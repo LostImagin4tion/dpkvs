@@ -6,24 +6,49 @@
 
 namespace NKVStore::Engine {
 
-    TStoreEngine::TStoreEngine() {
+    TStoreEngine::TStoreEngine()
+    {
         _store = std::unordered_map<std::string, std::any>();
     }
 
-    TStoreEngine::TStoreEngine(TStoreEngine && other) noexcept {
+    TStoreEngine::TStoreEngine(TStoreEngine && other) noexcept
+    {
         _store = std::move(other._store);
     }
 
-    TStoreEngine& TStoreEngine::operator=(TStoreEngine && other) noexcept {
+    TStoreEngine& TStoreEngine::operator=(TStoreEngine && other) noexcept
+    {
         _store = std::move(other._store);
         return *this;
     }
 
-    void TStoreEngine::put(std::string key, std::any value) {
+    void TStoreEngine::Put(
+        const std::string& key,
+        const std::any& value)
+    {
+        std::unique_lock lock(_mutex);
         _store[key] = value;
     }
 
-    const std::any& TStoreEngine::get(std::string key) {
-        return _store.at(key);
+    std::optional<const std::any> TStoreEngine::Get(const std::string& key)
+    {
+        std::shared_lock lock(_mutex);
+
+        if (_store.contains(key)) {
+            return _store[key];
+        }
+        return {};
     }
+
+    bool TStoreEngine::Remove(const std::string &key)
+    {
+        std::unique_lock lock(_mutex);
+
+        if (_store.contains(key)) {
+            _store.erase(key);
+            return true;
+        }
+        return false;
+    }
+
 } // namespace NKV::Engine
