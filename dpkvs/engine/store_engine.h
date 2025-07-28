@@ -4,9 +4,10 @@
 
 #pragma once
 
+#include <dpkvs/engine/storable_value.h>
+
 #include <string>
 #include <unordered_map>
-#include <any>
 #include <shared_mutex>
 
 namespace NKVStore::Engine
@@ -16,6 +17,7 @@ namespace NKVStore::Engine
     {
     public:
         TStoreEngine();
+        explicit TStoreEngine(std::unordered_map<std::string, TStorableValue>&& other);
         TStoreEngine(const TStoreEngine&) = delete;
         TStoreEngine(TStoreEngine&&) noexcept;
         ~TStoreEngine() = default;
@@ -23,14 +25,14 @@ namespace NKVStore::Engine
         void operator=(const TStoreEngine&) = delete;
         TStoreEngine& operator=(TStoreEngine&&) noexcept;
 
-        void Put(const std::string& key, const std::any& value);
+        void Put(std::string&& key, TStorableValue&& value);
 
-        [[nodiscard]] std::optional<const std::any> Get(const std::string& key);
+        [[nodiscard]] std::optional<TStorableValue> Get(const std::string& key) const;
 
-        bool Remove(const std::string& key);
+        [[nodiscard]] bool Remove(const std::string& key);
 
     private:
-        std::unordered_map<std::string, std::any> _store;
+        std::unordered_map<std::string, TStorableValue> _store;
         mutable std::shared_mutex _mutex;
     };
 
