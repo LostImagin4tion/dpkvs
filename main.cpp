@@ -1,12 +1,23 @@
+//
+// Created by Egor Danilov on 28.07.2025.
+//
+
+#include <dpkvs/engine/store_engine.h>
 #include <iostream>
+#include <cassert>
+
+using NKVStore::Engine::TStoreEngine;
 
 int main() {
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+    TStoreEngine store;
 
-    for (int i = 1; i <= 5; i++) {
-        std::cout << "i = " << i << std::endl;
-    }
+    store.put("hello", std::string("world"));
+
+    const auto& anyValue = store.get("hello");
+
+    auto value = std::any_cast<std::string>(anyValue);
+    std::cout << value;
+    assert(value == "world");
 
     return 0;
 }
