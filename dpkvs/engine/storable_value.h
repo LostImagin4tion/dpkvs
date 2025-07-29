@@ -1,29 +1,26 @@
-//
-// Created by Egor Danilov on 29.07.2025.
-//
-
 #pragma once
 
 #include <optional>
 #include <vector>
 
-namespace NKVStore::Engine
+namespace NKVStore::NEngine
 {
-    struct TStorableValue
-    {
-        TStorableValue() = default;
 
-        explicit TStorableValue( std::vector<uint8_t>&& bytes);
+struct TStorableValue
+{
+    TStorableValue() = default;
 
-        TStorableValue(const TStorableValue&) = default;
-        TStorableValue(TStorableValue&&) = default;
+    explicit TStorableValue( std::vector<uint8_t>&& bytes);
 
-        TStorableValue& operator=(const TStorableValue&) = default;
-        TStorableValue& operator=(TStorableValue&&) = default;
+    TStorableValue(const TStorableValue&) = default;
+    TStorableValue(TStorableValue&&) = default;
 
-        std::vector<uint8_t> byteData;
-        std::optional<std::chrono::system_clock::time_point> expiry;
-        uint32_t flags = 0;
-    };
+    TStorableValue& operator=(const TStorableValue&) = default;
+    TStorableValue& operator=(TStorableValue&&) = default;
 
-} // NKVStore::Engine
+    std::vector<uint8_t> binaryData;
+    std::optional<std::chrono::system_clock::time_point> expiry;
+    uint32_t flags = 0;
+};
+
+} // NKVStore::NEngine

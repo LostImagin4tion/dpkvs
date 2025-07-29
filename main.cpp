@@ -1,12 +1,8 @@
-//
-// Created by Egor Danilov on 28.07.2025.
-//
-
 #include <dpkvs/engine/store_engine.h>
 #include <iostream>
 #include <cassert>
 
-using NKVStore::Engine::TStoreEngine;
+using NKVStore::NEngine::TStoreEngine;
 
 int main() {
     TStoreEngine store;

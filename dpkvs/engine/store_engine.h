@@ -1,7 +1,3 @@
-//
-// Created by Egor Danilov on 28.07.2025.
-//
-
 #pragma once
 
 #include <dpkvs/engine/storable_value.h>
@@ -10,30 +6,33 @@
 #include <unordered_map>
 #include <shared_mutex>
 
-namespace NKVStore::Engine
+namespace NKVStore::NEngine
 {
 
-    class TStoreEngine
-    {
-    public:
-        TStoreEngine();
-        explicit TStoreEngine(std::unordered_map<std::string, TStorableValue>&& other);
-        TStoreEngine(const TStoreEngine&) = delete;
-        TStoreEngine(TStoreEngine&&) noexcept;
-        ~TStoreEngine() = default;
+class TStoreEngine
+{
+public:
+    TStoreEngine();
 
-        void operator=(const TStoreEngine&) = delete;
-        TStoreEngine& operator=(TStoreEngine&&) noexcept;
+    explicit TStoreEngine(std::unordered_map<std::string, TStorableValue>&& other);
 
-        void Put(std::string&& key, TStorableValue&& value);
+    TStoreEngine(const TStoreEngine&) = delete;
+    TStoreEngine& operator=(const TStoreEngine&) = delete;
 
-        [[nodiscard]] std::optional<TStorableValue> Get(const std::string& key) const;
+    TStoreEngine(TStoreEngine&&) noexcept;
+    TStoreEngine& operator=(TStoreEngine&&) noexcept;
 
-        [[nodiscard]] bool Remove(const std::string& key);
+    ~TStoreEngine() = default;
 
-    private:
-        std::unordered_map<std::string, TStorableValue> _store;
-        mutable std::shared_mutex _mutex;
-    };
+    void Put(std::string&& key, TStorableValue&& value);
 
-} // namespace NKV::Engine
+    [[nodiscard]] std::optional<TStorableValue> Get(const std::string& key) const;
+
+    [[nodiscard]] bool Remove(const std::string& key);
+
+private:
+    std::unordered_map<std::string, TStorableValue> _store;
+    mutable std::shared_mutex _mutex;
+};
+
+} // namespace NKV::NEngine
