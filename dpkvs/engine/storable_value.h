@@ -10,7 +10,7 @@ struct TStorableValue
 {
     TStorableValue() = default;
 
-    explicit TStorableValue( std::vector<uint8_t>&& bytes);
+    explicit TStorableValue(std::vector<uint8_t>&& bytes);
 
     TStorableValue(const TStorableValue&) = default;
     TStorableValue(TStorableValue&&) = default;
