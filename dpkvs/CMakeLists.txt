@@ -1,4 +1,4 @@
-add_library(dpkvs_lib
+add_library(dpkvs_lib STATIC
         engine/store_engine.cpp
         engine/store_engine.h
         engine/storable_value.h

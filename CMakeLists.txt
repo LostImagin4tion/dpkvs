@@ -12,8 +12,8 @@ target_include_directories(dpkvs_app PRIVATE
 )
 
 add_subdirectory(dpkvs)
+add_subdirectory(tests)
 
-target_link_libraries(dpkvs_app
-        PRIVATE
+target_link_libraries(dpkvs_app PRIVATE
         dpkvs_lib
 )
