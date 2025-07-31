@@ -30,6 +30,8 @@ public:
 
     [[nodiscard]] bool Remove(const std::string& key);
 
+    size_t Size() const;
+
 private:
     std::unordered_map<std::string, TStorableValue> _store;
     mutable std::shared_mutex _mutex;

@@ -52,4 +52,9 @@ bool TStoreEngine::Remove(const std::string &key)
     return false;
 }
 
+size_t TStoreEngine::Size() const
+{
+    return _store.size();
+}
+
 } // namespace NKV::NEngine

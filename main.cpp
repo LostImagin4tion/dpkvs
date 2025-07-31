@@ -1,19 +1,22 @@
-#include <dpkvs/engine/store_engine.h>
+#include <dpkvs/store_controller/store_controller.h>
 #include <iostream>
 #include <cassert>
 
-using NKVStore::NEngine::TStoreEngine;
+using NKVStore::NController::TStoreController;
 
 int main() {
-    TStoreEngine store;
+    TStoreController store;
 
-    store.Put("hello", std::string("world"));
+    std::string key = "hello";
+    std::string value = "world";
+
+    auto valueBytes = std::vector<uint8_t>(value.begin(), value.end());
+
+    store.Put(key, valueBytes);
 
     const auto& anyValue = store.Get("hello");
 
-    auto value = std::any_cast<std::string>(anyValue);
-    std::cout << value;
-    assert(value == "world");
+    assert(anyValue.has_value());
 
     return 0;
 }

@@ -1,5 +1,7 @@
 enable_testing()
 
+#set(CMAKE_CXX_FLAGS --coverage)
+
 include(FetchContent)
 
 FetchContent_Declare(
@@ -10,11 +12,17 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_executable(dpkvs_tests
-        unit/engine/engine_test.cpp
+        unit/engine/engine_basic_operations_test.cpp
+        unit/engine/engine_instantiating_test.cpp
+)
+
+target_include_directories(dpkvs_tests PRIVATE
+        ${CMAKE_SOURCE_DIR}
 )
 
 target_link_libraries(dpkvs_tests
         GTest::gtest_main
+        dpkvs_lib
 )
 
 include(GoogleTest)
