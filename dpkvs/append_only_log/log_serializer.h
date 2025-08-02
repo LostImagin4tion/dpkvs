@@ -24,6 +24,7 @@ namespace NKVStore::NAppendLog
 
         ~TAppendLogSerializer();
 
+        void EnableReadMode();
         bool ReadyToRead();
 
         void WritePutLog(
@@ -37,12 +38,14 @@ namespace NKVStore::NAppendLog
         NEngine::TStorableValue ReadValue();
 
     private:
+        void OpenFileStream();
+
+        void EnableWriteMode();
+
         template <class T>
         T ReadBinary();
 
         void Flush();
-
-        void OpenFileStream();
 
         std::fstream _log_stream;
 

@@ -43,18 +43,23 @@ std::unique_ptr<NEngine::TStoreEngine> TAppendOnlyLog::RecoverFromLog()
     auto recoveredStore = std::unordered_map<std::string, NEngine::TStorableValue>();
 
     try {
+        _logSerializer.EnableReadMode();
+
         while (_logSerializer.ReadyToRead()) {
             EAppendLogOperations command = _logSerializer.ReadCommand();
+
             switch (command) {
                 case EAppendLogOperations::Put: {
                     std::string key = _logSerializer.ReadKey();
                     NEngine::TStorableValue value = _logSerializer.ReadValue();
+
                     recoveredStore[std::move(key)] = std::move(value);
                     break;
                 }
 
                 case EAppendLogOperations::Remove: {
                     std::string key = _logSerializer.ReadKey();
+
                     recoveredStore.erase(key);
                     break;
                 }
