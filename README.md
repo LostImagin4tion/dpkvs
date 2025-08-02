@@ -52,6 +52,10 @@ root:~$ xxd -b append-only-log.txt
 0000001e: 00000110 00000000
 ```
 
+## Code Style
+
+This project follows [YTsaurus code style conventions](https://github.com/ytsaurus/ytsaurus/blob/main/yt/styleguide/cpp.md).
+
 ## Testing
 
 Code is being covered with unit and integration test using Google Test framework.
