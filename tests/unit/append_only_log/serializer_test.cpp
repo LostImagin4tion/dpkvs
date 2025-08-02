@@ -30,6 +30,7 @@ TEST(SerializerTest, WriteReadLogsTest) {
     logSerializer.WriteRemoveLog(key1);
 
     // === Read put first value log ===
+    logSerializer.EnableReadMode();
 
     ASSERT_TRUE(logSerializer.ReadyToRead());
 

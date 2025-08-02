@@ -35,17 +35,22 @@ TAppendLogSerializer::~TAppendLogSerializer()
     }
 }
 
+void TAppendLogSerializer::EnableReadMode()
+{
+    _log_stream.clear();
+    _log_stream.seekg(0, std::ios::beg);
+}
+
 bool TAppendLogSerializer::ReadyToRead()
 {
-    _log_stream.seekg(0, std::ios::beg);
-    return _log_stream.good();
+    return _log_stream.good() && !_log_stream.eof() && _log_stream.peek() != std::char_traits<char>::eof();
 }
 
 void TAppendLogSerializer::WritePutLog(
     const std::string& key,
     const NEngine::TStorableValue& value)
 {
-    _log_stream.seekp(0, std::ios::end);
+    EnableWriteMode();
 
     EAppendLogOperations operation = EAppendLogOperations::Put;
     _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
@@ -73,7 +78,7 @@ void TAppendLogSerializer::WritePutLog(
 
 void TAppendLogSerializer::WriteRemoveLog(const std::string& key)
 {
-    _log_stream.seekp(0, std::ios::end);
+    EnableWriteMode();
 
     EAppendLogOperations operation = EAppendLogOperations::Remove;
     _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
@@ -137,6 +142,26 @@ NEngine::TStorableValue TAppendLogSerializer::ReadValue()
     return value;
 }
 
+void TAppendLogSerializer::OpenFileStream()
+{
+    _log_stream.open(
+        _fileName,
+        std::ios::binary | std::ios::in | std::ios::out);
+
+    if (!_log_stream.is_open()) {
+        _log_stream.clear();
+        _log_stream.open(_fileName, std::ios::binary | std::ios::out);
+        _log_stream.close();
+        _log_stream.open(_fileName, std::ios::binary | std::ios::in | std::ios::out);
+    }
+}
+
+void TAppendLogSerializer::EnableWriteMode()
+{
+    _log_stream.clear();
+    _log_stream.seekp(0, std::ios::end);
+}
+
 template <class T>
 T TAppendLogSerializer::ReadBinary()
 {
@@ -153,20 +178,6 @@ T TAppendLogSerializer::ReadBinary()
 void TAppendLogSerializer::Flush()
 {
     _log_stream.flush();
-}
-
-void TAppendLogSerializer::OpenFileStream()
-{
-    _log_stream.open(
-        _fileName,
-        std::ios::binary | std::ios::in | std::ios::out | std::ios::ate);
-
-    if (!_log_stream.is_open()) {
-        _log_stream.clear();
-        _log_stream.open(_fileName, std::ios::binary | std::ios::out);
-        _log_stream.close();
-        _log_stream.open(_fileName, std::ios::binary | std::ios::in | std::ios::out);
-    }
 }
 
 } // namespace NKVStore::NAppendLog

@@ -12,8 +12,7 @@ class AppendOnlyLogTest
 protected:
 };
 
-TEST(AppendOnlyLogTest, AppendToLogsAndRecoverTest)
-{
+TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
     auto appendOnlyLog = TAppendOnlyLog();
 
     // === Put first value ===
@@ -68,6 +67,7 @@ TEST(AppendOnlyLogTest, AppendToLogsAndRecoverTest)
     auto deletedValue1 = recoveredEngine2->Get(key1);
     auto recoveredAgainValue2 = recoveredEngine2->Get(key2);
 
+    ASSERT_EQ(recoveredEngine2->Size(), 1);
     ASSERT_FALSE(deletedValue1.has_value());
     ASSERT_TRUE(recoveredAgainValue2.has_value());
 
