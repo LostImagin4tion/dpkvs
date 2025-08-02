@@ -1,31 +1,29 @@
 #pragma once
 
-#include <dpkvs/engine/store_engine.h>
-
 #include <string>
 #include <any>
-#include <fstream>
+
+#include <dpkvs/engine/store_engine.h>
+#include <dpkvs/append_only_log/log_serializer.h>
+#include <dpkvs/append_only_log/operations.h>
 
 namespace NKVStore::NAppendLog
 {
-
-enum class EAppendLogOperations {
-    Put,
-    Remove,
-};
 
 class TAppendOnlyLog
 {
 public:
     TAppendOnlyLog() = default;
 
+    explicit TAppendOnlyLog(std::string& fileName);
+
     TAppendOnlyLog(TAppendOnlyLog&) = delete;
     TAppendOnlyLog& operator=(const TAppendOnlyLog&) = delete;
 
     TAppendOnlyLog(TAppendOnlyLog&&) noexcept;
-    TAppendOnlyLog& operator=(TAppendOnlyLog&&) noexcept ;
+    TAppendOnlyLog& operator=(TAppendOnlyLog&&) noexcept;
 
-    ~TAppendOnlyLog();
+    ~TAppendOnlyLog() = default;
 
     void AppendToLog(
         const EAppendLogOperations& operation,
@@ -35,26 +33,7 @@ public:
     std::unique_ptr<NEngine::TStoreEngine> RecoverFromLog();
 
 private:
-    void OpenOStream();
-    void OpenIStream();
-
-    void WritePutLog(
-        const std::string& key,
-        const NEngine::TStorableValue& value);
-
-    void WriteRemoveLog(const std::string& key);
-
-    template <class T>
-    T ReadBinary();
-
-    EAppendLogOperations ReadCommand();
-    std::string ReadKey();
-    NEngine::TStorableValue ReadValue();
-
-    std::string _fileName = "append-only-log.txt";
-
-    std::ofstream _log_ostream;
-    std::ifstream _log_istream;
+    TAppendLogSerializer _logSerializer;
 };
 
 } // namespace NKVStore::NAppendLog

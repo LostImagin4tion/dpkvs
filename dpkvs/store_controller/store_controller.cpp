@@ -44,12 +44,16 @@ std::optional<NEngine::TStorableValue> TStoreController::Get(const std::string& 
 
 bool TStoreController::Remove(const std::string& key)
 {
-    _logger->AppendToLog(
-        NAppendLog::EAppendLogOperations::Remove,
-        key,
-        std::nullopt);
+    if (_engine->Get(key).has_value()) {
+        _logger->AppendToLog(
+            NAppendLog::EAppendLogOperations::Remove,
+            key,
+            std::nullopt);
 
-    return _engine->Remove(key);
+        return _engine->Remove(key);
+    } else {
+        return false;
+    }
 }
 
 } // NKVStore::NController
