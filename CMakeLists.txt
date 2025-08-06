@@ -5,6 +5,8 @@ set(CMAKE_CXX_STANDARD 23)
 
 enable_testing()
 
+include(cmake/dependencies.cmake)
+
 add_executable(dpkvs_app
         main.cpp
 )
