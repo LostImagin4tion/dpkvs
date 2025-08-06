@@ -3,6 +3,8 @@ project(dpkvs)
 
 set(CMAKE_CXX_STANDARD 23)
 
+enable_testing()
+
 add_executable(dpkvs_app
         main.cpp
 )
@@ -15,5 +17,6 @@ add_subdirectory(dpkvs)
 add_subdirectory(tests)
 
 target_link_libraries(dpkvs_app PRIVATE
+        grpc++
         dpkvs_lib
 )

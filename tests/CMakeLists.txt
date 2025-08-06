@@ -2,14 +2,7 @@ enable_testing()
 
 #set(CMAKE_CXX_FLAGS --coverage)
 
-include(FetchContent)
-
-FetchContent_Declare(
-        googletest
-        GIT_REPOSITORY https://github.com/google/googletest.git
-        GIT_TAG        v1.17.0
-)
-FetchContent_MakeAvailable(googletest)
+include(${CMAKE_SOURCE_DIR}/cmake/test_dependencies.cmake)
 
 add_executable(dpkvs_tests
         unit/engine/engine_basic_operations_test.cpp
@@ -27,5 +20,16 @@ target_link_libraries(dpkvs_tests
         dpkvs_lib
 )
 
+set_tests_properties(
+        PROPERTIES LABELS "dpkvs_tests"
+)
+
 include(GoogleTest)
 gtest_discover_tests(dpkvs_tests)
+
+add_custom_target(run_tests
+        COMMAND ${CMAKE_CTEST_COMMAND} -L dpkvs_tests
+        DEPENDS dpkvs_tests
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMENT "Run all tests"
+)
