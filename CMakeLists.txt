@@ -19,6 +19,5 @@ add_subdirectory(dpkvs)
 add_subdirectory(tests)
 
 target_link_libraries(dpkvs_app PRIVATE
-        grpc++
         dpkvs_lib
 )

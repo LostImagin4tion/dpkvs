@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "get_operation.proto";
+import "put_operation.proto";
+import "remove_operation.proto";
+
+service DpkvsService {
+  rpc Get(GetRequest) returns (GetResponse);
+  rpc Put(PutRequest) returns (PutResponse);
+  rpc Remove(RemoveRequest) returns (RemoveResponse);
+}
