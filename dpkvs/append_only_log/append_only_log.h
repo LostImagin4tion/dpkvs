@@ -33,7 +33,7 @@ public:
     std::unique_ptr<NEngine::TStoreEngine> RecoverFromLog();
 
 private:
-    TAppendLogSerializer _logSerializer;
+    std::unique_ptr<TAppendLogSerializer> _logSerializer;
 };
 
 } // namespace NKVStore::NAppendLog

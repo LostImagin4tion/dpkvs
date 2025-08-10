@@ -6,7 +6,7 @@ namespace NKVStore::NAppendLog
 {
 
 TAppendOnlyLog::TAppendOnlyLog(std::string &fileName)
-    : _logSerializer(fileName)
+    : _logSerializer(std::make_unique<TAppendLogSerializer>(fileName))
 {}
 
 TAppendOnlyLog::TAppendOnlyLog(TAppendOnlyLog && other) noexcept
@@ -29,11 +29,11 @@ void TAppendOnlyLog::AppendToLog(
             if (!value.has_value()) {
                 throw std::invalid_argument("If you use put operation, value must contain not null");
             }
-            _logSerializer.WritePutLog(key, value.value());
+            _logSerializer->WritePutLog(key, value.value());
             break;
 
         case EAppendLogOperations::Remove:
-            _logSerializer.WriteRemoveLog(key);
+            _logSerializer->WriteRemoveLog(key);
             break;
     }
 }
@@ -43,22 +43,22 @@ std::unique_ptr<NEngine::TStoreEngine> TAppendOnlyLog::RecoverFromLog()
     auto recoveredStore = std::unordered_map<std::string, NEngine::TStorableValue>();
 
     try {
-        _logSerializer.EnableReadMode();
+        _logSerializer->EnableReadMode();
 
-        while (_logSerializer.ReadyToRead()) {
-            EAppendLogOperations command = _logSerializer.ReadCommand();
+        while (_logSerializer->ReadyToRead()) {
+            EAppendLogOperations command = _logSerializer->ReadCommand();
 
             switch (command) {
                 case EAppendLogOperations::Put: {
-                    std::string key = _logSerializer.ReadKey();
-                    NEngine::TStorableValue value = _logSerializer.ReadValue();
+                    std::string key = _logSerializer->ReadKey();
+                    NEngine::TStorableValue value = _logSerializer->ReadValue();
 
                     recoveredStore[std::move(key)] = std::move(value);
                     break;
                 }
 
                 case EAppendLogOperations::Remove: {
-                    std::string key = _logSerializer.ReadKey();
+                    std::string key = _logSerializer->ReadKey();
 
                     recoveredStore.erase(key);
                     break;
