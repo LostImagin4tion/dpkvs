@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstddef>
 #include <optional>
 #include <vector>
 
@@ -19,8 +20,8 @@ struct TStorableValue
     TStorableValue& operator=(TStorableValue&&) = default;
 
     std::vector<uint8_t> binaryData;
-    std::optional<std::chrono::system_clock::time_point> expiry;
     uint32_t flags = 0;
+    std::optional<std::chrono::system_clock::time_point> expiry;
 };
 
 } // NKVStore::NEngine
