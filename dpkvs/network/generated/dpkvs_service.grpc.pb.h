@@ -25,89 +25,92 @@
 #include <grpcpp/support/stub_options.h>
 #include <grpcpp/support/sync_stream.h>
 
+namespace NKVStore {
+namespace NService {
+
 class DpkvsService final {
  public:
   static constexpr char const* service_full_name() {
-    return "DpkvsService";
+    return "NKVStore.NService.DpkvsService";
   }
   class StubInterface {
    public:
     virtual ~StubInterface() {}
-    virtual ::grpc::Status Get(::grpc::ClientContext* context, const ::GetRequest& request, ::GetResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::GetResponse>> AsyncGet(::grpc::ClientContext* context, const ::GetRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::GetResponse>>(AsyncGetRaw(context, request, cq));
+    virtual ::grpc::Status Get(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::NKVStore::NService::GetResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::GetResponse>> AsyncGet(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::GetResponse>>(AsyncGetRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::GetResponse>> PrepareAsyncGet(::grpc::ClientContext* context, const ::GetRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::GetResponse>>(PrepareAsyncGetRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::GetResponse>> PrepareAsyncGet(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::GetResponse>>(PrepareAsyncGetRaw(context, request, cq));
     }
-    virtual ::grpc::Status Put(::grpc::ClientContext* context, const ::PutRequest& request, ::PutResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PutResponse>> AsyncPut(::grpc::ClientContext* context, const ::PutRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PutResponse>>(AsyncPutRaw(context, request, cq));
+    virtual ::grpc::Status Put(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::NKVStore::NService::PutResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::PutResponse>> AsyncPut(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::PutResponse>>(AsyncPutRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PutResponse>> PrepareAsyncPut(::grpc::ClientContext* context, const ::PutRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::PutResponse>>(PrepareAsyncPutRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::PutResponse>> PrepareAsyncPut(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::PutResponse>>(PrepareAsyncPutRaw(context, request, cq));
     }
-    virtual ::grpc::Status Remove(::grpc::ClientContext* context, const ::RemoveRequest& request, ::RemoveResponse* response) = 0;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::RemoveResponse>> AsyncRemove(::grpc::ClientContext* context, const ::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::RemoveResponse>>(AsyncRemoveRaw(context, request, cq));
+    virtual ::grpc::Status Remove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::NKVStore::NService::RemoveResponse* response) = 0;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::RemoveResponse>> AsyncRemove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::RemoveResponse>>(AsyncRemoveRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::RemoveResponse>> PrepareAsyncRemove(::grpc::ClientContext* context, const ::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::RemoveResponse>>(PrepareAsyncRemoveRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::RemoveResponse>> PrepareAsyncRemove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::RemoveResponse>>(PrepareAsyncRemoveRaw(context, request, cq));
     }
     class async_interface {
      public:
       virtual ~async_interface() {}
-      virtual void Get(::grpc::ClientContext* context, const ::GetRequest* request, ::GetResponse* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Get(::grpc::ClientContext* context, const ::GetRequest* request, ::GetResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void Put(::grpc::ClientContext* context, const ::PutRequest* request, ::PutResponse* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Put(::grpc::ClientContext* context, const ::PutRequest* request, ::PutResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
-      virtual void Remove(::grpc::ClientContext* context, const ::RemoveRequest* request, ::RemoveResponse* response, std::function<void(::grpc::Status)>) = 0;
-      virtual void Remove(::grpc::ClientContext* context, const ::RemoveRequest* request, ::RemoveResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void Get(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest* request, ::NKVStore::NService::GetResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Get(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest* request, ::NKVStore::NService::GetResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void Put(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest* request, ::NKVStore::NService::PutResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Put(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest* request, ::NKVStore::NService::PutResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
+      virtual void Remove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest* request, ::NKVStore::NService::RemoveResponse* response, std::function<void(::grpc::Status)>) = 0;
+      virtual void Remove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest* request, ::NKVStore::NService::RemoveResponse* response, ::grpc::ClientUnaryReactor* reactor) = 0;
     };
     typedef class async_interface experimental_async_interface;
     virtual class async_interface* async() { return nullptr; }
     class async_interface* experimental_async() { return async(); }
    private:
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::GetResponse>* AsyncGetRaw(::grpc::ClientContext* context, const ::GetRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::GetResponse>* PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::GetRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::PutResponse>* AsyncPutRaw(::grpc::ClientContext* context, const ::PutRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::PutResponse>* PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::PutRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::RemoveResponse>* AsyncRemoveRaw(::grpc::ClientContext* context, const ::RemoveRequest& request, ::grpc::CompletionQueue* cq) = 0;
-    virtual ::grpc::ClientAsyncResponseReaderInterface< ::RemoveResponse>* PrepareAsyncRemoveRaw(::grpc::ClientContext* context, const ::RemoveRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::GetResponse>* AsyncGetRaw(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::GetResponse>* PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::PutResponse>* AsyncPutRaw(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::PutResponse>* PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::RemoveResponse>* AsyncRemoveRaw(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) = 0;
+    virtual ::grpc::ClientAsyncResponseReaderInterface< ::NKVStore::NService::RemoveResponse>* PrepareAsyncRemoveRaw(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) = 0;
   };
   class Stub final : public StubInterface {
    public:
     Stub(const std::shared_ptr< ::grpc::ChannelInterface>& channel, const ::grpc::StubOptions& options = ::grpc::StubOptions());
-    ::grpc::Status Get(::grpc::ClientContext* context, const ::GetRequest& request, ::GetResponse* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::GetResponse>> AsyncGet(::grpc::ClientContext* context, const ::GetRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::GetResponse>>(AsyncGetRaw(context, request, cq));
+    ::grpc::Status Get(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::NKVStore::NService::GetResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::GetResponse>> AsyncGet(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::GetResponse>>(AsyncGetRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::GetResponse>> PrepareAsyncGet(::grpc::ClientContext* context, const ::GetRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::GetResponse>>(PrepareAsyncGetRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::GetResponse>> PrepareAsyncGet(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::GetResponse>>(PrepareAsyncGetRaw(context, request, cq));
     }
-    ::grpc::Status Put(::grpc::ClientContext* context, const ::PutRequest& request, ::PutResponse* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PutResponse>> AsyncPut(::grpc::ClientContext* context, const ::PutRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PutResponse>>(AsyncPutRaw(context, request, cq));
+    ::grpc::Status Put(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::NKVStore::NService::PutResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::PutResponse>> AsyncPut(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::PutResponse>>(AsyncPutRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PutResponse>> PrepareAsyncPut(::grpc::ClientContext* context, const ::PutRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::PutResponse>>(PrepareAsyncPutRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::PutResponse>> PrepareAsyncPut(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::PutResponse>>(PrepareAsyncPutRaw(context, request, cq));
     }
-    ::grpc::Status Remove(::grpc::ClientContext* context, const ::RemoveRequest& request, ::RemoveResponse* response) override;
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::RemoveResponse>> AsyncRemove(::grpc::ClientContext* context, const ::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::RemoveResponse>>(AsyncRemoveRaw(context, request, cq));
+    ::grpc::Status Remove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::NKVStore::NService::RemoveResponse* response) override;
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::RemoveResponse>> AsyncRemove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::RemoveResponse>>(AsyncRemoveRaw(context, request, cq));
     }
-    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::RemoveResponse>> PrepareAsyncRemove(::grpc::ClientContext* context, const ::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
-      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::RemoveResponse>>(PrepareAsyncRemoveRaw(context, request, cq));
+    std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::RemoveResponse>> PrepareAsyncRemove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
+      return std::unique_ptr< ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::RemoveResponse>>(PrepareAsyncRemoveRaw(context, request, cq));
     }
     class async final :
       public StubInterface::async_interface {
      public:
-      void Get(::grpc::ClientContext* context, const ::GetRequest* request, ::GetResponse* response, std::function<void(::grpc::Status)>) override;
-      void Get(::grpc::ClientContext* context, const ::GetRequest* request, ::GetResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void Put(::grpc::ClientContext* context, const ::PutRequest* request, ::PutResponse* response, std::function<void(::grpc::Status)>) override;
-      void Put(::grpc::ClientContext* context, const ::PutRequest* request, ::PutResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
-      void Remove(::grpc::ClientContext* context, const ::RemoveRequest* request, ::RemoveResponse* response, std::function<void(::grpc::Status)>) override;
-      void Remove(::grpc::ClientContext* context, const ::RemoveRequest* request, ::RemoveResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void Get(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest* request, ::NKVStore::NService::GetResponse* response, std::function<void(::grpc::Status)>) override;
+      void Get(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest* request, ::NKVStore::NService::GetResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void Put(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest* request, ::NKVStore::NService::PutResponse* response, std::function<void(::grpc::Status)>) override;
+      void Put(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest* request, ::NKVStore::NService::PutResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
+      void Remove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest* request, ::NKVStore::NService::RemoveResponse* response, std::function<void(::grpc::Status)>) override;
+      void Remove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest* request, ::NKVStore::NService::RemoveResponse* response, ::grpc::ClientUnaryReactor* reactor) override;
      private:
       friend class Stub;
       explicit async(Stub* stub): stub_(stub) { }
@@ -119,12 +122,12 @@ class DpkvsService final {
    private:
     std::shared_ptr< ::grpc::ChannelInterface> channel_;
     class async async_stub_{this};
-    ::grpc::ClientAsyncResponseReader< ::GetResponse>* AsyncGetRaw(::grpc::ClientContext* context, const ::GetRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::GetResponse>* PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::GetRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::PutResponse>* AsyncPutRaw(::grpc::ClientContext* context, const ::PutRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::PutResponse>* PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::PutRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::RemoveResponse>* AsyncRemoveRaw(::grpc::ClientContext* context, const ::RemoveRequest& request, ::grpc::CompletionQueue* cq) override;
-    ::grpc::ClientAsyncResponseReader< ::RemoveResponse>* PrepareAsyncRemoveRaw(::grpc::ClientContext* context, const ::RemoveRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::GetResponse>* AsyncGetRaw(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::GetResponse>* PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::PutResponse>* AsyncPutRaw(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::PutResponse>* PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::RemoveResponse>* AsyncRemoveRaw(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) override;
+    ::grpc::ClientAsyncResponseReader< ::NKVStore::NService::RemoveResponse>* PrepareAsyncRemoveRaw(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) override;
     const ::grpc::internal::RpcMethod rpcmethod_Get_;
     const ::grpc::internal::RpcMethod rpcmethod_Put_;
     const ::grpc::internal::RpcMethod rpcmethod_Remove_;
@@ -135,9 +138,9 @@ class DpkvsService final {
    public:
     Service();
     virtual ~Service();
-    virtual ::grpc::Status Get(::grpc::ServerContext* context, const ::GetRequest* request, ::GetResponse* response);
-    virtual ::grpc::Status Put(::grpc::ServerContext* context, const ::PutRequest* request, ::PutResponse* response);
-    virtual ::grpc::Status Remove(::grpc::ServerContext* context, const ::RemoveRequest* request, ::RemoveResponse* response);
+    virtual ::grpc::Status Get(::grpc::ServerContext* context, const ::NKVStore::NService::GetRequest* request, ::NKVStore::NService::GetResponse* response);
+    virtual ::grpc::Status Put(::grpc::ServerContext* context, const ::NKVStore::NService::PutRequest* request, ::NKVStore::NService::PutResponse* response);
+    virtual ::grpc::Status Remove(::grpc::ServerContext* context, const ::NKVStore::NService::RemoveRequest* request, ::NKVStore::NService::RemoveResponse* response);
   };
   template <class BaseClass>
   class WithAsyncMethod_Get : public BaseClass {
@@ -151,11 +154,11 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::GetRequest* /*request*/, ::GetResponse* /*response*/) override {
+    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::GetRequest* /*request*/, ::NKVStore::NService::GetResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestGet(::grpc::ServerContext* context, ::GetRequest* request, ::grpc::ServerAsyncResponseWriter< ::GetResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestGet(::grpc::ServerContext* context, ::NKVStore::NService::GetRequest* request, ::grpc::ServerAsyncResponseWriter< ::NKVStore::NService::GetResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(0, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -171,11 +174,11 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::PutRequest* /*request*/, ::PutResponse* /*response*/) override {
+    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::PutRequest* /*request*/, ::NKVStore::NService::PutResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestPut(::grpc::ServerContext* context, ::PutRequest* request, ::grpc::ServerAsyncResponseWriter< ::PutResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestPut(::grpc::ServerContext* context, ::NKVStore::NService::PutRequest* request, ::grpc::ServerAsyncResponseWriter< ::NKVStore::NService::PutResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(1, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -191,11 +194,11 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::RemoveRequest* /*request*/, ::RemoveResponse* /*response*/) override {
+    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::RemoveRequest* /*request*/, ::NKVStore::NService::RemoveResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
-    void RequestRemove(::grpc::ServerContext* context, ::RemoveRequest* request, ::grpc::ServerAsyncResponseWriter< ::RemoveResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
+    void RequestRemove(::grpc::ServerContext* context, ::NKVStore::NService::RemoveRequest* request, ::grpc::ServerAsyncResponseWriter< ::NKVStore::NService::RemoveResponse>* response, ::grpc::CompletionQueue* new_call_cq, ::grpc::ServerCompletionQueue* notification_cq, void *tag) {
       ::grpc::Service::RequestAsyncUnary(2, context, request, response, new_call_cq, notification_cq, tag);
     }
   };
@@ -207,25 +210,25 @@ class DpkvsService final {
    public:
     WithCallbackMethod_Get() {
       ::grpc::Service::MarkMethodCallback(0,
-          new ::grpc::internal::CallbackUnaryHandler< ::GetRequest, ::GetResponse>(
+          new ::grpc::internal::CallbackUnaryHandler< ::NKVStore::NService::GetRequest, ::NKVStore::NService::GetResponse>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::GetRequest* request, ::GetResponse* response) { return this->Get(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::NKVStore::NService::GetRequest* request, ::NKVStore::NService::GetResponse* response) { return this->Get(context, request, response); }));}
     void SetMessageAllocatorFor_Get(
-        ::grpc::MessageAllocator< ::GetRequest, ::GetResponse>* allocator) {
+        ::grpc::MessageAllocator< ::NKVStore::NService::GetRequest, ::NKVStore::NService::GetResponse>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(0);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::GetRequest, ::GetResponse>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::NKVStore::NService::GetRequest, ::NKVStore::NService::GetResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_Get() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::GetRequest* /*request*/, ::GetResponse* /*response*/) override {
+    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::GetRequest* /*request*/, ::NKVStore::NService::GetResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* Get(
-      ::grpc::CallbackServerContext* /*context*/, const ::GetRequest* /*request*/, ::GetResponse* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::NKVStore::NService::GetRequest* /*request*/, ::NKVStore::NService::GetResponse* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_Put : public BaseClass {
@@ -234,25 +237,25 @@ class DpkvsService final {
    public:
     WithCallbackMethod_Put() {
       ::grpc::Service::MarkMethodCallback(1,
-          new ::grpc::internal::CallbackUnaryHandler< ::PutRequest, ::PutResponse>(
+          new ::grpc::internal::CallbackUnaryHandler< ::NKVStore::NService::PutRequest, ::NKVStore::NService::PutResponse>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::PutRequest* request, ::PutResponse* response) { return this->Put(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::NKVStore::NService::PutRequest* request, ::NKVStore::NService::PutResponse* response) { return this->Put(context, request, response); }));}
     void SetMessageAllocatorFor_Put(
-        ::grpc::MessageAllocator< ::PutRequest, ::PutResponse>* allocator) {
+        ::grpc::MessageAllocator< ::NKVStore::NService::PutRequest, ::NKVStore::NService::PutResponse>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(1);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::PutRequest, ::PutResponse>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::NKVStore::NService::PutRequest, ::NKVStore::NService::PutResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_Put() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::PutRequest* /*request*/, ::PutResponse* /*response*/) override {
+    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::PutRequest* /*request*/, ::NKVStore::NService::PutResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* Put(
-      ::grpc::CallbackServerContext* /*context*/, const ::PutRequest* /*request*/, ::PutResponse* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::NKVStore::NService::PutRequest* /*request*/, ::NKVStore::NService::PutResponse* /*response*/)  { return nullptr; }
   };
   template <class BaseClass>
   class WithCallbackMethod_Remove : public BaseClass {
@@ -261,25 +264,25 @@ class DpkvsService final {
    public:
     WithCallbackMethod_Remove() {
       ::grpc::Service::MarkMethodCallback(2,
-          new ::grpc::internal::CallbackUnaryHandler< ::RemoveRequest, ::RemoveResponse>(
+          new ::grpc::internal::CallbackUnaryHandler< ::NKVStore::NService::RemoveRequest, ::NKVStore::NService::RemoveResponse>(
             [this](
-                   ::grpc::CallbackServerContext* context, const ::RemoveRequest* request, ::RemoveResponse* response) { return this->Remove(context, request, response); }));}
+                   ::grpc::CallbackServerContext* context, const ::NKVStore::NService::RemoveRequest* request, ::NKVStore::NService::RemoveResponse* response) { return this->Remove(context, request, response); }));}
     void SetMessageAllocatorFor_Remove(
-        ::grpc::MessageAllocator< ::RemoveRequest, ::RemoveResponse>* allocator) {
+        ::grpc::MessageAllocator< ::NKVStore::NService::RemoveRequest, ::NKVStore::NService::RemoveResponse>* allocator) {
       ::grpc::internal::MethodHandler* const handler = ::grpc::Service::GetHandler(2);
-      static_cast<::grpc::internal::CallbackUnaryHandler< ::RemoveRequest, ::RemoveResponse>*>(handler)
+      static_cast<::grpc::internal::CallbackUnaryHandler< ::NKVStore::NService::RemoveRequest, ::NKVStore::NService::RemoveResponse>*>(handler)
               ->SetMessageAllocator(allocator);
     }
     ~WithCallbackMethod_Remove() override {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::RemoveRequest* /*request*/, ::RemoveResponse* /*response*/) override {
+    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::RemoveRequest* /*request*/, ::NKVStore::NService::RemoveResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     virtual ::grpc::ServerUnaryReactor* Remove(
-      ::grpc::CallbackServerContext* /*context*/, const ::RemoveRequest* /*request*/, ::RemoveResponse* /*response*/)  { return nullptr; }
+      ::grpc::CallbackServerContext* /*context*/, const ::NKVStore::NService::RemoveRequest* /*request*/, ::NKVStore::NService::RemoveResponse* /*response*/)  { return nullptr; }
   };
   typedef WithCallbackMethod_Get<WithCallbackMethod_Put<WithCallbackMethod_Remove<Service > > > CallbackService;
   typedef CallbackService ExperimentalCallbackService;
@@ -295,7 +298,7 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::GetRequest* /*request*/, ::GetResponse* /*response*/) override {
+    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::GetRequest* /*request*/, ::NKVStore::NService::GetResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -312,7 +315,7 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::PutRequest* /*request*/, ::PutResponse* /*response*/) override {
+    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::PutRequest* /*request*/, ::NKVStore::NService::PutResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -329,7 +332,7 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::RemoveRequest* /*request*/, ::RemoveResponse* /*response*/) override {
+    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::RemoveRequest* /*request*/, ::NKVStore::NService::RemoveResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -346,7 +349,7 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::GetRequest* /*request*/, ::GetResponse* /*response*/) override {
+    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::GetRequest* /*request*/, ::NKVStore::NService::GetResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -366,7 +369,7 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::PutRequest* /*request*/, ::PutResponse* /*response*/) override {
+    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::PutRequest* /*request*/, ::NKVStore::NService::PutResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -386,7 +389,7 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::RemoveRequest* /*request*/, ::RemoveResponse* /*response*/) override {
+    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::RemoveRequest* /*request*/, ::NKVStore::NService::RemoveResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -409,7 +412,7 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::GetRequest* /*request*/, ::GetResponse* /*response*/) override {
+    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::GetRequest* /*request*/, ::NKVStore::NService::GetResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -431,7 +434,7 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::PutRequest* /*request*/, ::PutResponse* /*response*/) override {
+    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::PutRequest* /*request*/, ::NKVStore::NService::PutResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -453,7 +456,7 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable synchronous version of this method
-    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::RemoveRequest* /*request*/, ::RemoveResponse* /*response*/) override {
+    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::RemoveRequest* /*request*/, ::NKVStore::NService::RemoveResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
@@ -468,10 +471,10 @@ class DpkvsService final {
     WithStreamedUnaryMethod_Get() {
       ::grpc::Service::MarkMethodStreamed(0,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::GetRequest, ::GetResponse>(
+          ::NKVStore::NService::GetRequest, ::NKVStore::NService::GetResponse>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::GetRequest, ::GetResponse>* streamer) {
+                     ::NKVStore::NService::GetRequest, ::NKVStore::NService::GetResponse>* streamer) {
                        return this->StreamedGet(context,
                          streamer);
                   }));
@@ -480,12 +483,12 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::GetRequest* /*request*/, ::GetResponse* /*response*/) override {
+    ::grpc::Status Get(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::GetRequest* /*request*/, ::NKVStore::NService::GetResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedGet(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::GetRequest,::GetResponse>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedGet(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::NKVStore::NService::GetRequest,::NKVStore::NService::GetResponse>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_Put : public BaseClass {
@@ -495,10 +498,10 @@ class DpkvsService final {
     WithStreamedUnaryMethod_Put() {
       ::grpc::Service::MarkMethodStreamed(1,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::PutRequest, ::PutResponse>(
+          ::NKVStore::NService::PutRequest, ::NKVStore::NService::PutResponse>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::PutRequest, ::PutResponse>* streamer) {
+                     ::NKVStore::NService::PutRequest, ::NKVStore::NService::PutResponse>* streamer) {
                        return this->StreamedPut(context,
                          streamer);
                   }));
@@ -507,12 +510,12 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::PutRequest* /*request*/, ::PutResponse* /*response*/) override {
+    ::grpc::Status Put(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::PutRequest* /*request*/, ::NKVStore::NService::PutResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedPut(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::PutRequest,::PutResponse>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedPut(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::NKVStore::NService::PutRequest,::NKVStore::NService::PutResponse>* server_unary_streamer) = 0;
   };
   template <class BaseClass>
   class WithStreamedUnaryMethod_Remove : public BaseClass {
@@ -522,10 +525,10 @@ class DpkvsService final {
     WithStreamedUnaryMethod_Remove() {
       ::grpc::Service::MarkMethodStreamed(2,
         new ::grpc::internal::StreamedUnaryHandler<
-          ::RemoveRequest, ::RemoveResponse>(
+          ::NKVStore::NService::RemoveRequest, ::NKVStore::NService::RemoveResponse>(
             [this](::grpc::ServerContext* context,
                    ::grpc::ServerUnaryStreamer<
-                     ::RemoveRequest, ::RemoveResponse>* streamer) {
+                     ::NKVStore::NService::RemoveRequest, ::NKVStore::NService::RemoveResponse>* streamer) {
                        return this->StreamedRemove(context,
                          streamer);
                   }));
@@ -534,17 +537,20 @@ class DpkvsService final {
       BaseClassMustBeDerivedFromService(this);
     }
     // disable regular version of this method
-    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::RemoveRequest* /*request*/, ::RemoveResponse* /*response*/) override {
+    ::grpc::Status Remove(::grpc::ServerContext* /*context*/, const ::NKVStore::NService::RemoveRequest* /*request*/, ::NKVStore::NService::RemoveResponse* /*response*/) override {
       abort();
       return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
     }
     // replace default version of method with streamed unary
-    virtual ::grpc::Status StreamedRemove(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::RemoveRequest,::RemoveResponse>* server_unary_streamer) = 0;
+    virtual ::grpc::Status StreamedRemove(::grpc::ServerContext* context, ::grpc::ServerUnaryStreamer< ::NKVStore::NService::RemoveRequest,::NKVStore::NService::RemoveResponse>* server_unary_streamer) = 0;
   };
   typedef WithStreamedUnaryMethod_Get<WithStreamedUnaryMethod_Put<WithStreamedUnaryMethod_Remove<Service > > > StreamedUnaryService;
   typedef Service SplitStreamedService;
   typedef WithStreamedUnaryMethod_Get<WithStreamedUnaryMethod_Put<WithStreamedUnaryMethod_Remove<Service > > > StreamedService;
 };
+
+}  // namespace NService
+}  // namespace NKVStore
 
 
 #endif  // GRPC_dpkvs_5fservice_2eproto__INCLUDED

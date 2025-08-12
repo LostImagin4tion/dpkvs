@@ -52,6 +52,8 @@ struct TableStruct_remove_5foperation_2eproto {
 extern "C" {
 extern const ::google::protobuf::internal::DescriptorTable descriptor_table_remove_5foperation_2eproto;
 }  // extern "C"
+namespace NKVStore {
+namespace NService {
 class RemoveRequest;
 struct RemoveRequestDefaultTypeInternal;
 extern RemoveRequestDefaultTypeInternal _RemoveRequest_default_instance_;
@@ -60,11 +62,15 @@ class RemoveResponse;
 struct RemoveResponseDefaultTypeInternal;
 extern RemoveResponseDefaultTypeInternal _RemoveResponse_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull RemoveResponse_class_data_;
+}  // namespace NService
+}  // namespace NKVStore
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
+namespace NKVStore {
+namespace NService {
 
 // ===================================================================
 
@@ -72,7 +78,7 @@ namespace protobuf {
 // -------------------------------------------------------------------
 
 class RemoveResponse final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:RemoveResponse) */ {
+/* @@protoc_insertion_point(class_definition:NKVStore.NService.RemoveResponse) */ {
  public:
   inline RemoveResponse() : RemoveResponse(nullptr) {}
   ~RemoveResponse() PROTOBUF_FINAL;
@@ -190,7 +196,7 @@ class RemoveResponse final : public ::google::protobuf::Message
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "RemoveResponse"; }
+  static ::absl::string_view FullMessageName() { return "NKVStore.NService.RemoveResponse"; }
 
  protected:
   explicit RemoveResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -226,7 +232,7 @@ class RemoveResponse final : public ::google::protobuf::Message
   void _internal_set_removed(bool value);
 
   public:
-  // @@protoc_insertion_point(class_scope:RemoveResponse)
+  // @@protoc_insertion_point(class_scope:NKVStore.NService.RemoveResponse)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -263,7 +269,7 @@ extern const ::google::protobuf::internal::ClassDataFull RemoveResponse_class_da
 // -------------------------------------------------------------------
 
 class RemoveRequest final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:RemoveRequest) */ {
+/* @@protoc_insertion_point(class_definition:NKVStore.NService.RemoveRequest) */ {
  public:
   inline RemoveRequest() : RemoveRequest(nullptr) {}
   ~RemoveRequest() PROTOBUF_FINAL;
@@ -381,7 +387,7 @@ class RemoveRequest final : public ::google::protobuf::Message
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "RemoveRequest"; }
+  static ::absl::string_view FullMessageName() { return "NKVStore.NService.RemoveRequest"; }
 
  protected:
   explicit RemoveRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -422,12 +428,12 @@ class RemoveRequest final : public ::google::protobuf::Message
   ::std::string* PROTOBUF_NONNULL _internal_mutable_key();
 
   public:
-  // @@protoc_insertion_point(class_scope:RemoveRequest)
+  // @@protoc_insertion_point(class_scope:NKVStore.NService.RemoveRequest)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<0, 1,
-                                   0, 25,
+                                   0, 43,
                                    2>
       _table_;
 
@@ -481,7 +487,7 @@ inline void RemoveRequest::clear_key() {
 }
 inline const ::std::string& RemoveRequest::key() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:RemoveRequest.key)
+  // @@protoc_insertion_point(field_get:NKVStore.NService.RemoveRequest.key)
   return _internal_key();
 }
 template <typename Arg_, typename... Args_>
@@ -489,12 +495,12 @@ PROTOBUF_ALWAYS_INLINE void RemoveRequest::set_key(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.key_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:RemoveRequest.key)
+  // @@protoc_insertion_point(field_set:NKVStore.NService.RemoveRequest.key)
 }
 inline ::std::string* PROTOBUF_NONNULL RemoveRequest::mutable_key()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::std::string* _s = _internal_mutable_key();
-  // @@protoc_insertion_point(field_mutable:RemoveRequest.key)
+  // @@protoc_insertion_point(field_mutable:NKVStore.NService.RemoveRequest.key)
   return _s;
 }
 inline const ::std::string& RemoveRequest::_internal_key() const {
@@ -513,7 +519,7 @@ inline ::std::string* PROTOBUF_NONNULL RemoveRequest::_internal_mutable_key() {
 }
 inline ::std::string* PROTOBUF_NULLABLE RemoveRequest::release_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:RemoveRequest.key)
+  // @@protoc_insertion_point(field_release:NKVStore.NService.RemoveRequest.key)
   if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
     return nullptr;
   }
@@ -535,7 +541,7 @@ inline void RemoveRequest::set_allocated_key(::std::string* PROTOBUF_NULLABLE va
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.key_.IsDefault()) {
     _impl_.key_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:RemoveRequest.key)
+  // @@protoc_insertion_point(field_set_allocated:NKVStore.NService.RemoveRequest.key)
 }
 
 // -------------------------------------------------------------------
@@ -549,13 +555,13 @@ inline void RemoveResponse::clear_removed() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline bool RemoveResponse::removed() const {
-  // @@protoc_insertion_point(field_get:RemoveResponse.removed)
+  // @@protoc_insertion_point(field_get:NKVStore.NService.RemoveResponse.removed)
   return _internal_removed();
 }
 inline void RemoveResponse::set_removed(bool value) {
   _internal_set_removed(value);
   _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:RemoveResponse.removed)
+  // @@protoc_insertion_point(field_set:NKVStore.NService.RemoveResponse.removed)
 }
 inline bool RemoveResponse::_internal_removed() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
@@ -571,6 +577,8 @@ inline void RemoveResponse::_internal_set_removed(bool value) {
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NService
+}  // namespace NKVStore
 
 
 // @@protoc_insertion_point(global_scope)

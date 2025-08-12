@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package dpkvs.service;
+package NKVStore.NService;
 
 import "get_operation.proto";
 import "put_operation.proto";

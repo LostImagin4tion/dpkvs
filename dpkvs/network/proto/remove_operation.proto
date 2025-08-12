@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package NKVStore.NService;
+
 message RemoveRequest {
   string key = 1;
 }

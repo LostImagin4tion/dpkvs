@@ -57,6 +57,8 @@ namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
+namespace NKVStore {
+namespace NService {
 
 // ===================================================================
 
@@ -79,6 +81,8 @@ namespace protobuf {
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NService
+}  // namespace NKVStore
 
 
 // @@protoc_insertion_point(global_scope)

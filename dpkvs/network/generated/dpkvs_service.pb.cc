@@ -24,6 +24,10 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
+namespace NKVStore {
+namespace NService {
+}  // namespace NService
+}  // namespace NKVStore
 static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
     file_level_enum_descriptors_dpkvs_5fservice_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
@@ -34,12 +38,15 @@ static constexpr ::_pb::Message* PROTOBUF_NONNULL const* PROTOBUF_NULLABLE
     file_default_instances = nullptr;
 const char descriptor_table_protodef_dpkvs_5fservice_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\023dpkvs_service.proto\032\023get_operation.pro"
-    "to\032\023put_operation.proto\032\026remove_operatio"
-    "n.proto2}\n\014DpkvsService\022 \n\003Get\022\013.GetRequ"
-    "est\032\014.GetResponse\022 \n\003Put\022\013.PutRequest\032\014."
-    "PutResponse\022)\n\006Remove\022\016.RemoveRequest\032\017."
-    "RemoveResponseb\006proto3"
+    "\n\023dpkvs_service.proto\022\021NKVStore.NService"
+    "\032\023get_operation.proto\032\023put_operation.pro"
+    "to\032\026remove_operation.proto2\351\001\n\014DpkvsServ"
+    "ice\022D\n\003Get\022\035.NKVStore.NService.GetReques"
+    "t\032\036.NKVStore.NService.GetResponse\022D\n\003Put"
+    "\022\035.NKVStore.NService.PutRequest\032\036.NKVSto"
+    "re.NService.PutResponse\022M\n\006Remove\022 .NKVS"
+    "tore.NService.RemoveRequest\032!.NKVStore.N"
+    "Service.RemoveResponseb\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_dpkvs_5fservice_2eproto_deps[3] = {
@@ -51,7 +58,7 @@ static ::absl::once_flag descriptor_table_dpkvs_5fservice_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_dpkvs_5fservice_2eproto = {
     false,
     false,
-    222,
+    350,
     descriptor_table_protodef_dpkvs_5fservice_2eproto,
     "dpkvs_service.proto",
     &descriptor_table_dpkvs_5fservice_2eproto_once,
@@ -64,7 +71,11 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_dpkvs_5fservic
     file_level_enum_descriptors_dpkvs_5fservice_2eproto,
     file_level_service_descriptors_dpkvs_5fservice_2eproto,
 };
+namespace NKVStore {
+namespace NService {
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NService
+}  // namespace NKVStore
 namespace google {
 namespace protobuf {
 }  // namespace protobuf

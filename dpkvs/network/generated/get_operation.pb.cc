@@ -24,6 +24,8 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
+namespace NKVStore {
+namespace NService {
 
 inline constexpr GetResponse::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
@@ -78,6 +80,8 @@ struct GetRequestDefaultTypeInternal {
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 GetRequestDefaultTypeInternal _GetRequest_default_instance_;
+}  // namespace NService
+}  // namespace NKVStore
 static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
     file_level_enum_descriptors_get_5foperation_2eproto = nullptr;
 static constexpr const ::_pb::ServiceDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
@@ -86,37 +90,37 @@ const ::uint32_t
     TableStruct_get_5foperation_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
         0x081, // bitmap
-        PROTOBUF_FIELD_OFFSET(::GetRequest, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::GetRequest, _impl_._has_bits_),
         4, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::GetRequest, _impl_.key_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::GetRequest, _impl_.key_),
         0,
         0x081, // bitmap
-        PROTOBUF_FIELD_OFFSET(::GetResponse, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::GetResponse, _impl_._has_bits_),
         4, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::GetResponse, _impl_.value_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::GetResponse, _impl_.value_),
         0,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, sizeof(::GetRequest)},
-        {5, sizeof(::GetResponse)},
+        {0, sizeof(::NKVStore::NService::GetRequest)},
+        {5, sizeof(::NKVStore::NService::GetResponse)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
-    &::_GetRequest_default_instance_._instance,
-    &::_GetResponse_default_instance_._instance,
+    &::NKVStore::NService::_GetRequest_default_instance_._instance,
+    &::NKVStore::NService::_GetResponse_default_instance_._instance,
 };
 const char descriptor_table_protodef_get_5foperation_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
-    "\n\023get_operation.proto\"\031\n\nGetRequest\022\013\n\003k"
-    "ey\030\001 \001(\t\"+\n\013GetResponse\022\022\n\005value\030\001 \001(\014H\000"
-    "\210\001\001B\010\n\006_valueb\006proto3"
+    "\n\023get_operation.proto\022\021NKVStore.NService"
+    "\"\031\n\nGetRequest\022\013\n\003key\030\001 \001(\t\"+\n\013GetRespon"
+    "se\022\022\n\005value\030\001 \001(\014H\000\210\001\001B\010\n\006_valueb\006proto3"
 };
 static ::absl::once_flag descriptor_table_get_5foperation_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_get_5foperation_2eproto = {
     false,
     false,
-    101,
+    120,
     descriptor_table_protodef_get_5foperation_2eproto,
     "get_operation.proto",
     &descriptor_table_get_5foperation_2eproto_once,
@@ -129,6 +133,8 @@ PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_get_5foperatio
     file_level_enum_descriptors_get_5foperation_2eproto,
     file_level_service_descriptors_get_5foperation_2eproto,
 };
+namespace NKVStore {
+namespace NService {
 // ===================================================================
 
 class GetRequest::_Internal {
@@ -146,12 +152,12 @@ GetRequest::GetRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:GetRequest)
+  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.GetRequest)
 }
 PROTOBUF_NDEBUG_INLINE GetRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    const ::GetRequest& from_msg)
+    const ::NKVStore::NService::GetRequest& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
         key_(arena, from.key_) {}
@@ -170,7 +176,7 @@ GetRequest::GetRequest(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
 
-  // @@protoc_insertion_point(copy_constructor:GetRequest)
+  // @@protoc_insertion_point(copy_constructor:NKVStore.NService.GetRequest)
 }
 PROTOBUF_NDEBUG_INLINE GetRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -182,7 +188,7 @@ inline void GetRequest::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
 GetRequest::~GetRequest() {
-  // @@protoc_insertion_point(destructor:GetRequest)
+  // @@protoc_insertion_point(destructor:NKVStore.NService.GetRequest)
   SharedDtor(*this);
 }
 inline void GetRequest::SharedDtor(MessageLite& self) {
@@ -236,7 +242,7 @@ GetRequest::GetClassData() const {
   return GetRequest_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 22, 2>
+const ::_pbi::TcParseTable<0, 1, 0, 40, 2>
 GetRequest::_table_ = {
   {
     PROTOBUF_FIELD_OFFSET(GetRequest, _impl_._has_bits_),
@@ -252,7 +258,7 @@ GetRequest::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::GetRequest>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::NKVStore::NService::GetRequest>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // string key = 1;
@@ -267,13 +273,13 @@ GetRequest::_table_ = {
   }},
   // no aux_entries
   {{
-    "\12\3\0\0\0\0\0\0"
-    "GetRequest"
+    "\34\3\0\0\0\0\0\0"
+    "NKVStore.NService.GetRequest"
     "key"
   }},
 };
 PROTOBUF_NOINLINE void GetRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:GetRequest)
+// @@protoc_insertion_point(message_clear_start:NKVStore.NService.GetRequest)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -298,7 +304,7 @@ PROTOBUF_NOINLINE void GetRequest::Clear() {
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
   const GetRequest& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(serialize_to_array_start:GetRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:NKVStore.NService.GetRequest)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
@@ -307,7 +313,7 @@ PROTOBUF_NOINLINE void GetRequest::Clear() {
     if (!this_._internal_key().empty()) {
       const ::std::string& _s = this_._internal_key();
       ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "GetRequest.key");
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "NKVStore.NService.GetRequest.key");
       target = stream->WriteStringMaybeAliased(1, _s, target);
     }
   }
@@ -317,7 +323,7 @@ PROTOBUF_NOINLINE void GetRequest::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:GetRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:NKVStore.NService.GetRequest)
   return target;
 }
 
@@ -328,7 +334,7 @@ PROTOBUF_NOINLINE void GetRequest::Clear() {
 ::size_t GetRequest::ByteSizeLong() const {
   const GetRequest& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(message_byte_size_start:GetRequest)
+  // @@protoc_insertion_point(message_byte_size_start:NKVStore.NService.GetRequest)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -352,7 +358,7 @@ PROTOBUF_NOINLINE void GetRequest::Clear() {
 void GetRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<GetRequest*>(&to_msg);
   auto& from = static_cast<const GetRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:GetRequest)
+  // @@protoc_insertion_point(class_specific_merge_from_start:NKVStore.NService.GetRequest)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -372,7 +378,7 @@ void GetRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goog
 }
 
 void GetRequest::CopyFrom(const GetRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:GetRequest)
+// @@protoc_insertion_point(class_specific_copy_from_start:NKVStore.NService.GetRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -408,12 +414,12 @@ GetResponse::GetResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:GetResponse)
+  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.GetResponse)
 }
 PROTOBUF_NDEBUG_INLINE GetResponse::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    const ::GetResponse& from_msg)
+    const ::NKVStore::NService::GetResponse& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
         value_(arena, from.value_) {}
@@ -432,7 +438,7 @@ GetResponse::GetResponse(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
 
-  // @@protoc_insertion_point(copy_constructor:GetResponse)
+  // @@protoc_insertion_point(copy_constructor:NKVStore.NService.GetResponse)
 }
 PROTOBUF_NDEBUG_INLINE GetResponse::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
@@ -444,7 +450,7 @@ inline void GetResponse::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
 GetResponse::~GetResponse() {
-  // @@protoc_insertion_point(destructor:GetResponse)
+  // @@protoc_insertion_point(destructor:NKVStore.NService.GetResponse)
   SharedDtor(*this);
 }
 inline void GetResponse::SharedDtor(MessageLite& self) {
@@ -514,7 +520,7 @@ GetResponse::_table_ = {
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::GetResponse>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::NKVStore::NService::GetResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // optional bytes value = 1;
@@ -532,7 +538,7 @@ GetResponse::_table_ = {
   }},
 };
 PROTOBUF_NOINLINE void GetResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:GetResponse)
+// @@protoc_insertion_point(message_clear_start:NKVStore.NService.GetResponse)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -557,7 +563,7 @@ PROTOBUF_NOINLINE void GetResponse::Clear() {
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
   const GetResponse& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(serialize_to_array_start:GetResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:NKVStore.NService.GetResponse)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
@@ -573,7 +579,7 @@ PROTOBUF_NOINLINE void GetResponse::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:GetResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:NKVStore.NService.GetResponse)
   return target;
 }
 
@@ -584,7 +590,7 @@ PROTOBUF_NOINLINE void GetResponse::Clear() {
 ::size_t GetResponse::ByteSizeLong() const {
   const GetResponse& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(message_byte_size_start:GetResponse)
+  // @@protoc_insertion_point(message_byte_size_start:NKVStore.NService.GetResponse)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -606,7 +612,7 @@ PROTOBUF_NOINLINE void GetResponse::Clear() {
 void GetResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
   auto* const _this = static_cast<GetResponse*>(&to_msg);
   auto& from = static_cast<const GetResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:GetResponse)
+  // @@protoc_insertion_point(class_specific_merge_from_start:NKVStore.NService.GetResponse)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -620,7 +626,7 @@ void GetResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goo
 }
 
 void GetResponse::CopyFrom(const GetResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:GetResponse)
+// @@protoc_insertion_point(class_specific_copy_from_start:NKVStore.NService.GetResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -640,6 +646,8 @@ void GetResponse::InternalSwap(GetResponse* PROTOBUF_RESTRICT PROTOBUF_NONNULL o
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NService
+}  // namespace NKVStore
 namespace google {
 namespace protobuf {
 }  // namespace protobuf

@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package NKVStore.NService;
+
 message PutRequest {
   string key = 1;
   bytes value = 2;

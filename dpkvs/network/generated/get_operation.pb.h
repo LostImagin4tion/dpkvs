@@ -52,6 +52,8 @@ struct TableStruct_get_5foperation_2eproto {
 extern "C" {
 extern const ::google::protobuf::internal::DescriptorTable descriptor_table_get_5foperation_2eproto;
 }  // extern "C"
+namespace NKVStore {
+namespace NService {
 class GetRequest;
 struct GetRequestDefaultTypeInternal;
 extern GetRequestDefaultTypeInternal _GetRequest_default_instance_;
@@ -60,11 +62,15 @@ class GetResponse;
 struct GetResponseDefaultTypeInternal;
 extern GetResponseDefaultTypeInternal _GetResponse_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull GetResponse_class_data_;
+}  // namespace NService
+}  // namespace NKVStore
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
 
+namespace NKVStore {
+namespace NService {
 
 // ===================================================================
 
@@ -72,7 +78,7 @@ namespace protobuf {
 // -------------------------------------------------------------------
 
 class GetResponse final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:GetResponse) */ {
+/* @@protoc_insertion_point(class_definition:NKVStore.NService.GetResponse) */ {
  public:
   inline GetResponse() : GetResponse(nullptr) {}
   ~GetResponse() PROTOBUF_FINAL;
@@ -190,7 +196,7 @@ class GetResponse final : public ::google::protobuf::Message
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "GetResponse"; }
+  static ::absl::string_view FullMessageName() { return "NKVStore.NService.GetResponse"; }
 
  protected:
   explicit GetResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -232,7 +238,7 @@ class GetResponse final : public ::google::protobuf::Message
   ::std::string* PROTOBUF_NONNULL _internal_mutable_value();
 
   public:
-  // @@protoc_insertion_point(class_scope:GetResponse)
+  // @@protoc_insertion_point(class_scope:NKVStore.NService.GetResponse)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -269,7 +275,7 @@ extern const ::google::protobuf::internal::ClassDataFull GetResponse_class_data_
 // -------------------------------------------------------------------
 
 class GetRequest final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:GetRequest) */ {
+/* @@protoc_insertion_point(class_definition:NKVStore.NService.GetRequest) */ {
  public:
   inline GetRequest() : GetRequest(nullptr) {}
   ~GetRequest() PROTOBUF_FINAL;
@@ -387,7 +393,7 @@ class GetRequest final : public ::google::protobuf::Message
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "GetRequest"; }
+  static ::absl::string_view FullMessageName() { return "NKVStore.NService.GetRequest"; }
 
  protected:
   explicit GetRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
@@ -428,12 +434,12 @@ class GetRequest final : public ::google::protobuf::Message
   ::std::string* PROTOBUF_NONNULL _internal_mutable_key();
 
   public:
-  // @@protoc_insertion_point(class_scope:GetRequest)
+  // @@protoc_insertion_point(class_scope:NKVStore.NService.GetRequest)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<0, 1,
-                                   0, 22,
+                                   0, 40,
                                    2>
       _table_;
 
@@ -487,7 +493,7 @@ inline void GetRequest::clear_key() {
 }
 inline const ::std::string& GetRequest::key() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:GetRequest.key)
+  // @@protoc_insertion_point(field_get:NKVStore.NService.GetRequest.key)
   return _internal_key();
 }
 template <typename Arg_, typename... Args_>
@@ -495,12 +501,12 @@ PROTOBUF_ALWAYS_INLINE void GetRequest::set_key(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.key_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:GetRequest.key)
+  // @@protoc_insertion_point(field_set:NKVStore.NService.GetRequest.key)
 }
 inline ::std::string* PROTOBUF_NONNULL GetRequest::mutable_key()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::std::string* _s = _internal_mutable_key();
-  // @@protoc_insertion_point(field_mutable:GetRequest.key)
+  // @@protoc_insertion_point(field_mutable:NKVStore.NService.GetRequest.key)
   return _s;
 }
 inline const ::std::string& GetRequest::_internal_key() const {
@@ -519,7 +525,7 @@ inline ::std::string* PROTOBUF_NONNULL GetRequest::_internal_mutable_key() {
 }
 inline ::std::string* PROTOBUF_NULLABLE GetRequest::release_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:GetRequest.key)
+  // @@protoc_insertion_point(field_release:NKVStore.NService.GetRequest.key)
   if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
     return nullptr;
   }
@@ -541,7 +547,7 @@ inline void GetRequest::set_allocated_key(::std::string* PROTOBUF_NULLABLE value
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.key_.IsDefault()) {
     _impl_.key_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:GetRequest.key)
+  // @@protoc_insertion_point(field_set_allocated:NKVStore.NService.GetRequest.key)
 }
 
 // -------------------------------------------------------------------
@@ -560,7 +566,7 @@ inline void GetResponse::clear_value() {
 }
 inline const ::std::string& GetResponse::value() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:GetResponse.value)
+  // @@protoc_insertion_point(field_get:NKVStore.NService.GetResponse.value)
   return _internal_value();
 }
 template <typename Arg_, typename... Args_>
@@ -568,12 +574,12 @@ PROTOBUF_ALWAYS_INLINE void GetResponse::set_value(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:GetResponse.value)
+  // @@protoc_insertion_point(field_set:NKVStore.NService.GetResponse.value)
 }
 inline ::std::string* PROTOBUF_NONNULL GetResponse::mutable_value()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::std::string* _s = _internal_mutable_value();
-  // @@protoc_insertion_point(field_mutable:GetResponse.value)
+  // @@protoc_insertion_point(field_mutable:NKVStore.NService.GetResponse.value)
   return _s;
 }
 inline const ::std::string& GetResponse::_internal_value() const {
@@ -592,7 +598,7 @@ inline ::std::string* PROTOBUF_NONNULL GetResponse::_internal_mutable_value() {
 }
 inline ::std::string* PROTOBUF_NULLABLE GetResponse::release_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:GetResponse.value)
+  // @@protoc_insertion_point(field_release:NKVStore.NService.GetResponse.value)
   if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
     return nullptr;
   }
@@ -614,7 +620,7 @@ inline void GetResponse::set_allocated_value(::std::string* PROTOBUF_NULLABLE va
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.value_.IsDefault()) {
     _impl_.value_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:GetResponse.value)
+  // @@protoc_insertion_point(field_set_allocated:NKVStore.NService.GetResponse.value)
 }
 
 #ifdef __GNUC__
@@ -622,6 +628,8 @@ inline void GetResponse::set_allocated_value(::std::string* PROTOBUF_NULLABLE va
 #endif  // __GNUC__
 
 // @@protoc_insertion_point(namespace_scope)
+}  // namespace NService
+}  // namespace NKVStore
 
 
 // @@protoc_insertion_point(global_scope)
