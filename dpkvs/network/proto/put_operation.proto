@@ -6,5 +6,4 @@ message PutRequest {
 }
 
 message PutResponse {
-  bool inserted = 1;
 }

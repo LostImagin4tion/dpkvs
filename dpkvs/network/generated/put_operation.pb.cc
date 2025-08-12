@@ -24,21 +24,14 @@ PROTOBUF_PRAGMA_INIT_SEG
 namespace _pb = ::google::protobuf;
 namespace _pbi = ::google::protobuf::internal;
 namespace _fl = ::google::protobuf::internal::field_layout;
-
-inline constexpr PutResponse::Impl_::Impl_(
-    ::_pbi::ConstantInitialized) noexcept
-      : _cached_size_{0},
-        inserted_{false} {}
-
 template <typename>
 PROTOBUF_CONSTEXPR PutResponse::PutResponse(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(PutResponse_class_data_.base()),
+    : ::google::protobuf::internal::ZeroFieldsBase(PutResponse_class_data_.base()){}
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(),
-#endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(::_pbi::ConstantInitialized()) {
+    : ::google::protobuf::internal::ZeroFieldsBase() {
 }
+#endif  // PROTOBUF_CUSTOM_VTABLE
 struct PutResponseDefaultTypeInternal {
   PROTOBUF_CONSTEXPR PutResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
   ~PutResponseDefaultTypeInternal() {}
@@ -93,11 +86,7 @@ const ::uint32_t
         PROTOBUF_FIELD_OFFSET(::PutRequest, _impl_.value_),
         0,
         1,
-        0x081, // bitmap
-        PROTOBUF_FIELD_OFFSET(::PutResponse, _impl_._has_bits_),
-        4, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::PutResponse, _impl_.inserted_),
-        0,
+        0x000, // bitmap
 };
 
 static const ::_pbi::MigrationSchema
@@ -112,14 +101,14 @@ static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
 const char descriptor_table_protodef_put_5foperation_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\023put_operation.proto\"(\n\nPutRequest\022\013\n\003k"
-    "ey\030\001 \001(\t\022\r\n\005value\030\002 \001(\014\"\037\n\013PutResponse\022\020"
-    "\n\010inserted\030\001 \001(\010b\006proto3"
+    "ey\030\001 \001(\t\022\r\n\005value\030\002 \001(\014\"\r\n\013PutResponseb\006"
+    "proto3"
 };
 static ::absl::once_flag descriptor_table_put_5foperation_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_put_5foperation_2eproto = {
     false,
     false,
-    104,
+    86,
     descriptor_table_protodef_put_5foperation_2eproto,
     "put_operation.proto",
     &descriptor_table_put_5foperation_2eproto_once,
@@ -440,50 +429,30 @@ void PutRequest::InternalSwap(PutRequest* PROTOBUF_RESTRICT PROTOBUF_NONNULL oth
 
 class PutResponse::_Internal {
  public:
-  using HasBits =
-      decltype(::std::declval<PutResponse>()._impl_._has_bits_);
-  static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(PutResponse, _impl_._has_bits_);
 };
 
 PutResponse::PutResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, PutResponse_class_data_.base()) {
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, PutResponse_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena) {
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  SharedCtor(arena);
   // @@protoc_insertion_point(arena_constructor:PutResponse)
 }
 PutResponse::PutResponse(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const PutResponse& from)
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
+    const PutResponse& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, PutResponse_class_data_.base()),
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, PutResponse_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
-    : ::google::protobuf::Message(arena),
+    : ::google::protobuf::internal::ZeroFieldsBase(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-      _impl_(from._impl_) {
+  PutResponse* const _this = this;
+  (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
-}
-PROTOBUF_NDEBUG_INLINE PutResponse::Impl_::Impl_(
-    ::google::protobuf::internal::InternalVisibility visibility,
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
-      : _cached_size_{0} {}
 
-inline void PutResponse::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
-  new (&_impl_) Impl_(internal_visibility(), arena);
-  _impl_.inserted_ = {};
-}
-PutResponse::~PutResponse() {
-  // @@protoc_insertion_point(destructor:PutResponse)
-  SharedDtor(*this);
-}
-inline void PutResponse::SharedDtor(MessageLite& self) {
-  PutResponse& this_ = static_cast<PutResponse&>(self);
-  this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
-  ABSL_DCHECK(this_.GetArena() == nullptr);
-  this_._impl_.~Impl_();
+  // @@protoc_insertion_point(copy_constructor:PutResponse)
 }
 
 inline void* PROTOBUF_NONNULL PutResponse::PlacementNew_(
@@ -503,10 +472,10 @@ constexpr auto PutResponse::InternalGenerateClassData_() {
           nullptr,  // OnDemandRegisterArenaDtor
           nullptr,  // IsInitialized
           &PutResponse::MergeImpl,
-          ::google::protobuf::Message::GetNewImpl<PutResponse>(),
+          ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<PutResponse>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
           &PutResponse::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<PutResponse>(), &PutResponse::ByteSizeLong,
+          ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<PutResponse>(), &PutResponse::ByteSizeLong,
               &PutResponse::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
           PROTOBUF_FIELD_OFFSET(PutResponse, _impl_._cached_size_),
@@ -529,16 +498,16 @@ PutResponse::GetClassData() const {
   return PutResponse_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 0, 2>
+const ::_pbi::TcParseTable<0, 0, 0, 0, 2>
 PutResponse::_table_ = {
   {
-    PROTOBUF_FIELD_OFFSET(PutResponse, _impl_._has_bits_),
+    0,  // no _has_bits_
     0, // no _extensions_
-    1, 0,  // max_field_number, fast_idx_mask
+    0, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
-    4294967294,  // skipmap
-    offsetof(decltype(_table_), field_entries),
-    1,  // num_field_entries
+    4294967295,  // skipmap
+    offsetof(decltype(_table_), field_names),  // no field_entries
+    0,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
     PutResponse_class_data_.base(),
@@ -548,127 +517,22 @@ PutResponse::_table_ = {
     ::_pbi::TcParser::GetTable<::PutResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
-    // bool inserted = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(PutResponse, _impl_.inserted_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(PutResponse, _impl_.inserted_)}},
+    {::_pbi::TcParser::MiniParse, {}},
   }}, {{
     65535, 65535
-  }}, {{
-    // bool inserted = 1;
-    {PROTOBUF_FIELD_OFFSET(PutResponse, _impl_.inserted_), _Internal::kHasBitsOffset + 0, 0,
-    (0 | ::_fl::kFcOptional | ::_fl::kBool)},
-  }},
-  // no aux_entries
+  }}, // no field_entries, or aux_entries
   {{
   }},
 };
-PROTOBUF_NOINLINE void PutResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:PutResponse)
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  _impl_.inserted_ = false;
-  _impl_._has_bits_.Clear();
-  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL PutResponse::_InternalSerialize(
-    const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const PutResponse& this_ = static_cast<const PutResponse&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL PutResponse::_InternalSerialize(
-    ::uint8_t* PROTOBUF_NONNULL target,
-    ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const PutResponse& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(serialize_to_array_start:PutResponse)
-  ::uint32_t cached_has_bits = 0;
-  (void)cached_has_bits;
-
-  // bool inserted = 1;
-  if ((this_._impl_._has_bits_[0] & 0x00000001u) != 0) {
-    if (this_._internal_inserted() != 0) {
-      target = stream->EnsureSpace(target);
-      target = ::_pbi::WireFormatLite::WriteBoolToArray(
-          1, this_._internal_inserted(), target);
-    }
-  }
-
-  if (ABSL_PREDICT_FALSE(this_._internal_metadata_.have_unknown_fields())) {
-    target =
-        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-            this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:PutResponse)
-  return target;
-}
-
-#if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t PutResponse::ByteSizeLong(const MessageLite& base) {
-  const PutResponse& this_ = static_cast<const PutResponse&>(base);
-#else   // PROTOBUF_CUSTOM_VTABLE
-::size_t PutResponse::ByteSizeLong() const {
-  const PutResponse& this_ = *this;
-#endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(message_byte_size_start:PutResponse)
-  ::size_t total_size = 0;
-
-  ::uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void)cached_has_bits;
-
-   {
-    // bool inserted = 1;
-    cached_has_bits = this_._impl_._has_bits_[0];
-    if ((cached_has_bits & 0x00000001u) != 0) {
-      if (this_._internal_inserted() != 0) {
-        total_size += 2;
-      }
-    }
-  }
-  return this_.MaybeComputeUnknownFieldsSize(total_size,
-                                             &this_._impl_._cached_size_);
-}
-
-void PutResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<PutResponse*>(&to_msg);
-  auto& from = static_cast<const PutResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:PutResponse)
-  ABSL_DCHECK_NE(&from, _this);
-  ::uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = from._impl_._has_bits_[0];
-  if ((cached_has_bits & 0x00000001u) != 0) {
-    if (from._internal_inserted() != 0) {
-      _this->_impl_.inserted_ = from._impl_.inserted_;
-    }
-  }
-  _this->_impl_._has_bits_[0] |= cached_has_bits;
-  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void PutResponse::CopyFrom(const PutResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:PutResponse)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
 
 
-void PutResponse::InternalSwap(PutResponse* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
-  using ::std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-  swap(_impl_.inserted_, other->_impl_.inserted_);
-}
+
+
+
+
 
 ::google::protobuf::Metadata PutResponse::GetMetadata() const {
-  return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
+  return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)
 namespace google {

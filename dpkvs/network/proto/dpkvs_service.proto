@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package dpkvs.service;
+
 import "get_operation.proto";
 import "put_operation.proto";
 import "remove_operation.proto";

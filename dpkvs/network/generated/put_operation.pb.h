@@ -20,6 +20,7 @@
 #include "google/protobuf/io/coded_stream.h"
 #include "google/protobuf/arena.h"
 #include "google/protobuf/arenastring.h"
+#include "google/protobuf/generated_message_bases.h"
 #include "google/protobuf/generated_message_tctable_decl.h"
 #include "google/protobuf/generated_message_util.h"
 #include "google/protobuf/metadata_lite.h"
@@ -71,11 +72,10 @@ namespace protobuf {
 
 // -------------------------------------------------------------------
 
-class PutResponse final : public ::google::protobuf::Message
+class PutResponse final : public ::google::protobuf::internal::ZeroFieldsBase
 /* @@protoc_insertion_point(class_definition:PutResponse) */ {
  public:
   inline PutResponse() : PutResponse(nullptr) {}
-  ~PutResponse() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
   void operator delete(PutResponse* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
@@ -145,48 +145,21 @@ class PutResponse final : public ::google::protobuf::Message
   // implements Message ----------------------------------------------
 
   PutResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<PutResponse>(arena);
+    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<PutResponse>(arena);
   }
-  using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const PutResponse& from);
-  using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const PutResponse& from) { PutResponse::MergeImpl(*this, from); }
-
-  private:
-  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
-                        const ::google::protobuf::MessageLite& from_msg);
+  using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
+  inline void CopyFrom(const PutResponse& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
+  }
+  using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
+  void MergeFrom(const PutResponse& from) {
+    ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
+  }
 
   public:
   bool IsInitialized() const {
     return true;
   }
-  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
-  #if defined(PROTOBUF_CUSTOM_VTABLE)
-  private:
-  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
-  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
-
-  public:
-  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-    return _InternalSerialize(*this, target, stream);
-  }
-  #else   // PROTOBUF_CUSTOM_VTABLE
-  ::size_t ByteSizeLong() const final;
-  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
-      ::uint8_t* PROTOBUF_NONNULL target,
-      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
-  #endif  // PROTOBUF_CUSTOM_VTABLE
-  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
-
-  private:
-  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  static void SharedDtor(MessageLite& self);
-  void InternalSwap(PutResponse* PROTOBUF_NONNULL other);
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
@@ -213,24 +186,11 @@ class PutResponse final : public ::google::protobuf::Message
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
-  enum : int {
-    kInsertedFieldNumber = 1,
-  };
-  // bool inserted = 1;
-  void clear_inserted() ;
-  bool inserted() const;
-  void set_inserted(bool value);
-
-  private:
-  bool _internal_inserted() const;
-  void _internal_set_inserted(bool value);
-
-  public:
   // @@protoc_insertion_point(class_scope:PutResponse)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 1,
+  static const ::google::protobuf::internal::TcParseTable<0, 0,
                                    0, 0,
                                    2>
       _table_;
@@ -250,12 +210,8 @@ class PutResponse final : public ::google::protobuf::Message
         ::google::protobuf::internal::InternalVisibility visibility,
         ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
         const PutResponse& from_msg);
-    ::google::protobuf::internal::HasBits<1> _has_bits_;
-    ::google::protobuf::internal::CachedSize _cached_size_;
-    bool inserted_;
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
-  union { Impl_ _impl_; };
   friend struct ::TableStruct_put_5foperation_2eproto;
 };
 
@@ -623,30 +579,6 @@ inline void PutRequest::set_allocated_value(::std::string* PROTOBUF_NULLABLE val
 // -------------------------------------------------------------------
 
 // PutResponse
-
-// bool inserted = 1;
-inline void PutResponse::clear_inserted() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.inserted_ = false;
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline bool PutResponse::inserted() const {
-  // @@protoc_insertion_point(field_get:PutResponse.inserted)
-  return _internal_inserted();
-}
-inline void PutResponse::set_inserted(bool value) {
-  _internal_set_inserted(value);
-  _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:PutResponse.inserted)
-}
-inline bool PutResponse::_internal_inserted() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.inserted_;
-}
-inline void PutResponse::_internal_set_inserted(bool value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.inserted_ = value;
-}
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
