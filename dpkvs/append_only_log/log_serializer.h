@@ -14,7 +14,7 @@ namespace NKVStore::NAppendLog
     public:
         TAppendLogSerializer();
 
-        explicit TAppendLogSerializer(std::string& fileName);
+        explicit TAppendLogSerializer(const std::string& fileName);
 
         TAppendLogSerializer(TAppendLogSerializer&) = delete;
         TAppendLogSerializer& operator=(const TAppendLogSerializer&) = delete;
