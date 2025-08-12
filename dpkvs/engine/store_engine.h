@@ -9,12 +9,15 @@
 namespace NKVStore::NEngine
 {
 
+using TStorableValuePtr = std::shared_ptr<const TStorableValue>;
+using TKVStoreMap = std::unordered_map<std::string, TStorableValuePtr>;
+
 class TStoreEngine
 {
 public:
     TStoreEngine();
 
-    explicit TStoreEngine(std::unordered_map<std::string, TStorableValue>&& other);
+    explicit TStoreEngine(TKVStoreMap&& other);
 
     TStoreEngine(const TStoreEngine&) = delete;
     TStoreEngine& operator=(const TStoreEngine&) = delete;
@@ -24,16 +27,16 @@ public:
 
     ~TStoreEngine() = default;
 
-    void Put(std::string&& key, TStorableValue&& value);
+    void Put(std::string key, TStorableValue value);
 
-    [[nodiscard]] std::optional<TStorableValue> Get(const std::string& key) const;
+    [[nodiscard]] TStorableValuePtr Get(const std::string& key) const;
 
     [[nodiscard]] bool Remove(const std::string& key);
 
     size_t Size() const;
 
 private:
-    std::unordered_map<std::string, TStorableValue> _store;
+    TKVStoreMap _store;
     mutable std::shared_mutex _mutex;
 };
 
