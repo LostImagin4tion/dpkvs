@@ -2,6 +2,7 @@
 
 #include <dpkvs/engine/storable_value.h>
 
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <shared_mutex>
@@ -15,7 +16,7 @@ using TKVStoreMap = std::unordered_map<std::string, TStorableValuePtr>;
 class TStoreEngine
 {
 public:
-    TStoreEngine();
+    TStoreEngine() = default;
 
     explicit TStoreEngine(TKVStoreMap&& other);
 

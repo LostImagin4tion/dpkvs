@@ -1,10 +1,8 @@
 #include "store_engine.h"
 
-namespace NKVStore::NEngine {
+#include <mutex>
 
-TStoreEngine::TStoreEngine()
-    : _store(TKVStoreMap())
-{}
+namespace NKVStore::NEngine {
 
 TStoreEngine::TStoreEngine(TKVStoreMap&& other)
     : _store(std::move(other))
@@ -12,13 +10,17 @@ TStoreEngine::TStoreEngine(TKVStoreMap&& other)
 
 TStoreEngine::TStoreEngine(TStoreEngine&& other) noexcept
 {
-    std::unique_lock lock(other._mutex);
+    std::scoped_lock lock(other._mutex, _mutex);
     _store = std::move(other._store);
 }
 
 TStoreEngine& TStoreEngine::operator=(TStoreEngine && other) noexcept
 {
-    std::unique_lock lock(other._mutex);
+    if (this == &other) {
+        return *this;
+    }
+
+    std::scoped_lock lock(other._mutex, _mutex);
     _store = std::move(other._store);
     return *this;
 }
@@ -42,7 +44,7 @@ TStorableValuePtr TStoreEngine::Get(const std::string& key) const
     {
         return iterator->second;
     }
-    return std::shared_ptr<TStorableValue>();
+    return {};
 }
 
 bool TStoreEngine::Remove(const std::string &key)

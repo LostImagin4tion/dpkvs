@@ -26,7 +26,7 @@ public:
 
     void AppendPutOperation(
         const std::string& key,
-        const NEngine::TStorableValue value);
+        const NEngine::TStorableValue& value);
 
     void AppendRemoveOperation(const std::string& key);
 

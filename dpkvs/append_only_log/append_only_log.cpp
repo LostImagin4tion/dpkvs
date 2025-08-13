@@ -25,7 +25,7 @@ TAppendOnlyLog& TAppendOnlyLog::operator=(TAppendOnlyLog && other) noexcept
 
 void TAppendOnlyLog::AppendPutOperation(
     const std::string& key,
-    const TStorableValue value)
+    const TStorableValue& value)
 {
     _logSerializer->WritePutLog(key, value);
 }

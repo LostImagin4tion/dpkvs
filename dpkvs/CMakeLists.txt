@@ -28,7 +28,7 @@ add_library(dpkvs_lib STATIC
         network/server/dpkvs_service_impl.cpp
 )
 
-target_include_directories(dpkvs_lib PRIVATE
+target_include_directories(dpkvs_lib PUBLIC
         ${CMAKE_SOURCE_DIR}
 )
 

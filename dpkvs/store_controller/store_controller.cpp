@@ -1,5 +1,7 @@
 #include "store_controller.h"
 
+#include <mutex>
+
 using NKVStore::NAppendLog::TAppendOnlyLog;
 using NKVStore::NAppendLog::EAppendLogOperations;
 
@@ -28,11 +30,10 @@ void TStoreController::Put(
     std::string key,
     std::string value)
 {
-    TStorableValue storableValue(std::move(value));
+    std::lock_guard<std::mutex> lock(_appendOnlyLogMutex);
 
-    _appendOnlyLogMutex.lock();
+    TStorableValue storableValue(std::move(value));
     _logger->AppendPutOperation(key,storableValue);
-    _appendOnlyLogMutex.unlock();
 
     _engine->Put(
         std::move(key),
@@ -46,11 +47,10 @@ TStorableValuePtr TStoreController::Get(const std::string& key) const
 
 bool TStoreController::Remove(const std::string& key)
 {
-    if (_engine->Get(key)) {
-        _appendOnlyLogMutex.lock();
-        _logger->AppendRemoveOperation(key);
-        _appendOnlyLogMutex.unlock();
+    std::unique_lock lock(_appendOnlyLogMutex);
 
+    if (_engine->Get(key)) {
+        _logger->AppendRemoveOperation(key);
         return _engine->Remove(key);
     } else {
         return false;

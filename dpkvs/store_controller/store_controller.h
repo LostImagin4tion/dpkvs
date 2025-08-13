@@ -32,7 +32,7 @@ private:
     std::unique_ptr<NEngine::TStoreEngine> _engine;
     std::unique_ptr<NAppendLog::TAppendOnlyLog> _logger;
 
-    mutable std::mutex _appendOnlyLogMutex;
+    std::mutex _appendOnlyLogMutex;
 };
 
 } // NKVStore::NController

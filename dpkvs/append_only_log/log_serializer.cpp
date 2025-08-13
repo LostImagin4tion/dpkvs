@@ -69,7 +69,7 @@ void TAppendLogSerializer::WritePutLog(
     _log_stream.write(reinterpret_cast<const char*>(&hasExpiry), sizeof(hasExpiry));
 
     if (hasExpiry) {
-        auto time = value.expiry->time_since_epoch().count();
+        int64_t time = value.expiry->time_since_epoch().count();
         _log_stream.write(reinterpret_cast<const char*>(&time), sizeof(time));
     }
 
@@ -160,19 +160,6 @@ void TAppendLogSerializer::EnableWriteMode()
 {
     _log_stream.clear();
     _log_stream.seekp(0, std::ios::end);
-}
-
-template <class T>
-T TAppendLogSerializer::ReadBinary()
-{
-    T value;
-    _log_stream.read(reinterpret_cast<char*>(&value), sizeof(value));
-
-    if (!_log_stream.good()) {
-        throw std::runtime_error("Failed to read binary data");
-    }
-
-    return value;
 }
 
 void TAppendLogSerializer::Flush()
