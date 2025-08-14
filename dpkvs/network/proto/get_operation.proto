@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package NKVStore.NService;
+
+message GetRequest {
+  string key = 1;
+}
+
+message GetResponse {
+  optional bytes value = 1;
+}
