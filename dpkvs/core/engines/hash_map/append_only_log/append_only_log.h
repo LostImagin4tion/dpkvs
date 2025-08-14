@@ -2,7 +2,7 @@
 
 #include <dpkvs/core/store_record/store_record.h>
 #include <dpkvs/core/engines/hash_map/append_only_log/log_serializer.h>
-#include <dpkvs/core/engines/hash_map/hash_map_store_engine.h>
+#include "dpkvs/core/engines/hash_map/impl/hash_map_store_engine.h"
 
 #include <string>
 

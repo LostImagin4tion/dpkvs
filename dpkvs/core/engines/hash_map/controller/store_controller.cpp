@@ -4,34 +4,34 @@
 
 using NKVStore::NCore::NEngine::EStoreEngineOperations;
 
-namespace NKVStore::NController
+namespace NKVStore::NCore::NEngine::NController
 {
 
-TStoreController::TStoreController()
+THashMapStoreController::THashMapStoreController()
     : _logger(std::make_unique<TAppendOnlyLog>())
 {
     _engine = _logger->RecoverFromLog();
 }
 
-TStoreController::TStoreController(const std::string& appendOnlyLogFileName)
+THashMapStoreController::THashMapStoreController(const std::string& appendOnlyLogFileName)
     : _logger(std::make_unique<TAppendOnlyLog>(appendOnlyLogFileName))
 {
     _engine = _logger->RecoverFromLog();
 }
 
-TStoreController::TStoreController(TStoreController&& other) noexcept
+THashMapStoreController::THashMapStoreController(THashMapStoreController&& other) noexcept
     : _engine(std::move(other._engine))
     , _logger(std::move(other._logger))
 {}
 
-TStoreController& TStoreController::operator=(TStoreController&& other) noexcept
+THashMapStoreController& THashMapStoreController::operator=(THashMapStoreController&& other) noexcept
 {
     _engine = std::move(other._engine);
     _logger = std::move(other._logger);
     return *this;
 }
 
-void TStoreController::Put(
+void THashMapStoreController::Put(
     std::string key,
     std::string value)
 {
@@ -45,12 +45,12 @@ void TStoreController::Put(
         std::move(storableValue));
 }
 
-TStoreRecordPtr TStoreController::Get(const std::string& key) const
+TStoreRecordPtr THashMapStoreController::Get(const std::string& key) const
 {
     return _engine->Get(key);
 }
 
-bool TStoreController::Remove(const std::string& key)
+bool THashMapStoreController::Remove(const std::string& key)
 {
     std::unique_lock lock(_appendOnlyLogMutex);
 
@@ -62,4 +62,4 @@ bool TStoreController::Remove(const std::string& key)
     }
 }
 
-} // NKVStore::NController
+} // NKVStore::NCore::NEngine::NController

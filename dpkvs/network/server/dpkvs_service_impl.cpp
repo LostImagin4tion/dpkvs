@@ -4,10 +4,10 @@ namespace NKVStore::NService
 {
 
 TDpkvsServiceImpl::TDpkvsServiceImpl()
-    : _storeController(std::make_unique<TStoreController>())
+    : _storeController(std::make_unique<THashMapStoreController>())
 {}
 
-TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<TStoreController> storeController)
+TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<THashMapStoreController> storeController)
     : _storeController(std::move(storeController))
 {}
 

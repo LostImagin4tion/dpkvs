@@ -2,7 +2,7 @@
 
 #include <dpkvs/network/generated/dpkvs_service.grpc.pb.h>
 
-#include <dpkvs/store_controller/store_controller.h>
+#include <dpkvs/core/engines/hash_map/controller/store_controller.h>
 
 using grpc::CallbackServerContext;
 using grpc::Server;
@@ -11,7 +11,7 @@ using grpc::ServerUnaryReactor;
 using grpc::Status;
 using grpc::StatusCode;
 
-using NKVStore::NController::TStoreController;
+using NKVStore::NCore::NEngine::NController::THashMapStoreController;
 
 namespace NKVStore::NService
 {
@@ -22,7 +22,7 @@ class TDpkvsServiceImpl final
 public:
     TDpkvsServiceImpl();
 
-    explicit TDpkvsServiceImpl(std::unique_ptr<TStoreController> storeController);
+    explicit TDpkvsServiceImpl(std::unique_ptr<THashMapStoreController> storeController);
 
     ServerUnaryReactor* Get(
         CallbackServerContext* context,
@@ -40,7 +40,7 @@ public:
         RemoveResponse* response) override final;
 
 private:
-    std::unique_ptr<TStoreController> _storeController;
+    std::unique_ptr<THashMapStoreController> _storeController;
 };
 
 } // namespace NKVStore::NService

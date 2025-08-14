@@ -5,9 +5,9 @@ add_library(dpkvs_lib STATIC
         core/engines/store_engine.h
         core/engines/operations.h
 
-        # hash map store engine
-        core/engines/hash_map/hash_map_store_engine.h
-        core/engines/hash_map/hash_map_store_engine.cpp
+        # ==== Hash Map store engine ====
+        core/engines/hash_map/impl/hash_map_store_engine.h
+        core/engines/hash_map/impl/hash_map_store_engine.cpp
 
         # append only log
         core/engines/hash_map/append_only_log/append_only_log.h
@@ -16,8 +16,8 @@ add_library(dpkvs_lib STATIC
         core/engines/hash_map/append_only_log/log_serializer.cpp
 
         # store controller
-        store_controller/store_controller.h
-        store_controller/store_controller.cpp
+        core/engines/hash_map/controller/store_controller.h
+        core/engines/hash_map/controller/store_controller.cpp
 
         # service protos
         network/generated/dpkvs_service.grpc.pb.cc

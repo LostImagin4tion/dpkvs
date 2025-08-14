@@ -2,10 +2,10 @@
 #include <iostream>
 #include <cassert>
 
-using NKVStore::NController::TStoreController;
+using NKVStore::NController::THashMapStoreController;
 
 int main() {
-    TStoreController store;
+    THashMapStoreController store;
 
     std::string key = "hello";
     std::string value = "world";
