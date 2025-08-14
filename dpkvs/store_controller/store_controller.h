@@ -14,6 +14,8 @@ class TStoreController
 public:
     TStoreController();
 
+    explicit TStoreController(const std::string& appendOnlyLogFileName);
+
     TStoreController(const TStoreController&) = delete;
     TStoreController& operator=(const TStoreController&) = delete;
 

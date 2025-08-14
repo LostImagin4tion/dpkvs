@@ -7,6 +7,10 @@ TDpkvsServiceImpl::TDpkvsServiceImpl()
     : _storeController(std::make_unique<TStoreController>())
 {}
 
+TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<TStoreController> storeController)
+    : _storeController(std::move(storeController))
+{}
+
 ServerUnaryReactor* TDpkvsServiceImpl::Get(
     CallbackServerContext* context,
     const GetRequest* request,

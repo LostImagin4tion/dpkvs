@@ -12,15 +12,12 @@ class EngineInstantiatingTest
 protected:
     void SetUp() override {
         auto valueStr1 = std::string("hello");
-        auto value1 = std::vector<uint8_t>(valueStr1.begin(), valueStr1.end());
-
         auto valueStr2 = std::string("world");
 
         defaultStore.Put(std::string(key1), TStorableValue(std::move(valueStr1)));
         defaultStore.Put(std::string(key2), TStorableValue(std::move(valueStr2)));
 
         auto valueStr3 = std::string("world");
-
         map[std::string(key1)] = std::make_shared<TStorableValue>(std::move(valueStr3));
     }
 

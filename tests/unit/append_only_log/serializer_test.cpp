@@ -3,8 +3,9 @@
 #include <dpkvs/engine/storable_value.h>
 #include <dpkvs/append_only_log/log_serializer.h>
 
-using namespace NKVStore::NEngine;
-using namespace NKVStore::NAppendLog;
+using NKVStore::NEngine::TStorableValue;
+using NKVStore::NAppendLog::TAppendLogSerializer;
+using NKVStore::NAppendLog::EAppendLogOperations;
 
 TEST(SerializerTest, WriteReadLogsTest) {
     auto logSerializer = TAppendLogSerializer();

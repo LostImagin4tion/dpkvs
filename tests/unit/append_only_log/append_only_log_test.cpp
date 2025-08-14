@@ -3,8 +3,8 @@
 #include <dpkvs/engine/storable_value.h>
 #include <dpkvs/append_only_log/append_only_log.h>
 
-using namespace NKVStore::NAppendLog;
-using namespace NKVStore::NEngine;
+using NKVStore::NAppendLog::TAppendOnlyLog;
+using NKVStore::NEngine::TStorableValue;
 
 class AppendOnlyLogTest
     : public testing::Test

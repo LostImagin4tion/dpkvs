@@ -22,6 +22,8 @@ class TDpkvsServiceImpl final
 public:
     TDpkvsServiceImpl();
 
+    explicit TDpkvsServiceImpl(std::unique_ptr<TStoreController> storeController);
+
     ServerUnaryReactor* Get(
         CallbackServerContext* context,
         const GetRequest* request,

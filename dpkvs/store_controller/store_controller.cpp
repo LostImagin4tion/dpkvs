@@ -14,6 +14,12 @@ TStoreController::TStoreController()
     _engine = _logger->RecoverFromLog();
 }
 
+TStoreController::TStoreController(const std::string& appendOnlyLogFileName)
+    : _logger(std::make_unique<TAppendOnlyLog>(appendOnlyLogFileName))
+{
+    _engine = _logger->RecoverFromLog();
+}
+
 TStoreController::TStoreController(TStoreController&& other) noexcept
     : _engine(std::move(other._engine))
     , _logger(std::move(other._logger))
