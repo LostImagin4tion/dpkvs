@@ -19,7 +19,7 @@ target_include_directories(dpkvs_tests PRIVATE
 
 target_link_libraries(dpkvs_tests
         GTest::gtest_main
-        dpkvs_lib
+        dpkvs_master_lib
 )
 
 set_tests_properties(
