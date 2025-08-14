@@ -19,31 +19,21 @@ TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {
 
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
-    auto value1 = std::vector<uint8_t>(valueStr1.begin(), valueStr1.end());
 
-    store.Put(
-        std::move(key1),
-        TStorableValue(std::move(value1)));
+    store.Put(std::move(key1), TStorableValue(std::move(valueStr1)));
 
     ASSERT_EQ(store.Size(), 1);
-    ASSERT_TRUE(store.Get("hello").has_value());
+    ASSERT_TRUE(store.Get("hello"));
 
-    auto binaryData1 = store.Get("hello")
-        .value()
-        .binaryData;
-    auto string = std::string(binaryData1.begin(), binaryData1.end());
-
+    auto string = store.Get("hello")->data;
     ASSERT_EQ(string, "world");
 
     // === second put ===
 
     auto key2 = std::string("world");
     auto valueStr2 = std::string("hello");
-    auto value2 = std::vector<uint8_t>(valueStr2.begin(), valueStr2.end());
 
-    store.Put(
-        std::move(key2),
-        TStorableValue(std::move(value2)));
+    store.Put(std::move(key2),TStorableValue(std::move(valueStr2)));
 
     ASSERT_EQ(store.Size(), 2);
 

@@ -3,8 +3,9 @@
 #include <dpkvs/engine/storable_value.h>
 #include <dpkvs/append_only_log/log_serializer.h>
 
-using namespace NKVStore::NEngine;
-using namespace NKVStore::NAppendLog;
+using NKVStore::NEngine::TStorableValue;
+using NKVStore::NAppendLog::TAppendLogSerializer;
+using NKVStore::NAppendLog::EAppendLogOperations;
 
 TEST(SerializerTest, WriteReadLogsTest) {
     auto logSerializer = TAppendLogSerializer();
@@ -13,7 +14,7 @@ TEST(SerializerTest, WriteReadLogsTest) {
 
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
-    auto storableValue1 = TStorableValue(std::vector<uint8_t>(valueStr1.begin(), valueStr1.end()));
+    auto storableValue1 = TStorableValue(valueStr1);
 
     logSerializer.WritePutLog(key1, storableValue1);
 
@@ -21,7 +22,7 @@ TEST(SerializerTest, WriteReadLogsTest) {
 
     auto key2 = std::string("darkness");
     auto valueStr2 = std::string("my old friend");
-    auto storableValue2 = TStorableValue(std::vector<uint8_t>(valueStr2.begin(), valueStr2.end()));
+    auto storableValue2 = TStorableValue(valueStr2);
 
     logSerializer.WritePutLog(key2, storableValue2);
 
@@ -40,8 +41,7 @@ TEST(SerializerTest, WriteReadLogsTest) {
     auto readKey1 = logSerializer.ReadKey();
     ASSERT_EQ(readKey1, key1);
 
-    auto readValue1 = logSerializer.ReadValue().binaryData;
-    auto readStr1 =  std::string(readValue1.begin(), readValue1.end());
+    auto readStr1 =  logSerializer.ReadValue().data;
     ASSERT_EQ(readStr1, valueStr1);
 
     // === Read put second value log ===
@@ -52,8 +52,7 @@ TEST(SerializerTest, WriteReadLogsTest) {
     auto readKey2 = logSerializer.ReadKey();
     ASSERT_EQ(readKey2, key2);
 
-    auto readValue2 = logSerializer.ReadValue().binaryData;
-    auto readStr2 =  std::string(readValue2.begin(), readValue2.end());
+    auto readStr2 =  logSerializer.ReadValue().data;
     ASSERT_EQ(readStr2, valueStr2);
 
     // === Read removed first value log ===

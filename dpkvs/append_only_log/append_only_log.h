@@ -1,7 +1,6 @@
 #pragma once
 
 #include <string>
-#include <any>
 
 #include <dpkvs/engine/store_engine.h>
 #include <dpkvs/append_only_log/log_serializer.h>
@@ -13,9 +12,9 @@ namespace NKVStore::NAppendLog
 class TAppendOnlyLog
 {
 public:
-    TAppendOnlyLog() = default;
+    TAppendOnlyLog();
 
-    explicit TAppendOnlyLog(std::string& fileName);
+    explicit TAppendOnlyLog(const std::string& fileName);
 
     TAppendOnlyLog(TAppendOnlyLog&) = delete;
     TAppendOnlyLog& operator=(const TAppendOnlyLog&) = delete;
@@ -25,15 +24,16 @@ public:
 
     ~TAppendOnlyLog() = default;
 
-    void AppendToLog(
-        const EAppendLogOperations& operation,
+    void AppendPutOperation(
         const std::string& key,
-        std::optional<const NEngine::TStorableValue> value);
+        const NEngine::TStorableValue& value);
+
+    void AppendRemoveOperation(const std::string& key);
 
     std::unique_ptr<NEngine::TStoreEngine> RecoverFromLog();
 
 private:
-    TAppendLogSerializer _logSerializer;
+    std::unique_ptr<TAppendLogSerializer> _logSerializer;
 };
 
 } // namespace NKVStore::NAppendLog

@@ -7,6 +7,7 @@ Built with C++, so DPKVS is ⚡ blazingly fast ⚡ and 🔥 memory-unsafe 🔥
 ## Features
 
 * Persistence using Append-Only Log and binary serialization
+* gRPC API
 * Distributed (WIP)
 * Master-Slave Replication (WIP)
 * Data Partitioning using Consistent Hashing (WIP)
@@ -31,8 +32,8 @@ Put operations also contain:
 | value size                   | 4 bytes             |
 | value itself                 | 1 byte * value_size |
 | "has expiry" flag            | 1 byte              |
-| expiry timestamp             | 8 bytes             |
 | additional client-side flags | 4 bytes             |
+| expiry timestamp             | 8 bytes             |
 
 Therefore, operation's size is:
 * `5 + key_size` bytes for `REMOVE` operations

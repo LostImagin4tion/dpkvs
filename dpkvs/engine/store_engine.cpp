@@ -1,59 +1,62 @@
 #include "store_engine.h"
 
+#include <mutex>
+
 namespace NKVStore::NEngine {
 
-TStoreEngine::TStoreEngine()
-    : _store(std::unordered_map<std::string, TStorableValue>())
-{}
-
-TStoreEngine::TStoreEngine(std::unordered_map<std::string, TStorableValue>&& other)
+TStoreEngine::TStoreEngine(TKVStoreMap&& other)
     : _store(std::move(other))
 {}
 
-TStoreEngine::TStoreEngine(TStoreEngine && other) noexcept
-    : _store(std::move(other._store))
-{}
+TStoreEngine::TStoreEngine(TStoreEngine&& other) noexcept
+{
+    std::scoped_lock lock(other._mutex, _mutex);
+    _store = std::move(other._store);
+}
 
 TStoreEngine& TStoreEngine::operator=(TStoreEngine && other) noexcept
 {
+    if (this == &other) {
+        return *this;
+    }
+
+    std::scoped_lock lock(other._mutex, _mutex);
     _store = std::move(other._store);
     return *this;
 }
 
 void TStoreEngine::Put(
-    std::string&& key,
-    TStorableValue&& value)
+    std::string key,
+    TStorableValue value)
 {
     std::unique_lock lock(_mutex);
-    _store.emplace(std::move(key), std::move(value));
+    _store.insert_or_assign(
+        std::move(key),
+        std::make_shared<TStorableValue>(std::move(value)));
 }
 
-std::optional<TStorableValue> TStoreEngine::Get(const std::string& key) const
+TStorableValuePtr TStoreEngine::Get(const std::string& key) const
 {
     std::shared_lock lock(_mutex);
 
-    if (_store.contains(key)) {
-        auto iterator = _store.find(key);
-        if (iterator != _store.end()) {
-            return iterator->second;
-        }
+    if (auto iterator = _store.find(key);
+        iterator != _store.end())
+    {
+        return iterator->second;
     }
-    return std::nullopt;
+    return {};
 }
 
 bool TStoreEngine::Remove(const std::string &key)
 {
     std::unique_lock lock(_mutex);
 
-    if (_store.contains(key)) {
-        _store.erase(key);
-        return true;
-    }
-    return false;
+    return _store.erase(key) > 0;
 }
 
 size_t TStoreEngine::Size() const
 {
+    std::shared_lock lock(_mutex);
     return _store.size();
 }
 

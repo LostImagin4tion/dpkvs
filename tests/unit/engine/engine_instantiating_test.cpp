@@ -4,6 +4,7 @@
 
 using NKVStore::NEngine::TStoreEngine;
 using NKVStore::NEngine::TStorableValue;
+using NKVStore::NEngine::TStorableValuePtr;
 
 class EngineInstantiatingTest
     : public testing::Test
@@ -11,23 +12,18 @@ class EngineInstantiatingTest
 protected:
     void SetUp() override {
         auto valueStr1 = std::string("hello");
-        auto value1 = std::vector<uint8_t>(valueStr1.begin(), valueStr1.end());
-
         auto valueStr2 = std::string("world");
-        auto value2 = std::vector<uint8_t>(valueStr2.begin(), valueStr2.end());
 
-        defaultStore.Put(std::string(key1), TStorableValue(std::move(value1)));
-        defaultStore.Put(std::string(key2), TStorableValue(std::move(value2)));
+        defaultStore.Put(std::string(key1), TStorableValue(std::move(valueStr1)));
+        defaultStore.Put(std::string(key2), TStorableValue(std::move(valueStr2)));
 
         auto valueStr3 = std::string("world");
-        auto value3 = std::vector<uint8_t>(valueStr3.begin(), valueStr3.end());
-
-        map[std::string(key1)] = TStorableValue(std::move(value3));
+        map[std::string(key1)] = std::make_shared<TStorableValue>(std::move(valueStr3));
     }
 
     std::string key1 = "hello";
     std::string key2 = "world";
-    std::unordered_map<std::string, TStorableValue> map;
+    std::unordered_map<std::string, TStorableValuePtr> map;
     TStoreEngine defaultStore;
 };
 
@@ -36,12 +32,10 @@ TEST_F(EngineInstantiatingTest, ParametrizedContructorTest) {
     auto newStore = TStoreEngine(std::move(map));
 
     ASSERT_EQ(newStore.Size(), mapSize);
-    ASSERT_TRUE(newStore.Get(key1).has_value());
+    ASSERT_TRUE(newStore.Get(key1));
 
-    auto item = newStore.Get(key1).value().binaryData;
-    auto itemStr = std::string(item.begin(), item.end());
-
-    ASSERT_EQ(itemStr, "world");
+    auto item = newStore.Get(key1)->data;
+    ASSERT_EQ(item, "world");
 }
 
 TEST_F(EngineInstantiatingTest, MoveConstructorTest) {
@@ -49,13 +43,11 @@ TEST_F(EngineInstantiatingTest, MoveConstructorTest) {
     TStoreEngine newStore(std::move(defaultStore));
 
     ASSERT_EQ(newStore.Size(), storeSize);
-    ASSERT_TRUE(newStore.Get(key1).has_value());
-    ASSERT_TRUE(newStore.Get(key2).has_value());
+    ASSERT_TRUE(newStore.Get(key1));
+    ASSERT_TRUE(newStore.Get(key2));
 
-    auto item = newStore.Get(key1).value().binaryData;
-    auto itemStr = std::string(item.begin(), item.end());
-
-    ASSERT_EQ(itemStr, "hello");
+    auto item = newStore.Get(key1)->data;
+    ASSERT_EQ(item, "hello");
 }
 
 TEST_F(EngineInstantiatingTest, MoveAssignmentOperatorTest) {
@@ -63,11 +55,9 @@ TEST_F(EngineInstantiatingTest, MoveAssignmentOperatorTest) {
     auto newStore = TStoreEngine(std::move(defaultStore));
 
     ASSERT_EQ(newStore.Size(), storeSize);
-    ASSERT_TRUE(newStore.Get(key1).has_value());
-    ASSERT_TRUE(newStore.Get(key2).has_value());
+    ASSERT_TRUE(newStore.Get(key1));
+    ASSERT_TRUE(newStore.Get(key2));
 
-    auto item = newStore.Get(key2).value().binaryData;
-    auto itemStr = std::string(item.begin(), item.end());
-
-    ASSERT_EQ(itemStr, "world");
+    auto item = newStore.Get(key2)->data;
+    ASSERT_EQ(item, "world");
 }

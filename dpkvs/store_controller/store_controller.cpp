@@ -1,10 +1,21 @@
 #include "store_controller.h"
 
+#include <mutex>
+
+using NKVStore::NAppendLog::TAppendOnlyLog;
+using NKVStore::NAppendLog::EAppendLogOperations;
+
 namespace NKVStore::NController
 {
 
 TStoreController::TStoreController()
-    : _logger(std::make_unique<NAppendLog::TAppendOnlyLog>())
+    : _logger(std::make_unique<TAppendOnlyLog>())
+{
+    _engine = _logger->RecoverFromLog();
+}
+
+TStoreController::TStoreController(const std::string& appendOnlyLogFileName)
+    : _logger(std::make_unique<TAppendOnlyLog>(appendOnlyLogFileName))
 {
     _engine = _logger->RecoverFromLog();
 }
@@ -22,34 +33,30 @@ TStoreController& TStoreController::operator=(TStoreController&& other) noexcept
 }
 
 void TStoreController::Put(
-    std::string& key,
-    std::vector<uint8_t>& value)
+    std::string key,
+    std::string value)
 {
-    auto storableValue = NEngine::TStorableValue(std::move(value));
+    std::lock_guard<std::mutex> lock(_appendOnlyLogMutex);
 
-    _logger->AppendToLog(
-        NAppendLog::EAppendLogOperations::Put,
-        key,
-        storableValue);
+    TStorableValue storableValue(std::move(value));
+    _logger->AppendPutOperation(key,storableValue);
 
     _engine->Put(
         std::move(key),
         std::move(storableValue));
 }
 
-std::optional<NEngine::TStorableValue> TStoreController::Get(const std::string& key) const
+TStorableValuePtr TStoreController::Get(const std::string& key) const
 {
     return _engine->Get(key);
 }
 
 bool TStoreController::Remove(const std::string& key)
 {
-    if (_engine->Get(key).has_value()) {
-        _logger->AppendToLog(
-            NAppendLog::EAppendLogOperations::Remove,
-            key,
-            std::nullopt);
+    std::unique_lock lock(_appendOnlyLogMutex);
 
+    if (_engine->Get(key)) {
+        _logger->AppendRemoveOperation(key);
         return _engine->Remove(key);
     } else {
         return false;

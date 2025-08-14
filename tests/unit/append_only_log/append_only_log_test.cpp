@@ -3,8 +3,8 @@
 #include <dpkvs/engine/storable_value.h>
 #include <dpkvs/append_only_log/append_only_log.h>
 
-using namespace NKVStore::NAppendLog;
-using namespace NKVStore::NEngine;
+using NKVStore::NAppendLog::TAppendOnlyLog;
+using NKVStore::NEngine::TStorableValue;
 
 class AppendOnlyLogTest
     : public testing::Test
@@ -19,23 +19,17 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
 
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
-    auto value1 = TStorableValue(std::vector<uint8_t>(valueStr1.begin(), valueStr1.end()));
+    auto value1 = TStorableValue(valueStr1);
 
-    appendOnlyLog.AppendToLog(
-        EAppendLogOperations::Put,
-        key1,
-        value1);
+    appendOnlyLog.AppendPutOperation(key1, value1);
 
     // === Put second value ===
 
     auto key2 = std::string("darkness");
     auto valueStr2 = std::string("my old friend");
-    auto value2 = TStorableValue(std::vector<uint8_t>(valueStr2.begin(), valueStr2.end()));
+    auto value2 = TStorableValue(valueStr2);
 
-    appendOnlyLog.AppendToLog(
-        EAppendLogOperations::Put,
-        key2,
-        value2);
+    appendOnlyLog.AppendPutOperation(key2,value2);
 
     // === Recover ===
 
@@ -44,21 +38,18 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
     auto recoveredValue1 = recoveredEngine1->Get(key1);
     auto recoveredValue2 = recoveredEngine1->Get(key2);
 
-    ASSERT_TRUE(recoveredValue1.has_value());
-    ASSERT_TRUE(recoveredValue2.has_value());
+    ASSERT_TRUE(recoveredValue1);
+    ASSERT_TRUE(recoveredValue2);
 
-    auto recoveredStr1 = std::string(recoveredValue1->binaryData.begin(), recoveredValue1->binaryData.end());
-    auto recoveredStr2 = std::string(recoveredValue2->binaryData.begin(), recoveredValue2->binaryData.end());
+    auto recoveredStr1 = recoveredValue1->data;
+    auto recoveredStr2 = recoveredValue2->data;
 
     ASSERT_EQ(recoveredStr1, valueStr1);
     ASSERT_EQ(recoveredStr2, valueStr2);
 
     // === Remove first value ===
 
-    appendOnlyLog.AppendToLog(
-        EAppendLogOperations::Remove,
-        key1,
-        value1);
+    appendOnlyLog.AppendRemoveOperation(key1);
 
     // === Recover again ===
 
@@ -68,12 +59,10 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
     auto recoveredAgainValue2 = recoveredEngine2->Get(key2);
 
     ASSERT_EQ(recoveredEngine2->Size(), 1);
-    ASSERT_FALSE(deletedValue1.has_value());
-    ASSERT_TRUE(recoveredAgainValue2.has_value());
+    ASSERT_FALSE(deletedValue1);
+    ASSERT_TRUE(recoveredAgainValue2);
 
-    auto recoveredAgainStr2 = std::string(
-        recoveredAgainValue2->binaryData.begin(),
-        recoveredAgainValue2->binaryData.end());
+    auto recoveredAgainStr2 = recoveredAgainValue2->data;
 
     ASSERT_EQ(recoveredAgainStr2, valueStr2);
 }

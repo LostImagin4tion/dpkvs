@@ -14,7 +14,7 @@ namespace NKVStore::NAppendLog
     public:
         TAppendLogSerializer();
 
-        explicit TAppendLogSerializer(std::string& fileName);
+        explicit TAppendLogSerializer(std::string fileName);
 
         TAppendLogSerializer(TAppendLogSerializer&) = delete;
         TAppendLogSerializer& operator=(const TAppendLogSerializer&) = delete;
@@ -39,13 +39,21 @@ namespace NKVStore::NAppendLog
 
     private:
         void OpenFileStream();
-
         void EnableWriteMode();
+        void Flush();
 
         template <class T>
-        T ReadBinary();
+        T ReadBinary()
+        {
+            T value;
+            _log_stream.read(reinterpret_cast<char*>(&value), sizeof(value));
 
-        void Flush();
+            if (!_log_stream.good()) {
+                throw std::runtime_error("Failed to read binary data");
+            }
+
+            return value;
+        }
 
         std::fstream _log_stream;
 

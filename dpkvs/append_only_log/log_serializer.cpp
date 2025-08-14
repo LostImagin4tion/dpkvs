@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include "log_serializer.h"
 
 namespace NKVStore::NAppendLog
@@ -9,8 +10,8 @@ TAppendLogSerializer::TAppendLogSerializer()
    OpenFileStream();
 }
 
-TAppendLogSerializer::TAppendLogSerializer(std::string& fileName)
-    : _fileName(fileName)
+TAppendLogSerializer::TAppendLogSerializer(std::string  fileName)
+    : _fileName(std::move(fileName))
 {
     OpenFileStream();
 }
@@ -59,17 +60,17 @@ void TAppendLogSerializer::WritePutLog(
     _log_stream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
     _log_stream.write(key.data(), keySize);
 
-    uint32_t dataSize = value.binaryData.size();
+    uint32_t dataSize = value.data.size();
     _log_stream.write(reinterpret_cast<const char*>(&dataSize), sizeof(dataSize));
 
-    _log_stream.write(reinterpret_cast<const char*>(value.binaryData.data()), dataSize);
+    _log_stream.write(value.data.data(), dataSize);
     _log_stream.write(reinterpret_cast<const char*>(&value.flags), sizeof(value.flags));
 
-    bool hasExpiry = value.expiry.has_value();
+    uint8_t hasExpiry = value.expiry.has_value();
     _log_stream.write(reinterpret_cast<const char*>(&hasExpiry), sizeof(hasExpiry));
 
     if (hasExpiry) {
-        auto time = value.expiry->time_since_epoch().count();
+        int64_t time = value.expiry->time_since_epoch().count();
         _log_stream.write(reinterpret_cast<const char*>(&time), sizeof(time));
     }
 
@@ -121,16 +122,16 @@ NEngine::TStorableValue TAppendLogSerializer::ReadValue()
     NEngine::TStorableValue value;
 
     auto dataSize = ReadBinary<uint32_t>();
-    value.binaryData.resize(dataSize);
+    value.data.resize(dataSize);
 
-    _log_stream.read(reinterpret_cast<char*>(value.binaryData.data()), dataSize);
+    _log_stream.read(value.data.data(), dataSize);
     if (!_log_stream.good()) {
         throw std::runtime_error("Failed to read value data");
     }
 
     value.flags = ReadBinary<uint32_t>();
 
-    bool hasExpiry = ReadBinary<bool>();
+    uint8_t hasExpiry = ReadBinary<uint8_t>();
 
     if (hasExpiry) {
         auto timeValue = ReadBinary<int64_t>();
@@ -160,19 +161,6 @@ void TAppendLogSerializer::EnableWriteMode()
 {
     _log_stream.clear();
     _log_stream.seekp(0, std::ios::end);
-}
-
-template <class T>
-T TAppendLogSerializer::ReadBinary()
-{
-    T value;
-    _log_stream.read(reinterpret_cast<char*>(&value), sizeof(value));
-
-    if (!_log_stream.good()) {
-        throw std::runtime_error("Failed to read binary data");
-    }
-
-    return value;
 }
 
 void TAppendLogSerializer::Flush()

@@ -2,11 +2,19 @@
 
 #include <iostream>
 
+using NKVStore::NEngine::TStoreEngine;
+using NKVStore::NEngine::TStorableValue;
+using NKVStore::NEngine::TStorableValuePtr;
+
 namespace NKVStore::NAppendLog
 {
 
-TAppendOnlyLog::TAppendOnlyLog(std::string &fileName)
-    : _logSerializer(fileName)
+TAppendOnlyLog::TAppendOnlyLog()
+    : _logSerializer(std::make_unique<TAppendLogSerializer>())
+{}
+
+TAppendOnlyLog::TAppendOnlyLog(const std::string& fileName)
+    : _logSerializer(std::make_unique<TAppendLogSerializer>(fileName))
 {}
 
 TAppendOnlyLog::TAppendOnlyLog(TAppendOnlyLog && other) noexcept
@@ -19,46 +27,39 @@ TAppendOnlyLog& TAppendOnlyLog::operator=(TAppendOnlyLog && other) noexcept
     return *this;
 }
 
-void TAppendOnlyLog::AppendToLog(
-    const EAppendLogOperations& operation,
+void TAppendOnlyLog::AppendPutOperation(
     const std::string& key,
-    std::optional<const NEngine::TStorableValue> value)
+    const TStorableValue& value)
 {
-    switch (operation) {
-        case EAppendLogOperations::Put:
-            if (!value.has_value()) {
-                throw std::invalid_argument("If you use put operation, value must contain not null");
-            }
-            _logSerializer.WritePutLog(key, value.value());
-            break;
-
-        case EAppendLogOperations::Remove:
-            _logSerializer.WriteRemoveLog(key);
-            break;
-    }
+    _logSerializer->WritePutLog(key, value);
 }
 
-std::unique_ptr<NEngine::TStoreEngine> TAppendOnlyLog::RecoverFromLog()
+void TAppendOnlyLog::AppendRemoveOperation(const std::string& key)
 {
-    auto recoveredStore = std::unordered_map<std::string, NEngine::TStorableValue>();
+    _logSerializer->WriteRemoveLog(key);
+}
+
+std::unique_ptr<TStoreEngine> TAppendOnlyLog::RecoverFromLog()
+{
+    auto recoveredStore = std::unordered_map<std::string, TStorableValuePtr>();
 
     try {
-        _logSerializer.EnableReadMode();
+        _logSerializer->EnableReadMode();
 
-        while (_logSerializer.ReadyToRead()) {
-            EAppendLogOperations command = _logSerializer.ReadCommand();
+        while (_logSerializer->ReadyToRead()) {
+            EAppendLogOperations command = _logSerializer->ReadCommand();
 
             switch (command) {
                 case EAppendLogOperations::Put: {
-                    std::string key = _logSerializer.ReadKey();
-                    NEngine::TStorableValue value = _logSerializer.ReadValue();
+                    std::string key = _logSerializer->ReadKey();
+                    TStorableValue value = _logSerializer->ReadValue();
 
-                    recoveredStore[std::move(key)] = std::move(value);
+                    recoveredStore[std::move(key)] = std::make_shared<TStorableValue>(std::move(value));
                     break;
                 }
 
                 case EAppendLogOperations::Remove: {
-                    std::string key = _logSerializer.ReadKey();
+                    std::string key = _logSerializer->ReadKey();
 
                     recoveredStore.erase(key);
                     break;
@@ -69,7 +70,7 @@ std::unique_ptr<NEngine::TStoreEngine> TAppendOnlyLog::RecoverFromLog()
         std::cerr << "Error reading log: " << e.what() << std::endl;
     }
 
-    return std::make_unique<NEngine::TStoreEngine>(std::move(recoveredStore));
+    return std::make_unique<TStoreEngine>(std::move(recoveredStore));
 }
 
 } // namespace NKVStore::NAppendLog
