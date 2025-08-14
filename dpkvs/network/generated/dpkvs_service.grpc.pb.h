@@ -28,10 +28,10 @@
 namespace NKVStore {
 namespace NService {
 
-class DpkvsService final {
+class TDpkvsService final {
  public:
   static constexpr char const* service_full_name() {
-    return "NKVStore.NService.DpkvsService";
+    return "NKVStore.NService.TDpkvsService";
   }
   class StubInterface {
    public:

@@ -11,10 +11,10 @@
 
 ABSL_FLAG(std::string, address, "localhost:50051", "Server address for the service");
 
-using NKVStore::NService::DpkvsServiceImpl;
+using NKVStore::NService::TDpkvsServiceImpl;
 
 void RunServer(const std::string& server_address) {
-    DpkvsServiceImpl service;
+    TDpkvsServiceImpl service;
 
     grpc::EnableDefaultHealthCheckService(true);
     grpc::reflection::InitProtoReflectionServerBuilderPlugin();

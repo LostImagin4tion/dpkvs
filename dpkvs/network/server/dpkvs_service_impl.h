@@ -16,11 +16,11 @@ using NKVStore::NController::TStoreController;
 namespace NKVStore::NService
 {
 
-class DpkvsServiceImpl final
-    : public DpkvsService::CallbackService
+class TDpkvsServiceImpl final
+    : public TDpkvsService::CallbackService
 {
 public:
-    DpkvsServiceImpl();
+    TDpkvsServiceImpl();
 
     ServerUnaryReactor* Get(
         CallbackServerContext* context,

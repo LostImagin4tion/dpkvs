@@ -40,13 +40,13 @@ const char descriptor_table_protodef_dpkvs_5fservice_2eproto[] ABSL_ATTRIBUTE_SE
     protodesc_cold) = {
     "\n\023dpkvs_service.proto\022\021NKVStore.NService"
     "\032\023get_operation.proto\032\023put_operation.pro"
-    "to\032\026remove_operation.proto2\351\001\n\014DpkvsServ"
-    "ice\022D\n\003Get\022\035.NKVStore.NService.GetReques"
-    "t\032\036.NKVStore.NService.GetResponse\022D\n\003Put"
-    "\022\035.NKVStore.NService.PutRequest\032\036.NKVSto"
-    "re.NService.PutResponse\022M\n\006Remove\022 .NKVS"
-    "tore.NService.RemoveRequest\032!.NKVStore.N"
-    "Service.RemoveResponseb\006proto3"
+    "to\032\026remove_operation.proto2\352\001\n\rTDpkvsSer"
+    "vice\022D\n\003Get\022\035.NKVStore.NService.GetReque"
+    "st\032\036.NKVStore.NService.GetResponse\022D\n\003Pu"
+    "t\022\035.NKVStore.NService.PutRequest\032\036.NKVSt"
+    "ore.NService.PutResponse\022M\n\006Remove\022 .NKV"
+    "Store.NService.RemoveRequest\032!.NKVStore."
+    "NService.RemoveResponseb\006proto3"
 };
 static const ::_pbi::DescriptorTable* PROTOBUF_NONNULL const
     descriptor_table_dpkvs_5fservice_2eproto_deps[3] = {
@@ -58,7 +58,7 @@ static ::absl::once_flag descriptor_table_dpkvs_5fservice_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_dpkvs_5fservice_2eproto = {
     false,
     false,
-    350,
+    351,
     descriptor_table_protodef_dpkvs_5fservice_2eproto,
     "dpkvs_service.proto",
     &descriptor_table_dpkvs_5fservice_2eproto_once,

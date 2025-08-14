@@ -3,11 +3,11 @@
 namespace NKVStore::NService
 {
 
-DpkvsServiceImpl::DpkvsServiceImpl()
+TDpkvsServiceImpl::TDpkvsServiceImpl()
     : _storeController(std::make_unique<TStoreController>())
 {}
 
-ServerUnaryReactor* DpkvsServiceImpl::Get(
+ServerUnaryReactor* TDpkvsServiceImpl::Get(
     CallbackServerContext* context,
     const GetRequest* request,
     GetResponse* response)
@@ -25,7 +25,7 @@ ServerUnaryReactor* DpkvsServiceImpl::Get(
     return reactor;
 }
 
-ServerUnaryReactor* DpkvsServiceImpl::Put(
+ServerUnaryReactor* TDpkvsServiceImpl::Put(
     CallbackServerContext* context,
     const PutRequest* request,
     PutResponse* response)
@@ -40,7 +40,7 @@ ServerUnaryReactor* DpkvsServiceImpl::Put(
     return reactor;
 }
 
-ServerUnaryReactor* DpkvsServiceImpl::Remove(
+ServerUnaryReactor* TDpkvsServiceImpl::Remove(
     CallbackServerContext* context,
     const RemoveRequest* request,
     RemoveResponse* response)
