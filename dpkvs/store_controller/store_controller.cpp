@@ -2,8 +2,7 @@
 
 #include <mutex>
 
-using NKVStore::NAppendLog::TAppendOnlyLog;
-using NKVStore::NAppendLog::EAppendLogOperations;
+using NKVStore::NCore::NEngine::EStoreEngineOperations;
 
 namespace NKVStore::NController
 {
@@ -38,7 +37,7 @@ void TStoreController::Put(
 {
     std::lock_guard<std::mutex> lock(_appendOnlyLogMutex);
 
-    TStorableValue storableValue(std::move(value));
+    TStoreRecord storableValue(std::move(value));
     _logger->AppendPutOperation(key,storableValue);
 
     _engine->Put(
@@ -46,7 +45,7 @@ void TStoreController::Put(
         std::move(storableValue));
 }
 
-TStorableValuePtr TStoreController::Get(const std::string& key) const
+TStoreRecordPtr TStoreController::Get(const std::string& key) const
 {
     return _engine->Get(key);
 }

@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
-#include "cmake-build-debug/_deps/grpc-src/include/grpcpp/grpcpp.h"
+#include <dpkvs/network/generated/dpkvs_service.grpc.pb.h>
+#include <dpkvs/network/server/dpkvs_service_impl.h>
 
-#include "dpkvs/network/generated/dpkvs_service.grpc.pb.h"
-#include "dpkvs/network/server/dpkvs_service_impl.h"
+#include <grpcpp/grpcpp.h>
 
 using grpc::Server;
 using grpc::ServerBuilder;

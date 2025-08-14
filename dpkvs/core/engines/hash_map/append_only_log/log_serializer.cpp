@@ -1,8 +1,9 @@
-#include <iostream>
-#include <utility>
 #include "log_serializer.h"
 
-namespace NKVStore::NAppendLog
+#include <iostream>
+#include <utility>
+
+namespace NKVStore::NCore::NEngine::NAppendLog
 {
 
 TAppendLogSerializer::TAppendLogSerializer()
@@ -49,11 +50,11 @@ bool TAppendLogSerializer::ReadyToRead()
 
 void TAppendLogSerializer::WritePutLog(
     const std::string& key,
-    const NEngine::TStorableValue& value)
+    const TStoreRecord& value)
 {
     EnableWriteMode();
 
-    EAppendLogOperations operation = EAppendLogOperations::Put;
+    auto operation = EStoreEngineOperations::Put;
     _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
 
     uint32_t keySize = key.size();
@@ -81,7 +82,7 @@ void TAppendLogSerializer::WriteRemoveLog(const std::string& key)
 {
     EnableWriteMode();
 
-    EAppendLogOperations operation = EAppendLogOperations::Remove;
+    auto operation = EStoreEngineOperations::Remove;
     _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
 
     uint32_t keySize = key.size();
@@ -91,9 +92,9 @@ void TAppendLogSerializer::WriteRemoveLog(const std::string& key)
     Flush();
 }
 
-EAppendLogOperations TAppendLogSerializer::ReadCommand()
+EStoreEngineOperations TAppendLogSerializer::ReadCommand()
 {
-    EAppendLogOperations command;
+    EStoreEngineOperations command;
     _log_stream.read(reinterpret_cast<char*>(&command), sizeof(command));
 
     if (!_log_stream.good()) {
@@ -117,9 +118,9 @@ std::string TAppendLogSerializer::ReadKey()
     return key;
 }
 
-NEngine::TStorableValue TAppendLogSerializer::ReadValue()
+TStoreRecord TAppendLogSerializer::ReadValue()
 {
-    NEngine::TStorableValue value;
+    TStoreRecord value;
 
     auto dataSize = ReadBinary<uint32_t>();
     value.data.resize(dataSize);
@@ -131,7 +132,7 @@ NEngine::TStorableValue TAppendLogSerializer::ReadValue()
 
     value.flags = ReadBinary<uint32_t>();
 
-    uint8_t hasExpiry = ReadBinary<uint8_t>();
+    auto hasExpiry = ReadBinary<uint8_t>();
 
     if (hasExpiry) {
         auto timeValue = ReadBinary<int64_t>();
@@ -168,4 +169,4 @@ void TAppendLogSerializer::Flush()
     _log_stream.flush();
 }
 
-} // namespace NKVStore::NAppendLog
+} // namespace NKVStore::NCore::NEngine::NAppendLog

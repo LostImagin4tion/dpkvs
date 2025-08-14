@@ -1,12 +1,15 @@
 #pragma once
 
+#include <dpkvs/core/engines/operations.h>
+#include <dpkvs/core/store_record/store_record.h>
+
 #include <string>
 #include <fstream>
 
-#include <dpkvs/engine/storable_value.h>
-#include <dpkvs/append_only_log/operations.h>
+using NKVStore::NCore::NRecord::TStoreRecord;
+using NKVStore::NCore::NEngine::EStoreEngineOperations;
 
-namespace NKVStore::NAppendLog
+namespace NKVStore::NCore::NEngine::NAppendLog
 {
 
     class TAppendLogSerializer
@@ -29,13 +32,13 @@ namespace NKVStore::NAppendLog
 
         void WritePutLog(
             const std::string& key,
-            const NEngine::TStorableValue& value);
+            const TStoreRecord& value);
 
         void WriteRemoveLog(const std::string& key);
 
-        EAppendLogOperations ReadCommand();
+        EStoreEngineOperations ReadCommand();
         std::string ReadKey();
-        NEngine::TStorableValue ReadValue();
+        TStoreRecord ReadValue();
 
     private:
         void OpenFileStream();
@@ -60,4 +63,4 @@ namespace NKVStore::NAppendLog
         std::string _fileName = "append-only-log.txt";
     };
 
-} // namespace NKVStore::NAppendLog
+} // namespace NKVStore::NCore::NEngine::NAppendLog

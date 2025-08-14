@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/engine/store_engine.h>
+#include <dpkvs/core/engines/hash_map/hash_map_store_engine.h>
 
-using NKVStore::NEngine::TStoreEngine;
-using NKVStore::NEngine::TStorableValue;
+using NKVStore::NCore::NEngine::THashMapEngine;
+using NKVStore::NCore::NRecord::TStoreRecord;
 
 class EngineBasicOperationsTest
     : public testing::Test
 {
 protected:
-    TStoreEngine store;
+    THashMapEngine store;
 };
 
 TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {
@@ -20,7 +20,7 @@ TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
 
-    store.Put(std::move(key1), TStorableValue(std::move(valueStr1)));
+    store.Put(std::move(key1), TStoreRecord(std::move(valueStr1)));
 
     ASSERT_EQ(store.Size(), 1);
     ASSERT_TRUE(store.Get("hello"));
@@ -33,7 +33,7 @@ TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {
     auto key2 = std::string("world");
     auto valueStr2 = std::string("hello");
 
-    store.Put(std::move(key2),TStorableValue(std::move(valueStr2)));
+    store.Put(std::move(key2),TStoreRecord(std::move(valueStr2)));
 
     ASSERT_EQ(store.Size(), 2);
 

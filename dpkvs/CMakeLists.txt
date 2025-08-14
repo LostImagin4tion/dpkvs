@@ -1,16 +1,19 @@
 add_library(dpkvs_lib STATIC
         # store engine
-        engine/store_engine.h
-        engine/store_engine.cpp
-        engine/storable_value.h
-        engine/storable_value.cpp
+        core/store_record/store_record.h
+        core/store_record/store_record.cpp
+        core/engines/store_engine.h
+        core/engines/operations.h
+
+        # hash map store engine
+        core/engines/hash_map/hash_map_store_engine.h
+        core/engines/hash_map/hash_map_store_engine.cpp
 
         # append only log
-        append_only_log/operations.h
-        append_only_log/append_only_log.h
-        append_only_log/append_only_log.cpp
-        append_only_log/log_serializer.h
-        append_only_log/log_serializer.cpp
+        core/engines/hash_map/append_only_log/append_only_log.h
+        core/engines/hash_map/append_only_log/append_only_log.cpp
+        core/engines/hash_map/append_only_log/log_serializer.h
+        core/engines/hash_map/append_only_log/log_serializer.cpp
 
         # store controller
         store_controller/store_controller.h

@@ -1,20 +1,21 @@
-#include "store_engine.h"
+#include "hash_map_store_engine.h"
 
 #include <mutex>
 
-namespace NKVStore::NEngine {
+namespace NKVStore::NCore::NEngine
+{
 
-TStoreEngine::TStoreEngine(TKVStoreMap&& other)
+THashMapEngine::THashMapEngine(TKVStoreMap&& other)
     : _store(std::move(other))
 {}
 
-TStoreEngine::TStoreEngine(TStoreEngine&& other) noexcept
+THashMapEngine::THashMapEngine(THashMapEngine&& other) noexcept
 {
     std::scoped_lock lock(other._mutex, _mutex);
     _store = std::move(other._store);
 }
 
-TStoreEngine& TStoreEngine::operator=(TStoreEngine && other) noexcept
+THashMapEngine& THashMapEngine::operator=(THashMapEngine && other) noexcept
 {
     if (this == &other) {
         return *this;
@@ -25,17 +26,17 @@ TStoreEngine& TStoreEngine::operator=(TStoreEngine && other) noexcept
     return *this;
 }
 
-void TStoreEngine::Put(
+void THashMapEngine::Put(
     std::string key,
-    TStorableValue value)
+    TStoreRecord value)
 {
     std::unique_lock lock(_mutex);
     _store.insert_or_assign(
         std::move(key),
-        std::make_shared<TStorableValue>(std::move(value)));
+        std::make_shared<TStoreRecord>(std::move(value)));
 }
 
-TStorableValuePtr TStoreEngine::Get(const std::string& key) const
+TStoreRecordPtr THashMapEngine::Get(const std::string& key) const
 {
     std::shared_lock lock(_mutex);
 
@@ -47,17 +48,17 @@ TStorableValuePtr TStoreEngine::Get(const std::string& key) const
     return {};
 }
 
-bool TStoreEngine::Remove(const std::string &key)
+bool THashMapEngine::Remove(const std::string &key)
 {
     std::unique_lock lock(_mutex);
 
     return _store.erase(key) > 0;
 }
 
-size_t TStoreEngine::Size() const
+size_t THashMapEngine::Size() const
 {
     std::shared_lock lock(_mutex);
     return _store.size();
 }
 
-} // namespace NKV::NEngine
+} // namespace NKVStore::NCore::NEngine

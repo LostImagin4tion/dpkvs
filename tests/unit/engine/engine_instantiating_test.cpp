@@ -1,10 +1,8 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/engine/store_engine.h>
+#include <dpkvs/core/engines/hash_map/hash_map_store_engine.h>
 
-using NKVStore::NEngine::TStoreEngine;
-using NKVStore::NEngine::TStorableValue;
-using NKVStore::NEngine::TStorableValuePtr;
+using NKVStore::NCore::NEngine::THashMapEngine;
 
 class EngineInstantiatingTest
     : public testing::Test
@@ -14,22 +12,22 @@ protected:
         auto valueStr1 = std::string("hello");
         auto valueStr2 = std::string("world");
 
-        defaultStore.Put(std::string(key1), TStorableValue(std::move(valueStr1)));
-        defaultStore.Put(std::string(key2), TStorableValue(std::move(valueStr2)));
+        defaultStore.Put(std::string(key1), TStoreRecord(std::move(valueStr1)));
+        defaultStore.Put(std::string(key2), TStoreRecord(std::move(valueStr2)));
 
         auto valueStr3 = std::string("world");
-        map[std::string(key1)] = std::make_shared<TStorableValue>(std::move(valueStr3));
+        map[std::string(key1)] = std::make_shared<TStoreRecord>(std::move(valueStr3));
     }
 
     std::string key1 = "hello";
     std::string key2 = "world";
-    std::unordered_map<std::string, TStorableValuePtr> map;
-    TStoreEngine defaultStore;
+    std::unordered_map<std::string, TStoreRecordPtr> map;
+    THashMapEngine defaultStore;
 };
 
 TEST_F(EngineInstantiatingTest, ParametrizedContructorTest) {
     auto mapSize = map.size();
-    auto newStore = TStoreEngine(std::move(map));
+    auto newStore = THashMapEngine(std::move(map));
 
     ASSERT_EQ(newStore.Size(), mapSize);
     ASSERT_TRUE(newStore.Get(key1));
@@ -40,7 +38,7 @@ TEST_F(EngineInstantiatingTest, ParametrizedContructorTest) {
 
 TEST_F(EngineInstantiatingTest, MoveConstructorTest) {
     auto storeSize = defaultStore.Size();
-    TStoreEngine newStore(std::move(defaultStore));
+    THashMapEngine newStore(std::move(defaultStore));
 
     ASSERT_EQ(newStore.Size(), storeSize);
     ASSERT_TRUE(newStore.Get(key1));
@@ -52,7 +50,7 @@ TEST_F(EngineInstantiatingTest, MoveConstructorTest) {
 
 TEST_F(EngineInstantiatingTest, MoveAssignmentOperatorTest) {
     auto storeSize = defaultStore.Size();
-    auto newStore = TStoreEngine(std::move(defaultStore));
+    auto newStore = THashMapEngine(std::move(defaultStore));
 
     ASSERT_EQ(newStore.Size(), storeSize);
     ASSERT_TRUE(newStore.Get(key1));

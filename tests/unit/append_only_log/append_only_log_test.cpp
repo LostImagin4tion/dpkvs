@@ -1,10 +1,10 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/engine/storable_value.h>
-#include <dpkvs/append_only_log/append_only_log.h>
+#include <dpkvs/core/store_record/store_record.h>
+#include <dpkvs/core/engines/hash_map/append_only_log/append_only_log.h>
 
-using NKVStore::NAppendLog::TAppendOnlyLog;
-using NKVStore::NEngine::TStorableValue;
+using NKVStore::NCore::NEngine::NAppendLog::TAppendOnlyLog;
+using NKVStore::NCore::NRecord::TStoreRecord;
 
 class AppendOnlyLogTest
     : public testing::Test
@@ -19,7 +19,7 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
 
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
-    auto value1 = TStorableValue(valueStr1);
+    auto value1 = TStoreRecord(valueStr1);
 
     appendOnlyLog.AppendPutOperation(key1, value1);
 
@@ -27,7 +27,7 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
 
     auto key2 = std::string("darkness");
     auto valueStr2 = std::string("my old friend");
-    auto value2 = TStorableValue(valueStr2);
+    auto value2 = TStoreRecord(valueStr2);
 
     appendOnlyLog.AppendPutOperation(key2,value2);
 

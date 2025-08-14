@@ -2,11 +2,7 @@
 
 #include <iostream>
 
-using NKVStore::NEngine::TStoreEngine;
-using NKVStore::NEngine::TStorableValue;
-using NKVStore::NEngine::TStorableValuePtr;
-
-namespace NKVStore::NAppendLog
+namespace NKVStore::NCore::NEngine::NAppendLog
 {
 
 TAppendOnlyLog::TAppendOnlyLog()
@@ -29,7 +25,7 @@ TAppendOnlyLog& TAppendOnlyLog::operator=(TAppendOnlyLog && other) noexcept
 
 void TAppendOnlyLog::AppendPutOperation(
     const std::string& key,
-    const TStorableValue& value)
+    const TStoreRecord& value)
 {
     _logSerializer->WritePutLog(key, value);
 }
@@ -39,26 +35,26 @@ void TAppendOnlyLog::AppendRemoveOperation(const std::string& key)
     _logSerializer->WriteRemoveLog(key);
 }
 
-std::unique_ptr<TStoreEngine> TAppendOnlyLog::RecoverFromLog()
+std::unique_ptr<THashMapEngine> TAppendOnlyLog::RecoverFromLog()
 {
-    auto recoveredStore = std::unordered_map<std::string, TStorableValuePtr>();
+    auto recoveredStore = std::unordered_map<std::string, TStoreRecordPtr>();
 
     try {
         _logSerializer->EnableReadMode();
 
         while (_logSerializer->ReadyToRead()) {
-            EAppendLogOperations command = _logSerializer->ReadCommand();
+            auto command = _logSerializer->ReadCommand();
 
             switch (command) {
-                case EAppendLogOperations::Put: {
+                case EStoreEngineOperations::Put: {
                     std::string key = _logSerializer->ReadKey();
-                    TStorableValue value = _logSerializer->ReadValue();
+                    TStoreRecord value = _logSerializer->ReadValue();
 
-                    recoveredStore[std::move(key)] = std::make_shared<TStorableValue>(std::move(value));
+                    recoveredStore[std::move(key)] = std::make_shared<TStoreRecord>(std::move(value));
                     break;
                 }
 
-                case EAppendLogOperations::Remove: {
+                case EStoreEngineOperations::Remove: {
                     std::string key = _logSerializer->ReadKey();
 
                     recoveredStore.erase(key);
@@ -70,7 +66,7 @@ std::unique_ptr<TStoreEngine> TAppendOnlyLog::RecoverFromLog()
         std::cerr << "Error reading log: " << e.what() << std::endl;
     }
 
-    return std::make_unique<TStoreEngine>(std::move(recoveredStore));
+    return std::make_unique<THashMapEngine>(std::move(recoveredStore));
 }
 
-} // namespace NKVStore::NAppendLog
+} // namespace NKVStore::NCore::NEngine::NAppendLog
