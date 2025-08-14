@@ -1,7 +1,5 @@
 enable_testing()
 
-#set(CMAKE_CXX_FLAGS --coverage)
-
 include(${CMAKE_SOURCE_DIR}/cmake/test_dependencies.cmake)
 
 add_executable(dpkvs_tests

@@ -32,7 +32,10 @@ target_include_directories(dpkvs_lib PUBLIC
         ${CMAKE_SOURCE_DIR}
 )
 
-target_link_libraries(dpkvs_lib PRIVATE
+target_link_libraries(dpkvs_lib PUBLIC
         grpc++
+        grpc++_reflection
         protobuf::libprotobuf
+        absl::flags
+        absl::flags_parse
 )

@@ -8,7 +8,6 @@ enable_testing()
 include(cmake/dependencies.cmake)
 
 add_executable(dpkvs_server
-#        cmd/client/main.cpp
         cmd/server/main.cpp
 )
 
@@ -21,6 +20,4 @@ add_subdirectory(tests)
 
 target_link_libraries(dpkvs_server PRIVATE
         dpkvs_lib
-        grpc++
-        protobuf::libprotobuf
 )

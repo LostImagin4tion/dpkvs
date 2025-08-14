@@ -1,4 +1,5 @@
 #include <iostream>
+#include <utility>
 #include "log_serializer.h"
 
 namespace NKVStore::NAppendLog
@@ -9,8 +10,8 @@ TAppendLogSerializer::TAppendLogSerializer()
    OpenFileStream();
 }
 
-TAppendLogSerializer::TAppendLogSerializer(const std::string& fileName)
-    : _fileName(fileName)
+TAppendLogSerializer::TAppendLogSerializer(std::string  fileName)
+    : _fileName(std::move(fileName))
 {
     OpenFileStream();
 }

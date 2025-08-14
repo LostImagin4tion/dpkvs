@@ -12,7 +12,7 @@ namespace NKVStore::NAppendLog
 class TAppendOnlyLog
 {
 public:
-    TAppendOnlyLog() = default;
+    TAppendOnlyLog();
 
     explicit TAppendOnlyLog(const std::string& fileName);
 

@@ -9,6 +9,10 @@ using NKVStore::NEngine::TStorableValuePtr;
 namespace NKVStore::NAppendLog
 {
 
+TAppendOnlyLog::TAppendOnlyLog()
+    : _logSerializer(std::make_unique<TAppendLogSerializer>())
+{}
+
 TAppendOnlyLog::TAppendOnlyLog(const std::string& fileName)
     : _logSerializer(std::make_unique<TAppendLogSerializer>(fileName))
 {}
