@@ -7,6 +7,7 @@ Built with C++, so DPKVS is ⚡ blazingly fast ⚡ and 🔥 memory-unsafe 🔥
 ## Features
 
 * Persistence using Append-Only Log and binary serialization
+* gRPC API
 * Distributed (WIP)
 * Master-Slave Replication (WIP)
 * Data Partitioning using Consistent Hashing (WIP)
