@@ -3,7 +3,7 @@
 #include <iostream>
 #include <utility>
 
-namespace NKVStore::NCore::NEngine::NAppendLog
+namespace NKVStore::NCore::NEngine::NPersistence
 {
 
 TAppendLogSerializer::TAppendLogSerializer()
@@ -169,4 +169,4 @@ void TAppendLogSerializer::Flush()
     _log_stream.flush();
 }
 
-} // namespace NKVStore::NCore::NEngine::NAppendLog
+} // namespace NKVStore::NCore::NEngine::NPersistence

@@ -7,9 +7,9 @@
 #include <string>
 
 using NKVStore::NCore::NRecord::TStoreRecord;
-using NKVStore::NCore::NEngine::THashMapStore;
+using NKVStore::NCore::NEngine::NRuntime::THashMapStore;
 
-namespace NKVStore::NCore::NEngine::NAppendLog
+namespace NKVStore::NCore::NEngine::NPersistence
 {
 
 class TAppendOnlyLog
@@ -39,4 +39,4 @@ private:
     std::unique_ptr<TAppendLogSerializer> _logSerializer;
 };
 
-} // namespace NKVStore::NCore::NEngine::NAppendLog
+} // namespace NKVStore::NCore::NEngine::NPersistence

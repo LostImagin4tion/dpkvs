@@ -9,7 +9,7 @@
 using NKVStore::NCore::NRecord::TStoreRecord;
 using NKVStore::NCore::NEngine::EStoreEngineOperations;
 
-namespace NKVStore::NCore::NEngine::NAppendLog
+namespace NKVStore::NCore::NEngine::NPersistence
 {
 
     class TAppendLogSerializer
@@ -63,4 +63,4 @@ namespace NKVStore::NCore::NEngine::NAppendLog
         std::string _fileName = "append-only-log.txt";
     };
 
-} // namespace NKVStore::NCore::NEngine::NAppendLog
+} // namespace NKVStore::NCore::NEngine::NPersistence

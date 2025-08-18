@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
 #include <dpkvs/core/store_record/store_record.h>
-#include <dpkvs/core/engines/hash_map/append_only_log/log_serializer.h>
+#include <dpkvs/core/engines/hash_map/persistence/log_serializer.h>
 
-using NKVStore::NCore::NEngine::NAppendLog::TAppendLogSerializer;
+using NKVStore::NCore::NEngine::NPersistence::TAppendLogSerializer;
 using NKVStore::NCore::NEngine::EStoreEngineOperations;
 
 TEST(SerializerTest, WriteReadLogsTest) {

@@ -2,7 +2,7 @@
 
 #include <mutex>
 
-namespace NKVStore::NCore::NEngine
+namespace NKVStore::NCore::NEngine::NRuntime
 {
 
 THashMapStore::THashMapStore(TKVStoreMap&& other)

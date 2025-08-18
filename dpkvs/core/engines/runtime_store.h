@@ -8,7 +8,7 @@ using NKVStore::NCore::NRecord::TStoreRecord;
 
 using TStoreRecordPtr = std::shared_ptr<const TStoreRecord>;
 
-namespace NKVStore::NCore::NEngine
+namespace NKVStore::NCore::NEngine::NRuntime
 {
 
 struct IRuntimeStore {
@@ -21,4 +21,4 @@ struct IRuntimeStore {
     [[nodiscard]] virtual size_t Size() const = 0;
 };
 
-} // namespace NKVStore::IStoreEngine
+} // namespace NKVStore::NCore::NEngine::NRuntime

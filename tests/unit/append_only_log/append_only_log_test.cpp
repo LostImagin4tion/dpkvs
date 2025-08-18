@@ -1,9 +1,9 @@
 #include <gtest/gtest.h>
 
 #include <dpkvs/core/store_record/store_record.h>
-#include <dpkvs/core/engines/hash_map/append_only_log/append_only_log.h>
+#include <dpkvs/core/engines/hash_map/persistence/append_only_log.h>
 
-using NKVStore::NCore::NEngine::NAppendLog::TAppendOnlyLog;
+using NKVStore::NCore::NEngine::NPersistence::TAppendOnlyLog;
 using NKVStore::NCore::NRecord::TStoreRecord;
 
 class AppendOnlyLogTest

@@ -9,7 +9,7 @@ using grpc::ServerBuilder;
 
 using NKVStore::NService::TDpkvsService;
 using NKVStore::NService::TDpkvsServiceImpl;
-using NKVStore::NCore::NEngine::NController::THashMapStoreController;
+using NKVStore::NCore::NEngine::THashMapStoreEngine;
 
 class ServiceIntegrationTest
     : public ::testing::Test {
@@ -18,7 +18,7 @@ protected:
     void SetUp() override {
         std::string serverAddress = "127.0.0.1:0"; // ephemeral port
 
-        auto controller = std::make_unique<THashMapStoreController>("test_service_append_only_log.txt");
+        auto controller = std::make_unique<THashMapStoreEngine>("test_service_append_only_log.txt");
         auto service = std::make_unique<TDpkvsServiceImpl>(std::move(controller));
 
         grpc::EnableDefaultHealthCheckService(true);

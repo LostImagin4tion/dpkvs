@@ -6,7 +6,7 @@
 #include <unordered_map>
 #include <shared_mutex>
 
-namespace NKVStore::NCore::NEngine
+namespace NKVStore::NCore::NEngine::NRuntime
 {
 
 using TKVStoreMap = std::unordered_map<std::string, TStoreRecordPtr>;
@@ -40,4 +40,4 @@ private:
     mutable std::shared_mutex _mutex;
 };
 
-} // namespace NKVStore::NCore::NEngine
+} // namespace NKVStore::NCore::NEngine::NRuntime

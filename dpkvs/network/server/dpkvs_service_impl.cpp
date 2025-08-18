@@ -4,11 +4,11 @@ namespace NKVStore::NService
 {
 
 TDpkvsServiceImpl::TDpkvsServiceImpl()
-    : _storeController(std::make_unique<THashMapStoreController>())
+    : _storeEngine(std::make_unique<THashMapStoreEngine>())
 {}
 
-TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<THashMapStoreController> storeController)
-    : _storeController(std::move(storeController))
+TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<THashMapStoreEngine> storeEngine)
+    : _storeEngine(std::move(storeEngine))
 {}
 
 ServerUnaryReactor* TDpkvsServiceImpl::Get(
@@ -18,7 +18,7 @@ ServerUnaryReactor* TDpkvsServiceImpl::Get(
 {
     auto reactor = context->DefaultReactor();
 
-    if (auto value = _storeController->Get(request->key()))
+    if (auto value = _storeEngine->Get(request->key()))
     {
         response->set_value(value->data);
         reactor->Finish(Status::OK);
@@ -36,7 +36,7 @@ ServerUnaryReactor* TDpkvsServiceImpl::Put(
 {
     auto reactor = context->DefaultReactor();
 
-    _storeController->Put(
+    _storeEngine->Put(
         request->key(),
         request->value());
 
@@ -51,7 +51,7 @@ ServerUnaryReactor* TDpkvsServiceImpl::Remove(
 {
     auto reactor = context->DefaultReactor();
 
-    auto removed = _storeController->Remove(request->key());
+    auto removed = _storeEngine->Remove(request->key());
     response->set_removed(removed);
 
     if (removed) {

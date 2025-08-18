@@ -1,8 +1,8 @@
 #include <gtest/gtest.h>
 
-#include "dpkvs/core/engines/hash_map/impl/hash_map_store_engine.h"
+#include <dpkvs/core/engines/hash_map/engine/store_engine.h>
 
-using NKVStore::NCore::NEngine::THashMapStore;
+using NKVStore::NCore::NEngine::THashMapStoreEngine;
 
 class EngineInstantiatingTest
     : public testing::Test

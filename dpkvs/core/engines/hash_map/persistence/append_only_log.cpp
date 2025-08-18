@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace NKVStore::NCore::NEngine::NAppendLog
+namespace NKVStore::NCore::NEngine::NPersistence
 {
 
 TAppendOnlyLog::TAppendOnlyLog()
@@ -69,4 +69,4 @@ std::unique_ptr<THashMapStore> TAppendOnlyLog::RecoverFromLog()
     return std::make_unique<THashMapStore>(std::move(recoveredStore));
 }
 
-} // namespace NKVStore::NCore::NEngine::NAppendLog
+} // namespace NKVStore::NCore::NEngine::NPersistence
