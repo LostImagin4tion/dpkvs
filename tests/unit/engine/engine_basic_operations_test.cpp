@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/engine/store_engine.h>
+#include <dpkvs/core/engines/hash_map/engine/store_engine.h>
 
-using NKVStore::NEngine::TStoreEngine;
-using NKVStore::NEngine::TStorableValue;
+using NKVStore::NCore::NEngine::THashMapStoreEngine;
+using NKVStore::NCore::NRecord::TStoreRecord;
 
 class EngineBasicOperationsTest
     : public testing::Test
 {
 protected:
-    TStoreEngine store;
+    THashMapStore store;
 };
 
 TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {
@@ -20,12 +20,14 @@ TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
 
-    store.Put(std::move(key1), TStorableValue(std::move(valueStr1)));
+    TStoreRecord record1;
+    record1.set_data(std::move(valueStr1));
+    store.Put(std::move(key1), std::move(record1));
 
     ASSERT_EQ(store.Size(), 1);
     ASSERT_TRUE(store.Get("hello"));
 
-    auto string = store.Get("hello")->data;
+    auto string = store.Get("hello")->data();
     ASSERT_EQ(string, "world");
 
     // === second put ===
@@ -33,7 +35,9 @@ TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {
     auto key2 = std::string("world");
     auto valueStr2 = std::string("hello");
 
-    store.Put(std::move(key2),TStorableValue(std::move(valueStr2)));
+    TStoreRecord record2;
+    record2.set_data(std::move(valueStr2));
+    store.Put(std::move(key2),std::move(record2));
 
     ASSERT_EQ(store.Size(), 2);
 

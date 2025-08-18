@@ -27,25 +27,25 @@ namespace _fl = ::google::protobuf::internal::field_layout;
 namespace NKVStore {
 namespace NService {
 template <typename>
-PROTOBUF_CONSTEXPR PutResponse::PutResponse(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR TPutResponse::TPutResponse(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(PutResponse_class_data_.base()){}
+    : ::google::protobuf::internal::ZeroFieldsBase(TPutResponse_class_data_.base()){}
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::internal::ZeroFieldsBase() {
 }
 #endif  // PROTOBUF_CUSTOM_VTABLE
-struct PutResponseDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR PutResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~PutResponseDefaultTypeInternal() {}
+struct TPutResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR TPutResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~TPutResponseDefaultTypeInternal() {}
   union {
-    PutResponse _instance;
+    TPutResponse _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PutResponseDefaultTypeInternal _PutResponse_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TPutResponseDefaultTypeInternal _TPutResponse_default_instance_;
 
-inline constexpr PutRequest::Impl_::Impl_(
+inline constexpr TPutRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         key_(
@@ -56,24 +56,24 @@ inline constexpr PutRequest::Impl_::Impl_(
             ::_pbi::ConstantInitialized()) {}
 
 template <typename>
-PROTOBUF_CONSTEXPR PutRequest::PutRequest(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR TPutRequest::TPutRequest(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(PutRequest_class_data_.base()),
+    : ::google::protobuf::Message(TPutRequest_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct PutRequestDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR PutRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~PutRequestDefaultTypeInternal() {}
+struct TPutRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR TPutRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~TPutRequestDefaultTypeInternal() {}
   union {
-    PutRequest _instance;
+    TPutRequest _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 PutRequestDefaultTypeInternal _PutRequest_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TPutRequestDefaultTypeInternal _TPutRequest_default_instance_;
 }  // namespace NService
 }  // namespace NKVStore
 static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
@@ -84,10 +84,10 @@ const ::uint32_t
     TableStruct_put_5foperation_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
         0x081, // bitmap
-        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::PutRequest, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::TPutRequest, _impl_._has_bits_),
         5, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::PutRequest, _impl_.key_),
-        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::PutRequest, _impl_.value_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::TPutRequest, _impl_.key_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::TPutRequest, _impl_.value_),
         0,
         1,
         0x000, // bitmap
@@ -95,24 +95,24 @@ const ::uint32_t
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, sizeof(::NKVStore::NService::PutRequest)},
-        {7, sizeof(::NKVStore::NService::PutResponse)},
+        {0, sizeof(::NKVStore::NService::TPutRequest)},
+        {7, sizeof(::NKVStore::NService::TPutResponse)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
-    &::NKVStore::NService::_PutRequest_default_instance_._instance,
-    &::NKVStore::NService::_PutResponse_default_instance_._instance,
+    &::NKVStore::NService::_TPutRequest_default_instance_._instance,
+    &::NKVStore::NService::_TPutResponse_default_instance_._instance,
 };
 const char descriptor_table_protodef_put_5foperation_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\023put_operation.proto\022\021NKVStore.NService"
-    "\"(\n\nPutRequest\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001"
-    "(\014\"\r\n\013PutResponseb\006proto3"
+    "\")\n\013TPutRequest\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 "
+    "\001(\014\"\016\n\014TPutResponseb\006proto3"
 };
 static ::absl::once_flag descriptor_table_put_5foperation_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_put_5foperation_2eproto = {
     false,
     false,
-    105,
+    107,
     descriptor_table_protodef_put_5foperation_2eproto,
     "put_operation.proto",
     &descriptor_table_put_5foperation_2eproto_once,
@@ -129,64 +129,64 @@ namespace NKVStore {
 namespace NService {
 // ===================================================================
 
-class PutRequest::_Internal {
+class TPutRequest::_Internal {
  public:
   using HasBits =
-      decltype(::std::declval<PutRequest>()._impl_._has_bits_);
+      decltype(::std::declval<TPutRequest>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(PutRequest, _impl_._has_bits_);
+      8 * PROTOBUF_FIELD_OFFSET(TPutRequest, _impl_._has_bits_);
 };
 
-PutRequest::PutRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+TPutRequest::TPutRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, PutRequest_class_data_.base()) {
+    : ::google::protobuf::Message(arena, TPutRequest_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.PutRequest)
+  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.TPutRequest)
 }
-PROTOBUF_NDEBUG_INLINE PutRequest::Impl_::Impl_(
+PROTOBUF_NDEBUG_INLINE TPutRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    const ::NKVStore::NService::PutRequest& from_msg)
+    const ::NKVStore::NService::TPutRequest& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
         key_(arena, from.key_),
         value_(arena, from.value_) {}
 
-PutRequest::PutRequest(
+TPutRequest::TPutRequest(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const PutRequest& from)
+    const TPutRequest& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, PutRequest_class_data_.base()) {
+    : ::google::protobuf::Message(arena, TPutRequest_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  PutRequest* const _this = this;
+  TPutRequest* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
 
-  // @@protoc_insertion_point(copy_constructor:NKVStore.NService.PutRequest)
+  // @@protoc_insertion_point(copy_constructor:NKVStore.NService.TPutRequest)
 }
-PROTOBUF_NDEBUG_INLINE PutRequest::Impl_::Impl_(
+PROTOBUF_NDEBUG_INLINE TPutRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
       : _cached_size_{0},
         key_(arena),
         value_(arena) {}
 
-inline void PutRequest::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+inline void TPutRequest::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
-PutRequest::~PutRequest() {
-  // @@protoc_insertion_point(destructor:NKVStore.NService.PutRequest)
+TPutRequest::~TPutRequest() {
+  // @@protoc_insertion_point(destructor:NKVStore.NService.TPutRequest)
   SharedDtor(*this);
 }
-inline void PutRequest::SharedDtor(MessageLite& self) {
-  PutRequest& this_ = static_cast<PutRequest&>(self);
+inline void TPutRequest::SharedDtor(MessageLite& self) {
+  TPutRequest& this_ = static_cast<TPutRequest&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.key_.Destroy();
@@ -194,53 +194,53 @@ inline void PutRequest::SharedDtor(MessageLite& self) {
   this_._impl_.~Impl_();
 }
 
-inline void* PROTOBUF_NONNULL PutRequest::PlacementNew_(
+inline void* PROTOBUF_NONNULL TPutRequest::PlacementNew_(
     const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
-  return ::new (mem) PutRequest(arena);
+  return ::new (mem) TPutRequest(arena);
 }
-constexpr auto PutRequest::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(PutRequest),
-                                            alignof(PutRequest));
+constexpr auto TPutRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(TPutRequest),
+                                            alignof(TPutRequest));
 }
-constexpr auto PutRequest::InternalGenerateClassData_() {
+constexpr auto TPutRequest::InternalGenerateClassData_() {
   return ::google::protobuf::internal::ClassDataFull{
       ::google::protobuf::internal::ClassData{
-          &_PutRequest_default_instance_._instance,
+          &_TPutRequest_default_instance_._instance,
           &_table_.header,
           nullptr,  // OnDemandRegisterArenaDtor
           nullptr,  // IsInitialized
-          &PutRequest::MergeImpl,
-          ::google::protobuf::Message::GetNewImpl<PutRequest>(),
+          &TPutRequest::MergeImpl,
+          ::google::protobuf::Message::GetNewImpl<TPutRequest>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-          &PutRequest::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<PutRequest>(), &PutRequest::ByteSizeLong,
-              &PutRequest::_InternalSerialize,
+          &TPutRequest::SharedDtor,
+          ::google::protobuf::Message::GetClearImpl<TPutRequest>(), &TPutRequest::ByteSizeLong,
+              &TPutRequest::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          PROTOBUF_FIELD_OFFSET(PutRequest, _impl_._cached_size_),
+          PROTOBUF_FIELD_OFFSET(TPutRequest, _impl_._cached_size_),
           false,
       },
-      &PutRequest::kDescriptorMethods,
+      &TPutRequest::kDescriptorMethods,
       &descriptor_table_put_5foperation_2eproto,
       nullptr,  // tracker
   };
 }
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull PutRequest_class_data_ =
-        PutRequest::InternalGenerateClassData_();
+    ::google::protobuf::internal::ClassDataFull TPutRequest_class_data_ =
+        TPutRequest::InternalGenerateClassData_();
 
 PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-PutRequest::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&PutRequest_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(PutRequest_class_data_.tc_table);
-  return PutRequest_class_data_.base();
+TPutRequest::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&TPutRequest_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(TPutRequest_class_data_.tc_table);
+  return TPutRequest_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<1, 2, 0, 40, 2>
-PutRequest::_table_ = {
+const ::_pbi::TcParseTable<1, 2, 0, 41, 2>
+TPutRequest::_table_ = {
   {
-    PROTOBUF_FIELD_OFFSET(PutRequest, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(TPutRequest, _impl_._has_bits_),
     0, // no _extensions_
     2, 8,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
@@ -249,38 +249,38 @@ PutRequest::_table_ = {
     2,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
-    PutRequest_class_data_.base(),
+    TPutRequest_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::NKVStore::NService::PutRequest>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::NKVStore::NService::TPutRequest>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // bytes value = 2;
     {::_pbi::TcParser::FastBS1,
-     {18, 1, 0, PROTOBUF_FIELD_OFFSET(PutRequest, _impl_.value_)}},
+     {18, 1, 0, PROTOBUF_FIELD_OFFSET(TPutRequest, _impl_.value_)}},
     // string key = 1;
     {::_pbi::TcParser::FastUS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(PutRequest, _impl_.key_)}},
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(TPutRequest, _impl_.key_)}},
   }}, {{
     65535, 65535
   }}, {{
     // string key = 1;
-    {PROTOBUF_FIELD_OFFSET(PutRequest, _impl_.key_), _Internal::kHasBitsOffset + 0, 0,
+    {PROTOBUF_FIELD_OFFSET(TPutRequest, _impl_.key_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
     // bytes value = 2;
-    {PROTOBUF_FIELD_OFFSET(PutRequest, _impl_.value_), _Internal::kHasBitsOffset + 1, 0,
+    {PROTOBUF_FIELD_OFFSET(TPutRequest, _impl_.value_), _Internal::kHasBitsOffset + 1, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kBytes | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
-    "\34\3\0\0\0\0\0\0"
-    "NKVStore.NService.PutRequest"
+    "\35\3\0\0\0\0\0\0"
+    "NKVStore.NService.TPutRequest"
     "key"
   }},
 };
-PROTOBUF_NOINLINE void PutRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:NKVStore.NService.PutRequest)
+PROTOBUF_NOINLINE void TPutRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:NKVStore.NService.TPutRequest)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -300,17 +300,17 @@ PROTOBUF_NOINLINE void PutRequest::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL PutRequest::_InternalSerialize(
+::uint8_t* PROTOBUF_NONNULL TPutRequest::_InternalSerialize(
     const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const PutRequest& this_ = static_cast<const PutRequest&>(base);
+  const TPutRequest& this_ = static_cast<const TPutRequest&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL PutRequest::_InternalSerialize(
+::uint8_t* PROTOBUF_NONNULL TPutRequest::_InternalSerialize(
     ::uint8_t* PROTOBUF_NONNULL target,
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const PutRequest& this_ = *this;
+  const TPutRequest& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(serialize_to_array_start:NKVStore.NService.PutRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:NKVStore.NService.TPutRequest)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
@@ -319,7 +319,7 @@ PROTOBUF_NOINLINE void PutRequest::Clear() {
     if (!this_._internal_key().empty()) {
       const ::std::string& _s = this_._internal_key();
       ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "NKVStore.NService.PutRequest.key");
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "NKVStore.NService.TPutRequest.key");
       target = stream->WriteStringMaybeAliased(1, _s, target);
     }
   }
@@ -337,18 +337,18 @@ PROTOBUF_NOINLINE void PutRequest::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NKVStore.NService.PutRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:NKVStore.NService.TPutRequest)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t PutRequest::ByteSizeLong(const MessageLite& base) {
-  const PutRequest& this_ = static_cast<const PutRequest&>(base);
+::size_t TPutRequest::ByteSizeLong(const MessageLite& base) {
+  const TPutRequest& this_ = static_cast<const TPutRequest&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-::size_t PutRequest::ByteSizeLong() const {
-  const PutRequest& this_ = *this;
+::size_t TPutRequest::ByteSizeLong() const {
+  const TPutRequest& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(message_byte_size_start:NKVStore.NService.PutRequest)
+  // @@protoc_insertion_point(message_byte_size_start:NKVStore.NService.TPutRequest)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -377,10 +377,10 @@ PROTOBUF_NOINLINE void PutRequest::Clear() {
                                              &this_._impl_._cached_size_);
 }
 
-void PutRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<PutRequest*>(&to_msg);
-  auto& from = static_cast<const PutRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:NKVStore.NService.PutRequest)
+void TPutRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<TPutRequest*>(&to_msg);
+  auto& from = static_cast<const TPutRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:NKVStore.NService.TPutRequest)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -410,15 +410,15 @@ void PutRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::goog
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void PutRequest::CopyFrom(const PutRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NKVStore.NService.PutRequest)
+void TPutRequest::CopyFrom(const TPutRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NKVStore.NService.TPutRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void PutRequest::InternalSwap(PutRequest* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void TPutRequest::InternalSwap(TPutRequest* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
   auto* arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
@@ -428,84 +428,84 @@ void PutRequest::InternalSwap(PutRequest* PROTOBUF_RESTRICT PROTOBUF_NONNULL oth
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.value_, &other->_impl_.value_, arena);
 }
 
-::google::protobuf::Metadata PutRequest::GetMetadata() const {
+::google::protobuf::Metadata TPutRequest::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
-class PutResponse::_Internal {
+class TPutResponse::_Internal {
  public:
 };
 
-PutResponse::PutResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+TPutResponse::TPutResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, PutResponse_class_data_.base()) {
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, TPutResponse_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::internal::ZeroFieldsBase(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.PutResponse)
+  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.TPutResponse)
 }
-PutResponse::PutResponse(
+TPutResponse::TPutResponse(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const PutResponse& from)
+    const TPutResponse& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::internal::ZeroFieldsBase(arena, PutResponse_class_data_.base()) {
+    : ::google::protobuf::internal::ZeroFieldsBase(arena, TPutResponse_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::internal::ZeroFieldsBase(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  PutResponse* const _this = this;
+  TPutResponse* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
 
-  // @@protoc_insertion_point(copy_constructor:NKVStore.NService.PutResponse)
+  // @@protoc_insertion_point(copy_constructor:NKVStore.NService.TPutResponse)
 }
 
-inline void* PROTOBUF_NONNULL PutResponse::PlacementNew_(
+inline void* PROTOBUF_NONNULL TPutResponse::PlacementNew_(
     const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
-  return ::new (mem) PutResponse(arena);
+  return ::new (mem) TPutResponse(arena);
 }
-constexpr auto PutResponse::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(PutResponse),
-                                            alignof(PutResponse));
+constexpr auto TPutResponse::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(TPutResponse),
+                                            alignof(TPutResponse));
 }
-constexpr auto PutResponse::InternalGenerateClassData_() {
+constexpr auto TPutResponse::InternalGenerateClassData_() {
   return ::google::protobuf::internal::ClassDataFull{
       ::google::protobuf::internal::ClassData{
-          &_PutResponse_default_instance_._instance,
+          &_TPutResponse_default_instance_._instance,
           &_table_.header,
           nullptr,  // OnDemandRegisterArenaDtor
           nullptr,  // IsInitialized
-          &PutResponse::MergeImpl,
-          ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<PutResponse>(),
+          &TPutResponse::MergeImpl,
+          ::google::protobuf::internal::ZeroFieldsBase::GetNewImpl<TPutResponse>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-          &PutResponse::SharedDtor,
-          ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<PutResponse>(), &PutResponse::ByteSizeLong,
-              &PutResponse::_InternalSerialize,
+          &TPutResponse::SharedDtor,
+          ::google::protobuf::internal::ZeroFieldsBase::GetClearImpl<TPutResponse>(), &TPutResponse::ByteSizeLong,
+              &TPutResponse::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          PROTOBUF_FIELD_OFFSET(PutResponse, _impl_._cached_size_),
+          PROTOBUF_FIELD_OFFSET(TPutResponse, _impl_._cached_size_),
           false,
       },
-      &PutResponse::kDescriptorMethods,
+      &TPutResponse::kDescriptorMethods,
       &descriptor_table_put_5foperation_2eproto,
       nullptr,  // tracker
   };
 }
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull PutResponse_class_data_ =
-        PutResponse::InternalGenerateClassData_();
+    ::google::protobuf::internal::ClassDataFull TPutResponse_class_data_ =
+        TPutResponse::InternalGenerateClassData_();
 
 PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-PutResponse::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&PutResponse_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(PutResponse_class_data_.tc_table);
-  return PutResponse_class_data_.base();
+TPutResponse::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&TPutResponse_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(TPutResponse_class_data_.tc_table);
+  return TPutResponse_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
 const ::_pbi::TcParseTable<0, 0, 0, 0, 2>
-PutResponse::_table_ = {
+TPutResponse::_table_ = {
   {
     0,  // no _has_bits_
     0, // no _extensions_
@@ -516,11 +516,11 @@ PutResponse::_table_ = {
     0,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
-    PutResponse_class_data_.base(),
+    TPutResponse_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::NKVStore::NService::PutResponse>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::NKVStore::NService::TPutResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     {::_pbi::TcParser::MiniParse, {}},
@@ -537,7 +537,7 @@ PutResponse::_table_ = {
 
 
 
-::google::protobuf::Metadata PutResponse::GetMetadata() const {
+::google::protobuf::Metadata TPutResponse::GetMetadata() const {
   return ::google::protobuf::internal::ZeroFieldsBase::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

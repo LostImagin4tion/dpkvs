@@ -1,44 +1,45 @@
-#include "store_controller.h"
+#include "store_engine.h"
 
 #include <mutex>
 
-using NKVStore::NAppendLog::TAppendOnlyLog;
-using NKVStore::NAppendLog::EAppendLogOperations;
+using NKVStore::NCore::NEngine::EStoreEngineOperations;
 
-namespace NKVStore::NController
+namespace NKVStore::NCore::NEngine
 {
 
-TStoreController::TStoreController()
+THashMapStoreEngine::THashMapStoreEngine()
     : _logger(std::make_unique<TAppendOnlyLog>())
 {
     _engine = _logger->RecoverFromLog();
 }
 
-TStoreController::TStoreController(const std::string& appendOnlyLogFileName)
+THashMapStoreEngine::THashMapStoreEngine(const std::string& appendOnlyLogFileName)
     : _logger(std::make_unique<TAppendOnlyLog>(appendOnlyLogFileName))
 {
     _engine = _logger->RecoverFromLog();
 }
 
-TStoreController::TStoreController(TStoreController&& other) noexcept
+THashMapStoreEngine::THashMapStoreEngine(THashMapStoreEngine&& other) noexcept
     : _engine(std::move(other._engine))
     , _logger(std::move(other._logger))
 {}
 
-TStoreController& TStoreController::operator=(TStoreController&& other) noexcept
+THashMapStoreEngine& THashMapStoreEngine::operator=(THashMapStoreEngine&& other) noexcept
 {
     _engine = std::move(other._engine);
     _logger = std::move(other._logger);
     return *this;
 }
 
-void TStoreController::Put(
+void THashMapStoreEngine::Put(
     std::string key,
     std::string value)
 {
     std::lock_guard<std::mutex> lock(_appendOnlyLogMutex);
 
-    TStorableValue storableValue(std::move(value));
+    TStoreRecord storableValue;
+    storableValue.set_data(std::move(value));
+
     _logger->AppendPutOperation(key,storableValue);
 
     _engine->Put(
@@ -46,12 +47,12 @@ void TStoreController::Put(
         std::move(storableValue));
 }
 
-TStorableValuePtr TStoreController::Get(const std::string& key) const
+TStoreRecordPtr THashMapStoreEngine::Get(const std::string& key) const
 {
     return _engine->Get(key);
 }
 
-bool TStoreController::Remove(const std::string& key)
+bool THashMapStoreEngine::Remove(const std::string& key)
 {
     std::unique_lock lock(_appendOnlyLogMutex);
 
@@ -63,4 +64,4 @@ bool TStoreController::Remove(const std::string& key)
     }
 }
 
-} // NKVStore::NController
+} // NKVStore::NCore::NEngine

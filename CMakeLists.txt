@@ -19,5 +19,5 @@ add_subdirectory(dpkvs)
 add_subdirectory(tests)
 
 target_link_libraries(dpkvs_server PRIVATE
-        dpkvs_lib
+        dpkvs_master_lib
 )

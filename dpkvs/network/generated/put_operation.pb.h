@@ -55,14 +55,14 @@ extern const ::google::protobuf::internal::DescriptorTable descriptor_table_put_
 }  // extern "C"
 namespace NKVStore {
 namespace NService {
-class PutRequest;
-struct PutRequestDefaultTypeInternal;
-extern PutRequestDefaultTypeInternal _PutRequest_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull PutRequest_class_data_;
-class PutResponse;
-struct PutResponseDefaultTypeInternal;
-extern PutResponseDefaultTypeInternal _PutResponse_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull PutResponse_class_data_;
+class TPutRequest;
+struct TPutRequestDefaultTypeInternal;
+extern TPutRequestDefaultTypeInternal _TPutRequest_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull TPutRequest_class_data_;
+class TPutResponse;
+struct TPutResponseDefaultTypeInternal;
+extern TPutResponseDefaultTypeInternal _TPutResponse_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull TPutResponse_class_data_;
 }  // namespace NService
 }  // namespace NKVStore
 namespace google {
@@ -78,29 +78,29 @@ namespace NService {
 
 // -------------------------------------------------------------------
 
-class PutResponse final : public ::google::protobuf::internal::ZeroFieldsBase
-/* @@protoc_insertion_point(class_definition:NKVStore.NService.PutResponse) */ {
+class TPutResponse final : public ::google::protobuf::internal::ZeroFieldsBase
+/* @@protoc_insertion_point(class_definition:NKVStore.NService.TPutResponse) */ {
  public:
-  inline PutResponse() : PutResponse(nullptr) {}
+  inline TPutResponse() : TPutResponse(nullptr) {}
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(PutResponse* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+  void operator delete(TPutResponse* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(PutResponse));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(TPutResponse));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR PutResponse(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR TPutResponse(::google::protobuf::internal::ConstantInitialized);
 
-  inline PutResponse(const PutResponse& from) : PutResponse(nullptr, from) {}
-  inline PutResponse(PutResponse&& from) noexcept
-      : PutResponse(nullptr, ::std::move(from)) {}
-  inline PutResponse& operator=(const PutResponse& from) {
+  inline TPutResponse(const TPutResponse& from) : TPutResponse(nullptr, from) {}
+  inline TPutResponse(TPutResponse&& from) noexcept
+      : TPutResponse(nullptr, ::std::move(from)) {}
+  inline TPutResponse& operator=(const TPutResponse& from) {
     CopyFrom(from);
     return *this;
   }
-  inline PutResponse& operator=(PutResponse&& from) noexcept {
+  inline TPutResponse& operator=(TPutResponse&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -128,13 +128,13 @@ class PutResponse final : public ::google::protobuf::internal::ZeroFieldsBase
   static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const PutResponse& default_instance() {
-    return *reinterpret_cast<const PutResponse*>(
-        &_PutResponse_default_instance_);
+  static const TPutResponse& default_instance() {
+    return *reinterpret_cast<const TPutResponse*>(
+        &_TPutResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 1;
-  friend void swap(PutResponse& a, PutResponse& b) { a.Swap(&b); }
-  inline void Swap(PutResponse* PROTOBUF_NONNULL other) {
+  friend void swap(TPutResponse& a, TPutResponse& b) { a.Swap(&b); }
+  inline void Swap(TPutResponse* PROTOBUF_NONNULL other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -142,7 +142,7 @@ class PutResponse final : public ::google::protobuf::internal::ZeroFieldsBase
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(PutResponse* PROTOBUF_NONNULL other) {
+  void UnsafeArenaSwap(TPutResponse* PROTOBUF_NONNULL other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -150,15 +150,15 @@ class PutResponse final : public ::google::protobuf::internal::ZeroFieldsBase
 
   // implements Message ----------------------------------------------
 
-  PutResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<PutResponse>(arena);
+  TPutResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::internal::ZeroFieldsBase::DefaultConstruct<TPutResponse>(arena);
   }
   using ::google::protobuf::internal::ZeroFieldsBase::CopyFrom;
-  inline void CopyFrom(const PutResponse& from) {
+  inline void CopyFrom(const TPutResponse& from) {
     ::google::protobuf::internal::ZeroFieldsBase::CopyImpl(*this, from);
   }
   using ::google::protobuf::internal::ZeroFieldsBase::MergeFrom;
-  void MergeFrom(const PutResponse& from) {
+  void MergeFrom(const TPutResponse& from) {
     ::google::protobuf::internal::ZeroFieldsBase::MergeImpl(*this, from);
   }
 
@@ -169,14 +169,14 @@ class PutResponse final : public ::google::protobuf::internal::ZeroFieldsBase
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "NKVStore.NService.PutResponse"; }
+  static ::absl::string_view FullMessageName() { return "NKVStore.NService.TPutResponse"; }
 
  protected:
-  explicit PutResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  PutResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const PutResponse& from);
-  PutResponse(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, PutResponse&& from) noexcept
-      : PutResponse(arena) {
+  explicit TPutResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  TPutResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const TPutResponse& from);
+  TPutResponse(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, TPutResponse&& from) noexcept
+      : TPutResponse(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
@@ -192,7 +192,7 @@ class PutResponse final : public ::google::protobuf::internal::ZeroFieldsBase
   // nested types ----------------------------------------------------
 
   // accessors -------------------------------------------------------
-  // @@protoc_insertion_point(class_scope:NKVStore.NService.PutResponse)
+  // @@protoc_insertion_point(class_scope:NKVStore.NService.TPutResponse)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -215,39 +215,39 @@ class PutResponse final : public ::google::protobuf::internal::ZeroFieldsBase
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
         ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const PutResponse& from_msg);
+        const TPutResponse& from_msg);
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   friend struct ::TableStruct_put_5foperation_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull PutResponse_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull TPutResponse_class_data_;
 // -------------------------------------------------------------------
 
-class PutRequest final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:NKVStore.NService.PutRequest) */ {
+class TPutRequest final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:NKVStore.NService.TPutRequest) */ {
  public:
-  inline PutRequest() : PutRequest(nullptr) {}
-  ~PutRequest() PROTOBUF_FINAL;
+  inline TPutRequest() : TPutRequest(nullptr) {}
+  ~TPutRequest() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(PutRequest* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+  void operator delete(TPutRequest* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(PutRequest));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(TPutRequest));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR PutRequest(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR TPutRequest(::google::protobuf::internal::ConstantInitialized);
 
-  inline PutRequest(const PutRequest& from) : PutRequest(nullptr, from) {}
-  inline PutRequest(PutRequest&& from) noexcept
-      : PutRequest(nullptr, ::std::move(from)) {}
-  inline PutRequest& operator=(const PutRequest& from) {
+  inline TPutRequest(const TPutRequest& from) : TPutRequest(nullptr, from) {}
+  inline TPutRequest(TPutRequest&& from) noexcept
+      : TPutRequest(nullptr, ::std::move(from)) {}
+  inline TPutRequest& operator=(const TPutRequest& from) {
     CopyFrom(from);
     return *this;
   }
-  inline PutRequest& operator=(PutRequest&& from) noexcept {
+  inline TPutRequest& operator=(TPutRequest&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -275,13 +275,13 @@ class PutRequest final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const PutRequest& default_instance() {
-    return *reinterpret_cast<const PutRequest*>(
-        &_PutRequest_default_instance_);
+  static const TPutRequest& default_instance() {
+    return *reinterpret_cast<const TPutRequest*>(
+        &_TPutRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 0;
-  friend void swap(PutRequest& a, PutRequest& b) { a.Swap(&b); }
-  inline void Swap(PutRequest* PROTOBUF_NONNULL other) {
+  friend void swap(TPutRequest& a, TPutRequest& b) { a.Swap(&b); }
+  inline void Swap(TPutRequest* PROTOBUF_NONNULL other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -289,7 +289,7 @@ class PutRequest final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(PutRequest* PROTOBUF_NONNULL other) {
+  void UnsafeArenaSwap(TPutRequest* PROTOBUF_NONNULL other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -297,13 +297,13 @@ class PutRequest final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  PutRequest* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<PutRequest>(arena);
+  TPutRequest* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<TPutRequest>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const PutRequest& from);
+  void CopyFrom(const TPutRequest& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const PutRequest& from) { PutRequest::MergeImpl(*this, from); }
+  void MergeFrom(const TPutRequest& from) { TPutRequest::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(::google::protobuf::MessageLite& to_msg,
@@ -339,18 +339,18 @@ class PutRequest final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(PutRequest* PROTOBUF_NONNULL other);
+  void InternalSwap(TPutRequest* PROTOBUF_NONNULL other);
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "NKVStore.NService.PutRequest"; }
+  static ::absl::string_view FullMessageName() { return "NKVStore.NService.TPutRequest"; }
 
  protected:
-  explicit PutRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  PutRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const PutRequest& from);
-  PutRequest(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, PutRequest&& from) noexcept
-      : PutRequest(arena) {
+  explicit TPutRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  TPutRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const TPutRequest& from);
+  TPutRequest(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, TPutRequest&& from) noexcept
+      : TPutRequest(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
@@ -400,12 +400,12 @@ class PutRequest final : public ::google::protobuf::Message
   ::std::string* PROTOBUF_NONNULL _internal_mutable_value();
 
   public:
-  // @@protoc_insertion_point(class_scope:NKVStore.NService.PutRequest)
+  // @@protoc_insertion_point(class_scope:NKVStore.NService.TPutRequest)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<1, 2,
-                                   0, 40,
+                                   0, 41,
                                    2>
       _table_;
 
@@ -423,7 +423,7 @@ class PutRequest final : public ::google::protobuf::Message
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
         ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const PutRequest& from_msg);
+        const TPutRequest& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr key_;
@@ -434,7 +434,7 @@ class PutRequest final : public ::google::protobuf::Message
   friend struct ::TableStruct_put_5foperation_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull PutRequest_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull TPutRequest_class_data_;
 
 // ===================================================================
 
@@ -450,49 +450,49 @@ extern const ::google::protobuf::internal::ClassDataFull PutRequest_class_data_;
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
-// PutRequest
+// TPutRequest
 
 // string key = 1;
-inline void PutRequest::clear_key() {
+inline void TPutRequest::clear_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.key_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const ::std::string& PutRequest::key() const
+inline const ::std::string& TPutRequest::key() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:NKVStore.NService.PutRequest.key)
+  // @@protoc_insertion_point(field_get:NKVStore.NService.TPutRequest.key)
   return _internal_key();
 }
 template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void PutRequest::set_key(Arg_&& arg, Args_... args) {
+PROTOBUF_ALWAYS_INLINE void TPutRequest::set_key(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.key_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:NKVStore.NService.PutRequest.key)
+  // @@protoc_insertion_point(field_set:NKVStore.NService.TPutRequest.key)
 }
-inline ::std::string* PROTOBUF_NONNULL PutRequest::mutable_key()
+inline ::std::string* PROTOBUF_NONNULL TPutRequest::mutable_key()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::std::string* _s = _internal_mutable_key();
-  // @@protoc_insertion_point(field_mutable:NKVStore.NService.PutRequest.key)
+  // @@protoc_insertion_point(field_mutable:NKVStore.NService.TPutRequest.key)
   return _s;
 }
-inline const ::std::string& PutRequest::_internal_key() const {
+inline const ::std::string& TPutRequest::_internal_key() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.key_.Get();
 }
-inline void PutRequest::_internal_set_key(const ::std::string& value) {
+inline void TPutRequest::_internal_set_key(const ::std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.key_.Set(value, GetArena());
 }
-inline ::std::string* PROTOBUF_NONNULL PutRequest::_internal_mutable_key() {
+inline ::std::string* PROTOBUF_NONNULL TPutRequest::_internal_mutable_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.key_.Mutable( GetArena());
 }
-inline ::std::string* PROTOBUF_NULLABLE PutRequest::release_key() {
+inline ::std::string* PROTOBUF_NULLABLE TPutRequest::release_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:NKVStore.NService.PutRequest.key)
+  // @@protoc_insertion_point(field_release:NKVStore.NService.TPutRequest.key)
   if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
     return nullptr;
   }
@@ -503,7 +503,7 @@ inline ::std::string* PROTOBUF_NULLABLE PutRequest::release_key() {
   }
   return released;
 }
-inline void PutRequest::set_allocated_key(::std::string* PROTOBUF_NULLABLE value) {
+inline void TPutRequest::set_allocated_key(::std::string* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001u;
@@ -514,50 +514,50 @@ inline void PutRequest::set_allocated_key(::std::string* PROTOBUF_NULLABLE value
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.key_.IsDefault()) {
     _impl_.key_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:NKVStore.NService.PutRequest.key)
+  // @@protoc_insertion_point(field_set_allocated:NKVStore.NService.TPutRequest.key)
 }
 
 // bytes value = 2;
-inline void PutRequest::clear_value() {
+inline void TPutRequest::clear_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.value_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline const ::std::string& PutRequest::value() const
+inline const ::std::string& TPutRequest::value() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:NKVStore.NService.PutRequest.value)
+  // @@protoc_insertion_point(field_get:NKVStore.NService.TPutRequest.value)
   return _internal_value();
 }
 template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void PutRequest::set_value(Arg_&& arg, Args_... args) {
+PROTOBUF_ALWAYS_INLINE void TPutRequest::set_value(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.value_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:NKVStore.NService.PutRequest.value)
+  // @@protoc_insertion_point(field_set:NKVStore.NService.TPutRequest.value)
 }
-inline ::std::string* PROTOBUF_NONNULL PutRequest::mutable_value()
+inline ::std::string* PROTOBUF_NONNULL TPutRequest::mutable_value()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::std::string* _s = _internal_mutable_value();
-  // @@protoc_insertion_point(field_mutable:NKVStore.NService.PutRequest.value)
+  // @@protoc_insertion_point(field_mutable:NKVStore.NService.TPutRequest.value)
   return _s;
 }
-inline const ::std::string& PutRequest::_internal_value() const {
+inline const ::std::string& TPutRequest::_internal_value() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.value_.Get();
 }
-inline void PutRequest::_internal_set_value(const ::std::string& value) {
+inline void TPutRequest::_internal_set_value(const ::std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.value_.Set(value, GetArena());
 }
-inline ::std::string* PROTOBUF_NONNULL PutRequest::_internal_mutable_value() {
+inline ::std::string* PROTOBUF_NONNULL TPutRequest::_internal_mutable_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000002u;
   return _impl_.value_.Mutable( GetArena());
 }
-inline ::std::string* PROTOBUF_NULLABLE PutRequest::release_value() {
+inline ::std::string* PROTOBUF_NULLABLE TPutRequest::release_value() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:NKVStore.NService.PutRequest.value)
+  // @@protoc_insertion_point(field_release:NKVStore.NService.TPutRequest.value)
   if ((_impl_._has_bits_[0] & 0x00000002u) == 0) {
     return nullptr;
   }
@@ -568,7 +568,7 @@ inline ::std::string* PROTOBUF_NULLABLE PutRequest::release_value() {
   }
   return released;
 }
-inline void PutRequest::set_allocated_value(::std::string* PROTOBUF_NULLABLE value) {
+inline void TPutRequest::set_allocated_value(::std::string* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     _impl_._has_bits_[0] |= 0x00000002u;
@@ -579,12 +579,12 @@ inline void PutRequest::set_allocated_value(::std::string* PROTOBUF_NULLABLE val
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.value_.IsDefault()) {
     _impl_.value_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:NKVStore.NService.PutRequest.value)
+  // @@protoc_insertion_point(field_set_allocated:NKVStore.NService.TPutRequest.value)
 }
 
 // -------------------------------------------------------------------
 
-// PutResponse
+// TPutResponse
 
 #ifdef __GNUC__
 #pragma GCC diagnostic pop

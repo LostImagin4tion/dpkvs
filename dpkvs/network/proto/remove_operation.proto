@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package NKVStore.NService;
 
-message RemoveRequest {
+message TRemoveRequest {
   string key = 1;
 }
 
-message RemoveResponse {
+message TRemoveResponse {
   bool removed = 1;
 }

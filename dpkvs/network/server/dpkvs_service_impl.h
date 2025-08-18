@@ -2,7 +2,7 @@
 
 #include <dpkvs/network/generated/dpkvs_service.grpc.pb.h>
 
-#include <dpkvs/store_controller/store_controller.h>
+#include <dpkvs/core/engines/hash_map/engine/store_engine.h>
 
 using grpc::CallbackServerContext;
 using grpc::Server;
@@ -11,7 +11,7 @@ using grpc::ServerUnaryReactor;
 using grpc::Status;
 using grpc::StatusCode;
 
-using NKVStore::NController::TStoreController;
+using NKVStore::NCore::NEngine::THashMapStoreEngine;
 
 namespace NKVStore::NService
 {
@@ -22,25 +22,25 @@ class TDpkvsServiceImpl final
 public:
     TDpkvsServiceImpl();
 
-    explicit TDpkvsServiceImpl(std::unique_ptr<TStoreController> storeController);
+    explicit TDpkvsServiceImpl(std::unique_ptr<THashMapStoreEngine> storeEngine);
 
     ServerUnaryReactor* Get(
         CallbackServerContext* context,
-        const GetRequest* request,
-        GetResponse* response) override final;
+        const TGetRequest* request,
+        TGetResponse* response) override final;
 
     ServerUnaryReactor* Put(
         CallbackServerContext* context,
-        const PutRequest* request,
-        PutResponse* response) override final;
+        const TPutRequest* request,
+        TPutResponse* response) override final;
 
     ServerUnaryReactor* Remove(
         CallbackServerContext* context,
-        const RemoveRequest* request,
-        RemoveResponse* response) override final;
+        const TRemoveRequest* request,
+        TRemoveResponse* response) override final;
 
 private:
-    std::unique_ptr<TStoreController> _storeController;
+    std::unique_ptr<THashMapStoreEngine> _storeEngine;
 };
 
 } // namespace NKVStore::NService

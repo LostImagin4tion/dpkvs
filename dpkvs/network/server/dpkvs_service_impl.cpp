@@ -4,23 +4,23 @@ namespace NKVStore::NService
 {
 
 TDpkvsServiceImpl::TDpkvsServiceImpl()
-    : _storeController(std::make_unique<TStoreController>())
+    : _storeEngine(std::make_unique<THashMapStoreEngine>())
 {}
 
-TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<TStoreController> storeController)
-    : _storeController(std::move(storeController))
+TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<THashMapStoreEngine> storeEngine)
+    : _storeEngine(std::move(storeEngine))
 {}
 
 ServerUnaryReactor* TDpkvsServiceImpl::Get(
     CallbackServerContext* context,
-    const GetRequest* request,
-    GetResponse* response)
+    const TGetRequest* request,
+    TGetResponse* response)
 {
     auto reactor = context->DefaultReactor();
 
-    if (auto value = _storeController->Get(request->key()))
+    if (auto value = _storeEngine->Get(request->key()))
     {
-        response->set_value(value->data);
+        response->set_value(value->data());
         reactor->Finish(Status::OK);
     } else {
         reactor->Finish(Status(StatusCode::NOT_FOUND, "Key not found"));
@@ -31,12 +31,12 @@ ServerUnaryReactor* TDpkvsServiceImpl::Get(
 
 ServerUnaryReactor* TDpkvsServiceImpl::Put(
     CallbackServerContext* context,
-    const PutRequest* request,
-    PutResponse* response)
+    const TPutRequest* request,
+    TPutResponse* response)
 {
     auto reactor = context->DefaultReactor();
 
-    _storeController->Put(
+    _storeEngine->Put(
         request->key(),
         request->value());
 
@@ -46,12 +46,12 @@ ServerUnaryReactor* TDpkvsServiceImpl::Put(
 
 ServerUnaryReactor* TDpkvsServiceImpl::Remove(
     CallbackServerContext* context,
-    const RemoveRequest* request,
-    RemoveResponse* response)
+    const TRemoveRequest* request,
+    TRemoveResponse* response)
 {
     auto reactor = context->DefaultReactor();
 
-    auto removed = _storeController->Remove(request->key());
+    auto removed = _storeEngine->Remove(request->key());
     response->set_removed(removed);
 
     if (removed) {

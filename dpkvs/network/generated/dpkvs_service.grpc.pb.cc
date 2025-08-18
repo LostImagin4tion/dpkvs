@@ -40,69 +40,69 @@ TDpkvsService::Stub::Stub(const std::shared_ptr< ::grpc::ChannelInterface>& chan
   , rpcmethod_Remove_(TDpkvsService_method_names[2], options.suffix_for_stats(),::grpc::internal::RpcMethod::NORMAL_RPC, channel)
   {}
 
-::grpc::Status TDpkvsService::Stub::Get(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::NKVStore::NService::GetResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::NKVStore::NService::GetRequest, ::NKVStore::NService::GetResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Get_, context, request, response);
+::grpc::Status TDpkvsService::Stub::Get(::grpc::ClientContext* context, const ::NKVStore::NService::TGetRequest& request, ::NKVStore::NService::TGetResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::NKVStore::NService::TGetRequest, ::NKVStore::NService::TGetResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Get_, context, request, response);
 }
 
-void TDpkvsService::Stub::async::Get(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest* request, ::NKVStore::NService::GetResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::NKVStore::NService::GetRequest, ::NKVStore::NService::GetResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, std::move(f));
+void TDpkvsService::Stub::async::Get(::grpc::ClientContext* context, const ::NKVStore::NService::TGetRequest* request, ::NKVStore::NService::TGetResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::NKVStore::NService::TGetRequest, ::NKVStore::NService::TGetResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, std::move(f));
 }
 
-void TDpkvsService::Stub::async::Get(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest* request, ::NKVStore::NService::GetResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+void TDpkvsService::Stub::async::Get(::grpc::ClientContext* context, const ::NKVStore::NService::TGetRequest* request, ::NKVStore::NService::TGetResponse* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Get_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::NKVStore::NService::GetResponse>* TDpkvsService::Stub::PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::NKVStore::NService::GetResponse, ::NKVStore::NService::GetRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Get_, context, request);
+::grpc::ClientAsyncResponseReader< ::NKVStore::NService::TGetResponse>* TDpkvsService::Stub::PrepareAsyncGetRaw(::grpc::ClientContext* context, const ::NKVStore::NService::TGetRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::NKVStore::NService::TGetResponse, ::NKVStore::NService::TGetRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Get_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::NKVStore::NService::GetResponse>* TDpkvsService::Stub::AsyncGetRaw(::grpc::ClientContext* context, const ::NKVStore::NService::GetRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::NKVStore::NService::TGetResponse>* TDpkvsService::Stub::AsyncGetRaw(::grpc::ClientContext* context, const ::NKVStore::NService::TGetRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncGetRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status TDpkvsService::Stub::Put(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::NKVStore::NService::PutResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::NKVStore::NService::PutRequest, ::NKVStore::NService::PutResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Put_, context, request, response);
+::grpc::Status TDpkvsService::Stub::Put(::grpc::ClientContext* context, const ::NKVStore::NService::TPutRequest& request, ::NKVStore::NService::TPutResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::NKVStore::NService::TPutRequest, ::NKVStore::NService::TPutResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Put_, context, request, response);
 }
 
-void TDpkvsService::Stub::async::Put(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest* request, ::NKVStore::NService::PutResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::NKVStore::NService::PutRequest, ::NKVStore::NService::PutResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, std::move(f));
+void TDpkvsService::Stub::async::Put(::grpc::ClientContext* context, const ::NKVStore::NService::TPutRequest* request, ::NKVStore::NService::TPutResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::NKVStore::NService::TPutRequest, ::NKVStore::NService::TPutResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, std::move(f));
 }
 
-void TDpkvsService::Stub::async::Put(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest* request, ::NKVStore::NService::PutResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+void TDpkvsService::Stub::async::Put(::grpc::ClientContext* context, const ::NKVStore::NService::TPutRequest* request, ::NKVStore::NService::TPutResponse* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Put_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::NKVStore::NService::PutResponse>* TDpkvsService::Stub::PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::NKVStore::NService::PutResponse, ::NKVStore::NService::PutRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Put_, context, request);
+::grpc::ClientAsyncResponseReader< ::NKVStore::NService::TPutResponse>* TDpkvsService::Stub::PrepareAsyncPutRaw(::grpc::ClientContext* context, const ::NKVStore::NService::TPutRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::NKVStore::NService::TPutResponse, ::NKVStore::NService::TPutRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Put_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::NKVStore::NService::PutResponse>* TDpkvsService::Stub::AsyncPutRaw(::grpc::ClientContext* context, const ::NKVStore::NService::PutRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::NKVStore::NService::TPutResponse>* TDpkvsService::Stub::AsyncPutRaw(::grpc::ClientContext* context, const ::NKVStore::NService::TPutRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncPutRaw(context, request, cq);
   result->StartCall();
   return result;
 }
 
-::grpc::Status TDpkvsService::Stub::Remove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::NKVStore::NService::RemoveResponse* response) {
-  return ::grpc::internal::BlockingUnaryCall< ::NKVStore::NService::RemoveRequest, ::NKVStore::NService::RemoveResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Remove_, context, request, response);
+::grpc::Status TDpkvsService::Stub::Remove(::grpc::ClientContext* context, const ::NKVStore::NService::TRemoveRequest& request, ::NKVStore::NService::TRemoveResponse* response) {
+  return ::grpc::internal::BlockingUnaryCall< ::NKVStore::NService::TRemoveRequest, ::NKVStore::NService::TRemoveResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), rpcmethod_Remove_, context, request, response);
 }
 
-void TDpkvsService::Stub::async::Remove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest* request, ::NKVStore::NService::RemoveResponse* response, std::function<void(::grpc::Status)> f) {
-  ::grpc::internal::CallbackUnaryCall< ::NKVStore::NService::RemoveRequest, ::NKVStore::NService::RemoveResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Remove_, context, request, response, std::move(f));
+void TDpkvsService::Stub::async::Remove(::grpc::ClientContext* context, const ::NKVStore::NService::TRemoveRequest* request, ::NKVStore::NService::TRemoveResponse* response, std::function<void(::grpc::Status)> f) {
+  ::grpc::internal::CallbackUnaryCall< ::NKVStore::NService::TRemoveRequest, ::NKVStore::NService::TRemoveResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Remove_, context, request, response, std::move(f));
 }
 
-void TDpkvsService::Stub::async::Remove(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest* request, ::NKVStore::NService::RemoveResponse* response, ::grpc::ClientUnaryReactor* reactor) {
+void TDpkvsService::Stub::async::Remove(::grpc::ClientContext* context, const ::NKVStore::NService::TRemoveRequest* request, ::NKVStore::NService::TRemoveResponse* response, ::grpc::ClientUnaryReactor* reactor) {
   ::grpc::internal::ClientCallbackUnaryFactory::Create< ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(stub_->channel_.get(), stub_->rpcmethod_Remove_, context, request, response, reactor);
 }
 
-::grpc::ClientAsyncResponseReader< ::NKVStore::NService::RemoveResponse>* TDpkvsService::Stub::PrepareAsyncRemoveRaw(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
-  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::NKVStore::NService::RemoveResponse, ::NKVStore::NService::RemoveRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Remove_, context, request);
+::grpc::ClientAsyncResponseReader< ::NKVStore::NService::TRemoveResponse>* TDpkvsService::Stub::PrepareAsyncRemoveRaw(::grpc::ClientContext* context, const ::NKVStore::NService::TRemoveRequest& request, ::grpc::CompletionQueue* cq) {
+  return ::grpc::internal::ClientAsyncResponseReaderHelper::Create< ::NKVStore::NService::TRemoveResponse, ::NKVStore::NService::TRemoveRequest, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(channel_.get(), cq, rpcmethod_Remove_, context, request);
 }
 
-::grpc::ClientAsyncResponseReader< ::NKVStore::NService::RemoveResponse>* TDpkvsService::Stub::AsyncRemoveRaw(::grpc::ClientContext* context, const ::NKVStore::NService::RemoveRequest& request, ::grpc::CompletionQueue* cq) {
+::grpc::ClientAsyncResponseReader< ::NKVStore::NService::TRemoveResponse>* TDpkvsService::Stub::AsyncRemoveRaw(::grpc::ClientContext* context, const ::NKVStore::NService::TRemoveRequest& request, ::grpc::CompletionQueue* cq) {
   auto* result =
     this->PrepareAsyncRemoveRaw(context, request, cq);
   result->StartCall();
@@ -113,31 +113,31 @@ TDpkvsService::Service::Service() {
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       TDpkvsService_method_names[0],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< TDpkvsService::Service, ::NKVStore::NService::GetRequest, ::NKVStore::NService::GetResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< TDpkvsService::Service, ::NKVStore::NService::TGetRequest, ::NKVStore::NService::TGetResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](TDpkvsService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::NKVStore::NService::GetRequest* req,
-             ::NKVStore::NService::GetResponse* resp) {
+             const ::NKVStore::NService::TGetRequest* req,
+             ::NKVStore::NService::TGetResponse* resp) {
                return service->Get(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       TDpkvsService_method_names[1],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< TDpkvsService::Service, ::NKVStore::NService::PutRequest, ::NKVStore::NService::PutResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< TDpkvsService::Service, ::NKVStore::NService::TPutRequest, ::NKVStore::NService::TPutResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](TDpkvsService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::NKVStore::NService::PutRequest* req,
-             ::NKVStore::NService::PutResponse* resp) {
+             const ::NKVStore::NService::TPutRequest* req,
+             ::NKVStore::NService::TPutResponse* resp) {
                return service->Put(ctx, req, resp);
              }, this)));
   AddMethod(new ::grpc::internal::RpcServiceMethod(
       TDpkvsService_method_names[2],
       ::grpc::internal::RpcMethod::NORMAL_RPC,
-      new ::grpc::internal::RpcMethodHandler< TDpkvsService::Service, ::NKVStore::NService::RemoveRequest, ::NKVStore::NService::RemoveResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
+      new ::grpc::internal::RpcMethodHandler< TDpkvsService::Service, ::NKVStore::NService::TRemoveRequest, ::NKVStore::NService::TRemoveResponse, ::grpc::protobuf::MessageLite, ::grpc::protobuf::MessageLite>(
           [](TDpkvsService::Service* service,
              ::grpc::ServerContext* ctx,
-             const ::NKVStore::NService::RemoveRequest* req,
-             ::NKVStore::NService::RemoveResponse* resp) {
+             const ::NKVStore::NService::TRemoveRequest* req,
+             ::NKVStore::NService::TRemoveResponse* resp) {
                return service->Remove(ctx, req, resp);
              }, this)));
 }
@@ -145,21 +145,21 @@ TDpkvsService::Service::Service() {
 TDpkvsService::Service::~Service() {
 }
 
-::grpc::Status TDpkvsService::Service::Get(::grpc::ServerContext* context, const ::NKVStore::NService::GetRequest* request, ::NKVStore::NService::GetResponse* response) {
+::grpc::Status TDpkvsService::Service::Get(::grpc::ServerContext* context, const ::NKVStore::NService::TGetRequest* request, ::NKVStore::NService::TGetResponse* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status TDpkvsService::Service::Put(::grpc::ServerContext* context, const ::NKVStore::NService::PutRequest* request, ::NKVStore::NService::PutResponse* response) {
+::grpc::Status TDpkvsService::Service::Put(::grpc::ServerContext* context, const ::NKVStore::NService::TPutRequest* request, ::NKVStore::NService::TPutResponse* response) {
   (void) context;
   (void) request;
   (void) response;
   return ::grpc::Status(::grpc::StatusCode::UNIMPLEMENTED, "");
 }
 
-::grpc::Status TDpkvsService::Service::Remove(::grpc::ServerContext* context, const ::NKVStore::NService::RemoveRequest* request, ::NKVStore::NService::RemoveResponse* response) {
+::grpc::Status TDpkvsService::Service::Remove(::grpc::ServerContext* context, const ::NKVStore::NService::TRemoveRequest* request, ::NKVStore::NService::TRemoveResponse* response) {
   (void) context;
   (void) request;
   (void) response;

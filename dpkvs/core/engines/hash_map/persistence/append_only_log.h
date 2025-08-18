@@ -1,12 +1,15 @@
 #pragma once
 
+#include <dpkvs/core/store_record/generated/store_record.pb.h>
+#include <dpkvs/core/engines/hash_map/persistence/log_serializer.h>
+#include "dpkvs/core/engines/hash_map/runtime/hash_map_store.h"
+
 #include <string>
 
-#include <dpkvs/engine/store_engine.h>
-#include <dpkvs/append_only_log/log_serializer.h>
-#include <dpkvs/append_only_log/operations.h>
+using NKVStore::NCore::NRecord::TStoreRecord;
+using NKVStore::NCore::NEngine::NRuntime::THashMapStore;
 
-namespace NKVStore::NAppendLog
+namespace NKVStore::NCore::NEngine::NPersistence
 {
 
 class TAppendOnlyLog
@@ -26,14 +29,14 @@ public:
 
     void AppendPutOperation(
         const std::string& key,
-        const NEngine::TStorableValue& value);
+        const TStoreRecord& value);
 
     void AppendRemoveOperation(const std::string& key);
 
-    std::unique_ptr<NEngine::TStoreEngine> RecoverFromLog();
+    std::unique_ptr<THashMapStore> RecoverFromLog();
 
 private:
     std::unique_ptr<TAppendLogSerializer> _logSerializer;
 };
 
-} // namespace NKVStore::NAppendLog
+} // namespace NKVStore::NCore::NEngine::NPersistence
