@@ -62,11 +62,11 @@ protected:
 TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
     // === Put ===
     grpc::ClientContext putContext;
-    NKVStore::NService::PutRequest putRequest;
+    NKVStore::NService::TPutRequest putRequest;
     putRequest.set_key("a");
     putRequest.set_value("1");
     
-    NKVStore::NService::PutResponse putResponse;
+    NKVStore::NService::TPutResponse putResponse;
     auto status1 = _stub->Put(
         &putContext, 
         putRequest, 
@@ -77,10 +77,10 @@ TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
     // === Get existing ===
 
     grpc::ClientContext getContext;
-    NKVStore::NService::GetRequest getRequest;
+    NKVStore::NService::TGetRequest getRequest;
     getRequest.set_key("a");
     
-    NKVStore::NService::GetResponse getResponse;
+    NKVStore::NService::TGetResponse getResponse;
     auto status2 = _stub->Get(
         &getContext, 
         getRequest, 
@@ -92,9 +92,9 @@ TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
     // === Remove ===
 
     grpc::ClientContext removeContext;
-    NKVStore::NService::RemoveRequest removeRequest;
+    NKVStore::NService::TRemoveRequest removeRequest;
     removeRequest.set_key("a");
-    NKVStore::NService::RemoveResponse removeResponse;
+    NKVStore::NService::TRemoveResponse removeResponse;
     
     auto status3 = _stub->Remove(
         &removeContext,
@@ -107,10 +107,10 @@ TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
     // === Get missing ===
 
     grpc::ClientContext getContext2;
-    NKVStore::NService::GetRequest getRequest2;
+    NKVStore::NService::TGetRequest getRequest2;
     getRequest2.set_key("a");
     
-    NKVStore::NService::GetResponse getResponse2;
+    NKVStore::NService::TGetResponse getResponse2;
     auto status4 = _stub->Get(
         &getContext2, 
         getRequest2, 

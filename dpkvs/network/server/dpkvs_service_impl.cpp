@@ -13,8 +13,8 @@ TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<THashMapStoreEngine> storeE
 
 ServerUnaryReactor* TDpkvsServiceImpl::Get(
     CallbackServerContext* context,
-    const GetRequest* request,
-    GetResponse* response)
+    const TGetRequest* request,
+    TGetResponse* response)
 {
     auto reactor = context->DefaultReactor();
 
@@ -31,8 +31,8 @@ ServerUnaryReactor* TDpkvsServiceImpl::Get(
 
 ServerUnaryReactor* TDpkvsServiceImpl::Put(
     CallbackServerContext* context,
-    const PutRequest* request,
-    PutResponse* response)
+    const TPutRequest* request,
+    TPutResponse* response)
 {
     auto reactor = context->DefaultReactor();
 
@@ -46,8 +46,8 @@ ServerUnaryReactor* TDpkvsServiceImpl::Put(
 
 ServerUnaryReactor* TDpkvsServiceImpl::Remove(
     CallbackServerContext* context,
-    const RemoveRequest* request,
-    RemoveResponse* response)
+    const TRemoveRequest* request,
+    TRemoveResponse* response)
 {
     auto reactor = context->DefaultReactor();
 

@@ -54,14 +54,14 @@ extern const ::google::protobuf::internal::DescriptorTable descriptor_table_remo
 }  // extern "C"
 namespace NKVStore {
 namespace NService {
-class RemoveRequest;
-struct RemoveRequestDefaultTypeInternal;
-extern RemoveRequestDefaultTypeInternal _RemoveRequest_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull RemoveRequest_class_data_;
-class RemoveResponse;
-struct RemoveResponseDefaultTypeInternal;
-extern RemoveResponseDefaultTypeInternal _RemoveResponse_default_instance_;
-extern const ::google::protobuf::internal::ClassDataFull RemoveResponse_class_data_;
+class TRemoveRequest;
+struct TRemoveRequestDefaultTypeInternal;
+extern TRemoveRequestDefaultTypeInternal _TRemoveRequest_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull TRemoveRequest_class_data_;
+class TRemoveResponse;
+struct TRemoveResponseDefaultTypeInternal;
+extern TRemoveResponseDefaultTypeInternal _TRemoveResponse_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull TRemoveResponse_class_data_;
 }  // namespace NService
 }  // namespace NKVStore
 namespace google {
@@ -77,30 +77,30 @@ namespace NService {
 
 // -------------------------------------------------------------------
 
-class RemoveResponse final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:NKVStore.NService.RemoveResponse) */ {
+class TRemoveResponse final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:NKVStore.NService.TRemoveResponse) */ {
  public:
-  inline RemoveResponse() : RemoveResponse(nullptr) {}
-  ~RemoveResponse() PROTOBUF_FINAL;
+  inline TRemoveResponse() : TRemoveResponse(nullptr) {}
+  ~TRemoveResponse() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(RemoveResponse* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+  void operator delete(TRemoveResponse* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(RemoveResponse));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(TRemoveResponse));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR RemoveResponse(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR TRemoveResponse(::google::protobuf::internal::ConstantInitialized);
 
-  inline RemoveResponse(const RemoveResponse& from) : RemoveResponse(nullptr, from) {}
-  inline RemoveResponse(RemoveResponse&& from) noexcept
-      : RemoveResponse(nullptr, ::std::move(from)) {}
-  inline RemoveResponse& operator=(const RemoveResponse& from) {
+  inline TRemoveResponse(const TRemoveResponse& from) : TRemoveResponse(nullptr, from) {}
+  inline TRemoveResponse(TRemoveResponse&& from) noexcept
+      : TRemoveResponse(nullptr, ::std::move(from)) {}
+  inline TRemoveResponse& operator=(const TRemoveResponse& from) {
     CopyFrom(from);
     return *this;
   }
-  inline RemoveResponse& operator=(RemoveResponse&& from) noexcept {
+  inline TRemoveResponse& operator=(TRemoveResponse&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -128,13 +128,13 @@ class RemoveResponse final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const RemoveResponse& default_instance() {
-    return *reinterpret_cast<const RemoveResponse*>(
-        &_RemoveResponse_default_instance_);
+  static const TRemoveResponse& default_instance() {
+    return *reinterpret_cast<const TRemoveResponse*>(
+        &_TRemoveResponse_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 1;
-  friend void swap(RemoveResponse& a, RemoveResponse& b) { a.Swap(&b); }
-  inline void Swap(RemoveResponse* PROTOBUF_NONNULL other) {
+  friend void swap(TRemoveResponse& a, TRemoveResponse& b) { a.Swap(&b); }
+  inline void Swap(TRemoveResponse* PROTOBUF_NONNULL other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -142,7 +142,7 @@ class RemoveResponse final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(RemoveResponse* PROTOBUF_NONNULL other) {
+  void UnsafeArenaSwap(TRemoveResponse* PROTOBUF_NONNULL other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -150,13 +150,13 @@ class RemoveResponse final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  RemoveResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<RemoveResponse>(arena);
+  TRemoveResponse* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<TRemoveResponse>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const RemoveResponse& from);
+  void CopyFrom(const TRemoveResponse& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const RemoveResponse& from) { RemoveResponse::MergeImpl(*this, from); }
+  void MergeFrom(const TRemoveResponse& from) { TRemoveResponse::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(::google::protobuf::MessageLite& to_msg,
@@ -192,18 +192,18 @@ class RemoveResponse final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(RemoveResponse* PROTOBUF_NONNULL other);
+  void InternalSwap(TRemoveResponse* PROTOBUF_NONNULL other);
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "NKVStore.NService.RemoveResponse"; }
+  static ::absl::string_view FullMessageName() { return "NKVStore.NService.TRemoveResponse"; }
 
  protected:
-  explicit RemoveResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  RemoveResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const RemoveResponse& from);
-  RemoveResponse(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, RemoveResponse&& from) noexcept
-      : RemoveResponse(arena) {
+  explicit TRemoveResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  TRemoveResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const TRemoveResponse& from);
+  TRemoveResponse(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, TRemoveResponse&& from) noexcept
+      : TRemoveResponse(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
@@ -232,7 +232,7 @@ class RemoveResponse final : public ::google::protobuf::Message
   void _internal_set_removed(bool value);
 
   public:
-  // @@protoc_insertion_point(class_scope:NKVStore.NService.RemoveResponse)
+  // @@protoc_insertion_point(class_scope:NKVStore.NService.TRemoveResponse)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
@@ -255,7 +255,7 @@ class RemoveResponse final : public ::google::protobuf::Message
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
         ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const RemoveResponse& from_msg);
+        const TRemoveResponse& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     bool removed_;
@@ -265,33 +265,33 @@ class RemoveResponse final : public ::google::protobuf::Message
   friend struct ::TableStruct_remove_5foperation_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull RemoveResponse_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull TRemoveResponse_class_data_;
 // -------------------------------------------------------------------
 
-class RemoveRequest final : public ::google::protobuf::Message
-/* @@protoc_insertion_point(class_definition:NKVStore.NService.RemoveRequest) */ {
+class TRemoveRequest final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:NKVStore.NService.TRemoveRequest) */ {
  public:
-  inline RemoveRequest() : RemoveRequest(nullptr) {}
-  ~RemoveRequest() PROTOBUF_FINAL;
+  inline TRemoveRequest() : TRemoveRequest(nullptr) {}
+  ~TRemoveRequest() PROTOBUF_FINAL;
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-  void operator delete(RemoveRequest* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+  void operator delete(TRemoveRequest* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
     SharedDtor(*msg);
-    ::google::protobuf::internal::SizedDelete(msg, sizeof(RemoveRequest));
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(TRemoveRequest));
   }
 #endif
 
   template <typename = void>
-  explicit PROTOBUF_CONSTEXPR RemoveRequest(::google::protobuf::internal::ConstantInitialized);
+  explicit PROTOBUF_CONSTEXPR TRemoveRequest(::google::protobuf::internal::ConstantInitialized);
 
-  inline RemoveRequest(const RemoveRequest& from) : RemoveRequest(nullptr, from) {}
-  inline RemoveRequest(RemoveRequest&& from) noexcept
-      : RemoveRequest(nullptr, ::std::move(from)) {}
-  inline RemoveRequest& operator=(const RemoveRequest& from) {
+  inline TRemoveRequest(const TRemoveRequest& from) : TRemoveRequest(nullptr, from) {}
+  inline TRemoveRequest(TRemoveRequest&& from) noexcept
+      : TRemoveRequest(nullptr, ::std::move(from)) {}
+  inline TRemoveRequest& operator=(const TRemoveRequest& from) {
     CopyFrom(from);
     return *this;
   }
-  inline RemoveRequest& operator=(RemoveRequest&& from) noexcept {
+  inline TRemoveRequest& operator=(TRemoveRequest&& from) noexcept {
     if (this == &from) return *this;
     if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
       InternalSwap(&from);
@@ -319,13 +319,13 @@ class RemoveRequest final : public ::google::protobuf::Message
   static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
     return default_instance().GetMetadata().reflection;
   }
-  static const RemoveRequest& default_instance() {
-    return *reinterpret_cast<const RemoveRequest*>(
-        &_RemoveRequest_default_instance_);
+  static const TRemoveRequest& default_instance() {
+    return *reinterpret_cast<const TRemoveRequest*>(
+        &_TRemoveRequest_default_instance_);
   }
   static constexpr int kIndexInFileMessages = 0;
-  friend void swap(RemoveRequest& a, RemoveRequest& b) { a.Swap(&b); }
-  inline void Swap(RemoveRequest* PROTOBUF_NONNULL other) {
+  friend void swap(TRemoveRequest& a, TRemoveRequest& b) { a.Swap(&b); }
+  inline void Swap(TRemoveRequest* PROTOBUF_NONNULL other) {
     if (other == this) return;
     if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
       InternalSwap(other);
@@ -333,7 +333,7 @@ class RemoveRequest final : public ::google::protobuf::Message
       ::google::protobuf::internal::GenericSwap(this, other);
     }
   }
-  void UnsafeArenaSwap(RemoveRequest* PROTOBUF_NONNULL other) {
+  void UnsafeArenaSwap(TRemoveRequest* PROTOBUF_NONNULL other) {
     if (other == this) return;
     ABSL_DCHECK(GetArena() == other->GetArena());
     InternalSwap(other);
@@ -341,13 +341,13 @@ class RemoveRequest final : public ::google::protobuf::Message
 
   // implements Message ----------------------------------------------
 
-  RemoveRequest* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
-    return ::google::protobuf::Message::DefaultConstruct<RemoveRequest>(arena);
+  TRemoveRequest* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<TRemoveRequest>(arena);
   }
   using ::google::protobuf::Message::CopyFrom;
-  void CopyFrom(const RemoveRequest& from);
+  void CopyFrom(const TRemoveRequest& from);
   using ::google::protobuf::Message::MergeFrom;
-  void MergeFrom(const RemoveRequest& from) { RemoveRequest::MergeImpl(*this, from); }
+  void MergeFrom(const TRemoveRequest& from) { TRemoveRequest::MergeImpl(*this, from); }
 
   private:
   static void MergeImpl(::google::protobuf::MessageLite& to_msg,
@@ -383,18 +383,18 @@ class RemoveRequest final : public ::google::protobuf::Message
   private:
   void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
   static void SharedDtor(MessageLite& self);
-  void InternalSwap(RemoveRequest* PROTOBUF_NONNULL other);
+  void InternalSwap(TRemoveRequest* PROTOBUF_NONNULL other);
  private:
   template <typename T>
   friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
-  static ::absl::string_view FullMessageName() { return "NKVStore.NService.RemoveRequest"; }
+  static ::absl::string_view FullMessageName() { return "NKVStore.NService.TRemoveRequest"; }
 
  protected:
-  explicit RemoveRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
-  RemoveRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const RemoveRequest& from);
-  RemoveRequest(
-      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, RemoveRequest&& from) noexcept
-      : RemoveRequest(arena) {
+  explicit TRemoveRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  TRemoveRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const TRemoveRequest& from);
+  TRemoveRequest(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, TRemoveRequest&& from) noexcept
+      : TRemoveRequest(arena) {
     *this = ::std::move(from);
   }
   const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
@@ -428,12 +428,12 @@ class RemoveRequest final : public ::google::protobuf::Message
   ::std::string* PROTOBUF_NONNULL _internal_mutable_key();
 
   public:
-  // @@protoc_insertion_point(class_scope:NKVStore.NService.RemoveRequest)
+  // @@protoc_insertion_point(class_scope:NKVStore.NService.TRemoveRequest)
  private:
   class _Internal;
   friend class ::google::protobuf::internal::TcParser;
   static const ::google::protobuf::internal::TcParseTable<0, 1,
-                                   0, 43,
+                                   0, 44,
                                    2>
       _table_;
 
@@ -451,7 +451,7 @@ class RemoveRequest final : public ::google::protobuf::Message
     inline explicit Impl_(
         ::google::protobuf::internal::InternalVisibility visibility,
         ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-        const RemoveRequest& from_msg);
+        const TRemoveRequest& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::google::protobuf::internal::ArenaStringPtr key_;
@@ -461,7 +461,7 @@ class RemoveRequest final : public ::google::protobuf::Message
   friend struct ::TableStruct_remove_5foperation_2eproto;
 };
 
-extern const ::google::protobuf::internal::ClassDataFull RemoveRequest_class_data_;
+extern const ::google::protobuf::internal::ClassDataFull TRemoveRequest_class_data_;
 
 // ===================================================================
 
@@ -477,49 +477,49 @@ extern const ::google::protobuf::internal::ClassDataFull RemoveRequest_class_dat
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
-// RemoveRequest
+// TRemoveRequest
 
 // string key = 1;
-inline void RemoveRequest::clear_key() {
+inline void TRemoveRequest::clear_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.key_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const ::std::string& RemoveRequest::key() const
+inline const ::std::string& TRemoveRequest::key() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:NKVStore.NService.RemoveRequest.key)
+  // @@protoc_insertion_point(field_get:NKVStore.NService.TRemoveRequest.key)
   return _internal_key();
 }
 template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void RemoveRequest::set_key(Arg_&& arg, Args_... args) {
+PROTOBUF_ALWAYS_INLINE void TRemoveRequest::set_key(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.key_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:NKVStore.NService.RemoveRequest.key)
+  // @@protoc_insertion_point(field_set:NKVStore.NService.TRemoveRequest.key)
 }
-inline ::std::string* PROTOBUF_NONNULL RemoveRequest::mutable_key()
+inline ::std::string* PROTOBUF_NONNULL TRemoveRequest::mutable_key()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::std::string* _s = _internal_mutable_key();
-  // @@protoc_insertion_point(field_mutable:NKVStore.NService.RemoveRequest.key)
+  // @@protoc_insertion_point(field_mutable:NKVStore.NService.TRemoveRequest.key)
   return _s;
 }
-inline const ::std::string& RemoveRequest::_internal_key() const {
+inline const ::std::string& TRemoveRequest::_internal_key() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.key_.Get();
 }
-inline void RemoveRequest::_internal_set_key(const ::std::string& value) {
+inline void TRemoveRequest::_internal_set_key(const ::std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.key_.Set(value, GetArena());
 }
-inline ::std::string* PROTOBUF_NONNULL RemoveRequest::_internal_mutable_key() {
+inline ::std::string* PROTOBUF_NONNULL TRemoveRequest::_internal_mutable_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.key_.Mutable( GetArena());
 }
-inline ::std::string* PROTOBUF_NULLABLE RemoveRequest::release_key() {
+inline ::std::string* PROTOBUF_NULLABLE TRemoveRequest::release_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:NKVStore.NService.RemoveRequest.key)
+  // @@protoc_insertion_point(field_release:NKVStore.NService.TRemoveRequest.key)
   if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
     return nullptr;
   }
@@ -530,7 +530,7 @@ inline ::std::string* PROTOBUF_NULLABLE RemoveRequest::release_key() {
   }
   return released;
 }
-inline void RemoveRequest::set_allocated_key(::std::string* PROTOBUF_NULLABLE value) {
+inline void TRemoveRequest::set_allocated_key(::std::string* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001u;
@@ -541,33 +541,33 @@ inline void RemoveRequest::set_allocated_key(::std::string* PROTOBUF_NULLABLE va
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.key_.IsDefault()) {
     _impl_.key_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:NKVStore.NService.RemoveRequest.key)
+  // @@protoc_insertion_point(field_set_allocated:NKVStore.NService.TRemoveRequest.key)
 }
 
 // -------------------------------------------------------------------
 
-// RemoveResponse
+// TRemoveResponse
 
 // bool removed = 1;
-inline void RemoveResponse::clear_removed() {
+inline void TRemoveResponse::clear_removed() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.removed_ = false;
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline bool RemoveResponse::removed() const {
-  // @@protoc_insertion_point(field_get:NKVStore.NService.RemoveResponse.removed)
+inline bool TRemoveResponse::removed() const {
+  // @@protoc_insertion_point(field_get:NKVStore.NService.TRemoveResponse.removed)
   return _internal_removed();
 }
-inline void RemoveResponse::set_removed(bool value) {
+inline void TRemoveResponse::set_removed(bool value) {
   _internal_set_removed(value);
   _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:NKVStore.NService.RemoveResponse.removed)
+  // @@protoc_insertion_point(field_set:NKVStore.NService.TRemoveResponse.removed)
 }
-inline bool RemoveResponse::_internal_removed() const {
+inline bool TRemoveResponse::_internal_removed() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
   return _impl_.removed_;
 }
-inline void RemoveResponse::_internal_set_removed(bool value) {
+inline void TRemoveResponse::_internal_set_removed(bool value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_.removed_ = value;
 }

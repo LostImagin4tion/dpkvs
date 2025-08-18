@@ -26,18 +26,18 @@ public:
 
     ServerUnaryReactor* Get(
         CallbackServerContext* context,
-        const GetRequest* request,
-        GetResponse* response) override final;
+        const TGetRequest* request,
+        TGetResponse* response) override final;
 
     ServerUnaryReactor* Put(
         CallbackServerContext* context,
-        const PutRequest* request,
-        PutResponse* response) override final;
+        const TPutRequest* request,
+        TPutResponse* response) override final;
 
     ServerUnaryReactor* Remove(
         CallbackServerContext* context,
-        const RemoveRequest* request,
-        RemoveResponse* response) override final;
+        const TRemoveRequest* request,
+        TRemoveResponse* response) override final;
 
 private:
     std::unique_ptr<THashMapStoreEngine> _storeEngine;

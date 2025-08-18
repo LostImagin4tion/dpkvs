@@ -2,10 +2,10 @@ syntax = "proto3";
 
 package NKVStore.NService;
 
-message GetRequest {
+message TGetRequest {
   string key = 1;
 }
 
-message GetResponse {
+message TGetResponse {
   optional bytes value = 1;
 }
