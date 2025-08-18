@@ -1,9 +1,9 @@
 #pragma once
 
-#include <dpkvs/core/engines/hash_map/impl/hash_map_store_engine.h>
-#include <dpkvs/core/engines/hash_map/append_only_log/append_only_log.h>
+#include <dpkvs/core/engines/hash_map/runtime/hash_map_store.h>
+#include <dpkvs/core/engines/hash_map/persistence/append_only_log.h>
 
-using NKVStore::NCore::NEngine::THashMapEngine;
+using NKVStore::NCore::NEngine::THashMapStore;
 using NKVStore::NCore::NRecord::TStoreRecord;
 using NKVStore::NCore::NEngine::NAppendLog::TAppendOnlyLog;
 
@@ -32,7 +32,7 @@ public:
     [[nodiscard]] bool Remove(const std::string& key);
 
 private:
-    std::unique_ptr<THashMapEngine> _engine;
+    std::unique_ptr<THashMapStore> _engine;
     std::unique_ptr<TAppendOnlyLog> _logger;
 
     std::mutex _appendOnlyLogMutex;

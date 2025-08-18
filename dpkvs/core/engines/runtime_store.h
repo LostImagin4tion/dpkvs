@@ -11,7 +11,7 @@ using TStoreRecordPtr = std::shared_ptr<const TStoreRecord>;
 namespace NKVStore::NCore::NEngine
 {
 
-struct IStoreEngine {
+struct IRuntimeStore {
     virtual void Put(std::string key, TStoreRecord value) = 0;
 
     [[nodiscard]] virtual TStoreRecordPtr Get(const std::string& key) const = 0;

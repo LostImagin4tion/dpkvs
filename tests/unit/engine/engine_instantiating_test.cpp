@@ -2,7 +2,7 @@
 
 #include "dpkvs/core/engines/hash_map/impl/hash_map_store_engine.h"
 
-using NKVStore::NCore::NEngine::THashMapEngine;
+using NKVStore::NCore::NEngine::THashMapStore;
 
 class EngineInstantiatingTest
     : public testing::Test
@@ -22,12 +22,12 @@ protected:
     std::string key1 = "hello";
     std::string key2 = "world";
     std::unordered_map<std::string, TStoreRecordPtr> map;
-    THashMapEngine defaultStore;
+    THashMapStore defaultStore;
 };
 
 TEST_F(EngineInstantiatingTest, ParametrizedContructorTest) {
     auto mapSize = map.size();
-    auto newStore = THashMapEngine(std::move(map));
+    auto newStore = THashMapStore(std::move(map));
 
     ASSERT_EQ(newStore.Size(), mapSize);
     ASSERT_TRUE(newStore.Get(key1));
@@ -38,7 +38,7 @@ TEST_F(EngineInstantiatingTest, ParametrizedContructorTest) {
 
 TEST_F(EngineInstantiatingTest, MoveConstructorTest) {
     auto storeSize = defaultStore.Size();
-    THashMapEngine newStore(std::move(defaultStore));
+    THashMapStore newStore(std::move(defaultStore));
 
     ASSERT_EQ(newStore.Size(), storeSize);
     ASSERT_TRUE(newStore.Get(key1));
@@ -50,7 +50,7 @@ TEST_F(EngineInstantiatingTest, MoveConstructorTest) {
 
 TEST_F(EngineInstantiatingTest, MoveAssignmentOperatorTest) {
     auto storeSize = defaultStore.Size();
-    auto newStore = THashMapEngine(std::move(defaultStore));
+    auto newStore = THashMapStore(std::move(defaultStore));
 
     ASSERT_EQ(newStore.Size(), storeSize);
     ASSERT_TRUE(newStore.Get(key1));

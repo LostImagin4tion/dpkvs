@@ -2,14 +2,14 @@
 
 #include "dpkvs/core/engines/hash_map/impl/hash_map_store_engine.h"
 
-using NKVStore::NCore::NEngine::THashMapEngine;
+using NKVStore::NCore::NEngine::THashMapStore;
 using NKVStore::NCore::NRecord::TStoreRecord;
 
 class EngineBasicOperationsTest
     : public testing::Test
 {
 protected:
-    THashMapEngine store;
+    THashMapStore store;
 };
 
 TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {

@@ -35,7 +35,7 @@ void TAppendOnlyLog::AppendRemoveOperation(const std::string& key)
     _logSerializer->WriteRemoveLog(key);
 }
 
-std::unique_ptr<THashMapEngine> TAppendOnlyLog::RecoverFromLog()
+std::unique_ptr<THashMapStore> TAppendOnlyLog::RecoverFromLog()
 {
     auto recoveredStore = std::unordered_map<std::string, TStoreRecordPtr>();
 
@@ -66,7 +66,7 @@ std::unique_ptr<THashMapEngine> TAppendOnlyLog::RecoverFromLog()
         std::cerr << "Error reading log: " << e.what() << std::endl;
     }
 
-    return std::make_unique<THashMapEngine>(std::move(recoveredStore));
+    return std::make_unique<THashMapStore>(std::move(recoveredStore));
 }
 
 } // namespace NKVStore::NCore::NEngine::NAppendLog

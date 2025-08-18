@@ -1,6 +1,6 @@
 #pragma once
 
-#include "dpkvs/core/engines/store_engine.h"
+#include "dpkvs/core/engines/runtime_store.h"
 
 #include <memory>
 #include <unordered_map>
@@ -11,21 +11,21 @@ namespace NKVStore::NCore::NEngine
 
 using TKVStoreMap = std::unordered_map<std::string, TStoreRecordPtr>;
 
-class THashMapEngine
-    : public IStoreEngine
+class THashMapStore
+    : public IRuntimeStore
 {
 public:
-    THashMapEngine() = default;
+    THashMapStore() = default;
 
-    explicit THashMapEngine(TKVStoreMap&& other);
+    explicit THashMapStore(TKVStoreMap&& other);
 
-    THashMapEngine(const THashMapEngine&) = delete;
-    THashMapEngine& operator=(const THashMapEngine&) = delete;
+    THashMapStore(const THashMapStore&) = delete;
+    THashMapStore& operator=(const THashMapStore&) = delete;
 
-    THashMapEngine(THashMapEngine&&) noexcept;
-    THashMapEngine& operator=(THashMapEngine&&) noexcept;
+    THashMapStore(THashMapStore&&) noexcept;
+    THashMapStore& operator=(THashMapStore&&) noexcept;
 
-    ~THashMapEngine() = default;
+    ~THashMapStore() = default;
 
     void Put(std::string key, TStoreRecord value) final;
 
