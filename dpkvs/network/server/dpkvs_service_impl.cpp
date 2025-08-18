@@ -20,7 +20,7 @@ ServerUnaryReactor* TDpkvsServiceImpl::Get(
 
     if (auto value = _storeEngine->Get(request->key()))
     {
-        response->set_value(value->data);
+        response->set_value(value->data());
         reactor->Finish(Status::OK);
     } else {
         reactor->Finish(Status(StatusCode::NOT_FOUND, "Key not found"));

@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/core/store_record/store_record.h>
 #include <dpkvs/core/engines/hash_map/persistence/log_serializer.h>
 
 using NKVStore::NCore::NEngine::NPersistence::TAppendLogSerializer;
@@ -13,7 +12,8 @@ TEST(SerializerTest, WriteReadLogsTest) {
 
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
-    auto storableValue1 = TStoreRecord(valueStr1);
+    TStoreRecord storableValue1;
+    storableValue1.set_data(valueStr1);
 
     logSerializer.WritePutLog(key1, storableValue1);
 
@@ -21,7 +21,8 @@ TEST(SerializerTest, WriteReadLogsTest) {
 
     auto key2 = std::string("darkness");
     auto valueStr2 = std::string("my old friend");
-    auto storableValue2 = TStoreRecord(valueStr2);
+    TStoreRecord storableValue2;
+    storableValue2.set_data(valueStr2);
 
     logSerializer.WritePutLog(key2, storableValue2);
 
@@ -40,7 +41,7 @@ TEST(SerializerTest, WriteReadLogsTest) {
     auto readKey1 = logSerializer.ReadKey();
     ASSERT_EQ(readKey1, key1);
 
-    auto readStr1 =  logSerializer.ReadValue().data;
+    auto readStr1 =  logSerializer.ReadValue().data();
     ASSERT_EQ(readStr1, valueStr1);
 
     // === Read put second value log ===
@@ -51,7 +52,7 @@ TEST(SerializerTest, WriteReadLogsTest) {
     auto readKey2 = logSerializer.ReadKey();
     ASSERT_EQ(readKey2, key2);
 
-    auto readStr2 =  logSerializer.ReadValue().data;
+    auto readStr2 =  logSerializer.ReadValue().data();
     ASSERT_EQ(readStr2, valueStr2);
 
     // === Read removed first value log ===

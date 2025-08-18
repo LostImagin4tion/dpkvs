@@ -12,11 +12,18 @@ protected:
         auto valueStr1 = std::string("hello");
         auto valueStr2 = std::string("world");
 
-        defaultStore.Put(std::string(key1), TStoreRecord(std::move(valueStr1)));
-        defaultStore.Put(std::string(key2), TStoreRecord(std::move(valueStr2)));
+        TStoreRecord record1;
+        record1.set_data(std::move(valueStr1));
+        TStoreRecord record2;
+        record2.set_data(std::move(valueStr2));
+
+        defaultStore.Put(std::string(key1), std::move(record1));
+        defaultStore.Put(std::string(key2), std::move(record2));
 
         auto valueStr3 = std::string("world");
-        map[std::string(key1)] = std::make_shared<TStoreRecord>(std::move(valueStr3));
+        auto record3 = std::make_shared<TStoreRecord>();
+        record3->set_data(std::move(valueStr3));
+        map[std::string(key1)] = std::move(record3);
     }
 
     std::string key1 = "hello";
@@ -32,7 +39,7 @@ TEST_F(EngineInstantiatingTest, ParametrizedContructorTest) {
     ASSERT_EQ(newStore.Size(), mapSize);
     ASSERT_TRUE(newStore.Get(key1));
 
-    auto item = newStore.Get(key1)->data;
+    auto item = newStore.Get(key1)->data();
     ASSERT_EQ(item, "world");
 }
 
@@ -44,7 +51,7 @@ TEST_F(EngineInstantiatingTest, MoveConstructorTest) {
     ASSERT_TRUE(newStore.Get(key1));
     ASSERT_TRUE(newStore.Get(key2));
 
-    auto item = newStore.Get(key1)->data;
+    auto item = newStore.Get(key1)->data();
     ASSERT_EQ(item, "hello");
 }
 
@@ -56,6 +63,6 @@ TEST_F(EngineInstantiatingTest, MoveAssignmentOperatorTest) {
     ASSERT_TRUE(newStore.Get(key1));
     ASSERT_TRUE(newStore.Get(key2));
 
-    auto item = newStore.Get(key2)->data;
+    auto item = newStore.Get(key2)->data();
     ASSERT_EQ(item, "world");
 }

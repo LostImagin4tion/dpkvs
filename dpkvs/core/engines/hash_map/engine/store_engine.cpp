@@ -37,7 +37,9 @@ void THashMapStoreEngine::Put(
 {
     std::lock_guard<std::mutex> lock(_appendOnlyLogMutex);
 
-    TStoreRecord storableValue(std::move(value));
+    TStoreRecord storableValue;
+    storableValue.set_data(std::move(value));
+
     _logger->AppendPutOperation(key,storableValue);
 
     _engine->Put(

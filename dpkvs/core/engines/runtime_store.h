@@ -1,6 +1,6 @@
 #pragma once
 
-#include <dpkvs/core/store_record/store_record.h>
+#include <dpkvs/core/store_record/generated/store_record.pb.h>
 
 #include <string>
 

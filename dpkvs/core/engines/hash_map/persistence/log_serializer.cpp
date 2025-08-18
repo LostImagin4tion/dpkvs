@@ -61,17 +61,19 @@ void TAppendLogSerializer::WritePutLog(
     _log_stream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
     _log_stream.write(key.data(), keySize);
 
-    uint32_t dataSize = value.data.size();
+    uint32_t dataSize = value.data().size();
     _log_stream.write(reinterpret_cast<const char*>(&dataSize), sizeof(dataSize));
 
-    _log_stream.write(value.data.data(), dataSize);
-    _log_stream.write(reinterpret_cast<const char*>(&value.flags), sizeof(value.flags));
+    _log_stream.write(value.data().data(), dataSize);
 
-    uint8_t hasExpiry = value.expiry.has_value();
+    auto flags = value.flags();
+    _log_stream.write(reinterpret_cast<const char*>(&flags), sizeof(flags));
+
+    uint8_t hasExpiry = value.has_expiry_millis();
     _log_stream.write(reinterpret_cast<const char*>(&hasExpiry), sizeof(hasExpiry));
 
     if (hasExpiry) {
-        int64_t time = value.expiry->time_since_epoch().count();
+        int64_t time = value.expiry_millis();
         _log_stream.write(reinterpret_cast<const char*>(&time), sizeof(time));
     }
 
@@ -123,22 +125,21 @@ TStoreRecord TAppendLogSerializer::ReadValue()
     TStoreRecord value;
 
     auto dataSize = ReadBinary<uint32_t>();
-    value.data.resize(dataSize);
+    auto* dataStr = value.mutable_data();
+    dataStr->resize(dataSize);
 
-    _log_stream.read(value.data.data(), dataSize);
+    _log_stream.read(dataStr->data(), dataSize);
     if (!_log_stream.good()) {
         throw std::runtime_error("Failed to read value data");
     }
 
-    value.flags = ReadBinary<uint32_t>();
+    value.set_flags(ReadBinary<uint32_t>());
 
-    auto hasExpiry = ReadBinary<uint8_t>();
+    uint8_t hasExpiry = ReadBinary<uint8_t>();
 
     if (hasExpiry) {
         auto timeValue = ReadBinary<int64_t>();
-        value.expiry = std::chrono::system_clock::time_point{
-            std::chrono::system_clock::duration{timeValue}
-        };
+        value.set_expiry_millis(timeValue);
     }
 
     return value;

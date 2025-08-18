@@ -1,9 +1,11 @@
 add_library(dpkvs_core STATIC
         # ==== Core Interfaces ===
-        store_record/store_record.h
-        store_record/store_record.cpp
         engines/runtime_store.h
         engines/operations.h
+
+        # record protos
+        store_record/generated/store_record.pb.h
+        store_record/generated/store_record.pb.cc
 
         # ==== Hash Map store engine ====
         # store engine
@@ -24,3 +26,9 @@ add_library(dpkvs_core STATIC
 target_include_directories(dpkvs_core PUBLIC
         ${CMAKE_SOURCE_DIR}
 )
+
+target_link_libraries(dpkvs_core
+        PUBLIC
+        protobuf::libprotobuf
+)
+
