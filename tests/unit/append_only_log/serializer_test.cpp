@@ -1,12 +1,12 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/core/engines/hash_map/persistence/log_serializer.h>
+#include "dpkvs/core/store_record/serializer/record_serializer.h"
 
-using NKVStore::NCore::NEngine::NPersistence::TAppendLogSerializer;
+using NKVStore::NCore::NRecord::TStoreRecordSerializer;
 using NKVStore::NCore::NEngine::EStoreEngineOperations;
 
 TEST(SerializerTest, WriteReadLogsTest) {
-    auto logSerializer = TAppendLogSerializer();
+    auto logSerializer = TStoreRecordSerializer();
 
     // === Put first value ===
 

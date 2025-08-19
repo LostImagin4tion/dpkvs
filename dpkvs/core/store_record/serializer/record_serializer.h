@@ -9,23 +9,23 @@
 using NKVStore::NCore::NRecord::TStoreValue;
 using NKVStore::NCore::NEngine::EStoreEngineOperations;
 
-namespace NKVStore::NCore::NEngine::NPersistence
+namespace NKVStore::NCore::NRecord
 {
 
-    class TAppendLogSerializer
+    class TStoreRecordSerializer
     {
     public:
-        TAppendLogSerializer();
+        TStoreRecordSerializer();
 
-        explicit TAppendLogSerializer(std::string fileName);
+        explicit TStoreRecordSerializer(std::string fileName);
 
-        TAppendLogSerializer(TAppendLogSerializer&) = delete;
-        TAppendLogSerializer& operator=(const TAppendLogSerializer&) = delete;
+        TStoreRecordSerializer(TStoreRecordSerializer&) = delete;
+        TStoreRecordSerializer& operator=(const TStoreRecordSerializer&) = delete;
 
-        TAppendLogSerializer(TAppendLogSerializer&&) noexcept;
-        TAppendLogSerializer& operator=(TAppendLogSerializer&&) noexcept;
+        TStoreRecordSerializer(TStoreRecordSerializer&&) noexcept;
+        TStoreRecordSerializer& operator=(TStoreRecordSerializer&&) noexcept;
 
-        ~TAppendLogSerializer();
+        ~TStoreRecordSerializer();
 
         void EnableReadMode();
         bool ReadyToRead();
@@ -63,4 +63,4 @@ namespace NKVStore::NCore::NEngine::NPersistence
         std::string _fileName = "append-only-log.txt";
     };
 
-} // namespace NKVStore::NCore::NEngine::NPersistence
+} // namespace NKVStore::NCore::NRecord

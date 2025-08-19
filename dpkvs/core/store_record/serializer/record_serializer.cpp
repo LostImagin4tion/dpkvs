@@ -1,35 +1,35 @@
-#include "log_serializer.h"
+#include "record_serializer.h"
 
 #include <iostream>
 #include <utility>
 
-namespace NKVStore::NCore::NEngine::NPersistence
+namespace NKVStore::NCore::NRecord
 {
 
-TAppendLogSerializer::TAppendLogSerializer()
+TStoreRecordSerializer::TStoreRecordSerializer()
 {
    OpenFileStream();
 }
 
-TAppendLogSerializer::TAppendLogSerializer(std::string  fileName)
+TStoreRecordSerializer::TStoreRecordSerializer(std::string  fileName)
     : _fileName(std::move(fileName))
 {
     OpenFileStream();
 }
 
-TAppendLogSerializer::TAppendLogSerializer(TAppendLogSerializer&& other) noexcept
+TStoreRecordSerializer::TStoreRecordSerializer(TStoreRecordSerializer&& other) noexcept
     : _fileName(std::move(other._fileName))
     , _log_stream(std::move(other._log_stream))
 {}
 
-TAppendLogSerializer& TAppendLogSerializer::operator=(TAppendLogSerializer&& other) noexcept
+TStoreRecordSerializer& TStoreRecordSerializer::operator=(TStoreRecordSerializer&& other) noexcept
 {
     _fileName = std::move(other._fileName);
     _log_stream = std::move(other._log_stream);
     return *this;
 }
 
-TAppendLogSerializer::~TAppendLogSerializer()
+TStoreRecordSerializer::~TStoreRecordSerializer()
 {
     if (_log_stream.is_open()) {
         Flush();
@@ -37,18 +37,18 @@ TAppendLogSerializer::~TAppendLogSerializer()
     }
 }
 
-void TAppendLogSerializer::EnableReadMode()
+void TStoreRecordSerializer::EnableReadMode()
 {
     _log_stream.clear();
     _log_stream.seekg(0, std::ios::beg);
 }
 
-bool TAppendLogSerializer::ReadyToRead()
+bool TStoreRecordSerializer::ReadyToRead()
 {
     return _log_stream.good() && !_log_stream.eof() && _log_stream.peek() != std::char_traits<char>::eof();
 }
 
-void TAppendLogSerializer::WritePutLog(
+void TStoreRecordSerializer::WritePutLog(
     const std::string& key,
     const TStoreValue& value)
 {
@@ -80,7 +80,7 @@ void TAppendLogSerializer::WritePutLog(
     Flush();
 }
 
-void TAppendLogSerializer::WriteRemoveLog(const std::string& key)
+void TStoreRecordSerializer::WriteRemoveLog(const std::string& key)
 {
     EnableWriteMode();
 
@@ -94,7 +94,7 @@ void TAppendLogSerializer::WriteRemoveLog(const std::string& key)
     Flush();
 }
 
-EStoreEngineOperations TAppendLogSerializer::ReadCommand()
+EStoreEngineOperations TStoreRecordSerializer::ReadCommand()
 {
     EStoreEngineOperations command;
     _log_stream.read(reinterpret_cast<char*>(&command), sizeof(command));
@@ -106,7 +106,7 @@ EStoreEngineOperations TAppendLogSerializer::ReadCommand()
     return command;
 }
 
-std::string TAppendLogSerializer::ReadKey()
+std::string TStoreRecordSerializer::ReadKey()
 {
     auto keySize = ReadBinary<uint32_t>();
     std::string key(keySize, '\0');
@@ -120,7 +120,7 @@ std::string TAppendLogSerializer::ReadKey()
     return key;
 }
 
-TStoreValue TAppendLogSerializer::ReadValue()
+TStoreValue TStoreRecordSerializer::ReadValue()
 {
     TStoreValue value;
 
@@ -145,7 +145,7 @@ TStoreValue TAppendLogSerializer::ReadValue()
     return value;
 }
 
-void TAppendLogSerializer::OpenFileStream()
+void TStoreRecordSerializer::OpenFileStream()
 {
     _log_stream.open(
         _fileName,
@@ -159,15 +159,15 @@ void TAppendLogSerializer::OpenFileStream()
     }
 }
 
-void TAppendLogSerializer::EnableWriteMode()
+void TStoreRecordSerializer::EnableWriteMode()
 {
     _log_stream.clear();
     _log_stream.seekp(0, std::ios::end);
 }
 
-void TAppendLogSerializer::Flush()
+void TStoreRecordSerializer::Flush()
 {
     _log_stream.flush();
 }
 
-} // namespace NKVStore::NCore::NEngine::NPersistence
+} // namespace NKVStore::NCore::NRecord

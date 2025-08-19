@@ -6,11 +6,11 @@ namespace NKVStore::NCore::NEngine::NPersistence
 {
 
 TAppendOnlyLog::TAppendOnlyLog()
-    : _logSerializer(std::make_unique<TAppendLogSerializer>())
+    : _logSerializer(std::make_unique<TStoreRecordSerializer>())
 {}
 
 TAppendOnlyLog::TAppendOnlyLog(const std::string& fileName)
-    : _logSerializer(std::make_unique<TAppendLogSerializer>(fileName))
+    : _logSerializer(std::make_unique<TStoreRecordSerializer>(fileName))
 {}
 
 TAppendOnlyLog::TAppendOnlyLog(TAppendOnlyLog && other) noexcept

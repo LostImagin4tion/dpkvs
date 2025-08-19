@@ -7,6 +7,13 @@ add_library(dpkvs_core STATIC
         store_value/generated/store_value.pb.h
         store_value/generated/store_value.pb.cc
 
+        # serializer
+        store_record/generated/store_record.pb.h
+        store_record/generated/store_record.pb.cc
+
+        store_record/serializer/record_serializer.h
+        store_record/serializer/record_serializer.cpp
+
         # ==== Hash Map store engine ====
         # store engine
         engines/hash_map/engine/store_engine.h
@@ -19,8 +26,6 @@ add_library(dpkvs_core STATIC
         # persistence (append only log)
         engines/hash_map/persistence/append_only_log.h
         engines/hash_map/persistence/append_only_log.cpp
-        engines/hash_map/persistence/log_serializer.h
-        engines/hash_map/persistence/log_serializer.cpp
 )
 
 target_include_directories(dpkvs_core PUBLIC
