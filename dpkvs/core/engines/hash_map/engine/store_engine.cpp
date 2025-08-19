@@ -2,7 +2,7 @@
 
 #include <mutex>
 
-using NKVStore::NCore::NEngine::EStoreEngineOperations;
+using NKVStore::NCore::NRecord::EStoreEngineOperations;
 
 namespace NKVStore::NCore::NEngine
 {

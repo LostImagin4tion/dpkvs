@@ -48,50 +48,13 @@ bool TStoreRecordSerializer::ReadyToRead()
     return _log_stream.good() && !_log_stream.eof() && _log_stream.peek() != std::char_traits<char>::eof();
 }
 
-void TStoreRecordSerializer::WritePutLog(
-    const std::string& key,
-    const TStoreValue& value)
+void TStoreRecordSerializer::WriteRecord(const TStoreRecord& record)
 {
-    EnableWriteMode();
-
-    auto operation = EStoreEngineOperations::Put;
-    _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
-
-    uint32_t keySize = key.size();
-    _log_stream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
-    _log_stream.write(key.data(), keySize);
-
-    uint32_t dataSize = value.data().size();
-    _log_stream.write(reinterpret_cast<const char*>(&dataSize), sizeof(dataSize));
-
-    _log_stream.write(value.data().data(), dataSize);
-
-    auto flags = value.flags();
-    _log_stream.write(reinterpret_cast<const char*>(&flags), sizeof(flags));
-
-    uint8_t hasExpiry = value.has_expiry_millis();
-    _log_stream.write(reinterpret_cast<const char*>(&hasExpiry), sizeof(hasExpiry));
-
-    if (hasExpiry) {
-        int64_t time = value.expiry_millis();
-        _log_stream.write(reinterpret_cast<const char*>(&time), sizeof(time));
+    if (record.has_put_operation()) {
+        WritePutLog(record);
+    } else if (record.has_remove_operation()) {
+        WriteRemoveLog(record);
     }
-
-    Flush();
-}
-
-void TStoreRecordSerializer::WriteRemoveLog(const std::string& key)
-{
-    EnableWriteMode();
-
-    auto operation = EStoreEngineOperations::Remove;
-    _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
-
-    uint32_t keySize = key.size();
-    _log_stream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
-    _log_stream.write(key.data(), keySize);
-
-    Flush();
 }
 
 EStoreEngineOperations TStoreRecordSerializer::ReadCommand()
@@ -143,6 +106,55 @@ TStoreValue TStoreRecordSerializer::ReadValue()
     }
 
     return value;
+}
+
+void TStoreRecordSerializer::WritePutLog(const TStoreRecord& record)
+{
+    EnableWriteMode();
+
+    auto key = record.put_operation().key();
+    auto value = record.put_operation().value();
+
+    auto operation = EStoreEngineOperations::Put;
+    _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
+
+    uint32_t keySize = key.size();
+    _log_stream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
+    _log_stream.write(key.data(), keySize);
+
+    uint32_t dataSize = value.data().size();
+    _log_stream.write(reinterpret_cast<const char*>(&dataSize), sizeof(dataSize));
+
+    _log_stream.write(value.data().data(), dataSize);
+
+    auto flags = value.flags();
+    _log_stream.write(reinterpret_cast<const char*>(&flags), sizeof(flags));
+
+    uint8_t hasExpiry = value.has_expiry_millis();
+    _log_stream.write(reinterpret_cast<const char*>(&hasExpiry), sizeof(hasExpiry));
+
+    if (hasExpiry) {
+        int64_t time = value.expiry_millis();
+        _log_stream.write(reinterpret_cast<const char*>(&time), sizeof(time));
+    }
+
+    Flush();
+}
+
+void TStoreRecordSerializer::WriteRemoveLog(const TStoreRecord& record)
+{
+    EnableWriteMode();
+
+    auto key = record.remove_operation().key();
+
+    auto operation = EStoreEngineOperations::Remove;
+    _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
+
+    uint32_t keySize = key.size();
+    _log_stream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
+    _log_stream.write(key.data(), keySize);
+
+    Flush();
 }
 
 void TStoreRecordSerializer::OpenFileStream()

@@ -1,9 +1,14 @@
 #include <gtest/gtest.h>
 
-#include "dpkvs/core/store_record/serializer/record_serializer.h"
+#include <dpkvs/core/store_value/generated/store_value.pb.h>
+#include <dpkvs/core/store_record/serializer/record_serializer.h>
+#include <dpkvs/core/store_record/factory/factory.h>
 
+using NKVStore::NCore::NRecord::TStoreValue;
 using NKVStore::NCore::NRecord::TStoreRecordSerializer;
-using NKVStore::NCore::NEngine::EStoreEngineOperations;
+using NKVStore::NCore::NRecord::CreatePutRecord;
+using NKVStore::NCore::NRecord::CreateRemoveRecord;
+using NKVStore::NCore::NRecord::EStoreEngineOperations;
 
 TEST(SerializerTest, WriteReadLogsTest) {
     auto logSerializer = TStoreRecordSerializer();
@@ -15,7 +20,8 @@ TEST(SerializerTest, WriteReadLogsTest) {
     TStoreValue storableValue1;
     storableValue1.set_data(valueStr1);
 
-    logSerializer.WritePutLog(key1, storableValue1);
+    auto record1 = CreatePutRecord(key1, storableValue1);
+    logSerializer.WriteRecord(record1);
 
     // === Put second value ===
 
@@ -24,11 +30,13 @@ TEST(SerializerTest, WriteReadLogsTest) {
     TStoreValue storableValue2;
     storableValue2.set_data(valueStr2);
 
-    logSerializer.WritePutLog(key2, storableValue2);
+    auto record2 = CreatePutRecord(key2, storableValue2);
+    logSerializer.WriteRecord(record2);
 
     // === Remove first value ===
 
-    logSerializer.WriteRemoveLog(key1);
+    auto record3 = CreateRemoveRecord(key1);
+    logSerializer.WriteRecord(record3);
 
     // === Read put first value log ===
     logSerializer.EnableReadMode();

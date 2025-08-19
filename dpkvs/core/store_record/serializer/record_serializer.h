@@ -1,13 +1,13 @@
 #pragma once
 
-#include <dpkvs/core/engines/operations.h>
-#include <dpkvs/core/store_value/generated/store_value.pb.h>
+#include <dpkvs/core/store_record/serializer/operations.h>
+#include <dpkvs/core/store_record/generated/store_record.pb.h>
 
 #include <string>
 #include <fstream>
 
-using NKVStore::NCore::NRecord::TStoreValue;
-using NKVStore::NCore::NEngine::EStoreEngineOperations;
+using NKVStore::NCore::NRecord::TStoreRecord;
+using NKVStore::NCore::NRecord::EStoreEngineOperations;
 
 namespace NKVStore::NCore::NRecord
 {
@@ -30,17 +30,16 @@ namespace NKVStore::NCore::NRecord
         void EnableReadMode();
         bool ReadyToRead();
 
-        void WritePutLog(
-            const std::string& key,
-            const TStoreValue& value);
-
-        void WriteRemoveLog(const std::string& key);
+        void WriteRecord(const TStoreRecord& record);
 
         EStoreEngineOperations ReadCommand();
         std::string ReadKey();
         TStoreValue ReadValue();
 
     private:
+        void WritePutLog(const TStoreRecord& record);
+        void WriteRemoveLog(const TStoreRecord& record);
+
         void OpenFileStream();
         void EnableWriteMode();
         void Flush();

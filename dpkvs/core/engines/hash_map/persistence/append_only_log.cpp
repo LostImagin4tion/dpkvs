@@ -1,6 +1,11 @@
 #include "append_only_log.h"
 
+#include <dpkvs/core/store_record/factory/factory.h>
+
 #include <iostream>
+
+using NKVStore::NCore::NRecord::CreatePutRecord;
+using NKVStore::NCore::NRecord::CreateRemoveRecord;
 
 namespace NKVStore::NCore::NEngine::NPersistence
 {
@@ -27,12 +32,14 @@ void TAppendOnlyLog::AppendPutOperation(
     const std::string& key,
     const TStoreValue& value)
 {
-    _logSerializer->WritePutLog(key, value);
+    auto record = CreatePutRecord(key, value);
+    _logSerializer->WriteRecord(record);
 }
 
 void TAppendOnlyLog::AppendRemoveOperation(const std::string& key)
 {
-    _logSerializer->WriteRemoveLog(key);
+    auto record = CreateRemoveRecord(key);
+    _logSerializer->WriteRecord(record);
 }
 
 std::unique_ptr<THashMapStore> TAppendOnlyLog::RecoverFromLog()

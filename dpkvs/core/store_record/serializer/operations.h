@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-namespace NKVStore::NCore::NEngine
+namespace NKVStore::NCore::NRecord
 {
 
 enum class EStoreEngineOperations : uint8_t {
@@ -10,4 +10,4 @@ enum class EStoreEngineOperations : uint8_t {
     Remove = 2,
 };
 
-} // NKVStore::NCore::NEngine
+} // NKVStore::NCore::NRecord
