@@ -15,6 +15,7 @@ generate_store_value_protos:
 generate_store_record_protos:
 	protoc -I=. \
 			--proto_path=$(STORE_RECORD_DIR)/proto \
+			--proto_path=$(STORE_VALUE_DIR)/proto \
             --cpp_out=$(STORE_RECORD_DIR)/generated \
 			store_record.proto
 
@@ -26,7 +27,7 @@ generate_service_protos:
 			--cpp_out=$(SERVICE_DIR)/generated \
     		--grpc_out=$(SERVICE_DIR)/generated \
     		--plugin=protoc-gen-grpc=$(shell which grpc_cpp_plugin) \
-    		dpkvs_service.proto \
+    		dpkvs_service.proto
 
 	protoc -I=. \
 			--proto_path=$(SERVICE_DIR)/proto \

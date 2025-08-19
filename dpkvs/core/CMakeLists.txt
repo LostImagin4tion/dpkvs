@@ -28,8 +28,12 @@ add_library(dpkvs_core STATIC
         engines/hash_map/persistence/append_only_log.cpp
 )
 
-target_include_directories(dpkvs_core PUBLIC
+target_include_directories(dpkvs_core
+        PUBLIC
         ${CMAKE_SOURCE_DIR}
+        PRIVATE
+        ${CMAKE_CURRENT_SOURCE_DIR}/store_value/generated
+        ${CMAKE_CURRENT_SOURCE_DIR}/store_record/generated
 )
 
 target_link_libraries(dpkvs_core

@@ -29,7 +29,7 @@
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
-#include "dpkvs/core/store_value/proto/store_value.pb.h"
+#include "store_value.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -646,52 +646,52 @@ class TStoreRecord final : public ::google::protobuf::Message
     kPutOperationFieldNumber = 2,
     kRemoveOperationFieldNumber = 3,
   };
-  // uint64 logSequenceNumber = 1;
-  void clear_logsequencenumber() ;
-  ::uint64_t logsequencenumber() const;
-  void set_logsequencenumber(::uint64_t value);
+  // uint64 log_sequence_number = 1;
+  void clear_log_sequence_number() ;
+  ::uint64_t log_sequence_number() const;
+  void set_log_sequence_number(::uint64_t value);
 
   private:
-  ::uint64_t _internal_logsequencenumber() const;
-  void _internal_set_logsequencenumber(::uint64_t value);
+  ::uint64_t _internal_log_sequence_number() const;
+  void _internal_set_log_sequence_number(::uint64_t value);
 
   public:
-  // .NKVStore.NCore.NRecord.TPutOperation putOperation = 2;
-  bool has_putoperation() const;
+  // .NKVStore.NCore.NRecord.TPutOperation put_operation = 2;
+  bool has_put_operation() const;
   private:
-  bool _internal_has_putoperation() const;
+  bool _internal_has_put_operation() const;
 
   public:
-  void clear_putoperation() ;
-  const ::NKVStore::NCore::NRecord::TPutOperation& putoperation() const;
-  [[nodiscard]] ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE release_putoperation();
-  ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL mutable_putoperation();
-  void set_allocated_putoperation(::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_putoperation(::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE value);
-  ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE unsafe_arena_release_putoperation();
+  void clear_put_operation() ;
+  const ::NKVStore::NCore::NRecord::TPutOperation& put_operation() const;
+  [[nodiscard]] ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE release_put_operation();
+  ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL mutable_put_operation();
+  void set_allocated_put_operation(::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_put_operation(::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE value);
+  ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE unsafe_arena_release_put_operation();
 
   private:
-  const ::NKVStore::NCore::NRecord::TPutOperation& _internal_putoperation() const;
-  ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL _internal_mutable_putoperation();
+  const ::NKVStore::NCore::NRecord::TPutOperation& _internal_put_operation() const;
+  ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL _internal_mutable_put_operation();
 
   public:
-  // .NKVStore.NCore.NRecord.TRemoveOperation removeOperation = 3;
-  bool has_removeoperation() const;
+  // .NKVStore.NCore.NRecord.TRemoveOperation remove_operation = 3;
+  bool has_remove_operation() const;
   private:
-  bool _internal_has_removeoperation() const;
+  bool _internal_has_remove_operation() const;
 
   public:
-  void clear_removeoperation() ;
-  const ::NKVStore::NCore::NRecord::TRemoveOperation& removeoperation() const;
-  [[nodiscard]] ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE release_removeoperation();
-  ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL mutable_removeoperation();
-  void set_allocated_removeoperation(::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE value);
-  void unsafe_arena_set_allocated_removeoperation(::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE value);
-  ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE unsafe_arena_release_removeoperation();
+  void clear_remove_operation() ;
+  const ::NKVStore::NCore::NRecord::TRemoveOperation& remove_operation() const;
+  [[nodiscard]] ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE release_remove_operation();
+  ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL mutable_remove_operation();
+  void set_allocated_remove_operation(::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_remove_operation(::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE value);
+  ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE unsafe_arena_release_remove_operation();
 
   private:
-  const ::NKVStore::NCore::NRecord::TRemoveOperation& _internal_removeoperation() const;
-  ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL _internal_mutable_removeoperation();
+  const ::NKVStore::NCore::NRecord::TRemoveOperation& _internal_remove_operation() const;
+  ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL _internal_mutable_remove_operation();
 
   public:
   void clear_operation();
@@ -699,8 +699,8 @@ class TStoreRecord final : public ::google::protobuf::Message
   // @@protoc_insertion_point(class_scope:NKVStore.NCore.NRecord.TStoreRecord)
  private:
   class _Internal;
-  void set_has_putoperation();
-  void set_has_removeoperation();
+  void set_has_put_operation();
+  void set_has_remove_operation();
   inline bool has_operation() const;
   inline void clear_has_operation();
   friend class ::google::protobuf::internal::TcParser;
@@ -726,12 +726,12 @@ class TStoreRecord final : public ::google::protobuf::Message
         const TStoreRecord& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::uint64_t logsequencenumber_;
+    ::uint64_t log_sequence_number_;
     union OperationUnion {
       constexpr OperationUnion() : _constinit_{} {}
       ::google::protobuf::internal::ConstantInitialized _constinit_;
-      ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE putoperation_;
-      ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE removeoperation_;
+      ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE put_operation_;
+      ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE remove_operation_;
     } operation_;
     ::uint32_t _oneof_case_[1];
     PROTOBUF_TSAN_DECLARE_MEMBER
@@ -989,189 +989,189 @@ inline void TRemoveOperation::set_allocated_key(::std::string* PROTOBUF_NULLABLE
 
 // TStoreRecord
 
-// uint64 logSequenceNumber = 1;
-inline void TStoreRecord::clear_logsequencenumber() {
+// uint64 log_sequence_number = 1;
+inline void TStoreRecord::clear_log_sequence_number() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.logsequencenumber_ = ::uint64_t{0u};
+  _impl_.log_sequence_number_ = ::uint64_t{0u};
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline ::uint64_t TStoreRecord::logsequencenumber() const {
-  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.logSequenceNumber)
-  return _internal_logsequencenumber();
+inline ::uint64_t TStoreRecord::log_sequence_number() const {
+  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.log_sequence_number)
+  return _internal_log_sequence_number();
 }
-inline void TStoreRecord::set_logsequencenumber(::uint64_t value) {
-  _internal_set_logsequencenumber(value);
+inline void TStoreRecord::set_log_sequence_number(::uint64_t value) {
+  _internal_set_log_sequence_number(value);
   _impl_._has_bits_[0] |= 0x00000001u;
-  // @@protoc_insertion_point(field_set:NKVStore.NCore.NRecord.TStoreRecord.logSequenceNumber)
+  // @@protoc_insertion_point(field_set:NKVStore.NCore.NRecord.TStoreRecord.log_sequence_number)
 }
-inline ::uint64_t TStoreRecord::_internal_logsequencenumber() const {
+inline ::uint64_t TStoreRecord::_internal_log_sequence_number() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.logsequencenumber_;
+  return _impl_.log_sequence_number_;
 }
-inline void TStoreRecord::_internal_set_logsequencenumber(::uint64_t value) {
+inline void TStoreRecord::_internal_set_log_sequence_number(::uint64_t value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.logsequencenumber_ = value;
+  _impl_.log_sequence_number_ = value;
 }
 
-// .NKVStore.NCore.NRecord.TPutOperation putOperation = 2;
-inline bool TStoreRecord::has_putoperation() const {
+// .NKVStore.NCore.NRecord.TPutOperation put_operation = 2;
+inline bool TStoreRecord::has_put_operation() const {
   return operation_case() == kPutOperation;
 }
-inline bool TStoreRecord::_internal_has_putoperation() const {
+inline bool TStoreRecord::_internal_has_put_operation() const {
   return operation_case() == kPutOperation;
 }
-inline void TStoreRecord::set_has_putoperation() {
+inline void TStoreRecord::set_has_put_operation() {
   _impl_._oneof_case_[0] = kPutOperation;
 }
-inline void TStoreRecord::clear_putoperation() {
+inline void TStoreRecord::clear_put_operation() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (operation_case() == kPutOperation) {
     if (GetArena() == nullptr) {
-      delete _impl_.operation_.putoperation_;
+      delete _impl_.operation_.put_operation_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.operation_.putoperation_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.operation_.put_operation_);
     }
     clear_has_operation();
   }
 }
-inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE TStoreRecord::release_putoperation() {
-  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TStoreRecord.putOperation)
+inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE TStoreRecord::release_put_operation() {
+  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
   if (operation_case() == kPutOperation) {
     clear_has_operation();
-    auto* temp = _impl_.operation_.putoperation_;
+    auto* temp = _impl_.operation_.put_operation_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.operation_.putoperation_ = nullptr;
+    _impl_.operation_.put_operation_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::NKVStore::NCore::NRecord::TPutOperation& TStoreRecord::_internal_putoperation() const {
-  return operation_case() == kPutOperation ? *_impl_.operation_.putoperation_ : reinterpret_cast<::NKVStore::NCore::NRecord::TPutOperation&>(::NKVStore::NCore::NRecord::_TPutOperation_default_instance_);
+inline const ::NKVStore::NCore::NRecord::TPutOperation& TStoreRecord::_internal_put_operation() const {
+  return operation_case() == kPutOperation ? *_impl_.operation_.put_operation_ : reinterpret_cast<::NKVStore::NCore::NRecord::TPutOperation&>(::NKVStore::NCore::NRecord::_TPutOperation_default_instance_);
 }
-inline const ::NKVStore::NCore::NRecord::TPutOperation& TStoreRecord::putoperation() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.putOperation)
-  return _internal_putoperation();
+inline const ::NKVStore::NCore::NRecord::TPutOperation& TStoreRecord::put_operation() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
+  return _internal_put_operation();
 }
-inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE TStoreRecord::unsafe_arena_release_putoperation() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:NKVStore.NCore.NRecord.TStoreRecord.putOperation)
+inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE TStoreRecord::unsafe_arena_release_put_operation() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
   if (operation_case() == kPutOperation) {
     clear_has_operation();
-    auto* temp = _impl_.operation_.putoperation_;
-    _impl_.operation_.putoperation_ = nullptr;
+    auto* temp = _impl_.operation_.put_operation_;
+    _impl_.operation_.put_operation_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void TStoreRecord::unsafe_arena_set_allocated_putoperation(
+inline void TStoreRecord::unsafe_arena_set_allocated_put_operation(
     ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_operation();
   if (value) {
-    set_has_putoperation();
-    _impl_.operation_.putoperation_ = value;
+    set_has_put_operation();
+    _impl_.operation_.put_operation_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NKVStore.NCore.NRecord.TStoreRecord.putOperation)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
 }
-inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL TStoreRecord::_internal_mutable_putoperation() {
+inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL TStoreRecord::_internal_mutable_put_operation() {
   if (operation_case() != kPutOperation) {
     clear_operation();
-    set_has_putoperation();
-    _impl_.operation_.putoperation_ = 
+    set_has_put_operation();
+    _impl_.operation_.put_operation_ = 
         ::google::protobuf::Message::DefaultConstruct<::NKVStore::NCore::NRecord::TPutOperation>(GetArena());
   }
-  return _impl_.operation_.putoperation_;
+  return _impl_.operation_.put_operation_;
 }
-inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL TStoreRecord::mutable_putoperation()
+inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL TStoreRecord::mutable_put_operation()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::NKVStore::NCore::NRecord::TPutOperation* _msg = _internal_mutable_putoperation();
-  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TStoreRecord.putOperation)
+  ::NKVStore::NCore::NRecord::TPutOperation* _msg = _internal_mutable_put_operation();
+  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
   return _msg;
 }
 
-// .NKVStore.NCore.NRecord.TRemoveOperation removeOperation = 3;
-inline bool TStoreRecord::has_removeoperation() const {
+// .NKVStore.NCore.NRecord.TRemoveOperation remove_operation = 3;
+inline bool TStoreRecord::has_remove_operation() const {
   return operation_case() == kRemoveOperation;
 }
-inline bool TStoreRecord::_internal_has_removeoperation() const {
+inline bool TStoreRecord::_internal_has_remove_operation() const {
   return operation_case() == kRemoveOperation;
 }
-inline void TStoreRecord::set_has_removeoperation() {
+inline void TStoreRecord::set_has_remove_operation() {
   _impl_._oneof_case_[0] = kRemoveOperation;
 }
-inline void TStoreRecord::clear_removeoperation() {
+inline void TStoreRecord::clear_remove_operation() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (operation_case() == kRemoveOperation) {
     if (GetArena() == nullptr) {
-      delete _impl_.operation_.removeoperation_;
+      delete _impl_.operation_.remove_operation_;
     } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
-      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.operation_.removeoperation_);
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.operation_.remove_operation_);
     }
     clear_has_operation();
   }
 }
-inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE TStoreRecord::release_removeoperation() {
-  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TStoreRecord.removeOperation)
+inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE TStoreRecord::release_remove_operation() {
+  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
   if (operation_case() == kRemoveOperation) {
     clear_has_operation();
-    auto* temp = _impl_.operation_.removeoperation_;
+    auto* temp = _impl_.operation_.remove_operation_;
     if (GetArena() != nullptr) {
       temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
     }
-    _impl_.operation_.removeoperation_ = nullptr;
+    _impl_.operation_.remove_operation_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline const ::NKVStore::NCore::NRecord::TRemoveOperation& TStoreRecord::_internal_removeoperation() const {
-  return operation_case() == kRemoveOperation ? *_impl_.operation_.removeoperation_ : reinterpret_cast<::NKVStore::NCore::NRecord::TRemoveOperation&>(::NKVStore::NCore::NRecord::_TRemoveOperation_default_instance_);
+inline const ::NKVStore::NCore::NRecord::TRemoveOperation& TStoreRecord::_internal_remove_operation() const {
+  return operation_case() == kRemoveOperation ? *_impl_.operation_.remove_operation_ : reinterpret_cast<::NKVStore::NCore::NRecord::TRemoveOperation&>(::NKVStore::NCore::NRecord::_TRemoveOperation_default_instance_);
 }
-inline const ::NKVStore::NCore::NRecord::TRemoveOperation& TStoreRecord::removeoperation() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.removeOperation)
-  return _internal_removeoperation();
+inline const ::NKVStore::NCore::NRecord::TRemoveOperation& TStoreRecord::remove_operation() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
+  return _internal_remove_operation();
 }
-inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE TStoreRecord::unsafe_arena_release_removeoperation() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:NKVStore.NCore.NRecord.TStoreRecord.removeOperation)
+inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE TStoreRecord::unsafe_arena_release_remove_operation() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
   if (operation_case() == kRemoveOperation) {
     clear_has_operation();
-    auto* temp = _impl_.operation_.removeoperation_;
-    _impl_.operation_.removeoperation_ = nullptr;
+    auto* temp = _impl_.operation_.remove_operation_;
+    _impl_.operation_.remove_operation_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void TStoreRecord::unsafe_arena_set_allocated_removeoperation(
+inline void TStoreRecord::unsafe_arena_set_allocated_remove_operation(
     ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE value) {
   // We rely on the oneof clear method to free the earlier contents
   // of this oneof. We can directly use the pointer we're given to
   // set the new value.
   clear_operation();
   if (value) {
-    set_has_removeoperation();
-    _impl_.operation_.removeoperation_ = value;
+    set_has_remove_operation();
+    _impl_.operation_.remove_operation_ = value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NKVStore.NCore.NRecord.TStoreRecord.removeOperation)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
 }
-inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL TStoreRecord::_internal_mutable_removeoperation() {
+inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL TStoreRecord::_internal_mutable_remove_operation() {
   if (operation_case() != kRemoveOperation) {
     clear_operation();
-    set_has_removeoperation();
-    _impl_.operation_.removeoperation_ = 
+    set_has_remove_operation();
+    _impl_.operation_.remove_operation_ = 
         ::google::protobuf::Message::DefaultConstruct<::NKVStore::NCore::NRecord::TRemoveOperation>(GetArena());
   }
-  return _impl_.operation_.removeoperation_;
+  return _impl_.operation_.remove_operation_;
 }
-inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL TStoreRecord::mutable_removeoperation()
+inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL TStoreRecord::mutable_remove_operation()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::NKVStore::NCore::NRecord::TRemoveOperation* _msg = _internal_mutable_removeoperation();
-  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TStoreRecord.removeOperation)
+  ::NKVStore::NCore::NRecord::TRemoveOperation* _msg = _internal_mutable_remove_operation();
+  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
   return _msg;
 }
 
