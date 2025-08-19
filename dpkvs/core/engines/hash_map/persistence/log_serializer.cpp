@@ -50,7 +50,7 @@ bool TAppendLogSerializer::ReadyToRead()
 
 void TAppendLogSerializer::WritePutLog(
     const std::string& key,
-    const TStoreRecord& value)
+    const TStoreValue& value)
 {
     EnableWriteMode();
 
@@ -120,9 +120,9 @@ std::string TAppendLogSerializer::ReadKey()
     return key;
 }
 
-TStoreRecord TAppendLogSerializer::ReadValue()
+TStoreValue TAppendLogSerializer::ReadValue()
 {
-    TStoreRecord value;
+    TStoreValue value;
 
     auto dataSize = ReadBinary<uint32_t>();
     auto* dataStr = value.mutable_data();

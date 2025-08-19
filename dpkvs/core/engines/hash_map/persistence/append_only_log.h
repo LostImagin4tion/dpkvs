@@ -1,12 +1,12 @@
 #pragma once
 
-#include <dpkvs/core/store_record/generated/store_record.pb.h>
+#include <dpkvs/core/store_value/generated/store_value.pb.h>
 #include <dpkvs/core/engines/hash_map/persistence/log_serializer.h>
 #include "dpkvs/core/engines/hash_map/runtime/hash_map_store.h"
 
 #include <string>
 
-using NKVStore::NCore::NRecord::TStoreRecord;
+using NKVStore::NCore::NRecord::TStoreValue;
 using NKVStore::NCore::NEngine::NRuntime::THashMapStore;
 
 namespace NKVStore::NCore::NEngine::NPersistence
@@ -29,7 +29,7 @@ public:
 
     void AppendPutOperation(
         const std::string& key,
-        const TStoreRecord& value);
+        const TStoreValue& value);
 
     void AppendRemoveOperation(const std::string& key);
 

@@ -3,7 +3,7 @@
 #include <dpkvs/core/engines/hash_map/engine/store_engine.h>
 
 using NKVStore::NCore::NEngine::THashMapStoreEngine;
-using NKVStore::NCore::NRecord::TStoreRecord;
+using NKVStore::NCore::NRecord::TStoreValue;
 
 class EngineBasicOperationsTest
     : public testing::Test
@@ -20,7 +20,7 @@ TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
 
-    TStoreRecord record1;
+    TStoreValue record1;
     record1.set_data(std::move(valueStr1));
     store.Put(std::move(key1), std::move(record1));
 
@@ -35,7 +35,7 @@ TEST_F(EngineBasicOperationsTest, StoreBasicOperations) {
     auto key2 = std::string("world");
     auto valueStr2 = std::string("hello");
 
-    TStoreRecord record2;
+    TStoreValue record2;
     record2.set_data(std::move(valueStr2));
     store.Put(std::move(key2),std::move(record2));
 

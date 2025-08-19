@@ -12,7 +12,7 @@ TEST(SerializerTest, WriteReadLogsTest) {
 
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
-    TStoreRecord storableValue1;
+    TStoreValue storableValue1;
     storableValue1.set_data(valueStr1);
 
     logSerializer.WritePutLog(key1, storableValue1);
@@ -21,7 +21,7 @@ TEST(SerializerTest, WriteReadLogsTest) {
 
     auto key2 = std::string("darkness");
     auto valueStr2 = std::string("my old friend");
-    TStoreRecord storableValue2;
+    TStoreValue storableValue2;
     storableValue2.set_data(valueStr2);
 
     logSerializer.WritePutLog(key2, storableValue2);

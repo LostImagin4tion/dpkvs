@@ -25,7 +25,7 @@ TAppendOnlyLog& TAppendOnlyLog::operator=(TAppendOnlyLog && other) noexcept
 
 void TAppendOnlyLog::AppendPutOperation(
     const std::string& key,
-    const TStoreRecord& value)
+    const TStoreValue& value)
 {
     _logSerializer->WritePutLog(key, value);
 }
@@ -37,7 +37,7 @@ void TAppendOnlyLog::AppendRemoveOperation(const std::string& key)
 
 std::unique_ptr<THashMapStore> TAppendOnlyLog::RecoverFromLog()
 {
-    auto recoveredStore = std::unordered_map<std::string, TStoreRecordPtr>();
+    auto recoveredStore = std::unordered_map<std::string, TStoreValuePtr>();
 
     try {
         _logSerializer->EnableReadMode();
@@ -48,9 +48,9 @@ std::unique_ptr<THashMapStore> TAppendOnlyLog::RecoverFromLog()
             switch (command) {
                 case EStoreEngineOperations::Put: {
                     std::string key = _logSerializer->ReadKey();
-                    TStoreRecord value = _logSerializer->ReadValue();
+                    TStoreValue value = _logSerializer->ReadValue();
 
-                    recoveredStore[std::move(key)] = std::make_shared<TStoreRecord>(std::move(value));
+                    recoveredStore[std::move(key)] = std::make_shared<TStoreValue>(std::move(value));
                     break;
                 }
 

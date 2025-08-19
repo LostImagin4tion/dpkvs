@@ -1,20 +1,20 @@
 #pragma once
 
-#include <dpkvs/core/store_record/generated/store_record.pb.h>
+#include <dpkvs/core/store_value/generated/store_value.pb.h>
 
 #include <string>
 
-using NKVStore::NCore::NRecord::TStoreRecord;
+using NKVStore::NCore::NRecord::TStoreValue;
 
-using TStoreRecordPtr = std::shared_ptr<const TStoreRecord>;
+using TStoreValuePtr = std::shared_ptr<const TStoreValue>;
 
 namespace NKVStore::NCore::NEngine::NRuntime
 {
 
 struct IRuntimeStore {
-    virtual void Put(std::string key, TStoreRecord value) = 0;
+    virtual void Put(std::string key, TStoreValue value) = 0;
 
-    [[nodiscard]] virtual TStoreRecordPtr Get(const std::string& key) const = 0;
+    [[nodiscard]] virtual TStoreValuePtr Get(const std::string& key) const = 0;
 
     [[nodiscard]] virtual bool Remove(const std::string& key) = 0;
 

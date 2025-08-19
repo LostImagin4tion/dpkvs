@@ -3,9 +3,9 @@ add_library(dpkvs_core STATIC
         engines/runtime_store.h
         engines/operations.h
 
-        # record protos
-        store_record/generated/store_record.pb.h
-        store_record/generated/store_record.pb.cc
+        # store value protos
+        store_value/generated/store_value.pb.h
+        store_value/generated/store_value.pb.cc
 
         # ==== Hash Map store engine ====
         # store engine

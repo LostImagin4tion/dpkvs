@@ -28,15 +28,15 @@ THashMapStore& THashMapStore::operator=(THashMapStore && other) noexcept
 
 void THashMapStore::Put(
     std::string key,
-    TStoreRecord value)
+    TStoreValue value)
 {
     std::unique_lock lock(_mutex);
     _store.insert_or_assign(
         std::move(key),
-        std::make_shared<TStoreRecord>(std::move(value)));
+        std::make_shared<TStoreValue>(std::move(value)));
 }
 
-TStoreRecordPtr THashMapStore::Get(const std::string& key) const
+TStoreValuePtr THashMapStore::Get(const std::string& key) const
 {
     std::shared_lock lock(_mutex);
 

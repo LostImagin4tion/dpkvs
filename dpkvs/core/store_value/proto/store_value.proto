@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package NKVStore.NCore.NRecord;
 
-message TStoreRecord {
+message TStoreValue {
   bytes data = 2;
   uint32 flags = 3;
   optional int64 expiry_millis = 4; // millis since epoch
