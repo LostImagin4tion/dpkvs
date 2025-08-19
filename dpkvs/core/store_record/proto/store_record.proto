@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package NKVStore.NCore.NRecord;
+
+import "dpkvs/core/store_value/proto/store_value.proto";
+
+message TPutOperation {
+  bytes key = 1;
+  TStoreValue value = 2;
+}
+
+message TRemoveOperation {
+  bytes key = 1;
+}
+
+message TStoreRecord {
+  uint64 logSequenceNumber = 1;
+  oneof operation {
+    TPutOperation putOperation = 2;
+    TRemoveOperation removeOperation = 3;
+  }
+}
