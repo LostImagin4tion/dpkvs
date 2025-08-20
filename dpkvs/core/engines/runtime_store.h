@@ -2,6 +2,7 @@
 
 #include <dpkvs/core/store_value/generated/store_value.pb.h>
 
+#include <absl/strings/string_view.h>
 #include <string>
 
 using NKVStore::NCore::NRecord::TStoreValue;
@@ -12,11 +13,11 @@ namespace NKVStore::NCore::NEngine::NRuntime
 {
 
 struct IRuntimeStore {
-    virtual void Put(std::string key, TStoreValue value) = 0;
+    virtual void Put(absl::string_view key, TStoreValue value) = 0;
 
-    [[nodiscard]] virtual TStoreValuePtr Get(const std::string& key) const = 0;
+    [[nodiscard]] virtual TStoreValuePtr Get(absl::string_view key) const = 0;
 
-    [[nodiscard]] virtual bool Remove(const std::string& key) = 0;
+    [[nodiscard]] virtual bool Remove(absl::string_view key) = 0;
 
     [[nodiscard]] virtual size_t Size() const = 0;
 };

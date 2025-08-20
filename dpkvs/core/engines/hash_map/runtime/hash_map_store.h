@@ -18,6 +18,8 @@ class THashMapStore
 public:
     THashMapStore() = default;
 
+    explicit THashMapStore(TKVStoreMap&& other);
+
     THashMapStore(const THashMapStore&) = delete;
     THashMapStore& operator=(const THashMapStore&) = delete;
 
@@ -26,11 +28,11 @@ public:
 
     ~THashMapStore() = default;
 
-    void Put(std::string key, TStoreValue value) final;
+    void Put(absl::string_view key, TStoreValue value) final;
 
-    TStoreValuePtr Get(const std::string& key) const final;
+    TStoreValuePtr Get(absl::string_view key) const final;
 
-    bool Remove(const std::string& key) final;
+    bool Remove(absl::string_view key) final;
 
     size_t Size() const final;
 

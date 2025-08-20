@@ -5,8 +5,15 @@
 namespace NKVStore::NCore::NEngine::NRuntime
 {
 
+THashMapStore::THashMapStore(TKVStoreMap&& other) {
+    for (const auto& entry : other) {
+        auto shardIdx = FindShardFor(entry.first);
+        _storeShards[shardIdx].store.insert_or_assign(entry.first, entry.second);
+    }
+}
+
 void THashMapStore::Put(
-    std::string key,
+    absl::string_view key,
     TStoreValue value)
 {
     auto shardIdx = FindShardFor(key);
@@ -15,11 +22,11 @@ void THashMapStore::Put(
     absl::WriterMutexLock lock(&_storeShards[shardIdx].mutex);
 
     _storeShards[shardIdx].store.insert_or_assign(
-        std::move(key),
+        std::string(key),
         std::move(storeValue));
 }
 
-TStoreValuePtr THashMapStore::Get(const std::string& key) const
+TStoreValuePtr THashMapStore::Get(absl::string_view key) const
 {
     auto shardIdx = FindShardFor(key);
     absl::ReaderMutexLock lock(&_storeShards[shardIdx].mutex);
@@ -32,7 +39,7 @@ TStoreValuePtr THashMapStore::Get(const std::string& key) const
     return {};
 }
 
-bool THashMapStore::Remove(const std::string &key)
+bool THashMapStore::Remove(absl::string_view key)
 {
     auto shardIdx = FindShardFor(key);
     absl::WriterMutexLock lock(&_storeShards[shardIdx].mutex);
@@ -55,4 +62,4 @@ size_t THashMapStore::FindShardFor(absl::string_view key)
     return absl::Hash<absl::string_view>{}(key) % _shardsNumber;
 }
 
-} // namespace NKVStore::NCore::NEngine
+} // namespace NKVStore::NCore::NEngine::NRuntime
