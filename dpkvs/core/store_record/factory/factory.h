@@ -9,8 +9,11 @@ using NKVStore::NCore::NRecord::TStoreRecord;
 namespace NKVStore::NCore::NRecord
 {
 
-TStoreRecord CreatePutRecord(const std::string &key, const TStoreValue &value);
+TStoreRecord CreatePutRecord(
+    const std::string &key,
+    const TStoreValue &value,
+    uint64_t lsn);
 
-TStoreRecord CreateRemoveRecord(const std::string &key);
+TStoreRecord CreateRemoveRecord(const std::string &key, uint64_t lsn);
 
 } // namespace NKVStore::NCore::NRecord

@@ -1,7 +1,6 @@
 add_library(dpkvs_core STATIC
         # ==== Core Interfaces ===
         engines/runtime_store.h
-        engines/operations.h
 
         # store value protos
         store_value/generated/store_value.pb.h
@@ -41,5 +40,7 @@ target_include_directories(dpkvs_core
 target_link_libraries(dpkvs_core
         PUBLIC
         protobuf::libprotobuf
+        PRIVATE
+        absl::crc32c
 )
 

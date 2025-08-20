@@ -3,19 +3,26 @@
 namespace NKVStore::NCore::NRecord
 {
 
-TStoreRecord CreatePutRecord(const std::string& key, const TStoreValue& value) {
+TStoreRecord CreatePutRecord(
+    const std::string& key,
+    const TStoreValue& value,
+    uint64_t lsn)
+{
     TStoreRecord record;
+    record.set_log_sequence_number(lsn);
+
     auto operation = record.mutable_put_operation();
     operation->set_key(key);
-    *(operation->mutable_value()) = value;
+    *operation->mutable_value() = value;
 
     return record;
 }
 
-TStoreRecord CreateRemoveRecord(const std::string& key) {
+TStoreRecord CreateRemoveRecord(const std::string& key, uint64_t lsn)
+{
     TStoreRecord record;
-    auto operation = record.mutable_remove_operation();
-    operation->set_key(key);
+    record.set_log_sequence_number(lsn);
+    record.mutable_remove_operation()->set_key(key);
 
     return record;
 }

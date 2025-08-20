@@ -1,7 +1,12 @@
 #include "record_serializer.h"
 
+#include <absl/crc/crc32c.h>
+
 #include <iostream>
 #include <utility>
+#include <system_error>
+#include <fcntl.h>
+#include <unistd.h>
 
 namespace NKVStore::NCore::NRecord
 {
@@ -32,8 +37,15 @@ TStoreRecordSerializer& TStoreRecordSerializer::operator=(TStoreRecordSerializer
 TStoreRecordSerializer::~TStoreRecordSerializer()
 {
     if (_log_stream.is_open()) {
-        Flush();
+        try {
+            Flush();
+        } catch (...) {}
+
         _log_stream.close();
+    }
+    if (_fileDescriptor >= 0) {
+        close(_fileDescriptor);
+        _fileDescriptor = -1;
     }
 }
 
@@ -43,119 +55,66 @@ void TStoreRecordSerializer::EnableReadMode()
     _log_stream.seekg(0, std::ios::beg);
 }
 
-bool TStoreRecordSerializer::ReadyToRead()
-{
-    return _log_stream.good() && !_log_stream.eof() && _log_stream.peek() != std::char_traits<char>::eof();
-}
-
 void TStoreRecordSerializer::WriteRecord(const TStoreRecord& record)
 {
-    if (record.has_put_operation()) {
-        WritePutLog(record);
-    } else if (record.has_remove_operation()) {
-        WriteRemoveLog(record);
-    }
-}
+    std::string serializedRecord;
+    serializedRecord.reserve(record.ByteSizeLong());
 
-EStoreEngineOperations TStoreRecordSerializer::ReadCommand()
-{
-    EStoreEngineOperations command;
-    _log_stream.read(reinterpret_cast<char*>(&command), sizeof(command));
-
-    if (!_log_stream.good()) {
-        throw std::runtime_error("Failed to read operation");
+    if (!record.SerializeToString(&serializedRecord)) {
+        throw std::runtime_error("Failed to serialize protobuf record to string");
     }
 
-    return command;
-}
+    const auto recordSize = static_cast<uint32_t>(serializedRecord.size());
+    const auto crc32 = static_cast<uint32_t>(absl::ComputeCrc32c(serializedRecord));
 
-std::string TStoreRecordSerializer::ReadKey()
-{
-    auto keySize = ReadBinary<uint32_t>();
-    std::string key(keySize, '\0');
-
-    _log_stream.read(key.data(), keySize);
-
-    if (!_log_stream.good()) {
-        throw std::runtime_error("Failed to read key");
-    }
-
-    return key;
-}
-
-TStoreValue TStoreRecordSerializer::ReadValue()
-{
-    TStoreValue value;
-
-    auto dataSize = ReadBinary<uint32_t>();
-    auto* dataStr = value.mutable_data();
-    dataStr->resize(dataSize);
-
-    _log_stream.read(dataStr->data(), dataSize);
-    if (!_log_stream.good()) {
-        throw std::runtime_error("Failed to read value data");
-    }
-
-    value.set_flags(ReadBinary<uint32_t>());
-
-    uint8_t hasExpiry = ReadBinary<uint8_t>();
-
-    if (hasExpiry) {
-        auto timeValue = ReadBinary<int64_t>();
-        value.set_expiry_millis(timeValue);
-    }
-
-    return value;
-}
-
-void TStoreRecordSerializer::WritePutLog(const TStoreRecord& record)
-{
     EnableWriteMode();
 
-    auto key = record.put_operation().key();
-    auto value = record.put_operation().value();
+    WriteU32LE(recordSize);
+    WriteU32LE(crc32);
+    _log_stream.write(serializedRecord.data(), serializedRecord.size());
 
-    auto operation = EStoreEngineOperations::Put;
-    _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
-
-    uint32_t keySize = key.size();
-    _log_stream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
-    _log_stream.write(key.data(), keySize);
-
-    uint32_t dataSize = value.data().size();
-    _log_stream.write(reinterpret_cast<const char*>(&dataSize), sizeof(dataSize));
-
-    _log_stream.write(value.data().data(), dataSize);
-
-    auto flags = value.flags();
-    _log_stream.write(reinterpret_cast<const char*>(&flags), sizeof(flags));
-
-    uint8_t hasExpiry = value.has_expiry_millis();
-    _log_stream.write(reinterpret_cast<const char*>(&hasExpiry), sizeof(hasExpiry));
-
-    if (hasExpiry) {
-        int64_t time = value.expiry_millis();
-        _log_stream.write(reinterpret_cast<const char*>(&time), sizeof(time));
+    if (!_log_stream.good()) {
+        throw std::runtime_error("WriteRecord failed");
     }
 
     Flush();
 }
 
-void TStoreRecordSerializer::WriteRemoveLog(const TStoreRecord& record)
+bool TStoreRecordSerializer::ReadRecord(TStoreRecord& outRecord)
 {
-    EnableWriteMode();
+    if (_log_stream.peek() == std::char_traits<char>::eof()) {
+        return false;
+    }
 
-    auto key = record.remove_operation().key();
+    uint32_t recordSize = 0u;
+    try {
+        recordSize = ReadU32LE();
+    } catch (...) {
+        if (_log_stream.eof()) {
+            return false;
+        }
+        throw;
+    }
 
-    auto operation = EStoreEngineOperations::Remove;
-    _log_stream.write(reinterpret_cast<const char*>(&operation), sizeof(operation));
+    uint32_t storedCrc32 = ReadU32LE();
 
-    uint32_t keySize = key.size();
-    _log_stream.write(reinterpret_cast<const char*>(&keySize), sizeof(keySize));
-    _log_stream.write(key.data(), keySize);
+    std::string serializedRecord(recordSize, '\0');
+    _log_stream.read(serializedRecord.data(), static_cast<std::streamsize>(recordSize));
+    if (!_log_stream.good()) {
+        throw std::runtime_error("Failed to read record payload");
+    }
 
-    Flush();
+    const uint32_t actualCrc32 = static_cast<uint32_t>(absl::ComputeCrc32c(serializedRecord));
+    if (actualCrc32 != storedCrc32) {
+        throw std::runtime_error("CRC32C mismatch");
+    }
+
+    if (!outRecord.ParseFromArray(serializedRecord.data(), static_cast<int>(serializedRecord.size()))) {
+        throw std::runtime_error("Failed to parse protobuf record");
+    }
+    return true;
 }
+
 
 void TStoreRecordSerializer::OpenFileStream()
 {
@@ -169,6 +128,12 @@ void TStoreRecordSerializer::OpenFileStream()
         _log_stream.close();
         _log_stream.open(_fileName, std::ios::binary | std::ios::in | std::ios::out);
     }
+
+    // Open OS fd for fsync
+    _fileDescriptor = open(_fileName.c_str(), O_RDWR | O_CLOEXEC);
+    if (_fileDescriptor < 0) {
+        throw std::system_error(errno, std::generic_category(), "open() for fsync failed");
+    }
 }
 
 void TStoreRecordSerializer::EnableWriteMode()
@@ -180,6 +145,46 @@ void TStoreRecordSerializer::EnableWriteMode()
 void TStoreRecordSerializer::Flush()
 {
     _log_stream.flush();
+    if (!_log_stream.good()) {
+        throw std::runtime_error("flush failed");
+    }
+    Fsync();
+}
+
+void TStoreRecordSerializer::WriteU32LE(uint32_t value)
+{
+    char b[4] = {
+        static_cast<char>(value & 0xFF),
+        static_cast<char>((value >> 8) & 0xFF),
+        static_cast<char>((value >> 16) & 0xFF),
+        static_cast<char>((value >> 24) & 0xFF)
+    };
+    _log_stream.write(b, 4);
+}
+
+uint32_t TStoreRecordSerializer::ReadU32LE()
+{
+    char value[4];
+    _log_stream.read(value, 4);
+    if (!_log_stream.good()) {
+        throw std::runtime_error("Failed to read u32");
+    }
+    return (static_cast<uint32_t>(static_cast<unsigned char>(value[0]))      ) |
+           (static_cast<uint32_t>(static_cast<unsigned char>(value[1])) << 8 ) |
+           (static_cast<uint32_t>(static_cast<unsigned char>(value[2])) << 16) |
+           (static_cast<uint32_t>(static_cast<unsigned char>(value[3])) << 24);
+}
+
+void TStoreRecordSerializer::Fsync() const {
+#ifdef __APPLE__
+    if (_fileDescriptor >= 0 && fcntl(_fileDescriptor, F_FULLFSYNC) != 0 && fsync(_fileDescriptor) != 0) {
+        throw std::system_error(errno, std::generic_category(), "fsync failed");
+    }
+#else
+    if (_fileDescriptor >= 0 && fsync(_fileDescriptor) != 0) {
+        throw std::system_error(errno, std::generic_category(), "fsync failed");
+    }
+#endif
 }
 
 } // namespace NKVStore::NCore::NRecord

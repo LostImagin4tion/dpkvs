@@ -2,8 +2,6 @@
 
 #include <mutex>
 
-using NKVStore::NCore::NRecord::EStoreEngineOperations;
-
 namespace NKVStore::NCore::NEngine
 {
 

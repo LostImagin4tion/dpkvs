@@ -37,6 +37,7 @@ public:
     std::unique_ptr<THashMapStore> RecoverFromLog();
 
 private:
+    uint64_t _logSequenceNumber = 0;
     std::unique_ptr<TStoreRecordSerializer> _logSerializer;
 };
 

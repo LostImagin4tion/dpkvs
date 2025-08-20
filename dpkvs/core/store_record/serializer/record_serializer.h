@@ -1,13 +1,11 @@
 #pragma once
 
-#include <dpkvs/core/store_record/serializer/operations.h>
 #include <dpkvs/core/store_record/generated/store_record.pb.h>
 
 #include <string>
 #include <fstream>
 
 using NKVStore::NCore::NRecord::TStoreRecord;
-using NKVStore::NCore::NRecord::EStoreEngineOperations;
 
 namespace NKVStore::NCore::NRecord
 {
@@ -28,38 +26,24 @@ namespace NKVStore::NCore::NRecord
         ~TStoreRecordSerializer();
 
         void EnableReadMode();
-        bool ReadyToRead();
 
         void WriteRecord(const TStoreRecord& record);
-
-        EStoreEngineOperations ReadCommand();
-        std::string ReadKey();
-        TStoreValue ReadValue();
+        bool ReadRecord(TStoreRecord& outRecord);
 
     private:
-        void WritePutLog(const TStoreRecord& record);
-        void WriteRemoveLog(const TStoreRecord& record);
-
         void OpenFileStream();
         void EnableWriteMode();
         void Flush();
 
-        template <class T>
-        T ReadBinary()
-        {
-            T value;
-            _log_stream.read(reinterpret_cast<char*>(&value), sizeof(value));
+        void WriteU32LE(uint32_t value);
+        uint32_t ReadU32LE();
 
-            if (!_log_stream.good()) {
-                throw std::runtime_error("Failed to read binary data");
-            }
-
-            return value;
-        }
+        void Fsync() const;
 
         std::fstream _log_stream;
 
         std::string _fileName = "append-only-log.txt";
+        int _fileDescriptor = -1; // OS file descriptor used for fsync
     };
 
 } // namespace NKVStore::NCore::NRecord
