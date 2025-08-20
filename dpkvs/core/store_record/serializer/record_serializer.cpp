@@ -16,7 +16,7 @@ TStoreRecordSerializer::TStoreRecordSerializer()
    OpenFileStream();
 }
 
-TStoreRecordSerializer::TStoreRecordSerializer(std::string  fileName)
+TStoreRecordSerializer::TStoreRecordSerializer(std::string fileName)
     : _fileName(std::move(fileName))
 {
     OpenFileStream();
