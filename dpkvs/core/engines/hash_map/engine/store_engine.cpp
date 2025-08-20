@@ -33,7 +33,7 @@ void THashMapStoreEngine::Put(
     std::string key,
     std::string value)
 {
-    std::lock_guard<std::mutex> lock(_appendOnlyLogMutex);
+    absl::MutexLock lock(&_mutex);
 
     TStoreValue storableValue;
     storableValue.set_data(std::move(value));
@@ -52,7 +52,7 @@ TStoreValuePtr THashMapStoreEngine::Get(const std::string& key) const
 
 bool THashMapStoreEngine::Remove(const std::string& key)
 {
-    std::unique_lock lock(_appendOnlyLogMutex);
+    absl::MutexLock lock(&_mutex);
 
     if (_engine->Get(key)) {
         _logger->AppendRemoveOperation(key);

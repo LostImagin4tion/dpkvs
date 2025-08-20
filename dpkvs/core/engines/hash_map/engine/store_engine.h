@@ -35,7 +35,7 @@ private:
     std::unique_ptr<THashMapStore> _engine;
     std::unique_ptr<TAppendOnlyLog> _logger;
 
-    std::mutex _appendOnlyLogMutex;
+    absl::Mutex _mutex;
 };
 
 } // NKVStore::NCore::NEngine
