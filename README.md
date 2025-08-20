@@ -6,7 +6,7 @@ Built with C++, so DPKVS is ⚡ blazingly fast ⚡ and 🔥 memory-unsafe 🔥
 
 ## Features
 
-* Persistence using Append-Only Log and binary serialization
+* Persistence using Append-Only Log and Protobuf serialization
 * gRPC API
 * Distributed (WIP)
 * Master-Slave Replication (WIP)
@@ -15,42 +15,50 @@ Built with C++, so DPKVS is ⚡ blazingly fast ⚡ and 🔥 memory-unsafe 🔥
 
 ### Persistence
 
-As for now, data is stored in in-memory hash map. But every modification operation (`PUT` or `REMOVE`) is being written to Append-Only Log.
+As for now, data is stored in in-memory hash map. But every modification operation (`PUT` or `REMOVE`) is being written to Append-Only Log on a disk.
 
 Every operation log consists of:
+* Header (log size, CRC32C and LSN)
+* Payload (key and value)
 
-| Field          | Size              |
-|----------------|-------------------|
-| operation type | 1 byte            |
-| key size       | 4 bytes           |
-| key itself     | 1 byte * key_size |
+| Field               | Size       |
+|---------------------|------------|
+| log size            | 4 bytes    |
+| CRC32C checksum     | 4 bytes    |
+| Log Sequence Number | 2-10 bytes |
+| Payload proto       | variant    |
 
-Put operations also contain:
+Payload proto consists of:
 
-| Field                        | Size                |
-|------------------------------|---------------------|
-| value size                   | 4 bytes             |
-| value itself                 | 1 byte * value_size |
-| "has expiry" flag            | 1 byte              |
-| additional client-side flags | 4 bytes             |
-| expiry timestamp             | 8 bytes             |
+| Field | Size                                                                                 |
+|-------|--------------------------------------------------------------------------------------|
+| key   | 2 bytes + 1 byte * key_size                                                          |
+| value | 0 bytes, if operation == `REMOVE`. <br/>Else 2 + N bytes, where N - value proto size |
 
-Therefore, operation's size is:
-* `5 + key_size` bytes for `REMOVE` operations
-* `22 + key_size + value_size` bytes for `PUT` operations
+Value proto consists of: 
 
-For example, size of `put("hello", "world")` operation will be just 32 bytes.
+| Field                        | Size                          |
+|------------------------------|-------------------------------|
+| value itself                 | 2 bytes + 1 byte * value_size |
+| additional flags size        | 1 byte + 1 byte * flags_size  |
+| expiry timestamp             | 9 bytes                       |
+
+Therefore, log size is:
+* `[12, 20] + key_size` bytes for `REMOVE` operations
+* `[26, 34] + key_size + value_size + flags_size` bytes for `PUT` operations
+
+For example, size of `put("hello", "world"), flags=1, expiry=24h` operation will be just 37 bytes:
+* Log Sequence Number takes 2 bytes
+* key_size and value_size are equal to 5 bytes
+* flags_size is equal to 1 byte
 
 It will be serialized to:
 
 ```shell
-root:~$ xxd -b append-only-log.txt
-00000000: 00000001 00000101 00000000 00000000 00000000 01101000  .....h
-00000006: 01100101 01101100 01101100 01101111 00000101 00000000  ello..
-0000000c: 00000000 00000000 01110111 01101111 01110010 01101100  ..worl
-00000012: 01100100 00000000 00000000 00000000 00000000 00000001  d.....
-00000018: 11010010 11011111 01001000 11110110 01101010 00111011  ..H.j;
-0000001e: 00000110 00000000
+root:~$ xxd -g 1 append-only-log.txt
+00000000: 1d 00 00 00 38 b3 83 90 12 1b 0a 05 68 65 6c 6c  ....8.......hell
+00000010: 6f 12 12 12 05 77 6f 72 6c 64 18 01 20 b5 83 98  o....world.. ...
+00000020: e9 ea 9b 8f 03                                   .....
 ```
 
 ## Code Style

@@ -1,16 +1,22 @@
 #include "append_only_log.h"
 
+#include <dpkvs/core/store_record/factory/factory.h>
+
 #include <iostream>
+
+using NKVStore::NCore::NRecord::CreatePutRecord;
+using NKVStore::NCore::NRecord::CreateRemoveRecord;
+using NKVStore::NCore::NRecord::TStoreRecord;
 
 namespace NKVStore::NCore::NEngine::NPersistence
 {
 
 TAppendOnlyLog::TAppendOnlyLog()
-    : _logSerializer(std::make_unique<TAppendLogSerializer>())
+    : _logSerializer(std::make_unique<TStoreRecordSerializer>())
 {}
 
 TAppendOnlyLog::TAppendOnlyLog(const std::string& fileName)
-    : _logSerializer(std::make_unique<TAppendLogSerializer>(fileName))
+    : _logSerializer(std::make_unique<TStoreRecordSerializer>(fileName))
 {}
 
 TAppendOnlyLog::TAppendOnlyLog(TAppendOnlyLog && other) noexcept
@@ -25,43 +31,51 @@ TAppendOnlyLog& TAppendOnlyLog::operator=(TAppendOnlyLog && other) noexcept
 
 void TAppendOnlyLog::AppendPutOperation(
     const std::string& key,
-    const TStoreRecord& value)
+    const TStoreValue& value)
 {
-    _logSerializer->WritePutLog(key, value);
+    auto record = CreatePutRecord(key, value, _logSequenceNumber++);
+    _logSerializer->WriteRecord(record);
+    ++_logSequenceNumber;
 }
 
 void TAppendOnlyLog::AppendRemoveOperation(const std::string& key)
 {
-    _logSerializer->WriteRemoveLog(key);
+    auto record = CreateRemoveRecord(key, _logSequenceNumber++);
+    _logSerializer->WriteRecord(record);
 }
 
 std::unique_ptr<THashMapStore> TAppendOnlyLog::RecoverFromLog()
 {
-    auto recoveredStore = std::unordered_map<std::string, TStoreRecordPtr>();
+    auto recoveredStore = std::unordered_map<std::string, TStoreValuePtr>();
 
     try {
         _logSerializer->EnableReadMode();
 
-        while (_logSerializer->ReadyToRead()) {
-            auto command = _logSerializer->ReadCommand();
+        uint64_t currentLsn = -1;
+        TStoreRecord record;
+        while (_logSerializer->ReadRecord(record)) {
+            auto recordLsn = record.log_sequence_number();
+            if (recordLsn <= currentLsn) {
+                continue;
+            }
+            currentLsn = recordLsn;
 
-            switch (command) {
-                case EStoreEngineOperations::Put: {
-                    std::string key = _logSerializer->ReadKey();
-                    TStoreRecord value = _logSerializer->ReadValue();
+            if (record.has_put_operation()) {
+                const auto& put = record.put_operation();
+                const auto& key = put.key();
+                auto value = put.value();
 
-                    recoveredStore[std::move(key)] = std::make_shared<TStoreRecord>(std::move(value));
-                    break;
-                }
+                recoveredStore[key] = std::make_shared<TStoreValue>(value);
 
-                case EStoreEngineOperations::Remove: {
-                    std::string key = _logSerializer->ReadKey();
+            } else if (record.has_remove_operation()) {
+                const auto& remove = record.remove_operation();
+                const auto& key = remove.key();
 
-                    recoveredStore.erase(key);
-                    break;
-                }
+                recoveredStore.erase(key);
             }
         }
+        _logSequenceNumber = currentLsn + 1;
+
     } catch (const std::exception& e) {
         std::cerr << "Error reading log: " << e.what() << std::endl;
     }

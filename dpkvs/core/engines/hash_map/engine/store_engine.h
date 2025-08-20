@@ -3,7 +3,7 @@
 #include <dpkvs/core/engines/hash_map/runtime/hash_map_store.h>
 #include <dpkvs/core/engines/hash_map/persistence/append_only_log.h>
 
-using NKVStore::NCore::NRecord::TStoreRecord;
+using NKVStore::NCore::NRecord::TStoreValue;
 using NKVStore::NCore::NEngine::NRuntime::THashMapStore;
 using NKVStore::NCore::NEngine::NPersistence::TAppendOnlyLog;
 
@@ -27,7 +27,7 @@ public:
 
     void Put(std::string key, std::string value);
 
-    [[nodiscard]] TStoreRecordPtr Get(const std::string& key) const;
+    [[nodiscard]] TStoreValuePtr Get(const std::string& key) const;
 
     [[nodiscard]] bool Remove(const std::string& key);
 

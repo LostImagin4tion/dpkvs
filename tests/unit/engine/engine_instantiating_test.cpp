@@ -12,23 +12,23 @@ protected:
         auto valueStr1 = std::string("hello");
         auto valueStr2 = std::string("world");
 
-        TStoreRecord record1;
+        TStoreValue record1;
         record1.set_data(std::move(valueStr1));
-        TStoreRecord record2;
+        TStoreValue record2;
         record2.set_data(std::move(valueStr2));
 
         defaultStore.Put(std::string(key1), std::move(record1));
         defaultStore.Put(std::string(key2), std::move(record2));
 
         auto valueStr3 = std::string("world");
-        auto record3 = std::make_shared<TStoreRecord>();
+        auto record3 = std::make_shared<TStoreValue>();
         record3->set_data(std::move(valueStr3));
         map[std::string(key1)] = std::move(record3);
     }
 
     std::string key1 = "hello";
     std::string key2 = "world";
-    std::unordered_map<std::string, TStoreRecordPtr> map;
+    std::unordered_map<std::string, TStoreValuePtr> map;
     THashMapStore defaultStore;
 };
 

@@ -29,6 +29,7 @@
 #include "google/protobuf/repeated_field.h"  // IWYU pragma: export
 #include "google/protobuf/extension_set.h"  // IWYU pragma: export
 #include "google/protobuf/unknown_field_set.h"
+#include "store_value.pb.h"
 // @@protoc_insertion_point(includes)
 
 // Must be included last.
@@ -55,6 +56,14 @@ extern const ::google::protobuf::internal::DescriptorTable descriptor_table_stor
 namespace NKVStore {
 namespace NCore {
 namespace NRecord {
+class TPutOperation;
+struct TPutOperationDefaultTypeInternal;
+extern TPutOperationDefaultTypeInternal _TPutOperation_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull TPutOperation_class_data_;
+class TRemoveOperation;
+struct TRemoveOperationDefaultTypeInternal;
+extern TRemoveOperationDefaultTypeInternal _TRemoveOperation_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull TRemoveOperation_class_data_;
 class TStoreRecord;
 struct TStoreRecordDefaultTypeInternal;
 extern TStoreRecordDefaultTypeInternal _TStoreRecord_default_instance_;
@@ -74,6 +83,415 @@ namespace NRecord {
 // ===================================================================
 
 
+// -------------------------------------------------------------------
+
+class TRemoveOperation final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:NKVStore.NCore.NRecord.TRemoveOperation) */ {
+ public:
+  inline TRemoveOperation() : TRemoveOperation(nullptr) {}
+  ~TRemoveOperation() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(TRemoveOperation* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(TRemoveOperation));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR TRemoveOperation(::google::protobuf::internal::ConstantInitialized);
+
+  inline TRemoveOperation(const TRemoveOperation& from) : TRemoveOperation(nullptr, from) {}
+  inline TRemoveOperation(TRemoveOperation&& from) noexcept
+      : TRemoveOperation(nullptr, ::std::move(from)) {}
+  inline TRemoveOperation& operator=(const TRemoveOperation& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline TRemoveOperation& operator=(TRemoveOperation&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const TRemoveOperation& default_instance() {
+    return *reinterpret_cast<const TRemoveOperation*>(
+        &_TRemoveOperation_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 1;
+  friend void swap(TRemoveOperation& a, TRemoveOperation& b) { a.Swap(&b); }
+  inline void Swap(TRemoveOperation* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(TRemoveOperation* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  TRemoveOperation* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<TRemoveOperation>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const TRemoveOperation& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const TRemoveOperation& from) { TRemoveOperation::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(TRemoveOperation* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "NKVStore.NCore.NRecord.TRemoveOperation"; }
+
+ protected:
+  explicit TRemoveOperation(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  TRemoveOperation(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const TRemoveOperation& from);
+  TRemoveOperation(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, TRemoveOperation&& from) noexcept
+      : TRemoveOperation(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kKeyFieldNumber = 1,
+  };
+  // bytes key = 1;
+  void clear_key() ;
+  const ::std::string& key() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_key(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_key();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_key();
+  void set_allocated_key(::std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const ::std::string& _internal_key() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_key(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_key();
+
+  public:
+  // @@protoc_insertion_point(class_scope:NKVStore.NCore.NRecord.TRemoveOperation)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<0, 1,
+                                   0, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const TRemoveOperation& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr key_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_store_5frecord_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull TRemoveOperation_class_data_;
+// -------------------------------------------------------------------
+
+class TPutOperation final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:NKVStore.NCore.NRecord.TPutOperation) */ {
+ public:
+  inline TPutOperation() : TPutOperation(nullptr) {}
+  ~TPutOperation() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(TPutOperation* PROTOBUF_NONNULL msg, std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(TPutOperation));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR TPutOperation(::google::protobuf::internal::ConstantInitialized);
+
+  inline TPutOperation(const TPutOperation& from) : TPutOperation(nullptr, from) {}
+  inline TPutOperation(TPutOperation&& from) noexcept
+      : TPutOperation(nullptr, ::std::move(from)) {}
+  inline TPutOperation& operator=(const TPutOperation& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline TPutOperation& operator=(TPutOperation&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const TPutOperation& default_instance() {
+    return *reinterpret_cast<const TPutOperation*>(
+        &_TPutOperation_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 0;
+  friend void swap(TPutOperation& a, TPutOperation& b) { a.Swap(&b); }
+  inline void Swap(TPutOperation* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(TPutOperation* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  TPutOperation* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<TPutOperation>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const TPutOperation& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const TPutOperation& from) { TPutOperation::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(TPutOperation* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "NKVStore.NCore.NRecord.TPutOperation"; }
+
+ protected:
+  explicit TPutOperation(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  TPutOperation(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const TPutOperation& from);
+  TPutOperation(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, TPutOperation&& from) noexcept
+      : TPutOperation(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kKeyFieldNumber = 1,
+    kValueFieldNumber = 2,
+  };
+  // bytes key = 1;
+  void clear_key() ;
+  const ::std::string& key() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_key(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_key();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_key();
+  void set_allocated_key(::std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const ::std::string& _internal_key() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_key(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_key();
+
+  public:
+  // .NKVStore.NCore.NRecord.TStoreValue value = 2;
+  bool has_value() const;
+  void clear_value() ;
+  const ::NKVStore::NCore::NRecord::TStoreValue& value() const;
+  [[nodiscard]] ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NULLABLE release_value();
+  ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NONNULL mutable_value();
+  void set_allocated_value(::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_value(::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NULLABLE value);
+  ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NULLABLE unsafe_arena_release_value();
+
+  private:
+  const ::NKVStore::NCore::NRecord::TStoreValue& _internal_value() const;
+  ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NONNULL _internal_mutable_value();
+
+  public:
+  // @@protoc_insertion_point(class_scope:NKVStore.NCore.NRecord.TPutOperation)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   1, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const TPutOperation& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr key_;
+    ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NULLABLE value_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_store_5frecord_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull TPutOperation_class_data_;
 // -------------------------------------------------------------------
 
 class TStoreRecord final : public ::google::protobuf::Message
@@ -131,7 +549,12 @@ class TStoreRecord final : public ::google::protobuf::Message
     return *reinterpret_cast<const TStoreRecord*>(
         &_TStoreRecord_default_instance_);
   }
-  static constexpr int kIndexInFileMessages = 0;
+  enum OperationCase {
+    kPutOperation = 2,
+    kRemoveOperation = 3,
+    OPERATION_NOT_SET = 0,
+  };
+  static constexpr int kIndexInFileMessages = 2;
   friend void swap(TStoreRecord& a, TStoreRecord& b) { a.Swap(&b); }
   inline void Swap(TStoreRecord* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -219,52 +642,70 @@ class TStoreRecord final : public ::google::protobuf::Message
 
   // accessors -------------------------------------------------------
   enum : int {
-    kDataFieldNumber = 2,
-    kExpiryMillisFieldNumber = 4,
-    kFlagsFieldNumber = 3,
+    kLogSequenceNumberFieldNumber = 1,
+    kPutOperationFieldNumber = 2,
+    kRemoveOperationFieldNumber = 3,
   };
-  // bytes data = 2;
-  void clear_data() ;
-  const ::std::string& data() const;
-  template <typename Arg_ = const ::std::string&, typename... Args_>
-  void set_data(Arg_&& arg, Args_... args);
-  ::std::string* PROTOBUF_NONNULL mutable_data();
-  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_data();
-  void set_allocated_data(::std::string* PROTOBUF_NULLABLE value);
+  // uint64 log_sequence_number = 1;
+  void clear_log_sequence_number() ;
+  ::uint64_t log_sequence_number() const;
+  void set_log_sequence_number(::uint64_t value);
 
   private:
-  const ::std::string& _internal_data() const;
-  PROTOBUF_ALWAYS_INLINE void _internal_set_data(const ::std::string& value);
-  ::std::string* PROTOBUF_NONNULL _internal_mutable_data();
+  ::uint64_t _internal_log_sequence_number() const;
+  void _internal_set_log_sequence_number(::uint64_t value);
 
   public:
-  // optional int64 expiry_millis = 4;
-  bool has_expiry_millis() const;
-  void clear_expiry_millis() ;
-  ::int64_t expiry_millis() const;
-  void set_expiry_millis(::int64_t value);
+  // .NKVStore.NCore.NRecord.TPutOperation put_operation = 2;
+  bool has_put_operation() const;
+  private:
+  bool _internal_has_put_operation() const;
+
+  public:
+  void clear_put_operation() ;
+  const ::NKVStore::NCore::NRecord::TPutOperation& put_operation() const;
+  [[nodiscard]] ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE release_put_operation();
+  ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL mutable_put_operation();
+  void set_allocated_put_operation(::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_put_operation(::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE value);
+  ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE unsafe_arena_release_put_operation();
 
   private:
-  ::int64_t _internal_expiry_millis() const;
-  void _internal_set_expiry_millis(::int64_t value);
+  const ::NKVStore::NCore::NRecord::TPutOperation& _internal_put_operation() const;
+  ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL _internal_mutable_put_operation();
 
   public:
-  // uint32 flags = 3;
-  void clear_flags() ;
-  ::uint32_t flags() const;
-  void set_flags(::uint32_t value);
+  // .NKVStore.NCore.NRecord.TRemoveOperation remove_operation = 3;
+  bool has_remove_operation() const;
+  private:
+  bool _internal_has_remove_operation() const;
+
+  public:
+  void clear_remove_operation() ;
+  const ::NKVStore::NCore::NRecord::TRemoveOperation& remove_operation() const;
+  [[nodiscard]] ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE release_remove_operation();
+  ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL mutable_remove_operation();
+  void set_allocated_remove_operation(::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_remove_operation(::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE value);
+  ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE unsafe_arena_release_remove_operation();
 
   private:
-  ::uint32_t _internal_flags() const;
-  void _internal_set_flags(::uint32_t value);
+  const ::NKVStore::NCore::NRecord::TRemoveOperation& _internal_remove_operation() const;
+  ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL _internal_mutable_remove_operation();
 
   public:
+  void clear_operation();
+  OperationCase operation_case() const;
   // @@protoc_insertion_point(class_scope:NKVStore.NCore.NRecord.TStoreRecord)
  private:
   class _Internal;
+  void set_has_put_operation();
+  void set_has_remove_operation();
+  inline bool has_operation() const;
+  inline void clear_has_operation();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<2, 3,
-                                   0, 0,
+  static const ::google::protobuf::internal::TcParseTable<0, 3,
+                                   2, 0,
                                    2>
       _table_;
 
@@ -285,9 +726,14 @@ class TStoreRecord final : public ::google::protobuf::Message
         const TStoreRecord& from_msg);
     ::google::protobuf::internal::HasBits<1> _has_bits_;
     ::google::protobuf::internal::CachedSize _cached_size_;
-    ::google::protobuf::internal::ArenaStringPtr data_;
-    ::int64_t expiry_millis_;
-    ::uint32_t flags_;
+    ::uint64_t log_sequence_number_;
+    union OperationUnion {
+      constexpr OperationUnion() : _constinit_{} {}
+      ::google::protobuf::internal::ConstantInitialized _constinit_;
+      ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE put_operation_;
+      ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE remove_operation_;
+    } operation_;
+    ::uint32_t _oneof_case_[1];
     PROTOBUF_TSAN_DECLARE_MEMBER
   };
   union { Impl_ _impl_; };
@@ -310,125 +756,434 @@ extern const ::google::protobuf::internal::ClassDataFull TStoreRecord_class_data
 #endif  // __GNUC__
 // -------------------------------------------------------------------
 
-// TStoreRecord
+// TPutOperation
 
-// bytes data = 2;
-inline void TStoreRecord::clear_data() {
+// bytes key = 1;
+inline void TPutOperation::clear_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.data_.ClearToEmpty();
+  _impl_.key_.ClearToEmpty();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const ::std::string& TStoreRecord::data() const
+inline const ::std::string& TPutOperation::key() const
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.data)
-  return _internal_data();
+  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TPutOperation.key)
+  return _internal_key();
 }
 template <typename Arg_, typename... Args_>
-PROTOBUF_ALWAYS_INLINE void TStoreRecord::set_data(Arg_&& arg, Args_... args) {
+PROTOBUF_ALWAYS_INLINE void TPutOperation::set_key(Arg_&& arg, Args_... args) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.data_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
-  // @@protoc_insertion_point(field_set:NKVStore.NCore.NRecord.TStoreRecord.data)
+  _impl_.key_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:NKVStore.NCore.NRecord.TPutOperation.key)
 }
-inline ::std::string* PROTOBUF_NONNULL TStoreRecord::mutable_data()
+inline ::std::string* PROTOBUF_NONNULL TPutOperation::mutable_key()
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
-  ::std::string* _s = _internal_mutable_data();
-  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TStoreRecord.data)
+  ::std::string* _s = _internal_mutable_key();
+  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TPutOperation.key)
   return _s;
 }
-inline const ::std::string& TStoreRecord::_internal_data() const {
+inline const ::std::string& TPutOperation::_internal_key() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.data_.Get();
+  return _impl_.key_.Get();
 }
-inline void TStoreRecord::_internal_set_data(const ::std::string& value) {
+inline void TPutOperation::_internal_set_key(const ::std::string& value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.data_.Set(value, GetArena());
+  _impl_.key_.Set(value, GetArena());
 }
-inline ::std::string* PROTOBUF_NONNULL TStoreRecord::_internal_mutable_data() {
+inline ::std::string* PROTOBUF_NONNULL TPutOperation::_internal_mutable_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   _impl_._has_bits_[0] |= 0x00000001u;
-  return _impl_.data_.Mutable( GetArena());
+  return _impl_.key_.Mutable( GetArena());
 }
-inline ::std::string* PROTOBUF_NULLABLE TStoreRecord::release_data() {
+inline ::std::string* PROTOBUF_NULLABLE TPutOperation::release_key() {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TStoreRecord.data)
+  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TPutOperation.key)
   if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
     return nullptr;
   }
   _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* released = _impl_.data_.Release();
+  auto* released = _impl_.key_.Release();
   if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
-    _impl_.data_.Set("", GetArena());
+    _impl_.key_.Set("", GetArena());
   }
   return released;
 }
-inline void TStoreRecord::set_allocated_data(::std::string* PROTOBUF_NULLABLE value) {
+inline void TPutOperation::set_allocated_key(::std::string* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
   if (value != nullptr) {
     _impl_._has_bits_[0] |= 0x00000001u;
   } else {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
-  _impl_.data_.SetAllocated(value, GetArena());
-  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.data_.IsDefault()) {
-    _impl_.data_.Set("", GetArena());
+  _impl_.key_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.key_.IsDefault()) {
+    _impl_.key_.Set("", GetArena());
   }
-  // @@protoc_insertion_point(field_set_allocated:NKVStore.NCore.NRecord.TStoreRecord.data)
+  // @@protoc_insertion_point(field_set_allocated:NKVStore.NCore.NRecord.TPutOperation.key)
 }
 
-// uint32 flags = 3;
-inline void TStoreRecord::clear_flags() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.flags_ = 0u;
-  _impl_._has_bits_[0] &= ~0x00000004u;
-}
-inline ::uint32_t TStoreRecord::flags() const {
-  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.flags)
-  return _internal_flags();
-}
-inline void TStoreRecord::set_flags(::uint32_t value) {
-  _internal_set_flags(value);
-  _impl_._has_bits_[0] |= 0x00000004u;
-  // @@protoc_insertion_point(field_set:NKVStore.NCore.NRecord.TStoreRecord.flags)
-}
-inline ::uint32_t TStoreRecord::_internal_flags() const {
-  ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.flags_;
-}
-inline void TStoreRecord::_internal_set_flags(::uint32_t value) {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.flags_ = value;
-}
-
-// optional int64 expiry_millis = 4;
-inline bool TStoreRecord::has_expiry_millis() const {
+// .NKVStore.NCore.NRecord.TStoreValue value = 2;
+inline bool TPutOperation::has_value() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  PROTOBUF_ASSUME(!value || _impl_.value_ != nullptr);
   return value;
 }
-inline void TStoreRecord::clear_expiry_millis() {
-  ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.expiry_millis_ = ::int64_t{0};
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline ::int64_t TStoreRecord::expiry_millis() const {
-  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.expiry_millis)
-  return _internal_expiry_millis();
-}
-inline void TStoreRecord::set_expiry_millis(::int64_t value) {
-  _internal_set_expiry_millis(value);
-  _impl_._has_bits_[0] |= 0x00000002u;
-  // @@protoc_insertion_point(field_set:NKVStore.NCore.NRecord.TStoreRecord.expiry_millis)
-}
-inline ::int64_t TStoreRecord::_internal_expiry_millis() const {
+inline const ::NKVStore::NCore::NRecord::TStoreValue& TPutOperation::_internal_value() const {
   ::google::protobuf::internal::TSanRead(&_impl_);
-  return _impl_.expiry_millis_;
+  const ::NKVStore::NCore::NRecord::TStoreValue* p = _impl_.value_;
+  return p != nullptr ? *p : reinterpret_cast<const ::NKVStore::NCore::NRecord::TStoreValue&>(::NKVStore::NCore::NRecord::_TStoreValue_default_instance_);
 }
-inline void TStoreRecord::_internal_set_expiry_millis(::int64_t value) {
+inline const ::NKVStore::NCore::NRecord::TStoreValue& TPutOperation::value() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TPutOperation.value)
+  return _internal_value();
+}
+inline void TPutOperation::unsafe_arena_set_allocated_value(
+    ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NULLABLE value) {
   ::google::protobuf::internal::TSanWrite(&_impl_);
-  _impl_.expiry_millis_ = value;
+  if (GetArena() == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.value_);
+  }
+  _impl_.value_ = reinterpret_cast<::NKVStore::NCore::NRecord::TStoreValue*>(value);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NKVStore.NCore.NRecord.TPutOperation.value)
+}
+inline ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NULLABLE TPutOperation::release_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::NKVStore::NCore::NRecord::TStoreValue* released = _impl_.value_;
+  _impl_.value_ = nullptr;
+  if (::google::protobuf::internal::DebugHardenForceCopyInRelease()) {
+    auto* old = reinterpret_cast<::google::protobuf::MessageLite*>(released);
+    released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    if (GetArena() == nullptr) {
+      delete old;
+    }
+  } else {
+    if (GetArena() != nullptr) {
+      released = ::google::protobuf::internal::DuplicateIfNonNull(released);
+    }
+  }
+  return released;
+}
+inline ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NULLABLE TPutOperation::unsafe_arena_release_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TPutOperation.value)
+
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  ::NKVStore::NCore::NRecord::TStoreValue* temp = _impl_.value_;
+  _impl_.value_ = nullptr;
+  return temp;
+}
+inline ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NONNULL TPutOperation::_internal_mutable_value() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (_impl_.value_ == nullptr) {
+    auto* p = ::google::protobuf::Message::DefaultConstruct<::NKVStore::NCore::NRecord::TStoreValue>(GetArena());
+    _impl_.value_ = reinterpret_cast<::NKVStore::NCore::NRecord::TStoreValue*>(p);
+  }
+  return _impl_.value_;
+}
+inline ::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NONNULL TPutOperation::mutable_value()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  ::NKVStore::NCore::NRecord::TStoreValue* _msg = _internal_mutable_value();
+  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TPutOperation.value)
+  return _msg;
+}
+inline void TPutOperation::set_allocated_value(::NKVStore::NCore::NRecord::TStoreValue* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::Arena* message_arena = GetArena();
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (message_arena == nullptr) {
+    delete reinterpret_cast<::google::protobuf::MessageLite*>(_impl_.value_);
+  }
+
+  if (value != nullptr) {
+    ::google::protobuf::Arena* submessage_arena = reinterpret_cast<::google::protobuf::Message*>(value)->GetArena();
+    if (message_arena != submessage_arena) {
+      value = ::google::protobuf::internal::GetOwnedMessage(message_arena, value, submessage_arena);
+    }
+    _impl_._has_bits_[0] |= 0x00000002u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000002u;
+  }
+
+  _impl_.value_ = reinterpret_cast<::NKVStore::NCore::NRecord::TStoreValue*>(value);
+  // @@protoc_insertion_point(field_set_allocated:NKVStore.NCore.NRecord.TPutOperation.value)
 }
 
+// -------------------------------------------------------------------
+
+// TRemoveOperation
+
+// bytes key = 1;
+inline void TRemoveOperation::clear_key() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.key_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline const ::std::string& TRemoveOperation::key() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TRemoveOperation.key)
+  return _internal_key();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void TRemoveOperation::set_key(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.key_.SetBytes(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:NKVStore.NCore.NRecord.TRemoveOperation.key)
+}
+inline ::std::string* PROTOBUF_NONNULL TRemoveOperation::mutable_key()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::std::string* _s = _internal_mutable_key();
+  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TRemoveOperation.key)
+  return _s;
+}
+inline const ::std::string& TRemoveOperation::_internal_key() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.key_.Get();
+}
+inline void TRemoveOperation::_internal_set_key(const ::std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.key_.Set(value, GetArena());
+}
+inline ::std::string* PROTOBUF_NONNULL TRemoveOperation::_internal_mutable_key() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  return _impl_.key_.Mutable( GetArena());
+}
+inline ::std::string* PROTOBUF_NULLABLE TRemoveOperation::release_key() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TRemoveOperation.key)
+  if ((_impl_._has_bits_[0] & 0x00000001u) == 0) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* released = _impl_.key_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.key_.Set("", GetArena());
+  }
+  return released;
+}
+inline void TRemoveOperation::set_allocated_key(::std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    _impl_._has_bits_[0] |= 0x00000001u;
+  } else {
+    _impl_._has_bits_[0] &= ~0x00000001u;
+  }
+  _impl_.key_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.key_.IsDefault()) {
+    _impl_.key_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:NKVStore.NCore.NRecord.TRemoveOperation.key)
+}
+
+// -------------------------------------------------------------------
+
+// TStoreRecord
+
+// uint64 log_sequence_number = 1;
+inline void TStoreRecord::clear_log_sequence_number() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.log_sequence_number_ = ::uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline ::uint64_t TStoreRecord::log_sequence_number() const {
+  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.log_sequence_number)
+  return _internal_log_sequence_number();
+}
+inline void TStoreRecord::set_log_sequence_number(::uint64_t value) {
+  _internal_set_log_sequence_number(value);
+  _impl_._has_bits_[0] |= 0x00000001u;
+  // @@protoc_insertion_point(field_set:NKVStore.NCore.NRecord.TStoreRecord.log_sequence_number)
+}
+inline ::uint64_t TStoreRecord::_internal_log_sequence_number() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.log_sequence_number_;
+}
+inline void TStoreRecord::_internal_set_log_sequence_number(::uint64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.log_sequence_number_ = value;
+}
+
+// .NKVStore.NCore.NRecord.TPutOperation put_operation = 2;
+inline bool TStoreRecord::has_put_operation() const {
+  return operation_case() == kPutOperation;
+}
+inline bool TStoreRecord::_internal_has_put_operation() const {
+  return operation_case() == kPutOperation;
+}
+inline void TStoreRecord::set_has_put_operation() {
+  _impl_._oneof_case_[0] = kPutOperation;
+}
+inline void TStoreRecord::clear_put_operation() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (operation_case() == kPutOperation) {
+    if (GetArena() == nullptr) {
+      delete _impl_.operation_.put_operation_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.operation_.put_operation_);
+    }
+    clear_has_operation();
+  }
+}
+inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE TStoreRecord::release_put_operation() {
+  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
+  if (operation_case() == kPutOperation) {
+    clear_has_operation();
+    auto* temp = _impl_.operation_.put_operation_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.operation_.put_operation_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::NKVStore::NCore::NRecord::TPutOperation& TStoreRecord::_internal_put_operation() const {
+  return operation_case() == kPutOperation ? *_impl_.operation_.put_operation_ : reinterpret_cast<::NKVStore::NCore::NRecord::TPutOperation&>(::NKVStore::NCore::NRecord::_TPutOperation_default_instance_);
+}
+inline const ::NKVStore::NCore::NRecord::TPutOperation& TStoreRecord::put_operation() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
+  return _internal_put_operation();
+}
+inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE TStoreRecord::unsafe_arena_release_put_operation() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
+  if (operation_case() == kPutOperation) {
+    clear_has_operation();
+    auto* temp = _impl_.operation_.put_operation_;
+    _impl_.operation_.put_operation_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void TStoreRecord::unsafe_arena_set_allocated_put_operation(
+    ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_operation();
+  if (value) {
+    set_has_put_operation();
+    _impl_.operation_.put_operation_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
+}
+inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL TStoreRecord::_internal_mutable_put_operation() {
+  if (operation_case() != kPutOperation) {
+    clear_operation();
+    set_has_put_operation();
+    _impl_.operation_.put_operation_ = 
+        ::google::protobuf::Message::DefaultConstruct<::NKVStore::NCore::NRecord::TPutOperation>(GetArena());
+  }
+  return _impl_.operation_.put_operation_;
+}
+inline ::NKVStore::NCore::NRecord::TPutOperation* PROTOBUF_NONNULL TStoreRecord::mutable_put_operation()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::NKVStore::NCore::NRecord::TPutOperation* _msg = _internal_mutable_put_operation();
+  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TStoreRecord.put_operation)
+  return _msg;
+}
+
+// .NKVStore.NCore.NRecord.TRemoveOperation remove_operation = 3;
+inline bool TStoreRecord::has_remove_operation() const {
+  return operation_case() == kRemoveOperation;
+}
+inline bool TStoreRecord::_internal_has_remove_operation() const {
+  return operation_case() == kRemoveOperation;
+}
+inline void TStoreRecord::set_has_remove_operation() {
+  _impl_._oneof_case_[0] = kRemoveOperation;
+}
+inline void TStoreRecord::clear_remove_operation() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (operation_case() == kRemoveOperation) {
+    if (GetArena() == nullptr) {
+      delete _impl_.operation_.remove_operation_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.operation_.remove_operation_);
+    }
+    clear_has_operation();
+  }
+}
+inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE TStoreRecord::release_remove_operation() {
+  // @@protoc_insertion_point(field_release:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
+  if (operation_case() == kRemoveOperation) {
+    clear_has_operation();
+    auto* temp = _impl_.operation_.remove_operation_;
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.operation_.remove_operation_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::NKVStore::NCore::NRecord::TRemoveOperation& TStoreRecord::_internal_remove_operation() const {
+  return operation_case() == kRemoveOperation ? *_impl_.operation_.remove_operation_ : reinterpret_cast<::NKVStore::NCore::NRecord::TRemoveOperation&>(::NKVStore::NCore::NRecord::_TRemoveOperation_default_instance_);
+}
+inline const ::NKVStore::NCore::NRecord::TRemoveOperation& TStoreRecord::remove_operation() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
+  return _internal_remove_operation();
+}
+inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE TStoreRecord::unsafe_arena_release_remove_operation() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
+  if (operation_case() == kRemoveOperation) {
+    clear_has_operation();
+    auto* temp = _impl_.operation_.remove_operation_;
+    _impl_.operation_.remove_operation_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void TStoreRecord::unsafe_arena_set_allocated_remove_operation(
+    ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_operation();
+  if (value) {
+    set_has_remove_operation();
+    _impl_.operation_.remove_operation_ = value;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
+}
+inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL TStoreRecord::_internal_mutable_remove_operation() {
+  if (operation_case() != kRemoveOperation) {
+    clear_operation();
+    set_has_remove_operation();
+    _impl_.operation_.remove_operation_ = 
+        ::google::protobuf::Message::DefaultConstruct<::NKVStore::NCore::NRecord::TRemoveOperation>(GetArena());
+  }
+  return _impl_.operation_.remove_operation_;
+}
+inline ::NKVStore::NCore::NRecord::TRemoveOperation* PROTOBUF_NONNULL TStoreRecord::mutable_remove_operation()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::NKVStore::NCore::NRecord::TRemoveOperation* _msg = _internal_mutable_remove_operation();
+  // @@protoc_insertion_point(field_mutable:NKVStore.NCore.NRecord.TStoreRecord.remove_operation)
+  return _msg;
+}
+
+inline bool TStoreRecord::has_operation() const {
+  return operation_case() != OPERATION_NOT_SET;
+}
+inline void TStoreRecord::clear_has_operation() {
+  _impl_._oneof_case_[0] = OPERATION_NOT_SET;
+}
+inline TStoreRecord::OperationCase TStoreRecord::operation_case() const {
+  return TStoreRecord::OperationCase(_impl_._oneof_case_[0]);
+}
 #ifdef __GNUC__
 #pragma GCC diagnostic pop
 #endif  // __GNUC__

@@ -3,7 +3,7 @@
 #include <dpkvs/core/engines/hash_map/persistence/append_only_log.h>
 
 using NKVStore::NCore::NEngine::NPersistence::TAppendOnlyLog;
-using NKVStore::NCore::NRecord::TStoreRecord;
+using NKVStore::NCore::NRecord::TStoreValue;
 
 class AppendOnlyLogTest
     : public testing::Test
@@ -18,7 +18,7 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
 
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
-    TStoreRecord value1;
+    TStoreValue value1;
     value1.set_data(valueStr1);
 
     appendOnlyLog.AppendPutOperation(key1, value1);
@@ -27,7 +27,7 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
 
     auto key2 = std::string("darkness");
     auto valueStr2 = std::string("my old friend");
-    TStoreRecord value2;
+    TStoreValue value2;
     value2.set_data(valueStr2);
 
     appendOnlyLog.AppendPutOperation(key2,value2);

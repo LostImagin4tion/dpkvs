@@ -9,7 +9,7 @@
 namespace NKVStore::NCore::NEngine::NRuntime
 {
 
-using TKVStoreMap = std::unordered_map<std::string, TStoreRecordPtr>;
+using TKVStoreMap = std::unordered_map<std::string, TStoreValuePtr>;
 
 class THashMapStore
     : public IRuntimeStore
@@ -27,9 +27,9 @@ public:
 
     ~THashMapStore() = default;
 
-    void Put(std::string key, TStoreRecord value) final;
+    void Put(std::string key, TStoreValue value) final;
 
-    TStoreRecordPtr Get(const std::string& key) const final;
+    TStoreValuePtr Get(const std::string& key) const final;
 
     bool Remove(const std::string& key) final;
 

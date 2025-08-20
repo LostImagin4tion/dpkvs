@@ -2,8 +2,21 @@ syntax = "proto3";
 
 package NKVStore.NCore.NRecord;
 
+import "store_value.proto";
+
+message TPutOperation {
+  bytes key = 1;
+  TStoreValue value = 2;
+}
+
+message TRemoveOperation {
+  bytes key = 1;
+}
+
 message TStoreRecord {
-  bytes data = 2;
-  uint32 flags = 3;
-  optional int64 expiry_millis = 4; // millis since epoch
+  uint64 log_sequence_number = 1;
+  oneof operation {
+    TPutOperation put_operation = 2;
+    TRemoveOperation remove_operation = 3;
+  }
 }

@@ -1,65 +1,64 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/core/engines/hash_map/persistence/log_serializer.h>
+#include <dpkvs/core/store_value/generated/store_value.pb.h>
+#include <dpkvs/core/store_record/serializer/record_serializer.h>
+#include <dpkvs/core/store_record/factory/factory.h>
 
-using NKVStore::NCore::NEngine::NPersistence::TAppendLogSerializer;
-using NKVStore::NCore::NEngine::EStoreEngineOperations;
+using NKVStore::NCore::NRecord::TStoreValue;
+using NKVStore::NCore::NRecord::TStoreRecordSerializer;
+using NKVStore::NCore::NRecord::TStoreRecord;
+using NKVStore::NCore::NRecord::CreatePutRecord;
+using NKVStore::NCore::NRecord::CreateRemoveRecord;
 
 TEST(SerializerTest, WriteReadLogsTest) {
-    auto logSerializer = TAppendLogSerializer();
+    auto logSerializer = TStoreRecordSerializer();
 
     // === Put first value ===
 
     auto key1 = std::string("hello");
     auto valueStr1 = std::string("world");
-    TStoreRecord storableValue1;
+    TStoreValue storableValue1;
     storableValue1.set_data(valueStr1);
+    storableValue1.set_flags(1);
 
-    logSerializer.WritePutLog(key1, storableValue1);
+    auto time = std::chrono::system_clock::now() + std::chrono::hours(24);
+    storableValue1.set_expiry_millis(time.time_since_epoch().count());
+
+    auto record1 = CreatePutRecord(key1, storableValue1, 0);
+    logSerializer.WriteRecord(record1);
 
     // === Put second value ===
 
     auto key2 = std::string("darkness");
     auto valueStr2 = std::string("my old friend");
-    TStoreRecord storableValue2;
+    TStoreValue storableValue2;
     storableValue2.set_data(valueStr2);
 
-    logSerializer.WritePutLog(key2, storableValue2);
+    auto record2 = CreatePutRecord(key2, storableValue2, 1);
+    logSerializer.WriteRecord(record2);
 
     // === Remove first value ===
 
-    logSerializer.WriteRemoveLog(key1);
+    auto record3 = CreateRemoveRecord(key1, 2);
+    logSerializer.WriteRecord(record3);
 
-    // === Read put first value log ===
+    // === Read record by record ===
     logSerializer.EnableReadMode();
 
-    ASSERT_TRUE(logSerializer.ReadyToRead());
+    TStoreRecord readRecord1;
+    ASSERT_TRUE(logSerializer.ReadRecord(readRecord1));
+    ASSERT_TRUE(readRecord1.has_put_operation());
+    ASSERT_EQ(readRecord1.put_operation().key(), key1);
+    ASSERT_EQ(readRecord1.put_operation().value().data(), valueStr1);
 
-    auto command1 = logSerializer.ReadCommand();
-    ASSERT_EQ(command1, EStoreEngineOperations::Put);
+    TStoreRecord readRecord2;
+    ASSERT_TRUE(logSerializer.ReadRecord(readRecord2));
+    ASSERT_TRUE(readRecord2.has_put_operation());
+    ASSERT_EQ(readRecord2.put_operation().key(), key2);
+    ASSERT_EQ(readRecord2.put_operation().value().data(), valueStr2);
 
-    auto readKey1 = logSerializer.ReadKey();
-    ASSERT_EQ(readKey1, key1);
-
-    auto readStr1 =  logSerializer.ReadValue().data();
-    ASSERT_EQ(readStr1, valueStr1);
-
-    // === Read put second value log ===
-
-    auto command2 = logSerializer.ReadCommand();
-    ASSERT_EQ(command2, EStoreEngineOperations::Put);
-
-    auto readKey2 = logSerializer.ReadKey();
-    ASSERT_EQ(readKey2, key2);
-
-    auto readStr2 =  logSerializer.ReadValue().data();
-    ASSERT_EQ(readStr2, valueStr2);
-
-    // === Read removed first value log ===
-
-    auto command3 = logSerializer.ReadCommand();
-    ASSERT_EQ(command3, EStoreEngineOperations::Remove);
-
-    auto readKey3 = logSerializer.ReadKey();
-    ASSERT_EQ(readKey3, key1);
+    TStoreRecord readRecord3;
+    ASSERT_TRUE(logSerializer.ReadRecord(readRecord3));
+    ASSERT_TRUE(readRecord3.has_remove_operation());
+    ASSERT_EQ(readRecord3.remove_operation().key(), key1);
 }
