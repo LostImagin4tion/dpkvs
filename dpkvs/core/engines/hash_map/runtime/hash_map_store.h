@@ -4,8 +4,8 @@
 
 #include <absl/container/flat_hash_map.h>
 #include <absl/synchronization/mutex.h>
+#include <array>
 #include <memory>
-#include <shared_mutex>
 
 namespace NKVStore::NCore::NEngine::NRuntime
 {

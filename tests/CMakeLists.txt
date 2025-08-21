@@ -5,6 +5,7 @@ include(${CMAKE_SOURCE_DIR}/cmake/test_dependencies.cmake)
 add_executable(dpkvs_tests
         # unit tests
         unit/engine/engine_basic_operations_test.cpp
+        unit/engine/hash_map_store_concurrency_test.cpp
         unit/append_only_log/serializer_test.cpp
         unit/append_only_log/append_only_log_test.cpp
 
