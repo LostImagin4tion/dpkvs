@@ -1,4 +1,4 @@
-#include <dpkvs/network/server/dpkvs_service_impl.h>
+#include <dpkvs/network/service/dpkvs_service_impl.h>
 
 #include <absl/flags/flag.h>
 #include <absl/flags/parse.h>

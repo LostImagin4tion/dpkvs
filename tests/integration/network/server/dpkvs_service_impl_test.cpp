@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/network/server/dpkvs_service_impl.h>
+#include <dpkvs/network/service/dpkvs_service_impl.h>
 
 #include <grpcpp/grpcpp.h>
 
