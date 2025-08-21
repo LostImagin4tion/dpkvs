@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/core/engines/hash_map/engine/store_engine.h>
+#include <dpkvs/core/engines/hash_map/engine/hash_map_store_engine.h>
 
 using NKVStore::NCore::NEngine::THashMapStoreEngine;
 using NKVStore::NCore::NRecord::TStoreValue;

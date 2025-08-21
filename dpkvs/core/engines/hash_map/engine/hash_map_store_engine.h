@@ -1,5 +1,7 @@
 #pragma once
 
+#include "dpkvs/core/engines/store_engine.h"
+
 #include <dpkvs/core/engines/hash_map/runtime/hash_map_store.h>
 #include <dpkvs/core/engines/hash_map/persistence/append_only_log.h>
 
@@ -11,6 +13,7 @@ namespace NKVStore::NCore::NEngine
 {
 
 class THashMapStoreEngine
+    : public IStoreEngine
 {
 public:
     THashMapStoreEngine();
@@ -25,11 +28,11 @@ public:
 
     ~THashMapStoreEngine() = default;
 
-    void Put(absl::string_view key, absl::string_view value);
+    void Put(absl::string_view key, absl::string_view value) final;
 
-    [[nodiscard]] TStoreValuePtr Get(absl::string_view key) const;
+    [[nodiscard]] TStoreValuePtr Get(absl::string_view key) const final;
 
-    [[nodiscard]] bool Remove(absl::string_view key);
+    [[nodiscard]] bool Remove(absl::string_view key) final;
 
 private:
     std::unique_ptr<THashMapStore> _engine;

@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <dpkvs/core/engines/hash_map/engine/hash_map_store_engine.h>
 #include <dpkvs/network/service/dpkvs_service_impl.h>
 
 #include <grpcpp/grpcpp.h>

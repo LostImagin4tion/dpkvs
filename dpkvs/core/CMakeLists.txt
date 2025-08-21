@@ -1,5 +1,6 @@
 add_library(dpkvs_core STATIC
         # ==== Core Interfaces ===
+        engines/store_engine.h
         engines/runtime_store.h
 
         # store value protos
@@ -18,8 +19,8 @@ add_library(dpkvs_core STATIC
 
         # ==== Hash Map store engine ====
         # store engine
-        engines/hash_map/engine/store_engine.h
-        engines/hash_map/engine/store_engine.cpp
+        engines/hash_map/engine/hash_map_store_engine.h
+        engines/hash_map/engine/hash_map_store_engine.cpp
 
         # runtime
         engines/hash_map/runtime/hash_map_store.h

@@ -1,5 +1,9 @@
 #include "dpkvs_service_impl.h"
 
+#include <dpkvs/core/engines/hash_map/engine/hash_map_store_engine.h>
+
+using NKVStore::NCore::NEngine::THashMapStoreEngine;
+
 namespace NKVStore::NService
 {
 
@@ -7,7 +11,7 @@ TDpkvsServiceImpl::TDpkvsServiceImpl()
     : _storeEngine(std::make_unique<THashMapStoreEngine>())
 {}
 
-TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<THashMapStoreEngine> storeEngine)
+TDpkvsServiceImpl::TDpkvsServiceImpl(std::unique_ptr<IStoreEngine> storeEngine)
     : _storeEngine(std::move(storeEngine))
 {}
 
