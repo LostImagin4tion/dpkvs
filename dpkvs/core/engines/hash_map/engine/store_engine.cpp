@@ -11,8 +11,8 @@ THashMapStoreEngine::THashMapStoreEngine()
     _engine = _logger->RecoverFromLog();
 }
 
-THashMapStoreEngine::THashMapStoreEngine(const std::string& appendOnlyLogFileName)
-    : _logger(std::make_unique<TAppendOnlyLog>(appendOnlyLogFileName))
+THashMapStoreEngine::THashMapStoreEngine(const std::string& logFileName)
+    : _logger(std::make_unique<TAppendOnlyLog>(logFileName))
 {
     _engine = _logger->RecoverFromLog();
 }
@@ -30,32 +30,30 @@ THashMapStoreEngine& THashMapStoreEngine::operator=(THashMapStoreEngine&& other)
 }
 
 void THashMapStoreEngine::Put(
-    std::string key,
-    std::string value)
+    absl::string_view key,
+    absl::string_view value)
 {
-    std::lock_guard<std::mutex> lock(_appendOnlyLogMutex);
+    absl::MutexLock lock(&_mutex);
 
     TStoreValue storableValue;
-    storableValue.set_data(std::move(value));
+    storableValue.set_data(std::string(value));
 
-    _logger->AppendPutOperation(key,storableValue);
+    _logger->AppendPutOperation(std::string(key), storableValue);
 
-    _engine->Put(
-        std::move(key),
-        std::move(storableValue));
+    _engine->Put(key,std::move(storableValue));
 }
 
-TStoreValuePtr THashMapStoreEngine::Get(const std::string& key) const
+TStoreValuePtr THashMapStoreEngine::Get(absl::string_view key) const
 {
     return _engine->Get(key);
 }
 
-bool THashMapStoreEngine::Remove(const std::string& key)
+bool THashMapStoreEngine::Remove(absl::string_view key)
 {
-    std::unique_lock lock(_appendOnlyLogMutex);
+    absl::MutexLock lock(&_mutex);
 
     if (_engine->Get(key)) {
-        _logger->AppendRemoveOperation(key);
+        _logger->AppendRemoveOperation(std::string(key));
         return _engine->Remove(key);
     } else {
         return false;

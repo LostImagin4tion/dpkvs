@@ -15,7 +15,7 @@ class THashMapStoreEngine
 public:
     THashMapStoreEngine();
 
-    explicit THashMapStoreEngine(const std::string& appendOnlyLogFileName);
+    explicit THashMapStoreEngine(const std::string& logFileName);
 
     THashMapStoreEngine(const THashMapStoreEngine&) = delete;
     THashMapStoreEngine& operator=(const THashMapStoreEngine&) = delete;
@@ -25,17 +25,17 @@ public:
 
     ~THashMapStoreEngine() = default;
 
-    void Put(std::string key, std::string value);
+    void Put(absl::string_view key, absl::string_view value);
 
-    [[nodiscard]] TStoreValuePtr Get(const std::string& key) const;
+    [[nodiscard]] TStoreValuePtr Get(absl::string_view key) const;
 
-    [[nodiscard]] bool Remove(const std::string& key);
+    [[nodiscard]] bool Remove(absl::string_view key);
 
 private:
     std::unique_ptr<THashMapStore> _engine;
     std::unique_ptr<TAppendOnlyLog> _logger;
 
-    std::mutex _appendOnlyLogMutex;
+    absl::Mutex _mutex;
 };
 
 } // NKVStore::NCore::NEngine

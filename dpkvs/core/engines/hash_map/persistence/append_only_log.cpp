@@ -35,7 +35,6 @@ void TAppendOnlyLog::AppendPutOperation(
 {
     auto record = CreatePutRecord(key, value, _logSequenceNumber++);
     _logSerializer->WriteRecord(record);
-    ++_logSequenceNumber;
 }
 
 void TAppendOnlyLog::AppendRemoveOperation(const std::string& key)
@@ -46,16 +45,17 @@ void TAppendOnlyLog::AppendRemoveOperation(const std::string& key)
 
 std::unique_ptr<THashMapStore> TAppendOnlyLog::RecoverFromLog()
 {
-    auto recoveredStore = std::unordered_map<std::string, TStoreValuePtr>();
+    auto recoveredStore = absl::flat_hash_map<std::string, TStoreValuePtr>();
 
     try {
         _logSerializer->EnableReadMode();
 
-        uint64_t currentLsn = -1;
+        uint64_t currentLsn = 0;
         TStoreRecord record;
+
         while (_logSerializer->ReadRecord(record)) {
             auto recordLsn = record.log_sequence_number();
-            if (recordLsn <= currentLsn) {
+            if (currentLsn > recordLsn) {
                 continue;
             }
             currentLsn = recordLsn;
@@ -74,7 +74,7 @@ std::unique_ptr<THashMapStore> TAppendOnlyLog::RecoverFromLog()
                 recoveredStore.erase(key);
             }
         }
-        _logSequenceNumber = currentLsn + 1;
+        _logSequenceNumber = currentLsn;
 
     } catch (const std::exception& e) {
         std::cerr << "Error reading log: " << e.what() << std::endl;

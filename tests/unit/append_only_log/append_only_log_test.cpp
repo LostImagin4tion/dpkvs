@@ -9,10 +9,15 @@ class AppendOnlyLogTest
     : public testing::Test
 {
 protected:
+    void TearDown() override {
+        std::filesystem::remove(fileName);
+    }
+
+    std::string fileName = "append_only_log.txt";
 };
 
 TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
-    auto appendOnlyLog = TAppendOnlyLog();
+    auto appendOnlyLog = TAppendOnlyLog(fileName);
 
     // === Put first value ===
 

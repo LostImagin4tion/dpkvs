@@ -10,8 +10,19 @@ using NKVStore::NCore::NRecord::TStoreRecord;
 using NKVStore::NCore::NRecord::CreatePutRecord;
 using NKVStore::NCore::NRecord::CreateRemoveRecord;
 
-TEST(SerializerTest, WriteReadLogsTest) {
-    auto logSerializer = TStoreRecordSerializer();
+class SerializerTest
+    : public testing::Test
+{
+protected:
+    void TearDown() override {
+        std::filesystem::remove(fileName);
+    }
+
+    std::string fileName = "append_only_log.txt";
+};
+
+TEST_F(SerializerTest, WriteReadLogsTest) {
+    auto logSerializer = TStoreRecordSerializer(fileName);
 
     // === Put first value ===
 

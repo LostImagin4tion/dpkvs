@@ -18,7 +18,7 @@ protected:
     void SetUp() override {
         std::string serverAddress = "127.0.0.1:0"; // ephemeral port
 
-        auto controller = std::make_unique<THashMapStoreEngine>("test_service_append_only_log.txt");
+        auto controller = std::make_unique<THashMapStoreEngine>(fileName);
         auto service = std::make_unique<TDpkvsServiceImpl>(std::move(controller));
 
         grpc::EnableDefaultHealthCheckService(true);
@@ -50,6 +50,8 @@ protected:
             server_.reset();
         }
         _service.reset();
+
+        std::filesystem::remove(fileName);
     }
 
     std::unique_ptr<Server> server_;
@@ -57,6 +59,8 @@ protected:
     std::unique_ptr<TDpkvsService::Stub> _stub;
     
     int selected_port_ = 0;
+
+    std::string fileName = "test_service_append_only_log.txt";
 };
 
 TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
