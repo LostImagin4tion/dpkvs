@@ -1,7 +1,6 @@
 #include <dpkvs/network/service/dpkvs_service_impl.h>
 
-#include <absl/flags/flag.h>
-#include <absl/flags/parse.h>
+#include <dpkvs/core/config/config.h>
 
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include <grpcpp/grpcpp.h>
@@ -11,11 +10,12 @@
 
 #include <iostream>
 
-ABSL_FLAG(std::string, address, "localhost:50051", "Server address for the service");
-
 using NKVStore::NService::TDpkvsServiceImpl;
+using NKVStore::NCore::NConfig::TConfig;
 
-void RunServer(const std::string& server_address) { // TODO DPKVS-14 move it to app-like class
+void RunServer(const std::string& host, int64_t port) {
+    auto serverAddress = std::format("{}:{}", host, port);
+
     auto logger = std::make_shared<TConsoleLogger>();
     auto service = std::make_unique<TDpkvsServiceImpl>("prod-append-only-log.txt", logger);
 
@@ -24,22 +24,26 @@ void RunServer(const std::string& server_address) { // TODO DPKVS-14 move it to 
 
     ServerBuilder builder;
     builder.AddListeningPort(
-        server_address,
+        serverAddress,
         grpc::InsecureServerCredentials());
     builder.RegisterService(service.get());
 
     std::unique_ptr<Server> server(builder.BuildAndStart());
 
-    std::cout << "Server running on " << server_address << std::endl;
+    logger->Info("Server running on {}", serverAddress);
 
     server->Wait();
 }
 
-int main(int argc, char** argv) {
+int main() {
     spdlog::init_thread_pool(8192, 2);
 
-    absl::ParseCommandLine(argc, argv);
-    RunServer(absl::GetFlag(FLAGS_address));
+    auto config = TConfig::FromFile("../config/config.yaml");
+
+    const auto host = config.GetString("server.host", "127.0.0.1");
+    const auto port = config.GetInt("server.port", 50051);
+
+    RunServer(host, port);
 
     spdlog::shutdown();
     return 0;

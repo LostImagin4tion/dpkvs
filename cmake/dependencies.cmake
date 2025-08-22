@@ -15,3 +15,10 @@ FetchContent_Declare(
         GIT_TAG        v1.15.3
 )
 FetchContent_MakeAvailable(spdlog)
+
+FetchContent_Declare(
+        yaml-cpp
+        GIT_REPOSITORY https://github.com/jbeder/yaml-cpp
+        GIT_TAG        0.8.0
+)
+FetchContent_MakeAvailable(yaml-cpp)

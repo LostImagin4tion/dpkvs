@@ -8,6 +8,8 @@ Built with C++, so DPKVS is ⚡ blazingly fast ⚡ and 🔥 memory-unsafe 🔥
 
 * Persistence using Append-Only Log and Protobuf serialization
 * gRPC API
+* Logging using [spdlog](https://github.com/gabime/spdlog)
+* Configuration using [yaml-cpp](https://github.com/jbeder/yaml-cpp)
 * Distributed (WIP)
 * Master-Slave Replication (WIP)
 * Data Partitioning using Consistent Hashing (WIP)
