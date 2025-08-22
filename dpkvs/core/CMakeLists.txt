@@ -1,4 +1,8 @@
 add_library(dpkvs_core STATIC
+        # ==== Config ====
+        config/config.h
+        config/config.cpp
+
         # ==== Core Interfaces ===
         engines/store_engine.h
         engines/runtime_store.h
@@ -46,6 +50,7 @@ target_link_libraries(dpkvs_core
         PUBLIC
         protobuf::libprotobuf
         spdlog::spdlog_header_only
+        yaml-cpp
         PRIVATE
         absl::crc32c
 )
