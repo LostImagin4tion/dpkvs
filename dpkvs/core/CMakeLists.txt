@@ -29,6 +29,10 @@ add_library(dpkvs_core STATIC
         # persistence (append only log)
         engines/hash_map/persistence/append_only_log.h
         engines/hash_map/persistence/append_only_log.cpp
+
+        # ==== Loggers ====
+        logger/console/console_logger.h
+        logger/console/console_logger.cpp
 )
 
 target_include_directories(dpkvs_core
@@ -41,6 +45,7 @@ target_include_directories(dpkvs_core
 target_link_libraries(dpkvs_core
         PUBLIC
         protobuf::libprotobuf
+        spdlog::spdlog_header_only
         PRIVATE
         absl::crc32c
 )

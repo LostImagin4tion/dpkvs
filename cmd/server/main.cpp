@@ -7,13 +7,15 @@
 #include <grpcpp/grpcpp.h>
 #include <grpcpp/health_check_service_interface.h>
 
+#include <spdlog/spdlog.h>
+
 #include <iostream>
 
 ABSL_FLAG(std::string, address, "localhost:50051", "Server address for the service");
 
 using NKVStore::NService::TDpkvsServiceImpl;
 
-void RunServer(const std::string& server_address) {
+void RunServer(const std::string& server_address) { // TODO DPKVS-14 move it to app-like class
     TDpkvsServiceImpl service;
 
     grpc::EnableDefaultHealthCheckService(true);
@@ -37,5 +39,6 @@ void RunServer(const std::string& server_address) {
 int main(int argc, char** argv) {
     absl::ParseCommandLine(argc, argv);
     RunServer(absl::GetFlag(FLAGS_address));
+    spdlog::shutdown();
     return 0;
 }
