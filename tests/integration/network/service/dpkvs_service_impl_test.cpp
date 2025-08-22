@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
-#include <dpkvs/network/server/dpkvs_service_impl.h>
+#include <dpkvs/core/engines/hash_map/engine/hash_map_store_engine.h>
+#include <dpkvs/network/service/dpkvs_service_impl.h>
 
 #include <grpcpp/grpcpp.h>
 
@@ -12,14 +13,16 @@ using NKVStore::NService::TDpkvsServiceImpl;
 using NKVStore::NCore::NEngine::THashMapStoreEngine;
 
 class ServiceIntegrationTest
-    : public ::testing::Test {
+    : public testing::Test {
 
 protected:
     void SetUp() override {
-        std::string serverAddress = "127.0.0.1:0"; // ephemeral port
+        spdlog::init_thread_pool(8192, 2);
 
-        auto controller = std::make_unique<THashMapStoreEngine>(fileName);
-        auto service = std::make_unique<TDpkvsServiceImpl>(std::move(controller));
+        std::string serverAddress = "127.0.0.1:0";
+
+        auto logger = std::make_shared<TConsoleLogger>();
+        auto service = std::make_unique<TDpkvsServiceImpl>(_fileName, logger);
 
         grpc::EnableDefaultHealthCheckService(true);
         
@@ -27,40 +30,41 @@ protected:
         builder.AddListeningPort(
             serverAddress, 
             grpc::InsecureServerCredentials(), 
-            &selected_port_);
+            &_selectedPort);
         builder.RegisterService(service.get());
         
         _service = std::move(service);
-        server_ = builder.BuildAndStart();
+        _server = builder.BuildAndStart();
 
-        ASSERT_TRUE(server_);
-        ASSERT_NE(selected_port_, 0);
+        ASSERT_TRUE(_server);
+        ASSERT_NE(_selectedPort, 0);
 
         auto channel = grpc::CreateChannel(
-            "127.0.0.1:" + std::to_string(selected_port_),
+            "127.0.0.1:" + std::to_string(_selectedPort),
             grpc::InsecureChannelCredentials());
         
-        _stub = TDpkvsService::NewStub(channel);
+        stub = TDpkvsService::NewStub(channel);
     }
 
     void TearDown() override {
-        if (server_) {
-            server_->Shutdown();
-            server_->Wait();
-            server_.reset();
+        if (_server) {
+            _server->Shutdown();
+            _server->Wait();
+            _server.reset();
         }
         _service.reset();
 
-        std::filesystem::remove(fileName);
+        std::filesystem::remove(_fileName);
     }
 
-    std::unique_ptr<Server> server_;
-    std::unique_ptr<TDpkvsServiceImpl> _service;
-    std::unique_ptr<TDpkvsService::Stub> _stub;
-    
-    int selected_port_ = 0;
+    std::unique_ptr<TDpkvsService::Stub> stub;
 
-    std::string fileName = "test_service_append_only_log.txt";
+private:
+    int _selectedPort = 0;
+    std::string _fileName = "test_service_append_only_log.txt";
+
+    std::unique_ptr<Server> _server;
+    std::unique_ptr<TDpkvsServiceImpl> _service;
 };
 
 TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
@@ -71,7 +75,7 @@ TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
     putRequest.set_value("1");
     
     NKVStore::NService::TPutResponse putResponse;
-    auto status1 = _stub->Put(
+    auto status1 = stub->Put(
         &putContext, 
         putRequest, 
         &putResponse);
@@ -85,7 +89,7 @@ TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
     getRequest.set_key("a");
     
     NKVStore::NService::TGetResponse getResponse;
-    auto status2 = _stub->Get(
+    auto status2 = stub->Get(
         &getContext, 
         getRequest, 
         &getResponse);
@@ -100,7 +104,7 @@ TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
     removeRequest.set_key("a");
     NKVStore::NService::TRemoveResponse removeResponse;
     
-    auto status3 = _stub->Remove(
+    auto status3 = stub->Remove(
         &removeContext,
         removeRequest, 
         &removeResponse);
@@ -115,7 +119,7 @@ TEST_F(ServiceIntegrationTest, PutGetRemoveRoundtrip) {
     getRequest2.set_key("a");
     
     NKVStore::NService::TGetResponse getResponse2;
-    auto status4 = _stub->Get(
+    auto status4 = stub->Get(
         &getContext2, 
         getRequest2, 
         &getResponse2);

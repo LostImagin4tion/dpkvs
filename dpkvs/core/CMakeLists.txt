@@ -1,5 +1,6 @@
 add_library(dpkvs_core STATIC
         # ==== Core Interfaces ===
+        engines/store_engine.h
         engines/runtime_store.h
 
         # store value protos
@@ -18,8 +19,8 @@ add_library(dpkvs_core STATIC
 
         # ==== Hash Map store engine ====
         # store engine
-        engines/hash_map/engine/store_engine.h
-        engines/hash_map/engine/store_engine.cpp
+        engines/hash_map/engine/hash_map_store_engine.h
+        engines/hash_map/engine/hash_map_store_engine.cpp
 
         # runtime
         engines/hash_map/runtime/hash_map_store.h
@@ -28,6 +29,10 @@ add_library(dpkvs_core STATIC
         # persistence (append only log)
         engines/hash_map/persistence/append_only_log.h
         engines/hash_map/persistence/append_only_log.cpp
+
+        # ==== Loggers ====
+        logger/console/console_logger.h
+        logger/console/console_logger.cpp
 )
 
 target_include_directories(dpkvs_core
@@ -40,6 +45,7 @@ target_include_directories(dpkvs_core
 target_link_libraries(dpkvs_core
         PUBLIC
         protobuf::libprotobuf
+        spdlog::spdlog_header_only
         PRIVATE
         absl::crc32c
 )

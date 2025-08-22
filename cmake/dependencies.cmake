@@ -8,3 +8,10 @@ FetchContent_Declare(
         GIT_TAG        v1.74.0
 )
 FetchContent_MakeAvailable(gRPC)
+
+FetchContent_Declare(
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog
+        GIT_TAG        v1.15.3
+)
+FetchContent_MakeAvailable(spdlog)

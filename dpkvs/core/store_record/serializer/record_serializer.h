@@ -13,7 +13,7 @@ namespace NKVStore::NCore::NRecord
     class TStoreRecordSerializer
     {
     public:
-        TStoreRecordSerializer();
+        TStoreRecordSerializer() = delete;
 
         explicit TStoreRecordSerializer(std::string fileName);
 
@@ -42,7 +42,7 @@ namespace NKVStore::NCore::NRecord
 
         std::fstream _log_stream;
 
-        std::string _fileName = "append-only-log.txt";
+        std::string _fileName;
         int _fileDescriptor = -1; // OS file descriptor used for fsync
     };
 

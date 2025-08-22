@@ -1,21 +1,26 @@
 #pragma once
 
+#include "dpkvs/core/engines/store_engine.h"
+
 #include <dpkvs/core/engines/hash_map/runtime/hash_map_store.h>
 #include <dpkvs/core/engines/hash_map/persistence/append_only_log.h>
+#include <dpkvs/core/logger/console/console_logger.h>
 
 using NKVStore::NCore::NRecord::TStoreValue;
 using NKVStore::NCore::NEngine::NRuntime::THashMapStore;
 using NKVStore::NCore::NEngine::NPersistence::TAppendOnlyLog;
+using NKVStore::NCore::NLogger::TConsoleLogger;
 
 namespace NKVStore::NCore::NEngine
 {
 
 class THashMapStoreEngine
+    : public IStoreEngine
 {
 public:
-    THashMapStoreEngine();
-
-    explicit THashMapStoreEngine(const std::string& logFileName);
+    explicit THashMapStoreEngine(
+        const std::string& logFileName, 
+        std::shared_ptr<TConsoleLogger> logger);
 
     THashMapStoreEngine(const THashMapStoreEngine&) = delete;
     THashMapStoreEngine& operator=(const THashMapStoreEngine&) = delete;
@@ -23,17 +28,19 @@ public:
     THashMapStoreEngine(THashMapStoreEngine&&) noexcept;
     THashMapStoreEngine& operator=(THashMapStoreEngine&&) noexcept;
 
-    ~THashMapStoreEngine() = default;
+    ~THashMapStoreEngine() override = default;
 
-    void Put(absl::string_view key, absl::string_view value);
+    void Put(absl::string_view key, absl::string_view value) final;
 
-    [[nodiscard]] TStoreValuePtr Get(absl::string_view key) const;
+    [[nodiscard]] TStoreValuePtr Get(absl::string_view key) const final;
 
-    [[nodiscard]] bool Remove(absl::string_view key);
+    [[nodiscard]] bool Remove(absl::string_view key) final;
 
 private:
+    std::shared_ptr<TConsoleLogger> _consoleLogger;
+
+    std::unique_ptr<TAppendOnlyLog> _appendOnlyLog;
     std::unique_ptr<THashMapStore> _engine;
-    std::unique_ptr<TAppendOnlyLog> _logger;
 
     absl::Mutex _mutex;
 };

@@ -1,14 +1,19 @@
 add_library(dpkvs_network STATIC
         # service protos
+        generated/dpkvs_service.grpc.pb.h
         generated/dpkvs_service.grpc.pb.cc
+        generated/dpkvs_service.pb.h
         generated/dpkvs_service.pb.cc
+        generated/get_operation.pb.h
         generated/get_operation.pb.cc
+        generated/put_operation.pb.h
         generated/put_operation.pb.cc
+        generated/remove_operation.pb.h
         generated/remove_operation.pb.cc
 
         # service impl
-        server/dpkvs_service_impl.h
-        server/dpkvs_service_impl.cpp
+        service/dpkvs_service_impl.h
+        service/dpkvs_service_impl.cpp
 )
 
 target_include_directories(dpkvs_network PUBLIC
