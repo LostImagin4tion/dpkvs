@@ -16,13 +16,24 @@ using NKVStore::NCore::NRecord::TStoreValue;
 class HashMapStoreConcurrencyTest
     : public ::testing::Test {
 protected:
-    TStoreValue MakeValue(const std::string& payload) {
+    void SetUp() override {
+        spdlog::init_thread_pool(8192, 2);
+
+        auto logger = std::make_shared<TConsoleLogger>();
+        store = std::make_unique<THashMapStore>(logger);
+    }
+
+    void TearDown() override {
+        spdlog::shutdown();
+    }
+
+    static TStoreValue MakeValue(const std::string& payload) {
         TStoreValue v;
         v.set_data(payload);
         return v;
     }
 
-    THashMapStore store;
+    std::unique_ptr<THashMapStore> store;
 };
 
 TEST_F(HashMapStoreConcurrencyTest, PutAndReadDistinctKeysConcurrently) {
@@ -41,7 +52,7 @@ TEST_F(HashMapStoreConcurrencyTest, PutAndReadDistinctKeysConcurrently) {
                 std::string key = "k_" + std::to_string(i) + "_" + std::to_string(j);
                 auto val = MakeValue("v_" + std::to_string(i) + "_" + std::to_string(j));
 
-                store.Put(key, std::move(val));
+                store->Put(key, std::move(val));
             }
         });
     }
@@ -50,13 +61,13 @@ TEST_F(HashMapStoreConcurrencyTest, PutAndReadDistinctKeysConcurrently) {
         thread.join();
     }
 
-    ASSERT_EQ(store.Size(), static_cast<size_t>(numThreads * keysPerThread));
+    ASSERT_EQ(store->Size(), static_cast<size_t>(numThreads * keysPerThread));
 
     for (int i = 0; i < numThreads; ++i) {
         for (int j : {0, keysPerThread - 1}) {
             std::string key = "k_" + std::to_string(i) + "_" + std::to_string(j);
             
-            auto value = store.Get(key);
+            auto value = store->Get(key);
             ASSERT_TRUE(value) << key;
             
             auto expectedValue = "v_" + std::to_string(i) + "_" + std::to_string(j);
@@ -76,7 +87,7 @@ TEST_F(HashMapStoreConcurrencyTest, ReadersSeeValidValuesDuringConcurrentPuts) {
     
     for (int i = 0; i < numKeys; ++i) {
         keys.emplace_back("key_" + std::to_string(i));
-        store.Put(keys.back(), MakeValue("init_" + std::to_string(i)));
+        store->Put(keys.back(), MakeValue("init_" + std::to_string(i)));
     }
 
     std::atomic<bool> stopReadersCmd{false};
@@ -96,7 +107,7 @@ TEST_F(HashMapStoreConcurrencyTest, ReadersSeeValidValuesDuringConcurrentPuts) {
             
             while (!stopReadersCmd.load(std::memory_order_relaxed)) {
                 const auto& key = keys[dist(randomGenerator)];
-                auto value = store.Get(key);
+                auto value = store->Get(key);
                 
                 if (!value) {
                     nullReadsCounter.fetch_add(1, std::memory_order_relaxed);
@@ -116,7 +127,7 @@ TEST_F(HashMapStoreConcurrencyTest, ReadersSeeValidValuesDuringConcurrentPuts) {
                 int idx = (i + j) % numKeys;
                 auto val = MakeValue("upd_" + std::to_string(i) + "_" + std::to_string(j));
                 
-                store.Put(keys[idx], std::move(val));
+                store->Put(keys[idx], std::move(val));
             }
         });
     }
@@ -132,7 +143,7 @@ TEST_F(HashMapStoreConcurrencyTest, ReadersSeeValidValuesDuringConcurrentPuts) {
     ASSERT_EQ(nullReadsCounter.load(), 0u);
     
     for (int i = 0; i < numKeys; ++i) {
-        auto value = store.Get(keys[i]);
+        auto value = store->Get(keys[i]);
 
         ASSERT_TRUE(value);
         ASSERT_FALSE(value->data().empty());
@@ -149,7 +160,7 @@ TEST_F(HashMapStoreConcurrencyTest, ReadersSeeConcurrentRemoves) {
     
     for (int i = 0; i < numKeys; ++i) {
         keys.emplace_back("rmk_" + std::to_string(i));
-        store.Put(keys.back(), MakeValue("v_" + std::to_string(i)));
+        store->Put(keys.back(), MakeValue("v_" + std::to_string(i)));
     }
 
     std::atomic<bool> stopReadersCommand{false};
@@ -167,7 +178,7 @@ TEST_F(HashMapStoreConcurrencyTest, ReadersSeeConcurrentRemoves) {
 
             while (!stopReadersCommand.load(std::memory_order_relaxed)) {
                 const auto& k = keys[dist(generator)];
-                auto value = store.Get(k);
+                auto value = store->Get(k);
 
                 if (value) {
                     ASSERT_FALSE(value->data().empty());
@@ -187,7 +198,7 @@ TEST_F(HashMapStoreConcurrencyTest, ReadersSeeConcurrentRemoves) {
             int end = (numKeys * (i + 1)) / numRemovers;
 
             for (int j = begin; j < end; ++j) {
-                auto removed = store.Remove(keys[j]);
+                auto removed = store->Remove(keys[j]);
                 ASSERT_TRUE(removed);
             }
         });
@@ -201,8 +212,8 @@ TEST_F(HashMapStoreConcurrencyTest, ReadersSeeConcurrentRemoves) {
         reader.join();
     }
 
-    ASSERT_EQ(store.Size(), 0u);
+    ASSERT_EQ(store->Size(), 0u);
     for (int i = 0; i < numKeys; ++i) {
-        ASSERT_FALSE(store.Get(keys[i]));
+        ASSERT_FALSE(store->Get(keys[i]));
     }
 }

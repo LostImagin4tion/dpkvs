@@ -4,13 +4,13 @@ include(${CMAKE_SOURCE_DIR}/cmake/test_dependencies.cmake)
 
 add_executable(dpkvs_tests
         # unit tests
-        unit/engine/engine_basic_operations_test.cpp
-        unit/engine/hash_map_store_concurrency_test.cpp
-        unit/append_only_log/serializer_test.cpp
-        unit/append_only_log/append_only_log_test.cpp
+        unit/core/engines/hash_map/runtime/hash_map_store_basic_operations_test.cpp
+        unit/core/engines/hash_map/runtime/hash_map_store_concurrency_test.cpp
+        unit/core/store_record/serializer/serializer_test.cpp
+        unit/core/engines/hash_map/persistence/append_only_log_test.cpp
 
         # integration tests
-        integration/network/server/dpkvs_service_impl_test.cpp
+        integration/network/service/dpkvs_service_impl_test.cpp
 )
 
 target_include_directories(dpkvs_tests PRIVATE

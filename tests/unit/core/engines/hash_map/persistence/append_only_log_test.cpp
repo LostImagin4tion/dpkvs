@@ -9,16 +9,25 @@ class AppendOnlyLogTest
     : public testing::Test
 {
 protected:
-    void TearDown() override {
-        std::filesystem::remove(fileName);
+    void SetUp() override {
+        spdlog::init_thread_pool(8192, 2);
+
+        auto logger = std::make_shared<TConsoleLogger>();
+        appendOnlyLog = std::make_unique<TAppendOnlyLog>(_fileName, logger);
     }
 
-    std::string fileName = "append_only_log.txt";
+    void TearDown() override {
+        spdlog::shutdown();
+        std::filesystem::remove(_fileName);
+    }
+
+    std::unique_ptr<TAppendOnlyLog> appendOnlyLog;
+
+private:
+    static constexpr std::string _fileName = "append_only_log.txt";
 };
 
 TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
-    auto appendOnlyLog = TAppendOnlyLog(fileName);
-
     // === Put first value ===
 
     auto key1 = std::string("hello");
@@ -26,7 +35,7 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
     TStoreValue value1;
     value1.set_data(valueStr1);
 
-    appendOnlyLog.AppendPutOperation(key1, value1);
+    appendOnlyLog->AppendPutOperation(key1, value1);
 
     // === Put second value ===
 
@@ -35,11 +44,11 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
     TStoreValue value2;
     value2.set_data(valueStr2);
 
-    appendOnlyLog.AppendPutOperation(key2,value2);
+    appendOnlyLog->AppendPutOperation(key2,value2);
 
     // === Recover ===
 
-    auto recoveredEngine1 = appendOnlyLog.RecoverFromLog();
+    auto recoveredEngine1 = appendOnlyLog->RecoverFromLog();
 
     auto recoveredValue1 = recoveredEngine1->Get(key1);
     auto recoveredValue2 = recoveredEngine1->Get(key2);
@@ -55,11 +64,11 @@ TEST_F(AppendOnlyLogTest, AppendToLogsAndRecoverTest) {
 
     // === Remove first value ===
 
-    appendOnlyLog.AppendRemoveOperation(key1);
+    appendOnlyLog->AppendRemoveOperation(key1);
 
     // === Recover again ===
 
-    auto recoveredEngine2 = appendOnlyLog.RecoverFromLog();
+    auto recoveredEngine2 = appendOnlyLog->RecoverFromLog();
 
     auto deletedValue1 = recoveredEngine2->Get(key1);
     auto recoveredAgainValue2 = recoveredEngine2->Get(key2);

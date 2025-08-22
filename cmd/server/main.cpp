@@ -16,18 +16,17 @@ ABSL_FLAG(std::string, address, "localhost:50051", "Server address for the servi
 using NKVStore::NService::TDpkvsServiceImpl;
 
 void RunServer(const std::string& server_address) { // TODO DPKVS-14 move it to app-like class
-    TDpkvsServiceImpl service;
+    auto logger = std::make_shared<TConsoleLogger>();
+    auto service = std::make_unique<TDpkvsServiceImpl>("prod-append-only-log.txt", logger);
 
     grpc::EnableDefaultHealthCheckService(true);
     grpc::reflection::InitProtoReflectionServerBuilderPlugin();
 
     ServerBuilder builder;
-
     builder.AddListeningPort(
         server_address,
         grpc::InsecureServerCredentials());
-
-    builder.RegisterService(&service);
+    builder.RegisterService(service.get());
 
     std::unique_ptr<Server> server(builder.BuildAndStart());
 
@@ -37,8 +36,11 @@ void RunServer(const std::string& server_address) { // TODO DPKVS-14 move it to 
 }
 
 int main(int argc, char** argv) {
+    spdlog::init_thread_pool(8192, 2);
+
     absl::ParseCommandLine(argc, argv);
     RunServer(absl::GetFlag(FLAGS_address));
+
     spdlog::shutdown();
     return 0;
 }

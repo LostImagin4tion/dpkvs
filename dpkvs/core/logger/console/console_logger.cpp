@@ -5,14 +5,17 @@ namespace NKVStore::NCore::NLogger
 
 TConsoleLogger::TConsoleLogger()
 {
-    spdlog::init_thread_pool(32768, 2); // 32KB queue, 2 background threads
+    if (auto existing = spdlog::get(_loggerName)) {
+        _logger = existing;
+        return;
+    }
     
     auto console_sink = std::make_shared<spdlog::sinks::stdout_color_sink_mt>();
     console_sink->set_level(spdlog::level::debug);
-    console_sink->set_pattern("[%n] [%Y-%m-%d %H:%M:%S.%e] [%^%L%$] [th %t] [%s:%#] %v");
+    console_sink->set_pattern("[%n] [%Y-%m-%d %H:%M:%S.%e] [%^%L%$] [th %t] %v");
     
     _logger = std::make_shared<spdlog::async_logger>(
-        "default_console",
+        _loggerName,
         console_sink, 
         spdlog::thread_pool(),
         spdlog::async_overflow_policy::block);
