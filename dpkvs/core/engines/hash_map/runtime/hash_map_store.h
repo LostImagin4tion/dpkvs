@@ -7,6 +7,7 @@
 #include <absl/synchronization/mutex.h>
 #include <array>
 #include <memory>
+#include <string>
 
 using NKVStore::NCore::NLogger::TConsoleLogger;
 

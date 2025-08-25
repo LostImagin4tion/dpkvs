@@ -3,6 +3,8 @@
 #include <dpkvs/core/store_value/generated/store_value.pb.h>
 
 #include <absl/strings/string_view.h>
+#include <memory>
+#include <cstddef>
 
 using NKVStore::NCore::NRecord::TStoreValue;
 

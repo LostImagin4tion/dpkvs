@@ -4,6 +4,8 @@
 
 #include <dpkvs/core/engines/store_engine.h>
 #include <dpkvs/core/logger/console/console_logger.h>
+#include <memory>
+#include <string>
 
 using grpc::CallbackServerContext;
 using grpc::Server;

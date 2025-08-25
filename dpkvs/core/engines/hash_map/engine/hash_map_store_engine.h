@@ -5,6 +5,11 @@
 #include <dpkvs/core/engines/hash_map/runtime/hash_map_store.h>
 #include <dpkvs/core/engines/hash_map/persistence/append_only_log.h>
 #include <dpkvs/core/logger/console/console_logger.h>
+ 
+#include <memory>
+#include <string>
+#include <mutex>
+#include <absl/synchronization/mutex.h>
 
 using NKVStore::NCore::NRecord::TStoreValue;
 using NKVStore::NCore::NEngine::NRuntime::THashMapStore;

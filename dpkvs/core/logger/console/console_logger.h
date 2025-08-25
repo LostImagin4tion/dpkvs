@@ -3,6 +3,9 @@
 #include <spdlog/spdlog.h>
 #include <spdlog/async.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
+#include <memory>
+#include <string>
+#include <utility>
 
 namespace NKVStore::NCore::NLogger
 {

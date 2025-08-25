@@ -69,7 +69,7 @@ This project follows [YTsaurus code style conventions](https://github.com/ytsaur
 
 ## Testing
 
-Code is being covered with unit and integration test using Google Test framework.
+Code is being covered with unit and integration tests using Google Test framework.
 
 ## Deploy
 

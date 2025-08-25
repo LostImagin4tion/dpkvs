@@ -1,6 +1,15 @@
 #pragma once
 
 #include <yaml-cpp/yaml.h>
+#include <string>
+#include <vector>
+#include <optional>
+#include <sstream>
+#include <algorithm>
+#include <iterator>
+#include <cctype>
+#include <cstdint>
+#include <cstdlib>
 
 namespace NKVStore::NCore::NConfig {
 
