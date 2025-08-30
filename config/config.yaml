@@ -1,6 +1,0 @@
-server:
-  host: "127.0.0.1"
-  port: 50051
-
-persistence_log:
-  path: "append-only-log.txt"

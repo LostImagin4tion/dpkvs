@@ -1,7 +1,10 @@
 add_library(dpkvs_core STATIC
-        # ==== Config ====
-        config/config.h
-        config/config.cpp
+        # ==== Configs ====
+        configs/build/build_config.h
+        configs/build/build_config.cpp
+
+        configs/feature/feature_config.h
+        configs/feature/feature_config.cpp
 
         # ==== Core Interfaces ===
         engines/store_engine.h
@@ -54,4 +57,3 @@ target_link_libraries(dpkvs_core
         PRIVATE
         absl::crc32c
 )
-

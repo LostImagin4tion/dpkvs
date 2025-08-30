@@ -1,6 +1,7 @@
 #include <dpkvs/network/service/dpkvs_service_impl.h>
 
-#include <dpkvs/core/config/config.h>
+#include <dpkvs/core/configs/build/build_config.h>
+#include <dpkvs/core/configs/feature//feature_config.h>
 
 #include <grpcpp/ext/proto_server_reflection_plugin.h>
 #include <grpcpp/grpcpp.h>
@@ -11,13 +12,20 @@
 #include <iostream>
 
 using NKVStore::NService::TDpkvsServiceImpl;
-using NKVStore::NCore::NConfig::TConfig;
+using NKVStore::NCore::NConfig::TBuildConfig;
+using NKVStore::NCore::NConfig::TFeatureConfig;
 
-void RunServer(const std::string& host, int64_t port) {
+void RunServer(
+    std::shared_ptr<TConsoleLogger> logger,
+    const std::string& host,
+    int64_t port,
+    std::string persistenceLogPath)
+{
     auto serverAddress = std::format("{}:{}", host, port);
 
-    auto logger = std::make_shared<TConsoleLogger>();
-    auto service = std::make_unique<TDpkvsServiceImpl>("prod-append-only-log.txt", logger);
+    auto service = std::make_unique<TDpkvsServiceImpl>(
+        std::move(persistenceLogPath),
+        logger);
 
     grpc::EnableDefaultHealthCheckService(true);
     grpc::reflection::InitProtoReflectionServerBuilderPlugin();
@@ -26,6 +34,7 @@ void RunServer(const std::string& host, int64_t port) {
     builder.AddListeningPort(
         serverAddress,
         grpc::InsecureServerCredentials());
+
     builder.RegisterService(service.get());
 
     std::unique_ptr<Server> server(builder.BuildAndStart());
@@ -35,15 +44,22 @@ void RunServer(const std::string& host, int64_t port) {
     server->Wait();
 }
 
-int main() {
+int main()
+{
     spdlog::init_thread_pool(8192, 2);
 
-    auto config = TConfig::FromFile("../config/config.yaml");
+    auto logger = std::make_shared<TConsoleLogger>();
 
-    const auto host = config.GetString("server.host", "127.0.0.1");
-    const auto port = config.GetInt("server.port", 50051);
+    auto buildConfig = TBuildConfig();
+    auto featureConfigPath = buildConfig.GetString("feature_config_path");
 
-    RunServer(host, port);
+    auto featureConfig = TFeatureConfig::FromFile(featureConfigPath);
+
+    const auto host = buildConfig.GetString("server_host");
+    const auto port = buildConfig.GetInt("server_port");
+    const auto persistenceLogPath = buildConfig.GetString("persistence_log_path");
+
+    RunServer(logger, host, port, persistenceLogPath);
 
     spdlog::shutdown();
     return 0;

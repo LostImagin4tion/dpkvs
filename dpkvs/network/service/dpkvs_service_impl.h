@@ -24,10 +24,10 @@ class TDpkvsServiceImpl final
     : public TDpkvsService::CallbackService
 {
 public:
-    TDpkvsServiceImpl(std::shared_ptr<TConsoleLogger> consoleLogger);
+    explicit TDpkvsServiceImpl(std::shared_ptr<TConsoleLogger> consoleLogger);
 
     explicit TDpkvsServiceImpl(
-        const std::string& persistenceLogFileName,
+        std::string persistenceLogFileName,
         std::shared_ptr<TConsoleLogger> consoleLogger);
 
     ServerUnaryReactor* Get(

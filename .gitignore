@@ -2,3 +2,7 @@
 !.idea/runConfigurations/
 
 .DS_STORE
+**/.DS_STORE
+
+configs/build/local.env
+configs/build/deploy.env
