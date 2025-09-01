@@ -6,3 +6,4 @@
 
 configs/build/local.env
 configs/build/deploy.env
+deployment/.env

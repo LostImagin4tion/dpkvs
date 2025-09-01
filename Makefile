@@ -16,7 +16,7 @@ run:
 
 .PHONY: deploy
 deploy:
-	docker compose -f ./deployment/docker-compose.yml up --build --remove-orphans
+	docker compose -f ./deployment/docker-compose.yml up
 
 
 .PHONY: generate_store_value_protos
