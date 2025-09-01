@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 23)
 
 enable_testing()
 
-include(cmake/dependencies.cmake)
+include(${CMAKE_SOURCE_DIR}/cmake/dependencies.cmake)
 
 add_executable(dpkvs_server
         cmd/server/main.cpp

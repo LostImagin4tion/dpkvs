@@ -6,6 +6,8 @@
 #include <dpkvs/core/logger/console/console_logger.h>
 
 #include <string>
+#include <memory>
+#include <cstdint>
 
 using NKVStore::NCore::NRecord::TStoreValue;
 using NKVStore::NCore::NEngine::NRuntime::THashMapStore;

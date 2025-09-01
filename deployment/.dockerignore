@@ -1,0 +1,29 @@
+# Build artifacts
+#cmake-build-*
+#build/
+#.cmake/
+
+# IDE files
+.idea/
+.vscode/
+
+# Git
+.git/
+.gitignore
+
+# Docs
+*.md
+
+# Deployment files
+deployment/
+
+# Logs
+*.log
+*.txt
+
+# macOS shit
+.DS_Store
+
+# Temporary files
+tmp/
+temp/

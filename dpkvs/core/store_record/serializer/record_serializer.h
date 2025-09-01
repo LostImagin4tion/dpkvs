@@ -4,6 +4,8 @@
 
 #include <string>
 #include <fstream>
+#include <cstdint>
+#include <memory>
 
 using NKVStore::NCore::NRecord::TStoreRecord;
 

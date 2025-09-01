@@ -2,6 +2,8 @@
 
 #include <dpkvs/core/engines/hash_map/engine/hash_map_store_engine.h>
 
+#include <utility>
+
 using NKVStore::NCore::NEngine::THashMapStoreEngine;
 
 namespace NKVStore::NService
@@ -13,9 +15,9 @@ TDpkvsServiceImpl::TDpkvsServiceImpl(std::shared_ptr<TConsoleLogger> consoleLogg
 {}
 
 TDpkvsServiceImpl::TDpkvsServiceImpl(
-    const std::string& persistenceLogFileName,
+    std::string  persistenceLogFileName,
     std::shared_ptr<TConsoleLogger> consoleLogger)
-    : _persistenceLogFileName(persistenceLogFileName)
+    : _persistenceLogFileName(std::move(persistenceLogFileName))
     , _logger(std::move(consoleLogger))
     , _storeEngine(std::make_unique<THashMapStoreEngine>(_persistenceLogFileName, _logger))
 {}

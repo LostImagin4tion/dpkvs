@@ -2,6 +2,7 @@ include(FetchContent)
 
 set(ABSL_ENABLE_INSTALL ON)
 
+# ====== gRPC ======
 FetchContent_Declare(
         gRPC
         GIT_REPOSITORY https://github.com/grpc/grpc
@@ -9,6 +10,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(gRPC)
 
+# ====== Logger ======
 FetchContent_Declare(
         spdlog
         GIT_REPOSITORY https://github.com/gabime/spdlog
@@ -16,6 +18,7 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 
+# ====== Configs parsers ======
 FetchContent_Declare(
         yaml-cpp
         GIT_REPOSITORY https://github.com/jbeder/yaml-cpp

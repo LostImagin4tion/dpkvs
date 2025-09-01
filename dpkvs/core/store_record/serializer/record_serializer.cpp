@@ -5,6 +5,7 @@
 #include <iostream>
 #include <utility>
 #include <system_error>
+#include <filesystem>
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -118,6 +119,13 @@ void TStoreRecordSerializer::OpenFileStream()
         std::ios::binary | std::ios::in | std::ios::out);
 
     if (!_log_stream.is_open()) {
+        std::filesystem::path filePath(_fileName);
+        std::filesystem::path parentDir = filePath.parent_path();
+
+        if (!parentDir.empty()) {
+            std::filesystem::create_directories(parentDir);
+        }
+
         _log_stream.clear();
         _log_stream.open(_fileName, std::ios::binary | std::ios::out);
         _log_stream.close();

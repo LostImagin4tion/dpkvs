@@ -4,6 +4,8 @@
 
 #include <dpkvs/core/engines/store_engine.h>
 #include <dpkvs/core/logger/console/console_logger.h>
+#include <memory>
+#include <string>
 
 using grpc::CallbackServerContext;
 using grpc::Server;
@@ -22,10 +24,10 @@ class TDpkvsServiceImpl final
     : public TDpkvsService::CallbackService
 {
 public:
-    TDpkvsServiceImpl(std::shared_ptr<TConsoleLogger> consoleLogger);
+    explicit TDpkvsServiceImpl(std::shared_ptr<TConsoleLogger> consoleLogger);
 
     explicit TDpkvsServiceImpl(
-        const std::string& persistenceLogFileName,
+        std::string persistenceLogFileName,
         std::shared_ptr<TConsoleLogger> consoleLogger);
 
     ServerUnaryReactor* Get(

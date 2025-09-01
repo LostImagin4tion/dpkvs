@@ -2,6 +2,22 @@ STORE_VALUE_DIR := dpkvs/core/store_value
 STORE_RECORD_DIR := dpkvs/core/store_record
 SERVICE_DIR := dpkvs/network
 
+.PHONY: env
+env:
+	cp configs/build/local_example.env configs/build/local.env
+	cp configs/build/deploy_example.env configs/build/deploy.env
+
+
+.PHONY: run
+run:
+	cmake --build cmake-build-debug --target dpkvs_server -j 10
+	env $$(cat configs/build/local.env | xargs) ./cmake-build-debug/dpkvs_server
+
+
+.PHONY: deploy
+deploy:
+	docker compose -f ./deployment/docker-compose.yml up
+
 
 .PHONY: generate_store_value_protos
 generate_store_value_protos:

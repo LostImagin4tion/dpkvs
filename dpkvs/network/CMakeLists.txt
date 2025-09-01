@@ -28,6 +28,4 @@ target_link_libraries(dpkvs_network
         grpc++
         grpc++_reflection
         protobuf::libprotobuf
-        absl::flags
-        absl::flags_parse
 )
