@@ -27,32 +27,32 @@ namespace _fl = ::google::protobuf::internal::field_layout;
 namespace NKVStore {
 namespace NService {
 
-inline constexpr RemoveResponse::Impl_::Impl_(
+inline constexpr TRemoveResponse::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         removed_{false} {}
 
 template <typename>
-PROTOBUF_CONSTEXPR RemoveResponse::RemoveResponse(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR TRemoveResponse::TRemoveResponse(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(RemoveResponse_class_data_.base()),
+    : ::google::protobuf::Message(TRemoveResponse_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct RemoveResponseDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR RemoveResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~RemoveResponseDefaultTypeInternal() {}
+struct TRemoveResponseDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR TRemoveResponseDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~TRemoveResponseDefaultTypeInternal() {}
   union {
-    RemoveResponse _instance;
+    TRemoveResponse _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RemoveResponseDefaultTypeInternal _RemoveResponse_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TRemoveResponseDefaultTypeInternal _TRemoveResponse_default_instance_;
 
-inline constexpr RemoveRequest::Impl_::Impl_(
+inline constexpr TRemoveRequest::Impl_::Impl_(
     ::_pbi::ConstantInitialized) noexcept
       : _cached_size_{0},
         key_(
@@ -60,24 +60,24 @@ inline constexpr RemoveRequest::Impl_::Impl_(
             ::_pbi::ConstantInitialized()) {}
 
 template <typename>
-PROTOBUF_CONSTEXPR RemoveRequest::RemoveRequest(::_pbi::ConstantInitialized)
+PROTOBUF_CONSTEXPR TRemoveRequest::TRemoveRequest(::_pbi::ConstantInitialized)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(RemoveRequest_class_data_.base()),
+    : ::google::protobuf::Message(TRemoveRequest_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(),
 #endif  // PROTOBUF_CUSTOM_VTABLE
       _impl_(::_pbi::ConstantInitialized()) {
 }
-struct RemoveRequestDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR RemoveRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-  ~RemoveRequestDefaultTypeInternal() {}
+struct TRemoveRequestDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR TRemoveRequestDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~TRemoveRequestDefaultTypeInternal() {}
   union {
-    RemoveRequest _instance;
+    TRemoveRequest _instance;
   };
 };
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 RemoveRequestDefaultTypeInternal _RemoveRequest_default_instance_;
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TRemoveRequestDefaultTypeInternal _TRemoveRequest_default_instance_;
 }  // namespace NService
 }  // namespace NKVStore
 static constexpr const ::_pb::EnumDescriptor *PROTOBUF_NONNULL *PROTOBUF_NULLABLE
@@ -88,37 +88,37 @@ const ::uint32_t
     TableStruct_remove_5foperation_2eproto::offsets[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
         protodesc_cold) = {
         0x081, // bitmap
-        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::RemoveRequest, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::TRemoveRequest, _impl_._has_bits_),
         4, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::RemoveRequest, _impl_.key_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::TRemoveRequest, _impl_.key_),
         0,
         0x081, // bitmap
-        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::RemoveResponse, _impl_._has_bits_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::TRemoveResponse, _impl_._has_bits_),
         4, // hasbit index offset
-        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::RemoveResponse, _impl_.removed_),
+        PROTOBUF_FIELD_OFFSET(::NKVStore::NService::TRemoveResponse, _impl_.removed_),
         0,
 };
 
 static const ::_pbi::MigrationSchema
     schemas[] ABSL_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-        {0, sizeof(::NKVStore::NService::RemoveRequest)},
-        {5, sizeof(::NKVStore::NService::RemoveResponse)},
+        {0, sizeof(::NKVStore::NService::TRemoveRequest)},
+        {5, sizeof(::NKVStore::NService::TRemoveResponse)},
 };
 static const ::_pb::Message* PROTOBUF_NONNULL const file_default_instances[] = {
-    &::NKVStore::NService::_RemoveRequest_default_instance_._instance,
-    &::NKVStore::NService::_RemoveResponse_default_instance_._instance,
+    &::NKVStore::NService::_TRemoveRequest_default_instance_._instance,
+    &::NKVStore::NService::_TRemoveResponse_default_instance_._instance,
 };
 const char descriptor_table_protodef_remove_5foperation_2eproto[] ABSL_ATTRIBUTE_SECTION_VARIABLE(
     protodesc_cold) = {
     "\n\026remove_operation.proto\022\021NKVStore.NServ"
-    "ice\"\034\n\rRemoveRequest\022\013\n\003key\030\001 \001(\t\"!\n\016Rem"
-    "oveResponse\022\017\n\007removed\030\001 \001(\010b\006proto3"
+    "ice\"\035\n\016TRemoveRequest\022\013\n\003key\030\001 \001(\t\"\"\n\017TR"
+    "emoveResponse\022\017\n\007removed\030\001 \001(\010b\006proto3"
 };
 static ::absl::once_flag descriptor_table_remove_5foperation_2eproto_once;
 PROTOBUF_CONSTINIT const ::_pbi::DescriptorTable descriptor_table_remove_5foperation_2eproto = {
     false,
     false,
-    116,
+    118,
     descriptor_table_protodef_remove_5foperation_2eproto,
     "remove_operation.proto",
     &descriptor_table_remove_5foperation_2eproto_once,
@@ -135,115 +135,115 @@ namespace NKVStore {
 namespace NService {
 // ===================================================================
 
-class RemoveRequest::_Internal {
+class TRemoveRequest::_Internal {
  public:
   using HasBits =
-      decltype(::std::declval<RemoveRequest>()._impl_._has_bits_);
+      decltype(::std::declval<TRemoveRequest>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(RemoveRequest, _impl_._has_bits_);
+      8 * PROTOBUF_FIELD_OFFSET(TRemoveRequest, _impl_._has_bits_);
 };
 
-RemoveRequest::RemoveRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+TRemoveRequest::TRemoveRequest(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, RemoveRequest_class_data_.base()) {
+    : ::google::protobuf::Message(arena, TRemoveRequest_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.RemoveRequest)
+  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.TRemoveRequest)
 }
-PROTOBUF_NDEBUG_INLINE RemoveRequest::Impl_::Impl_(
+PROTOBUF_NDEBUG_INLINE TRemoveRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
-    const ::NKVStore::NService::RemoveRequest& from_msg)
+    const ::NKVStore::NService::TRemoveRequest& from_msg)
       : _has_bits_{from._has_bits_},
         _cached_size_{0},
         key_(arena, from.key_) {}
 
-RemoveRequest::RemoveRequest(
+TRemoveRequest::TRemoveRequest(
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena,
-    const RemoveRequest& from)
+    const TRemoveRequest& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, RemoveRequest_class_data_.base()) {
+    : ::google::protobuf::Message(arena, TRemoveRequest_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  RemoveRequest* const _this = this;
+  TRemoveRequest* const _this = this;
   (void)_this;
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_, from);
 
-  // @@protoc_insertion_point(copy_constructor:NKVStore.NService.RemoveRequest)
+  // @@protoc_insertion_point(copy_constructor:NKVStore.NService.TRemoveRequest)
 }
-PROTOBUF_NDEBUG_INLINE RemoveRequest::Impl_::Impl_(
+PROTOBUF_NDEBUG_INLINE TRemoveRequest::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
       : _cached_size_{0},
         key_(arena) {}
 
-inline void RemoveRequest::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+inline void TRemoveRequest::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
 }
-RemoveRequest::~RemoveRequest() {
-  // @@protoc_insertion_point(destructor:NKVStore.NService.RemoveRequest)
+TRemoveRequest::~TRemoveRequest() {
+  // @@protoc_insertion_point(destructor:NKVStore.NService.TRemoveRequest)
   SharedDtor(*this);
 }
-inline void RemoveRequest::SharedDtor(MessageLite& self) {
-  RemoveRequest& this_ = static_cast<RemoveRequest&>(self);
+inline void TRemoveRequest::SharedDtor(MessageLite& self) {
+  TRemoveRequest& this_ = static_cast<TRemoveRequest&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.key_.Destroy();
   this_._impl_.~Impl_();
 }
 
-inline void* PROTOBUF_NONNULL RemoveRequest::PlacementNew_(
+inline void* PROTOBUF_NONNULL TRemoveRequest::PlacementNew_(
     const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
-  return ::new (mem) RemoveRequest(arena);
+  return ::new (mem) TRemoveRequest(arena);
 }
-constexpr auto RemoveRequest::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(RemoveRequest),
-                                            alignof(RemoveRequest));
+constexpr auto TRemoveRequest::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::CopyInit(sizeof(TRemoveRequest),
+                                            alignof(TRemoveRequest));
 }
-constexpr auto RemoveRequest::InternalGenerateClassData_() {
+constexpr auto TRemoveRequest::InternalGenerateClassData_() {
   return ::google::protobuf::internal::ClassDataFull{
       ::google::protobuf::internal::ClassData{
-          &_RemoveRequest_default_instance_._instance,
+          &_TRemoveRequest_default_instance_._instance,
           &_table_.header,
           nullptr,  // OnDemandRegisterArenaDtor
           nullptr,  // IsInitialized
-          &RemoveRequest::MergeImpl,
-          ::google::protobuf::Message::GetNewImpl<RemoveRequest>(),
+          &TRemoveRequest::MergeImpl,
+          ::google::protobuf::Message::GetNewImpl<TRemoveRequest>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-          &RemoveRequest::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<RemoveRequest>(), &RemoveRequest::ByteSizeLong,
-              &RemoveRequest::_InternalSerialize,
+          &TRemoveRequest::SharedDtor,
+          ::google::protobuf::Message::GetClearImpl<TRemoveRequest>(), &TRemoveRequest::ByteSizeLong,
+              &TRemoveRequest::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          PROTOBUF_FIELD_OFFSET(RemoveRequest, _impl_._cached_size_),
+          PROTOBUF_FIELD_OFFSET(TRemoveRequest, _impl_._cached_size_),
           false,
       },
-      &RemoveRequest::kDescriptorMethods,
+      &TRemoveRequest::kDescriptorMethods,
       &descriptor_table_remove_5foperation_2eproto,
       nullptr,  // tracker
   };
 }
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull RemoveRequest_class_data_ =
-        RemoveRequest::InternalGenerateClassData_();
+    ::google::protobuf::internal::ClassDataFull TRemoveRequest_class_data_ =
+        TRemoveRequest::InternalGenerateClassData_();
 
 PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-RemoveRequest::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&RemoveRequest_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(RemoveRequest_class_data_.tc_table);
-  return RemoveRequest_class_data_.base();
+TRemoveRequest::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&TRemoveRequest_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(TRemoveRequest_class_data_.tc_table);
+  return TRemoveRequest_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
-const ::_pbi::TcParseTable<0, 1, 0, 43, 2>
-RemoveRequest::_table_ = {
+const ::_pbi::TcParseTable<0, 1, 0, 44, 2>
+TRemoveRequest::_table_ = {
   {
-    PROTOBUF_FIELD_OFFSET(RemoveRequest, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(TRemoveRequest, _impl_._has_bits_),
     0, // no _extensions_
     1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
@@ -252,32 +252,32 @@ RemoveRequest::_table_ = {
     1,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
-    RemoveRequest_class_data_.base(),
+    TRemoveRequest_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::NKVStore::NService::RemoveRequest>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::NKVStore::NService::TRemoveRequest>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // string key = 1;
     {::_pbi::TcParser::FastUS1,
-     {10, 0, 0, PROTOBUF_FIELD_OFFSET(RemoveRequest, _impl_.key_)}},
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(TRemoveRequest, _impl_.key_)}},
   }}, {{
     65535, 65535
   }}, {{
     // string key = 1;
-    {PROTOBUF_FIELD_OFFSET(RemoveRequest, _impl_.key_), _Internal::kHasBitsOffset + 0, 0,
+    {PROTOBUF_FIELD_OFFSET(TRemoveRequest, _impl_.key_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kUtf8String | ::_fl::kRepAString)},
   }},
   // no aux_entries
   {{
-    "\37\3\0\0\0\0\0\0"
-    "NKVStore.NService.RemoveRequest"
+    "\40\3\0\0\0\0\0\0"
+    "NKVStore.NService.TRemoveRequest"
     "key"
   }},
 };
-PROTOBUF_NOINLINE void RemoveRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:NKVStore.NService.RemoveRequest)
+PROTOBUF_NOINLINE void TRemoveRequest::Clear() {
+// @@protoc_insertion_point(message_clear_start:NKVStore.NService.TRemoveRequest)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -292,17 +292,17 @@ PROTOBUF_NOINLINE void RemoveRequest::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL RemoveRequest::_InternalSerialize(
+::uint8_t* PROTOBUF_NONNULL TRemoveRequest::_InternalSerialize(
     const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const RemoveRequest& this_ = static_cast<const RemoveRequest&>(base);
+  const TRemoveRequest& this_ = static_cast<const TRemoveRequest&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL RemoveRequest::_InternalSerialize(
+::uint8_t* PROTOBUF_NONNULL TRemoveRequest::_InternalSerialize(
     ::uint8_t* PROTOBUF_NONNULL target,
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const RemoveRequest& this_ = *this;
+  const TRemoveRequest& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(serialize_to_array_start:NKVStore.NService.RemoveRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:NKVStore.NService.TRemoveRequest)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
@@ -311,7 +311,7 @@ PROTOBUF_NOINLINE void RemoveRequest::Clear() {
     if (!this_._internal_key().empty()) {
       const ::std::string& _s = this_._internal_key();
       ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "NKVStore.NService.RemoveRequest.key");
+          _s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormatLite::SERIALIZE, "NKVStore.NService.TRemoveRequest.key");
       target = stream->WriteStringMaybeAliased(1, _s, target);
     }
   }
@@ -321,18 +321,18 @@ PROTOBUF_NOINLINE void RemoveRequest::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NKVStore.NService.RemoveRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:NKVStore.NService.TRemoveRequest)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t RemoveRequest::ByteSizeLong(const MessageLite& base) {
-  const RemoveRequest& this_ = static_cast<const RemoveRequest&>(base);
+::size_t TRemoveRequest::ByteSizeLong(const MessageLite& base) {
+  const TRemoveRequest& this_ = static_cast<const TRemoveRequest&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-::size_t RemoveRequest::ByteSizeLong() const {
-  const RemoveRequest& this_ = *this;
+::size_t TRemoveRequest::ByteSizeLong() const {
+  const TRemoveRequest& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(message_byte_size_start:NKVStore.NService.RemoveRequest)
+  // @@protoc_insertion_point(message_byte_size_start:NKVStore.NService.TRemoveRequest)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -353,10 +353,10 @@ PROTOBUF_NOINLINE void RemoveRequest::Clear() {
                                              &this_._impl_._cached_size_);
 }
 
-void RemoveRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<RemoveRequest*>(&to_msg);
-  auto& from = static_cast<const RemoveRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:NKVStore.NService.RemoveRequest)
+void TRemoveRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<TRemoveRequest*>(&to_msg);
+  auto& from = static_cast<const TRemoveRequest&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:NKVStore.NService.TRemoveRequest)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -375,15 +375,15 @@ void RemoveRequest::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::g
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void RemoveRequest::CopyFrom(const RemoveRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NKVStore.NService.RemoveRequest)
+void TRemoveRequest::CopyFrom(const TRemoveRequest& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NKVStore.NService.TRemoveRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void RemoveRequest::InternalSwap(RemoveRequest* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void TRemoveRequest::InternalSwap(TRemoveRequest* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
   auto* arena = GetArena();
   ABSL_DCHECK_EQ(arena, other->GetArena());
@@ -392,32 +392,32 @@ void RemoveRequest::InternalSwap(RemoveRequest* PROTOBUF_RESTRICT PROTOBUF_NONNU
   ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.key_, &other->_impl_.key_, arena);
 }
 
-::google::protobuf::Metadata RemoveRequest::GetMetadata() const {
+::google::protobuf::Metadata TRemoveRequest::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // ===================================================================
 
-class RemoveResponse::_Internal {
+class TRemoveResponse::_Internal {
  public:
   using HasBits =
-      decltype(::std::declval<RemoveResponse>()._impl_._has_bits_);
+      decltype(::std::declval<TRemoveResponse>()._impl_._has_bits_);
   static constexpr ::int32_t kHasBitsOffset =
-      8 * PROTOBUF_FIELD_OFFSET(RemoveResponse, _impl_._has_bits_);
+      8 * PROTOBUF_FIELD_OFFSET(TRemoveResponse, _impl_._has_bits_);
 };
 
-RemoveResponse::RemoveResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
+TRemoveResponse::TRemoveResponse(::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, RemoveResponse_class_data_.base()) {
+    : ::google::protobuf::Message(arena, TRemoveResponse_class_data_.base()) {
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena) {
 #endif  // PROTOBUF_CUSTOM_VTABLE
   SharedCtor(arena);
-  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.RemoveResponse)
+  // @@protoc_insertion_point(arena_constructor:NKVStore.NService.TRemoveResponse)
 }
-RemoveResponse::RemoveResponse(
-    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const RemoveResponse& from)
+TRemoveResponse::TRemoveResponse(
+    ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const TRemoveResponse& from)
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-    : ::google::protobuf::Message(arena, RemoveResponse_class_data_.base()),
+    : ::google::protobuf::Message(arena, TRemoveResponse_class_data_.base()),
 #else   // PROTOBUF_CUSTOM_VTABLE
     : ::google::protobuf::Message(arena),
 #endif  // PROTOBUF_CUSTOM_VTABLE
@@ -425,73 +425,73 @@ RemoveResponse::RemoveResponse(
   _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
       from._internal_metadata_);
 }
-PROTOBUF_NDEBUG_INLINE RemoveResponse::Impl_::Impl_(
+PROTOBUF_NDEBUG_INLINE TRemoveResponse::Impl_::Impl_(
     ::google::protobuf::internal::InternalVisibility visibility,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena)
       : _cached_size_{0} {}
 
-inline void RemoveResponse::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
+inline void TRemoveResponse::SharedCtor(::_pb::Arena* PROTOBUF_NULLABLE arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   _impl_.removed_ = {};
 }
-RemoveResponse::~RemoveResponse() {
-  // @@protoc_insertion_point(destructor:NKVStore.NService.RemoveResponse)
+TRemoveResponse::~TRemoveResponse() {
+  // @@protoc_insertion_point(destructor:NKVStore.NService.TRemoveResponse)
   SharedDtor(*this);
 }
-inline void RemoveResponse::SharedDtor(MessageLite& self) {
-  RemoveResponse& this_ = static_cast<RemoveResponse&>(self);
+inline void TRemoveResponse::SharedDtor(MessageLite& self) {
+  TRemoveResponse& this_ = static_cast<TRemoveResponse&>(self);
   this_._internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   ABSL_DCHECK(this_.GetArena() == nullptr);
   this_._impl_.~Impl_();
 }
 
-inline void* PROTOBUF_NONNULL RemoveResponse::PlacementNew_(
+inline void* PROTOBUF_NONNULL TRemoveResponse::PlacementNew_(
     const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
     ::google::protobuf::Arena* PROTOBUF_NULLABLE arena) {
-  return ::new (mem) RemoveResponse(arena);
+  return ::new (mem) TRemoveResponse(arena);
 }
-constexpr auto RemoveResponse::InternalNewImpl_() {
-  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(RemoveResponse),
-                                            alignof(RemoveResponse));
+constexpr auto TRemoveResponse::InternalNewImpl_() {
+  return ::google::protobuf::internal::MessageCreator::ZeroInit(sizeof(TRemoveResponse),
+                                            alignof(TRemoveResponse));
 }
-constexpr auto RemoveResponse::InternalGenerateClassData_() {
+constexpr auto TRemoveResponse::InternalGenerateClassData_() {
   return ::google::protobuf::internal::ClassDataFull{
       ::google::protobuf::internal::ClassData{
-          &_RemoveResponse_default_instance_._instance,
+          &_TRemoveResponse_default_instance_._instance,
           &_table_.header,
           nullptr,  // OnDemandRegisterArenaDtor
           nullptr,  // IsInitialized
-          &RemoveResponse::MergeImpl,
-          ::google::protobuf::Message::GetNewImpl<RemoveResponse>(),
+          &TRemoveResponse::MergeImpl,
+          ::google::protobuf::Message::GetNewImpl<TRemoveResponse>(),
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-          &RemoveResponse::SharedDtor,
-          ::google::protobuf::Message::GetClearImpl<RemoveResponse>(), &RemoveResponse::ByteSizeLong,
-              &RemoveResponse::_InternalSerialize,
+          &TRemoveResponse::SharedDtor,
+          ::google::protobuf::Message::GetClearImpl<TRemoveResponse>(), &TRemoveResponse::ByteSizeLong,
+              &TRemoveResponse::_InternalSerialize,
 #endif  // PROTOBUF_CUSTOM_VTABLE
-          PROTOBUF_FIELD_OFFSET(RemoveResponse, _impl_._cached_size_),
+          PROTOBUF_FIELD_OFFSET(TRemoveResponse, _impl_._cached_size_),
           false,
       },
-      &RemoveResponse::kDescriptorMethods,
+      &TRemoveResponse::kDescriptorMethods,
       &descriptor_table_remove_5foperation_2eproto,
       nullptr,  // tracker
   };
 }
 
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 const
-    ::google::protobuf::internal::ClassDataFull RemoveResponse_class_data_ =
-        RemoveResponse::InternalGenerateClassData_();
+    ::google::protobuf::internal::ClassDataFull TRemoveResponse_class_data_ =
+        TRemoveResponse::InternalGenerateClassData_();
 
 PROTOBUF_ATTRIBUTE_WEAK const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL
-RemoveResponse::GetClassData() const {
-  ::google::protobuf::internal::PrefetchToLocalCache(&RemoveResponse_class_data_);
-  ::google::protobuf::internal::PrefetchToLocalCache(RemoveResponse_class_data_.tc_table);
-  return RemoveResponse_class_data_.base();
+TRemoveResponse::GetClassData() const {
+  ::google::protobuf::internal::PrefetchToLocalCache(&TRemoveResponse_class_data_);
+  ::google::protobuf::internal::PrefetchToLocalCache(TRemoveResponse_class_data_.tc_table);
+  return TRemoveResponse_class_data_.base();
 }
 PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
 const ::_pbi::TcParseTable<0, 1, 0, 0, 2>
-RemoveResponse::_table_ = {
+TRemoveResponse::_table_ = {
   {
-    PROTOBUF_FIELD_OFFSET(RemoveResponse, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(TRemoveResponse, _impl_._has_bits_),
     0, // no _extensions_
     1, 0,  // max_field_number, fast_idx_mask
     offsetof(decltype(_table_), field_lookup_table),
@@ -500,29 +500,29 @@ RemoveResponse::_table_ = {
     1,  // num_field_entries
     0,  // num_aux_entries
     offsetof(decltype(_table_), field_names),  // no aux_entries
-    RemoveResponse_class_data_.base(),
+    TRemoveResponse_class_data_.base(),
     nullptr,  // post_loop_handler
     ::_pbi::TcParser::GenericFallback,  // fallback
     #ifdef PROTOBUF_PREFETCH_PARSE_TABLE
-    ::_pbi::TcParser::GetTable<::NKVStore::NService::RemoveResponse>(),  // to_prefetch
+    ::_pbi::TcParser::GetTable<::NKVStore::NService::TRemoveResponse>(),  // to_prefetch
     #endif  // PROTOBUF_PREFETCH_PARSE_TABLE
   }, {{
     // bool removed = 1;
-    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(RemoveResponse, _impl_.removed_), 0>(),
-     {8, 0, 0, PROTOBUF_FIELD_OFFSET(RemoveResponse, _impl_.removed_)}},
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(TRemoveResponse, _impl_.removed_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(TRemoveResponse, _impl_.removed_)}},
   }}, {{
     65535, 65535
   }}, {{
     // bool removed = 1;
-    {PROTOBUF_FIELD_OFFSET(RemoveResponse, _impl_.removed_), _Internal::kHasBitsOffset + 0, 0,
+    {PROTOBUF_FIELD_OFFSET(TRemoveResponse, _impl_.removed_), _Internal::kHasBitsOffset + 0, 0,
     (0 | ::_fl::kFcOptional | ::_fl::kBool)},
   }},
   // no aux_entries
   {{
   }},
 };
-PROTOBUF_NOINLINE void RemoveResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:NKVStore.NService.RemoveResponse)
+PROTOBUF_NOINLINE void TRemoveResponse::Clear() {
+// @@protoc_insertion_point(message_clear_start:NKVStore.NService.TRemoveResponse)
   ::google::protobuf::internal::TSanWrite(&_impl_);
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
@@ -534,17 +534,17 @@ PROTOBUF_NOINLINE void RemoveResponse::Clear() {
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::uint8_t* PROTOBUF_NONNULL RemoveResponse::_InternalSerialize(
+::uint8_t* PROTOBUF_NONNULL TRemoveResponse::_InternalSerialize(
     const ::google::protobuf::MessageLite& base, ::uint8_t* PROTOBUF_NONNULL target,
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) {
-  const RemoveResponse& this_ = static_cast<const RemoveResponse&>(base);
+  const TRemoveResponse& this_ = static_cast<const TRemoveResponse&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-::uint8_t* PROTOBUF_NONNULL RemoveResponse::_InternalSerialize(
+::uint8_t* PROTOBUF_NONNULL TRemoveResponse::_InternalSerialize(
     ::uint8_t* PROTOBUF_NONNULL target,
     ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
-  const RemoveResponse& this_ = *this;
+  const TRemoveResponse& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(serialize_to_array_start:NKVStore.NService.RemoveResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:NKVStore.NService.TRemoveResponse)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
 
@@ -562,18 +562,18 @@ PROTOBUF_NOINLINE void RemoveResponse::Clear() {
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             this_._internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:NKVStore.NService.RemoveResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:NKVStore.NService.TRemoveResponse)
   return target;
 }
 
 #if defined(PROTOBUF_CUSTOM_VTABLE)
-::size_t RemoveResponse::ByteSizeLong(const MessageLite& base) {
-  const RemoveResponse& this_ = static_cast<const RemoveResponse&>(base);
+::size_t TRemoveResponse::ByteSizeLong(const MessageLite& base) {
+  const TRemoveResponse& this_ = static_cast<const TRemoveResponse&>(base);
 #else   // PROTOBUF_CUSTOM_VTABLE
-::size_t RemoveResponse::ByteSizeLong() const {
-  const RemoveResponse& this_ = *this;
+::size_t TRemoveResponse::ByteSizeLong() const {
+  const TRemoveResponse& this_ = *this;
 #endif  // PROTOBUF_CUSTOM_VTABLE
-  // @@protoc_insertion_point(message_byte_size_start:NKVStore.NService.RemoveResponse)
+  // @@protoc_insertion_point(message_byte_size_start:NKVStore.NService.TRemoveResponse)
   ::size_t total_size = 0;
 
   ::uint32_t cached_has_bits = 0;
@@ -593,10 +593,10 @@ PROTOBUF_NOINLINE void RemoveResponse::Clear() {
                                              &this_._impl_._cached_size_);
 }
 
-void RemoveResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
-  auto* const _this = static_cast<RemoveResponse*>(&to_msg);
-  auto& from = static_cast<const RemoveResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:NKVStore.NService.RemoveResponse)
+void TRemoveResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::google::protobuf::MessageLite& from_msg) {
+  auto* const _this = static_cast<TRemoveResponse*>(&to_msg);
+  auto& from = static_cast<const TRemoveResponse&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:NKVStore.NService.TRemoveResponse)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -611,22 +611,22 @@ void RemoveResponse::MergeImpl(::google::protobuf::MessageLite& to_msg, const ::
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
-void RemoveResponse::CopyFrom(const RemoveResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:NKVStore.NService.RemoveResponse)
+void TRemoveResponse::CopyFrom(const TRemoveResponse& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:NKVStore.NService.TRemoveResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
 
-void RemoveResponse::InternalSwap(RemoveResponse* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
+void TRemoveResponse::InternalSwap(TRemoveResponse* PROTOBUF_RESTRICT PROTOBUF_NONNULL other) {
   using ::std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_.removed_, other->_impl_.removed_);
 }
 
-::google::protobuf::Metadata RemoveResponse::GetMetadata() const {
+::google::protobuf::Metadata TRemoveResponse::GetMetadata() const {
   return ::google::protobuf::Message::GetMetadataImpl(GetClassData()->full());
 }
 // @@protoc_insertion_point(namespace_scope)

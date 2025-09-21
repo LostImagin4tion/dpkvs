@@ -7,7 +7,7 @@ import "put_operation.proto";
 import "remove_operation.proto";
 
 service TDpkvsService {
-  rpc Get(GetRequest) returns (GetResponse);
-  rpc Put(PutRequest) returns (PutResponse);
-  rpc Remove(RemoveRequest) returns (RemoveResponse);
+  rpc Get(TGetRequest) returns (TGetResponse);
+  rpc Put(TPutRequest) returns (TPutResponse);
+  rpc Remove(TRemoveRequest) returns (TRemoveResponse);
 }
