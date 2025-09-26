@@ -8,7 +8,7 @@ services:
     environment:
       DOCKER_BUILDKIT: 1
     build:
-      context: ..
+      context: ../..
       dockerfile: deployment/Dockerfile
     image: dpkvs-server-img:latest
     ports:
