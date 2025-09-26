@@ -1,0 +1,76 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: dpkvs-server
+  namespace: dpkvs
+  labels:
+    app: dpkvs-server
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: dpkvs-server
+
+  template:
+    metadata:
+      labels:
+        app: dpkvs-server
+
+    spec:
+      containers:
+
+      - name: dpkvs-server
+        image: dpkvs-server-img:latest 
+        imagePullPolicy: IfNotPresent
+
+        ports:
+        - containerPort: 50051
+          name: grpc
+          protocol: TCP
+
+        envFrom:
+        - configMapRef:
+            name: dpkvs-config
+        
+        volumeMounts:
+        - name: dpkvs-storage
+          mountPath: /app/data
+        
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "ps aux | grep dpkvs_server | grep -v grep"
+          initialDelaySeconds: 10
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c  
+            - "ps aux | grep dpkvs_server | grep -v grep"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "100m"
+            
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+
+      volumes:
+      - name: dpkvs-storage
+        persistentVolumeClaim:
+          claimName: dpkvs-data
