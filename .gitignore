@@ -1,9 +1,13 @@
 .idea/*
 !.idea/runConfigurations/
 
+.cache
+build
+cmake-build-debug
+
 .DS_STORE
 **/.DS_STORE
 
 configs/build/local.env
 configs/build/deploy.env
-deployment/.env
+deployment/docker/.env
