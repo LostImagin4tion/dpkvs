@@ -10,14 +10,38 @@ env:
 
 .PHONY: run
 run:
-	cmake --build cmake-build-debug --target dpkvs_server -j 10
-	env $$(cat configs/build/local.env | xargs) ./cmake-build-debug/dpkvs_server
+	cmake --build build --target dpkvs_server -j 10
+	env $$(cat configs/build/local.env | xargs) ./build/dpkvs_server
 
+
+# ====== DEPLOY ======
 
 .PHONY: deploy
-deploy:
-	docker compose -f ./deployment/docker-compose.yml up
+docker-deploy:
+	docker compose -f ./deployment/docker/docker-compose.yml up
 
+
+.PHONY: k8s-deploy
+k8s-deploy:
+	kubectl apply -k deployment/k8s/
+
+
+.PHONY: k8s-undeploy
+k8s-undeploy:
+	kubectl delete -k deployment/k8s/
+
+
+.PHONY: k8s-logs
+k8s-logs:
+	kubectl logs -n dpkvs -l app=dpkvs-server --tail=100 -f
+
+
+.PHONY: k8s-status
+k8s-status:
+	kubectl get all,pv,pvc -n dpkvs
+
+
+# ====== PROTOS ======
 
 .PHONY: generate_store_value_protos
 generate_store_value_protos:

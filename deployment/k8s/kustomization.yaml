@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: dpkvs
+
+resources:
+  - namespace.yaml
+  - configmap.yaml
+  - deployment.yaml
+  - service.yaml
+  - volume.yaml
+
+commonLabels:
+  app.kubernetes.io/name: dpkvs
+  app.kubernetes.io/version: "0.0.2"
+
+namePrefix: "dpkvs-resource"
+
+# Optional: Image tag replacement (useful for CI/CD)
+# images:
+#   - name: dpkvs-server-img
+#     newTag: latest
